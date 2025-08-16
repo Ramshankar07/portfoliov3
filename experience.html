@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience - Ramshankar Bhuvaneswaran</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">RB</div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="experience.html" class="nav-link active">Experience</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="blogs.html" class="nav-link">Blogs</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Work Experience</h1>
+            <p class="page-subtitle">My professional journey in AI/ML engineering</p>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="job-header">
+                            <h3>AI Engineer - Consultant</h3>
+                            <span class="company">BulkBeings</span>
+                            <span class="duration">May 2024 – Aug 2024</span>
+                            <span class="location">Chennai, India</span>
+                        </div>
+                        <ul class="job-description">
+                            <li>Accelerated Full Fine-tuning foundational LLMs (Mixtral, Qwen, Llama) using FSDP parallelization for context-aware suicidal ideation detection using methods like hybrid SFT-DPO training and budget-forced reasoning with GCP A100 cluster (distributed environments, Model parallelism, LLM finetuning).</li>
+                            <li>Designed and implemented synthetic dataset generation pipelines using AWS Bedrock and Langchain, creating 65K+ high-quality samples with dialect diversity and risk-level balancing and also automated the ETL process using AWS Glue and PySpark to process and transform existing large-scale conversational text data (200GB+), reducing processing time by 35%.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="job-header">
+                            <h3>Research and Development Engineer</h3>
+                            <span class="company">BulkBeings</span>
+                            <span class="duration">May 2023 – Dec 2023</span>
+                            <span class="location">Chennai, India</span>
+                        </div>
+                        <ul class="job-description">
+                            <li>Built a Deep learning-based OCR pipeline with Layout Detection for financial documents (ViT + CRNN architectures) using PyTorch with 98% text extraction accuracy and 42% faster processing through ONNX runtime optimization and CUDA kernels to reduce the latency.</li>
+                            <li>Collaborated on developing arrhythmia ECG classification model, a novel two-stage neural architectures combining Conv1D-Transformer with adaptive signal processing to capture both long-range and temporal features, resulting in 93% F1-score in detecting 10 cardiac condition and misclassification of ectopic beats by 40% in stage-2 analysis.</li>
+                            <li>Developed models on AWS G4 instances, with automated model retraining pipelines, A/B testing infrastructure for model variants, and real-time performance monitoring dashboard tracking prediction accuracy, latency (less than 100ms p99), and data drift metrics 99.9% uptime.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="job-header">
+                            <h3>ML Engineer Intern</h3>
+                            <span class="company">Velozity Global Solutions Pvt</span>
+                            <span class="duration">Jan 2022 – Aug 2022</span>
+                            <span class="location">Chennai, India</span>
+                        </div>
+                        <ul class="job-description">
+                            <li>Architected end-to-end ML pipelines in AWS, implementing predictive segments (high-value, at-risk) using XGBoost on behavioral patterns and validating clusters against campaign response data, resulting in a 45% increase in campaign conversion rates.</li>
+                            <li>Led cross-functional team in developing retail mix optimization system using Bayesian hierarchical models (PyMC3), increasing recurring customer LTV prediction accuracy by 34%.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Achievements Section -->
+    <section class="achievements">
+        <div class="container">
+            <h2 class="section-title">Key Achievements</h2>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Performance Improvements</h3>
+                    <p>35% reduction in ETL processing time, 42% faster OCR processing, 11% reduction in training time</p>
+                </div>
+                <div class="achievement-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI Model Accuracy</h3>
+                    <p>98% text extraction accuracy, 93% F1-score in ECG classification, 99.9% uptime monitoring</p>
+                </div>
+                <div class="achievement-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Business Impact</h3>
+                    <p>45% increase in campaign conversion rates, 34% improvement in customer LTV prediction</p>
+                </div>
+                <div class="achievement-card">
+                    <i class="fas fa-database"></i>
+                    <h3>Data Processing</h3>
+                    <p>Processed 200GB+ conversational data, created 65K+ synthetic samples, built master financial database</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Ramshankar Bhuvaneswaran. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

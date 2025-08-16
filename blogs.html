@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs - Ramshankar Bhuvaneswaran</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">RB</div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="experience.html" class="nav-link">Experience</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="blogs.html" class="nav-link active">Blogs</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Blog Posts</h1>
+            <p class="page-subtitle">Thoughts, insights, and technical deep-dives</p>
+        </div>
+    </section>
+
+    <!-- Featured Blog Post -->
+    <section class="featured-blog">
+        <div class="container">
+            <div class="featured-blog-card">
+                <div class="featured-blog-image">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="featured-blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-category">AI/ML</span>
+                        <span class="blog-date">Latest</span>
+                    </div>
+                    <h2 class="featured-blog-title">Understanding Large Language Models: From Theory to Practice</h2>
+                    <p class="featured-blog-excerpt">
+                        A comprehensive guide to understanding how Large Language Models work, from the fundamental 
+                        architecture to practical implementation strategies. Explore the evolution from GPT to modern 
+                        models and learn about fine-tuning techniques.
+                    </p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">LLMs</span>
+                        <span class="blog-tag">Deep Learning</span>
+                        <span class="blog-tag">NLP</span>
+                        <span class="blog-tag">Fine-tuning</span>
+                    </div>
+                    <a href="blogs/llm-guide.html" class="btn btn-primary">Read Full Article</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Recent Blog Posts -->
+    <section class="recent-blogs">
+        <div class="container">
+            <h2 class="section-title">Recent Posts</h2>
+            <div class="blogs-grid">
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">AI/ML</span>
+                            <span class="blog-date">Dec 25, 2024</span>
+                        </div>
+                        <h3 class="blog-card-title">How I Customized Llama 3.1 8B on a Budget</h3>
+                        <p class="blog-card-excerpt">
+                            Democratizing AI: Fine-tuning Large Language Models with Limited Resources. 
+                            Learn how to use LoRA for efficient model customization on university clusters.
+                        </p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">LLMs</span>
+                            <span class="blog-tag">LoRA</span>
+                            <span class="blog-tag">Fine-tuning</span>
+                        </div>
+                        <a href="blogs/llama3-budget-finetuning.html" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- More Blogs Section -->
+    <section class="more-blogs-section">
+        <div class="container">
+            <div class="more-blogs-content">
+                <h2>More Technical Content</h2>
+                <p>Explore additional articles, tutorials, and insights on my Substack</p>
+                <div class="substack-card">
+                    <div class="substack-icon">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="substack-info">
+                        <h3>AI Engineering & ML Insights</h3>
+                        <p>Deep dives into machine learning engineering, production deployments, and cutting-edge AI research</p>
+                        <div class="substack-features">
+                            <span class="feature-tag">Weekly Updates</span>
+                            <span class="feature-tag">Code Examples</span>
+                            <span class="feature-tag">Research Papers</span>
+                            <span class="feature-tag">Industry Trends</span>
+                        </div>
+                    </div>
+                    <a href="https://ramshankar07.substack.com" target="_blank" class="btn btn-primary substack-btn" id="substackLink">
+                        <i class="fas fa-external-link-alt"></i>
+                        Read on Substack
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Updated</h2>
+                <p>Get notified about new blog posts, technical insights, and industry updates</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Ramshankar Bhuvaneswaran. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

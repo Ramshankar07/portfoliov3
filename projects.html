@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Ramshankar Bhuvaneswaran</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">RB</div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="experience.html" class="nav-link">Experience</a></li>
+                <li><a href="projects.html" class="nav-link active">Projects</a></li>
+                <li><a href="blogs.html" class="nav-link">Blogs</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Projects</h1>
+            <p class="page-subtitle">Showcasing my technical projects and achievements</p>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Parallelizing Text-to-Image Generation Using Diffusion</h3>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">PyTorch</span>
+                            <span class="tech-tag">Dask</span>
+                            <span class="tech-tag">CLIP</span>
+                        </div>
+                    </div>
+                    <ul class="project-description">
+                        <li>Built DDPM model from scratch and Engineered Dask-powered distributed preprocessing pipeline (Multiprocessing backend) for text-to-image datasets, achieving 1.48x CPU throughput scaling versus single-thread baselines.</li>
+                        <li>Accelerated training via Automatic Mixed Precision (AMP) with Exponential Moving Average (EMA) weight averaging (β = 0.999), reducing training time by 11% (23.5 → 20.9 hrs/epoch) and loss variance by 29% through gradient histogram stabilization.</li>
+                    </ul>
+                    <div class="project-highlights">
+                        <div class="highlight">
+                            <i class="fas fa-rocket"></i>
+                            <span>1.48x CPU throughput scaling</span>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-clock"></i>
+                            <span>11% training time reduction</span>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-chart-line"></i>
+                            <span>29% loss variance reduction</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Fintech-Data-Processing-ETL-Platform</h3>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Snowflake</span>
+                            <span class="tech-tag">Airflow</span>
+                            <span class="tech-tag">FastAPI</span>
+                        </div>
+                    </div>
+                    <ul class="project-description">
+                        <li>Built a master financial statement database for US public companies, implementing three distinct storage strategies (Raw Staging, JSON Transformation, Denormalized Fact Tables) with Snowflake to optimize data access patterns.</li>
+                        <li>Engineered automated ETL pipelines with Apache Airflow for SEC data retrieval, implementing data scraping from SEC Markets Data page and utilizing S3 for efficient staging, with Data Validation Tool (DVT) ensuring schema integrity.</li>
+                        <li>Developed a client-facing analytics solution combining Streamlit for visualization and FastAPI backend services, enabling financial analysts to perform real-time fundamental analysis of public company data.</li>
+                    </ul>
+                    <div class="project-highlights">
+                        <div class="highlight">
+                            <i class="fas fa-database"></i>
+                            <span>Master financial database</span>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-cogs"></i>
+                            <span>Automated ETL pipelines</span>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Real-time analytics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Projects Section -->
+    <section class="additional-projects">
+        <div class="container">
+            <h2 class="section-title">Other Notable Projects</h2>
+            <div class="mini-projects-grid">
+                <div class="mini-project-card">
+                    <h3>OCR Pipeline with Layout Detection</h3>
+                    <p>Deep learning-based OCR system for financial documents using ViT + CRNN architectures</p>
+                    <div class="mini-project-tech">
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">ONNX</span>
+                        <span class="tech-tag">CUDA</span>
+                    </div>
+                </div>
+                <div class="mini-project-card">
+                    <h3>ECG Classification Model</h3>
+                    <p>Two-stage neural architecture for arrhythmia detection with 93% F1-score</p>
+                    <div class="mini-project-tech">
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">Transformer</span>
+                        <span class="tech-tag">Signal Processing</span>
+                    </div>
+                </div>
+                <div class="mini-project-card">
+                    <h3>ML Pipeline Architecture</h3>
+                    <p>End-to-end ML pipelines in AWS with predictive segmentation and optimization</p>
+                    <div class="mini-project-tech">
+                        <span class="tech-tag">AWS</span>
+                        <span class="tech-tag">XGBoost</span>
+                        <span class="tech-tag">PyMC3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Ramshankar Bhuvaneswaran. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

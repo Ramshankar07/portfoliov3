@@ -105,6 +105,101 @@
         </div>
     </section>
 
+    <!-- Academic Projects Section -->
+    <section class="academic-projects">
+        <div class="container">
+            <h2 class="section-title">Academic Projects</h2>
+            <div class="academic-projects-grid">
+                <div class="academic-project-card">
+                    <div class="academic-project-header">
+                        <h3>Medical Knowledge Graph RAG System</h3>
+                        <div class="academic-project-tech">
+                            <span class="tech-tag">Neo4j</span>
+                            <span class="tech-tag">LangChain</span>
+                            <span class="tech-tag">Graph RAG</span>
+                            <span class="tech-tag">Python</span>
+                        </div>
+                    </div>
+                    <p class="academic-project-description">
+                        Developed comprehensive Graph RAG framework for medical data retrieval using automated triplet extraction and dynamic knowledge graph construction with Neo4j. System implements semantic search optimization through LangChain and provides enhanced medical information retrieval with superior contextual understanding compared to traditional retrieval methods.
+                    </p>
+                    <div class="academic-project-highlights">
+                        <div class="highlight">
+                            <i class="fas fa-brain"></i>
+                            <span>Automated triplet extraction</span>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>Dynamic knowledge graph construction</span>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-search"></i>
+                            <span>Semantic search optimization</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="academic-project-card">
+                    <div class="academic-project-header">
+                        <h3>Llama3 - Pure C/CUDA Implementation</h3>
+                        <div class="academic-project-tech">
+                            <span class="tech-tag">C/CUDA</span>
+                            <span class="tech-tag">llm.c</span>
+                            <span class="tech-tag">Performance Optimization</span>
+                            <span class="tech-tag">GPU Kernels</span>
+                        </div>
+                    </div>
+                    <p class="academic-project-description">
+                        Implementation of Llama 3.1 in pure C/CUDA built on Karpathy's llm.c. Optimized various kernels including RMSNorm (2.3x speedup), SwiGLU with bfloat16, and integrated optimizations into MHA implementation. Achieved significant performance gains through cooperative groups, coalesced memory access, and efficient load/store operations. Features complete forward/backward pass implementation with attention mechanisms and RoPE embeddings.
+                    </p>
+                    <div class="academic-project-highlights">
+                        <div class="highlight">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>2.3x RMSNorm speedup</span>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-microchip"></i>
+                            <span>Optimized GPU kernels</span>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-code"></i>
+                            <span>Complete forward/backward pass</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="academic-project-card">
+                    <div class="academic-project-header">
+                        <h3>Stock Price Forecaster</h3>
+                        <div class="academic-project-tech">
+                            <span class="tech-tag">Streamlit</span>
+                            <span class="tech-tag">Hidden Markov Models</span>
+                            <span class="tech-tag">Time Series</span>
+                            <span class="tech-tag">Python</span>
+                        </div>
+                    </div>
+                    <p class="academic-project-description">
+                        Streamlit application forecasting stock prices using Hidden Markov Models based on historical data. Supports 1-day and multi-day forecasts for major tech stocks (AAPL, TSLA, NVDA). Models multivariate time series capturing opening price, closing price, and volume. Trained using maximum likelihood estimation with hidden states tuned via Akaike Information Criterion to prevent overfitting. Deployed at stock-hmm-analysis.streamlit.app.
+                    </p>
+                    <div class="academic-project-highlights">
+                        <div class="highlight">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Multi-day forecasting</span>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-robot"></i>
+                            <span>Hidden Markov Models</span>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-globe"></i>
+                            <span>Live deployment</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Additional Projects Section -->
     <section class="additional-projects">
         <div class="container">
@@ -151,6 +246,7 @@
     <script src="script.js"></script>
     
     <!-- Chatbot Widget -->
+    <!--
     <div class="chatbot-widget" id="chatbotWidget">
         <div class="chatbot-header" id="chatbotHeader">
             <div class="chatbot-title">
@@ -179,5 +275,6 @@
             </div>
         </div>
     </div>
+    -->
 </body>
 </html>

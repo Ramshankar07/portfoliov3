@@ -1,2 +1,16 @@
 /EMAILJS_SETUP.md
 /README.md
+/CLOUDFLARE_SETUP.md
+/portfolio_files/
+/node_modules/
+/package-lock.json
+/package.json
+/wrangler.toml
+/chroma_db/
+/example_usage.py
+/vector_db_setup.py
+/requirements.txt
+/src/
+/src/worker.js
+/src/worker_enhanced.js
+/vector_db_setup.py

@@ -396,6 +396,144 @@ document.addEventListener('DOMContentLoaded', function() {
     updateSubstackURL();
 });
 
+// Chatbot Functionality
+class ChatbotWidget {
+    constructor() {
+        this.widget = document.getElementById('chatbotWidget');
+        this.header = document.getElementById('chatbotHeader');
+        this.body = document.getElementById('chatbotBody');
+        this.messages = document.getElementById('chatbotMessages');
+        this.input = document.getElementById('chatbotInput');
+        this.sendBtn = document.getElementById('chatbotSend');
+        this.toggleBtn = document.getElementById('chatbotToggle');
+        
+        this.isMinimized = false;
+        this.isTyping = false;
+        
+        this.init();
+    }
+    
+    init() {
+        if (!this.widget) return;
+        
+        // Event listeners
+        this.header.addEventListener('click', () => this.toggleMinimize());
+        this.sendBtn.addEventListener('click', () => this.sendMessage());
+        this.input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') this.sendMessage();
+        });
+        
+        // Initialize minimized state
+        this.widget.classList.add('minimized');
+        this.isMinimized = true;
+    }
+    
+    toggleMinimize() {
+        if (this.isMinimized) {
+            this.widget.classList.remove('minimized');
+            this.isMinimized = false;
+            this.input.focus();
+        } else {
+            this.widget.classList.add('minimized');
+            this.isMinimized = true;
+        }
+    }
+    
+    async sendMessage() {
+        const message = this.input.value.trim();
+        if (!message || this.isTyping) return;
+        
+        // Add user message
+        this.addMessage(message, 'user');
+        this.input.value = '';
+        
+        // Show typing indicator
+        this.showTypingIndicator();
+        
+        try {
+            // Send to Cloudflare Worker backend
+            const response = await fetch('https://api.chatbot.yourdomain.com/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            
+            const data = await response.json();
+            
+            // Remove typing indicator and add bot response
+            this.hideTypingIndicator();
+            this.addMessage(data.response, 'bot');
+            
+        } catch (error) {
+            console.error('Error:', error);
+            this.hideTypingIndicator();
+            this.addMessage('Sorry, I encountered an error. Please try again.', 'bot');
+        }
+    }
+    
+    addMessage(text, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}-message`;
+        
+        const icon = sender === 'bot' ? 'fa-robot' : 'fa-user';
+        const time = this.getCurrentTime();
+        
+        messageDiv.innerHTML = `
+            <div class="message-content">
+                <i class="fas ${icon}"></i>
+                <p>${text}</p>
+            </div>
+            <div class="message-time">${time}</div>
+        `;
+        
+        this.messages.appendChild(messageDiv);
+        this.scrollToBottom();
+    }
+    
+    showTypingIndicator() {
+        this.isTyping = true;
+        this.sendBtn.disabled = true;
+        
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'typing-indicator';
+        typingDiv.innerHTML = `
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+        `;
+        
+        this.messages.appendChild(typingDiv);
+        this.scrollToBottom();
+    }
+    
+    hideTypingIndicator() {
+        this.isTyping = false;
+        this.sendBtn.disabled = false;
+        
+        const typingIndicator = this.messages.querySelector('.typing-indicator');
+        if (typingIndicator) {
+            typingIndicator.remove();
+        }
+    }
+    
+    scrollToBottom() {
+        this.messages.scrollTop = this.messages.scrollHeight;
+    }
+    
+    getCurrentTime() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        return `${hours}:${minutes.toString().padStart(2, '0')}`;
+    }
+}
+
 // Add page transition effects
 document.addEventListener('DOMContentLoaded', () => {
     // Add fade-in effect for page content
@@ -404,6 +542,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.transition = 'opacity 0.5s ease';
         document.body.style.opacity = '1';
     }, 100);
+    
+    // Initialize chatbot
+    new ChatbotWidget();
 });
 
 console.log('Multi-page portfolio loaded successfully! 🚀');

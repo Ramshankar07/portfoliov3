@@ -37,9 +37,10 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- Main Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
+            <!-- <h2 class="section-title">Main Projects</h2> -->
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-header">
@@ -110,20 +111,20 @@
         <div class="container">
             <h2 class="section-title">Academic Projects</h2>
             <div class="academic-projects-grid">
-                <div class="academic-project-card">
-                    <div class="academic-project-header">
+                <div class="project-card">
+                    <div class="project-header">
                         <h3>Medical Knowledge Graph RAG System</h3>
-                        <div class="academic-project-tech">
+                        <div class="project-tech">
                             <span class="tech-tag">Neo4j</span>
                             <span class="tech-tag">LangChain</span>
                             <span class="tech-tag">Graph RAG</span>
                             <span class="tech-tag">Python</span>
                         </div>
                     </div>
-                    <p class="academic-project-description">
+                    <p class="project-description">
                         Developed comprehensive Graph RAG framework for medical data retrieval using automated triplet extraction and dynamic knowledge graph construction with Neo4j. System implements semantic search optimization through LangChain and provides enhanced medical information retrieval with superior contextual understanding compared to traditional retrieval methods.
                     </p>
-                    <div class="academic-project-highlights">
+                    <div class="project-highlights">
                         <div class="highlight">
                             <i class="fas fa-brain"></i>
                             <span>Automated triplet extraction</span>
@@ -139,20 +140,20 @@
                     </div>
                 </div>
 
-                <div class="academic-project-card">
-                    <div class="academic-project-header">
+                <div class="project-card">
+                    <div class="project-header">
                         <h3>Llama3 - Pure C/CUDA Implementation</h3>
-                        <div class="academic-project-tech">
+                        <div class="project-tech">
                             <span class="tech-tag">C/CUDA</span>
                             <span class="tech-tag">llm.c</span>
                             <span class="tech-tag">Performance Optimization</span>
                             <span class="tech-tag">GPU Kernels</span>
                         </div>
                     </div>
-                    <p class="academic-project-description">
+                    <p class="project-description">
                         Implementation of Llama 3.1 in pure C/CUDA built on Karpathy's llm.c. Optimized various kernels including RMSNorm (2.3x speedup), SwiGLU with bfloat16, and integrated optimizations into MHA implementation. Achieved significant performance gains through cooperative groups, coalesced memory access, and efficient load/store operations. Features complete forward/backward pass implementation with attention mechanisms and RoPE embeddings.
                     </p>
-                    <div class="academic-project-highlights">
+                    <div class="project-highlights">
                         <div class="highlight">
                             <i class="fas fa-tachometer-alt"></i>
                             <span>2.3x RMSNorm speedup</span>
@@ -168,20 +169,20 @@
                     </div>
                 </div>
 
-                <div class="academic-project-card">
-                    <div class="academic-project-header">
+                <div class="project-card">
+                    <div class="project-header">
                         <h3>Stock Price Forecaster</h3>
-                        <div class="academic-project-tech">
+                        <div class="project-tech">
                             <span class="tech-tag">Streamlit</span>
                             <span class="tech-tag">Hidden Markov Models</span>
                             <span class="tech-tag">Time Series</span>
                             <span class="tech-tag">Python</span>
                         </div>
                     </div>
-                    <p class="academic-project-description">
+                    <p class="project-description">
                         Streamlit application forecasting stock prices using Hidden Markov Models based on historical data. Supports 1-day and multi-day forecasts for major tech stocks (AAPL, TSLA, NVDA). Models multivariate time series capturing opening price, closing price, and volume. Trained using maximum likelihood estimation with hidden states tuned via Akaike Information Criterion to prevent overfitting. Deployed at stock-hmm-analysis.streamlit.app.
                     </p>
-                    <div class="academic-project-highlights">
+                    <div class="project-highlights">
                         <div class="highlight">
                             <i class="fas fa-chart-line"></i>
                             <span>Multi-day forecasting</span>
@@ -205,33 +206,87 @@
         <div class="container">
             <h2 class="section-title">Work Experience Projects</h2>
             <div class="work-projects-grid">
-                <div class="work-project-card">
-                    <h3>Advanced Suicidal Ideation Classification System</h3>
-                    <p>Led development of a multi-conversation classification system processing diverse text inputs to detect mental health risks. Created comprehensive ETL pipelines for 123,000 training samples, implemented hybrid SFT-DPO training methodologies, and deployed on AWS SageMaker with model sharding across GPU instances. Achieved 71% macro-AUC improvement and 40% output consistency improvement through constitutional AI controls and real-time monitoring.</p>
-                    <div class="work-project-tech">
-                        <span class="tech-tag">AWS SageMaker</span>
-                        <span class="tech-tag">ETL Pipelines</span>
-                        <span class="tech-tag">SFT-DPO Training</span>
-                        <span class="tech-tag">Model Sharding</span>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Advanced Suicidal Ideation Classification System</h3>
+                        <div class="project-tech">
+                            <span class="tech-tag">AWS SageMaker</span>
+                            <span class="tech-tag">ETL Pipelines</span>
+                            <span class="tech-tag">SFT-DPO Training</span>
+                            <span class="tech-tag">Model Sharding</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Led development of a multi-conversation classification system processing diverse text inputs to detect mental health risks. Created comprehensive ETL pipelines for 123,000 training samples, implemented hybrid SFT-DPO training methodologies, and deployed on AWS SageMaker with model sharding across GPU instances. Achieved 71% macro-AUC improvement and 40% output consistency improvement through constitutional AI controls and real-time monitoring.
+                    </p>
+                    <div class="project-highlights">
+                        <div class="highlight">
+                            <i class="fas fa-chart-line"></i>
+                            <span>71% macro-AUC improvement</span>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-cogs"></i>
+                            <span>40% output consistency improvement</span>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-database"></i>
+                            <span>123,000 training samples</span>
+                        </div>
                     </div>
                 </div>
-                <div class="work-project-card">
-                    <h3>Two-Stage Cardiac Arrhythmia Detection System</h3>
-                    <p>Designed novel neural architecture processing ECG signals through specialized CNN-Transformer hybrids. First stage classifies overall rhythm patterns with 94-98% accuracy, while second stage provides adaptive ectopic beat detection with 90-95% accuracy. Features dynamic windowing algorithms adjusting to patient-specific heart rates and achieves perfect classification for critical arrhythmias like atrial flutter, enabling reliable automated cardiac screening.</p>
-                    <div class="work-project-tech">
-                        <span class="tech-tag">PyTorch</span>
-                        <span class="tech-tag">CNN-Transformer</span>
-                        <span class="tech-tag">Signal Processing</span>
-                        <span class="tech-tag">Medical AI</span>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Two-Stage Cardiac Arrhythmia Detection System</h3>
+                        <div class="project-tech">
+                            <span class="tech-tag">PyTorch</span>
+                            <span class="tech-tag">CNN-Transformer</span>
+                            <span class="tech-tag">Signal Processing</span>
+                            <span class="tech-tag">Medical AI</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Designed novel neural architecture processing ECG signals through specialized CNN-Transformer hybrids. First stage classifies overall rhythm patterns with 94-98% accuracy, while second stage provides adaptive ectopic beat detection with 90-95% accuracy. Features dynamic windowing algorithms adjusting to patient-specific heart rates and achieves perfect classification for critical arrhythmias like atrial flutter, enabling reliable automated cardiac screening.
+                    </p>
+                    <div class="project-highlights">
+                        <div class="highlight">
+                            <i class="fas fa-heartbeat"></i>
+                            <span>94-98% rhythm accuracy</span>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-microchip"></i>
+                            <span>90-95% ectopic detection</span>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Perfect critical arrhythmia detection</span>
+                        </div>
                     </div>
                 </div>
-                <div class="work-project-card">
-                    <h3>OCR Pipeline with Layout Detection</h3>
-                    <p>Deep learning-based OCR system for financial documents using ViT + CRNN architectures</p>
-                    <div class="work-project-tech">
-                        <span class="tech-tag">PyTorch</span>
-                        <span class="tech-tag">ONNX</span>
-                        <span class="tech-tag">CUDA</span>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>OCR Pipeline with Layout Detection</h3>
+                        <div class="project-tech">
+                            <span class="tech-tag">PyTorch</span>
+                            <span class="tech-tag">ONNX</span>
+                            <span class="tech-tag">CUDA</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Deep learning-based OCR system for financial documents using ViT + CRNN architectures with 98% text extraction accuracy and 42% faster processing through ONNX runtime optimization and CUDA kernels.
+                    </p>
+                    <div class="project-highlights">
+                        <div class="highlight">
+                            <i class="fas fa-eye"></i>
+                            <span>98% text extraction accuracy</span>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>42% faster processing</span>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-file-invoice"></i>
+                            <span>Financial document optimization</span>
+                        </div>
                     </div>
                 </div>
             </div>

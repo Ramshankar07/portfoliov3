@@ -812,45 +812,48 @@ section {
     font-weight: 500;
 }
 
-/* Additional Projects Section */
-.additional-projects {
+/* Work Experience Projects Section */
+.work-experience-projects {
     background: #f8fafc;
 }
 
-.mini-projects-grid {
+.work-projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
 }
 
-.mini-project-card {
+.work-project-card {
     background: white;
     padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
     border: 1px solid #e2e8f0;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid #10b981;
 }
 
-.mini-project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+.work-project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
-.mini-project-card h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
+.work-project-card h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
     color: #1e293b;
     margin-bottom: 1rem;
+    line-height: 1.3;
 }
 
-.mini-project-card p {
+.work-project-card p {
     color: #64748b;
     margin-bottom: 1.5rem;
-    line-height: 1.6;
+    line-height: 1.7;
+    font-size: 0.95rem;
 }
 
-.mini-project-tech {
+.work-project-tech {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
@@ -1125,7 +1128,7 @@ section {
         grid-template-columns: 1fr;
     }
 
-    .mini-projects-grid {
+    .work-projects-grid {
         grid-template-columns: 1fr;
     }
 
@@ -1205,7 +1208,7 @@ section {
 
     .overview-card,
     .achievement-card,
-    .mini-project-card,
+    .work-project-card,
     .contact-option {
         padding: 1.5rem;
     }
@@ -3006,6 +3009,31 @@ html {
     }
 }
 
+/* Responsive Work Experience Projects */
+@media (max-width: 768px) {
+    .work-experience-projects {
+        padding: 2rem 0;
+    }
+    
+    .work-projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .work-project-card {
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+    
+    .work-project-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .work-project-card p {
+        font-size: 0.9rem;
+    }
+}
+
 @media (max-width: 480px) {
     .academic-project-card {
         padding: 1rem;
@@ -3020,6 +3048,23 @@ html {
     }
     
     .academic-project-tech .tech-tag {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+    
+    .work-project-card {
+        padding: 1rem;
+    }
+    
+    .work-project-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .work-project-tech {
+        gap: 0.25rem;
+    }
+    
+    .work-project-tech .tech-tag {
         font-size: 0.75rem;
         padding: 0.25rem 0.5rem;
     }

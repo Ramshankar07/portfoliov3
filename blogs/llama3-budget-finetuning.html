@@ -4,244 +4,290 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How I Customized Llama 3.1 8B on a Budget - Ramshankar Bhuvaneswaran</title>
-    <link rel="stylesheet" href="../styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome.com/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
+<body class="font-inter text-gray-800 bg-white">
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">RB</div>
-            <ul class="nav-menu">
-                <li><a href="../index.html" class="nav-link">Home</a></li>
-                <li><a href="../about.html" class="nav-link">About</a></li>
-                <li><a href="../experience.html" class="nav-link">Experience</a></li>
-                <li><a href="../projects.html" class="nav-link">Projects</a></li>
-                <li><a href="../blogs.html" class="nav-link active">Blogs</a></li>
-                <li><a href="../contact.html" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 shadow-lg">
+        <div class="max-w-6xl mx-auto px-5">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-3xl font-bold text-primary-600 bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent">
+                    RB
+                </div>
+                <ul class="hidden md:flex space-x-8">
+                    <li><a href="../index.html" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Home</a></li>
+                    <li><a href="../about.html" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">About</a></li>
+                    <li><a href="../experience.html" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Experience</a></li>
+                    <li><a href="../projects.html" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Projects</a></li>
+                    <li><a href="../blogs.html" class="text-primary-600 font-medium relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500">Blogs</a></li>
+                    <li><a href="../contact.html" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Contact</a></li>
+                </ul>
+                <div class="md:hidden flex flex-col cursor-pointer">
+                    <span class="w-6 h-0.5 bg-gray-700 mb-1 transition-all duration-300"></span>
+                    <span class="w-6 h-0.5 bg-gray-700 mb-1 transition-all duration-300"></span>
+                    <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300"></span>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Blog Post Header -->
-    <section class="blog-post-header">
-        <div class="container">
-            <div class="blog-post-meta">
-                <span class="blog-category">AI/ML</span>
-                <span class="blog-date">December 25, 2024</span>
-                <span class="reading-time">12 min read</span>
-            </div>
-            <h1 class="blog-post-title">How I Customized Llama 3.1 8B on a Budget</h1>
-            <p class="blog-post-subtitle">
-                Democratizing AI: Fine-tuning Large Language Models with Limited Resources
-            </p>
-            <div class="blog-post-tags">
-                <span class="blog-tag">LLMs</span>
-                <span class="blog-tag">LoRA</span>
-                <span class="blog-tag">Fine-tuning</span>
-                <span class="blog-tag">Budget AI</span>
-                <span class="blog-tag">PyTorch</span>
+    <!-- Blog Header -->
+    <section class="pt-32 pb-16 bg-gradient-to-br from-gray-50 to-gray-200">
+        <div class="max-w-4xl mx-auto px-5">
+            <div class="text-center">
+                <div class="mb-6">
+                    <span class="inline-block px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-full mb-4">
+                        AI/ML Research
+                    </span>
+                    <span class="inline-block px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-full ml-2">
+                        Dec 15, 2024
+                    </span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                    How I Customized Llama 3.1 8B on a Budget
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 leading-relaxed max-w-3xl mx-auto">
+                    Democratizing AI: Fine-tuning Large Language Models with Limited Resources
+                </p>
+                <div class="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-500">
+                    <span class="flex items-center gap-2">
+                        <i class="fas fa-graduation-cap text-primary-600"></i>
+                        Graduate Student Research
+                    </span>
+                    <span class="flex items-center gap-2">
+                        <i class="fas fa-university text-primary-600"></i>
+                        Northeastern University
+                    </span>
+                    <span class="flex items-center gap-2">
+                        <i class="fas fa-clock text-primary-600"></i>
+                        15 min read
+                    </span>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Blog Post Content -->
-    <section class="blog-post-content">
-        <div class="container">
-            <article class="blog-post">
-                <div class="blog-post-body">
-                    <div class="project-info">
-                        <h3>Graduate Student Research</h3>
-                        <p><strong>Institution:</strong> Northeastern University</p>
-                        <p><strong>Focus:</strong> Budget-Friendly AI</p>
-                    </div>
+    <!-- Blog Content -->
+    <article class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-5">
+            <!-- Introduction -->
+            <div class="prose prose-lg max-w-none">
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                    I was impressed by how fine-tuned large language models outperform retrieval-augmented systems, especially at inference time. 
+                    So I set out to fine-tune an open-source model like Meta's Llama 3.1 (8B parameters). But most sources stated you needed 
+                    giant, expensive GPUs and tons of storage resources that I simply didn't have.
+                </p>
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                    Determined to find another way, I tried it on a budget, and discovered you don't need a fancy setup to customize a 
+                    state-of-the-art model.
+                </p>
 
-                    <h2>Why I Took on This Challenge</h2>
-                    <p>
-                        I was impressed by how fine-tuned large language models outperform retrieval-augmented systems, 
-                        especially at inference time. So I set out to fine-tune an open-source model like Meta's Llama 3.1 
-                        (8B parameters). But most sources stated you needed giant, expensive GPUs and tons of storage 
-                        resources that I simply didn't have.
-                    </p>
-                    
-                    <p>
-                        Determined to find another way, I tried it on a budget, and discovered you don't need a fancy 
-                        setup to customize a state-of-the-art model.
-                    </p>
-
-                    <h2>The Hurdles: Time, Memory, and Disk</h2>
-                    <p>
-                        Fine-tuning an 8 billion-parameter model throws up three big roadblocks:
-                    </p>
-
-                    <div class="challenges-grid">
-                        <div class="challenge-card">
-                            <div class="challenge-icon">
-                                <i class="fas fa-microchip"></i>
+                <!-- Challenge Section -->
+                <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg mb-8">
+                    <h2 class="text-2xl font-bold text-red-800 mb-4">The Hurdles: Time, Memory, and Disk</h2>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-memory text-red-600 text-2xl"></i>
                             </div>
-                            <h4>GPU RAM Required</h4>
-                            <div class="challenge-value">16GB</div>
+                            <h3 class="font-semibold text-red-800 mb-2">GPU RAM Required</h3>
+                            <p class="text-red-700">16GB</p>
                         </div>
-                        <div class="challenge-card">
-                            <div class="challenge-icon">
-                                <i class="fas fa-clock"></i>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-clock text-red-600 text-2xl"></i>
                             </div>
-                            <h4>GPU Time Limit</h4>
-                            <div class="challenge-value">4hrs</div>
+                            <h3 class="font-semibold text-red-800 mb-2">4hrs GPU Time Limit</h3>
+                            <p class="text-red-700">Hard constraint</p>
                         </div>
-                        <div class="challenge-card">
-                            <div class="challenge-icon">
-                                <i class="fas fa-hdd"></i>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-hdd text-red-600 text-2xl"></i>
                             </div>
-                            <h4>Disk Storage</h4>
-                            <div class="challenge-value">Limited</div>
+                            <h3 class="font-semibold text-red-800 mb-2">Limited Disk Storage</h3>
+                            <p class="text-red-700">16GB quota</p>
                         </div>
                     </div>
+                </div>
 
-                    <h2>My Secret Weapon: LoRA (Low-Rank Adaptation)</h2>
-                    <p>
-                        Instead of retraining 8 billion weights, LoRA tacks on small "adapter" matrices. Think of it 
-                        as fine-tuning a car's suspension, rather than redesigning the entire engine.
-                    </p>
+                <!-- LoRA Section -->
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">My Secret Weapon: LoRA (Low-Rank Adaptation)</h2>
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                    Instead of retraining 8 billion weights, LoRA tacks on small "adapter" matrices. Think of it as fine-tuning a car's suspension, 
+                    rather than redesigning the entire engine.
+                </p>
 
-                    <div class="lora-comparison">
-                        <div class="comparison-card full-model">
-                            <h4>FULL MODEL</h4>
-                            <div class="param-count">8B Parameters</div>
+                <div class="bg-blue-50 border border-blue-200 rounded-xl p-8 mb-8">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-6 text-center">Parameter Comparison</h3>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div class="text-center">
+                            <h4 class="text-lg font-semibold text-blue-700 mb-4">FULL MODEL</h4>
+                            <p class="text-3xl font-bold text-blue-800">8B Parameters</p>
                         </div>
-                        <div class="vs-divider">VS</div>
-                        <div class="comparison-card lora-model">
-                            <h4>LoRA</h4>
-                            <div class="param-count">65K Parameters</div>
-                            <div class="efficiency">250× FEWER PARAMS</div>
-                        </div>
-                    </div>
-
-                    <div class="parameter-breakdown">
-                        <h4>Parameter Comparison</h4>
-                        <ul>
-                            <li><strong>Full weight matrix:</strong> 4,096 × 4,096 = 16.7 million parameters</li>
-                            <li><strong>LoRA (rank 8):</strong> 4,096 × 8 + 8 × 4,096 = 65,536 parameters</li>
-                        </ul>
-                        <p class="highlight">That's 250× fewer parameters!</p>
-                    </div>
-
-                    <div class="adapter-sizes">
-                        <div class="size-card">
-                            <h4>Mini (rank 8)</h4>
-                            <div class="size-value">81MB</div>
-                        </div>
-                        <div class="size-card">
-                            <h4>Medium (rank 16)</h4>
-                            <div class="size-value">161MB</div>
+                        <div class="text-center">
+                            <h4 class="text-lg font-semibold text-blue-700 mb-4">LoRA</h4>
+                            <p class="text-3xl font-bold text-blue-800">65K Parameters</p>
                         </div>
                     </div>
+                    <div class="text-center mt-6">
+                        <p class="text-2xl font-bold text-blue-800">That's 250× fewer parameters!</p>
+                    </div>
+                </div>
 
-                    <h2>My Setup on Northeastern's Cluster</h2>
-                    <p>
-                        I tapped into the Discovery cluster, which has:
-                    </p>
-
-                    <div class="gpu-specs">
-                        <div class="gpu-card h200">
-                            <h4>H200</h4>
-                            <div class="vram">141GB GPU VRAM</div>
+                <div class="bg-green-50 border border-green-200 rounded-xl p-6 mb-8">
+                    <h3 class="text-xl font-semibold text-green-800 mb-4">Adapter Sizes</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="text-center p-4 bg-white rounded-lg">
+                            <span class="text-lg font-semibold text-green-700">81MB</span>
+                            <p class="text-sm text-green-600">Mini (rank 8)</p>
                         </div>
-                        <div class="gpu-card a100">
-                            <h4>A100</h4>
-                            <div class="vram">40GB GPU VRAM</div>
-                        </div>
-                        <div class="gpu-card v100">
-                            <h4>V100</h4>
-                            <div class="vram">32GB GPU VRAM</div>
+                        <div class="text-center p-4 bg-white rounded-lg">
+                            <span class="text-lg font-semibold text-green-700">161MB</span>
+                            <p class="text-sm text-green-600">Medium (rank 16)</p>
                         </div>
                     </div>
+                </div>
 
-                    <p>
-                        Jobs are managed by SLURM, with a hard 4-hour limit. To avoid eating disk quota, I redirected 
-                        all caches to scratch space:
-                    </p>
+                <!-- Setup Section -->
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">My Setup on Northeastern's Cluster</h2>
+                <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                    I tapped into the Discovery cluster, which has:
+                </p>
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 text-center">
+                        <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-microchip text-primary-600 text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">H200 GPU</h3>
+                        <p class="text-primary-600 font-semibold">141GB VRAM</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 text-center">
+                        <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-microchip text-primary-600 text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">A100 GPU</h3>
+                        <p class="text-primary-600 font-semibold">40GB VRAM</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 text-center">
+                        <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-microchip text-primary-600 text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">V100 GPU</h3>
+                        <p class="text-primary-600 font-semibold">32GB VRAM</p>
+                    </div>
+                </div>
 
-                    <div class="code-block">
-                        <h4>Cache Configuration</h4>
-                        <pre><code>export CACHE_DIR="${SCRATCH}/llama3_finetune/cache/huggingface"
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                    Jobs are managed by SLURM, with a hard 4-hour limit. To avoid eating disk quota, I redirected all caches to scratch space:
+                </p>
+
+                <div class="bg-gray-900 text-green-400 p-6 rounded-lg mb-8 font-mono text-sm overflow-x-auto">
+                    <pre><code>export CACHE_DIR="${SCRATCH}/llama3_finetune/cache/huggingface"
 export HF_HOME="$CACHE_DIR"
 export TRANSFORMERS_CACHE="$CACHE_DIR"</code></pre>
+                </div>
+
+                <!-- Project Structure -->
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Organizing the Project</h2>
+                <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                    I called it LlamaVox, with a simple structure:
+                </p>
+
+                <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 mb-8 font-mono text-sm">
+                    <pre><code>LlamaVox/
+├── config/          # LoRA settings
+├── data/            # Training files
+├── models/          # Saved adapters
+├── slurm/           # Job scripts
+└── src/             # Training code</code></pre>
+                </div>
+
+                <!-- Tech Stack -->
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">My Tech Stack</h2>
+                <div class="grid md:grid-cols-3 gap-4 mb-8">
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
+                        <span class="text-lg font-semibold text-gray-900">PyTorch 2.6.0</span>
                     </div>
-
-                    <h2>Organizing the Project</h2>
-                    <p>
-                        I called it LlamaVox, with a simple structure:
-                    </p>
-
-                    <div class="project-structure">
-                        <pre><code>LlamaVox/
-├── config/     # LoRA settings
-├── data/       # Training files
-├── models/     # Saved adapters
-├── slurm/      # Job scripts
-└── src/        # Training code</code></pre>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
+                        <span class="text-lg font-semibold text-gray-900">Transformers 4.53.0</span>
                     </div>
-
-                    <h3>My Tech Stack:</h3>
-                    <ul>
-                        <li>PyTorch 2.6.0</li>
-                        <li>Transformers 4.53.0</li>
-                        <li>PEFT 0.16.0</li>
-                        <li>TRL 0.19.0</li>
-                        <li>Accelerate</li>
-                        <li>bitsandbytes</li>
-                    </ul>
-
-                    <h2>Prepping the Data</h2>
-                    <p>
-                        I built three datasets:
-                    </p>
-
-                    <div class="dataset-info">
-                        <div class="dataset-card">
-                            <h4>Mini Dataset</h4>
-                            <div class="dataset-size">5K examples</div>
-                            <div class="dataset-file-size">2.2 MB</div>
-                        </div>
-                        <div class="dataset-card">
-                            <h4>Medium Dataset</h4>
-                            <div class="dataset-size">50K examples</div>
-                        </div>
-                        <div class="dataset-card">
-                            <h4>Synthetic Dataset</h4>
-                            <div class="dataset-size">1K examples</div>
-                        </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
+                        <span class="text-lg font-semibold text-gray-900">PEFT 0.16.0</span>
                     </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
+                        <span class="text-lg font-semibold text-gray-900">TRL 0.19.0</span>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
+                        <span class="text-lg font-semibold text-gray-900">Accelerate</span>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
+                        <span class="text-lg font-semibold text-gray-900">bitsandbytes</span>
+                    </div>
+                </div>
 
-                    <p>
-                        Each example looked like this:
-                    </p>
+                <!-- Data Section -->
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Prepping the Data</h2>
+                <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                    I built three datasets:
+                </p>
 
-                    <div class="code-block">
-                        <h4>Data Format</h4>
-                        <pre><code>{
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 text-center">
+                        <h3 class="font-semibold text-gray-900 mb-2">5K Mini Dataset</h3>
+                        <p class="text-primary-600 font-semibold">2.2 MB</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 text-center">
+                        <h3 class="font-semibold text-gray-900 mb-2">50K Medium Dataset</h3>
+                        <p class="text-primary-600 font-semibold">Larger scale</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 text-center">
+                        <h3 class="font-semibold text-gray-900 mb-2">1K Synthetic Dataset</h3>
+                        <p class="text-primary-600 font-semibold">Generated data</p>
+                    </div>
+                </div>
+
+                <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                    Each example looked like this:
+                </p>
+
+                <div class="bg-gray-900 text-green-400 p-6 rounded-lg mb-8 font-mono text-sm overflow-x-auto">
+                    <pre><code>{
   "conversations": [
     {"role": "user", "content": "What are the main challenges of urban planning?"},
     {"role": "assistant", "content": "Urban planning faces several key challenges..."}
   ]
 }</code></pre>
-                    </div>
+                </div>
 
-                    <h2>Running the Training Jobs</h2>
-                    <p>
-                        Here's a snippet of my SLURM script for an H200 GPU:
-                    </p>
+                <!-- Training Section -->
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Running the Training Jobs</h2>
+                <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                    Here's a snippet of my SLURM script for an H200 GPU:
+                </p>
 
-                    <div class="code-block">
-                        <h4>SLURM Script for H200</h4>
-                        <pre><code>#!/bin/bash
+                <div class="bg-gray-900 text-green-400 p-6 rounded-lg mb-8 font-mono text-sm overflow-x-auto">
+                    <pre><code>#!/bin/bash
 #SBATCH --job-name=llama3_h200
 #SBATCH --time=4:00:00
 #SBATCH --gres=gpu:h200:1
@@ -253,250 +299,198 @@ python src/train.py \
   --dataset data/mini.json \
   --lora_rank 8 \
   --output_dir models/mini_h200</code></pre>
-                    </div>
+                </div>
 
-                    <h2>Mini Dataset Results on H200</h2>
-                    <div class="training-results">
-                        <div class="result-item">
-                            <strong>Start:</strong> July 7, 2025 8:06 PM EDT
+                <!-- Results Section -->
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Mini Dataset Results on H200</h2>
+                <div class="bg-green-50 border border-green-200 rounded-xl p-6 mb-8">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="text-center">
+                            <h3 class="font-semibold text-green-800 mb-2">Start</h3>
+                            <p class="text-green-700">July 7, 2025 8:06 PM EDT</p>
                         </div>
-                        <div class="result-item">
-                            <strong>Runtime:</strong> 18 minutes
+                        <div class="text-center">
+                            <h3 class="font-semibold text-green-800 mb-2">Runtime</h3>
+                            <p class="text-green-700">18 minutes</p>
                         </div>
-                        <div class="result-item">
-                            <strong>Loss drop:</strong> 0.1164 → 0.0229
+                        <div class="text-center">
+                            <h3 class="font-semibold text-green-800 mb-2">Loss drop</h3>
+                            <p class="text-green-700">0.1164 → 0.0229</p>
                         </div>
-                        <div class="result-item">
-                            <strong>Token accuracy:</strong> 98.98%
-                        </div>
-                    </div>
-
-                    <h2>GPU Performance Comparison</h2>
-                    <div class="performance-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>GPU</th>
-                                    <th>VRAM</th>
-                                    <th>Mini (5K)</th>
-                                    <th>Medium (50K)</th>
-                                    <th>Adapter Size</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>H200</strong></td>
-                                    <td>141 GB</td>
-                                    <td>18 min</td>
-                                    <td>~2.5 hours</td>
-                                    <td>81–161 MB</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>A100</strong></td>
-                                    <td>40 GB</td>
-                                    <td>25 min</td>
-                                    <td>~3 hours</td>
-                                    <td>81–161 MB</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>V100</strong></td>
-                                    <td>32 GB</td>
-                                    <td>40 min</td>
-                                    <td>Failed</td>
-                                    <td>81 MB only</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="gpu-recommendations">
-                        <div class="recommendation-card h200">
-                            <h4>H200</h4>
-                            <p>Blistering speed, but scarce</p>
-                        </div>
-                        <div class="recommendation-card a100">
-                            <h4>A100</h4>
-                            <p>Great balance of power & availability</p>
-                        </div>
-                        <div class="recommendation-card v100">
-                            <h4>V100</h4>
-                            <p>OK for tiny jobs, hits 4hr wall</p>
-                        </div>
-                    </div>
-
-                    <h2>Performance Optimization Tricks</h2>
-                    <div class="optimization-tricks">
-                        <div class="trick-card">
-                            <h4>Gradient Accumulation</h4>
-                            <p>Fake bigger batches with less memory.</p>
-                        </div>
-                        <div class="trick-card">
-                            <h4>Mixed-Precision Training</h4>
-                            <p>Use 16-bit floats to halve memory use.</p>
-                        </div>
-                        <div class="trick-card">
-                            <h4>8-bit Quantization</h4>
-                            <p>Load the base model in 8-bit, freeing up VRAM.</p>
-                        </div>
-                        <div class="trick-card">
-                            <h4>Smart Checkpointing</h4>
-                            <p>Save every 10 minutes so you can resume if you hit the time limit.</p>
-                        </div>
-                    </div>
-
-                    <h2>Troubleshooting: Issues & Fixes</h2>
-                    <div class="troubleshooting-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Issue</th>
-                                    <th>Status</th>
-                                    <th>Fix Summary</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Flash Attention Compatibility</td>
-                                    <td><span class="status fixed">✅ Fixed</span></td>
-                                    <td>Uninstalled flash_attn; set attn_implementation="eager"</td>
-                                </tr>
-                                <tr>
-                                    <td>Disk Quota Exceeded</td>
-                                    <td><span class="status fixed">✅ Fixed</span></td>
-                                    <td>Redirected HF cache to scratch space</td>
-                                </tr>
-                                <tr>
-                                    <td>Hugging Face Authentication Errors</td>
-                                    <td><span class="status fixed">✅ Fixed</span></td>
-                                    <td>Added explicit huggingface_hub.login() and token management</td>
-                                </tr>
-                                <tr>
-                                    <td>Environment Setup Complexity</td>
-                                    <td><span class="status fixed">✅ Fixed</span></td>
-                                    <td>Created run_model.sh for automated setup and GPU checks</td>
-                                </tr>
-                                <tr>
-                                    <td>Out-of-Memory (OOM) Errors</td>
-                                    <td><span class="status ongoing">📋 Ongoing</span></td>
-                                    <td>8-bit quantization, smaller batches, request more VRAM, monitor</td>
-                                </tr>
-                                <tr>
-                                    <td>Model Access & Permissions</td>
-                                    <td><span class="status fixed">✅ Fixed</span></td>
-                                    <td>Verified permissions; added access checks before download attempts</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <h2>Quick Start Guide</h2>
-                    <div class="quick-start">
-                        <div class="step">
-                            <h4>1. Grab a GPU node</h4>
-                            <pre><code>srun --gres=gpu:1 --mem=32G --time=1:00:00 --pty bash</code></pre>
-                        </div>
-                        <div class="step">
-                            <h4>2. Run the launcher</h4>
-                            <pre><code>./llama3_finetune/run_model.sh</code></pre>
-                        </div>
-                    </div>
-
-                    <h2>Key Takeaways</h2>
-                    <div class="key-takeaways">
-                        <div class="takeaway-card">
-                            <h4>🎯 LoRA is Game-Changing</h4>
-                            <p>250× parameter reduction makes fine-tuning accessible on consumer hardware.</p>
-                        </div>
-                        <div class="takeaway-card">
-                            <h4>⚡ H200 vs A100 Trade-offs</h4>
-                            <p>H200 offers blistering speed but A100 provides better availability and cost-effectiveness.</p>
-                        </div>
-                        <div class="takeaway-card">
-                            <h4>💾 Smart Resource Management</h4>
-                            <p>Cache redirection and scratch space usage are crucial for cluster environments.</p>
-                        </div>
-                        <div class="takeaway-card">
-                            <h4>🔧 Optimization is Key</h4>
-                            <p>Mixed precision, quantization, and gradient accumulation can make or break your training.</p>
-                        </div>
-                    </div>
-
-                    <h2>Conclusion</h2>
-                    <p>
-                        Fine-tuning large language models doesn't have to be expensive or require enterprise-grade hardware. 
-                        With LoRA and smart resource management, you can customize state-of-the-art models like Llama 3.1 
-                        even on university clusters with strict time and storage limits.
-                    </p>
-
-                    <p>
-                        The key is understanding your constraints and working within them. Whether you have 4 hours or 40, 
-                        16GB or 141GB of VRAM, there's a way to make it work. The democratization of AI isn't just about 
-                        open-source models—it's about making the fine-tuning process accessible to everyone.
-                    </p>
-
-                    <div class="blog-post-footer">
-                        <div class="author-info">
-                            <h4>About the Author</h4>
-                            <p>
-                                Ramshankar Bhuvaneswaran is a Master's student in Information Systems at Northeastern University, 
-                                specializing in AI/ML engineering. This research was conducted as part of his graduate studies, 
-                                exploring practical approaches to democratizing AI technology.
-                            </p>
-                        </div>
-                        
-                        <div class="related-posts">
-                            <h4>Related Posts</h4>
-                            <ul>
-                                <li><a href="llm-guide.html">Understanding Large Language Models: From Theory to Practice</a></li>
-                                <li><a href="pytorch-production-optimization.html">Optimizing PyTorch Models for Production Deployment</a></li>
-                                <li><a href="aws-sagemaker-pipeline.html">AWS SageMaker: End-to-End ML Pipeline Implementation</a></li>
-                            </ul>
+                        <div class="text-center">
+                            <h3 class="font-semibold text-green-800 mb-2">Token accuracy</h3>
+                            <p class="text-green-700">98.98%</p>
                         </div>
                     </div>
                 </div>
-            </article>
+
+                <!-- GPU Performance Table -->
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">GPU Performance Comparison</h2>
+                <div class="overflow-x-auto mb-8">
+                    <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">GPU</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">VRAM</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mini (5K)</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Medium (50K)</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Adapter Size</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">H200</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">141 GB</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">18 min</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">~2.5 hours</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">81–161 MB</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">A100</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">40 GB</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">25 min</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">~3 hours</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">81–161 MB</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">V100</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">32 GB</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">40 min</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Failed</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">81 MB only</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-blue-50 p-6 rounded-xl border border-blue-200 text-center">
+                        <h3 class="font-semibold text-blue-800 mb-2">H200</h3>
+                        <p class="text-blue-700">Blistering speed, but scarce</p>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-xl border border-green-200 text-center">
+                        <h3 class="font-semibold text-green-800 mb-2">A100</h3>
+                        <p class="text-green-700">Great balance of power & availability</p>
+                    </div>
+                    <div class="bg-yellow-50 p-6 rounded-xl border border-yellow-200 text-center">
+                        <h3 class="font-semibold text-yellow-800 mb-2">V100</h3>
+                        <p class="text-yellow-700">OK for tiny jobs, hits 4hr wall</p>
+                    </div>
+                </div>
+
+                <!-- Optimization Section -->
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Performance Optimization Tricks</h2>
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <h3 class="font-semibold text-gray-900 mb-3">Gradient Accumulation</h3>
+                        <p class="text-gray-700">Fake bigger batches with less memory.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <h3 class="font-semibold text-gray-900 mb-3">Mixed-Precision Training</h3>
+                        <p class="text-gray-700">Use 16-bit floats to halve memory use.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <h3 class="font-semibold text-gray-900 mb-3">8-bit Quantization</h3>
+                        <p class="text-gray-700">Load the base model in 8-bit, freeing up VRAM.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <h3 class="font-semibold text-gray-900 mb-3">Smart Checkpointing</h3>
+                        <p class="text-gray-700">Save every 10 minutes so you can resume if you hit the time limit.</p>
+                    </div>
+                </div>
+
+                <!-- Troubleshooting Section -->
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Troubleshooting: Issues & Fixes</h2>
+                <div class="overflow-x-auto mb-8">
+                    <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Issue</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fix Summary</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Flash Attention Compatibility</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Fixed</span></td>
+                                <td class="px-6 py-4 text-sm text-gray-500">Uninstalled flash_attn; set attn_implementation="eager"</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Disk Quota Exceeded</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Fixed</span></td>
+                                <td class="px-6 py-4 text-sm text-gray-500">Redirected HF cache to scratch space</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Hugging Face Authentication Errors</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Fixed</span></td>
+                                <td class="px-6 py-4 text-sm text-gray-500">Added explicit huggingface_hub.login() and token management</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Environment Setup Complexity</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Fixed</span></td>
+                                <td class="px-6 py-4 text-sm text-gray-500">Created run_model.sh for automated setup and GPU checks</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Out-of-Memory (OOM) Errors</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full">Ongoing</span></td>
+                                <td class="px-6 py-4 text-sm text-gray-500">8-bit quantization, smaller batches, request more VRAM, monitor</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Model Access & Permissions</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Fixed</span></td>
+                                <td class="px-6 py-4 text-sm text-gray-500">Verified permissions; added access checks before download attempts</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Quick Start Guide -->
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Quick Start Guide</h2>
+                <div class="bg-gray-900 text-green-400 p-6 rounded-lg mb-8 font-mono text-sm overflow-x-auto">
+                    <pre><code># Grab a GPU node
+srun --gres=gpu:1 --mem=32G --time=1:00:00 --pty bash
+
+# Run the launcher
+./llama3_finetune/run_model.sh</code></pre>
+                </div>
+
+                <!-- Conclusion -->
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">What I Learned</h2>
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                    The key insight is that you don't need expensive hardware to fine-tune large language models. With LoRA, smart optimization, 
+                    and university cluster resources, you can achieve impressive results on a budget. The 4-hour time limit actually forced me 
+                    to be more efficient and creative with my approach.
+                </p>
+
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                    This project showed me that democratizing AI isn't just about open-source models—it's about making the fine-tuning process 
+                    accessible to students and researchers with limited resources. By sharing these techniques, I hope to inspire others to 
+                    experiment with large language models without breaking the bank.
+                </p>
+
+                <!-- Call to Action -->
+                <div class="bg-primary-50 border border-primary-200 rounded-xl p-8 text-center">
+                    <h3 class="text-2xl font-bold text-primary-800 mb-4">Ready to Try It Yourself?</h3>
+                    <p class="text-primary-700 mb-6">
+                        Check out the full code and detailed setup instructions on my GitHub repository.
+                    </p>
+                    <a href="#" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                        <i class="fab fa-github"></i>
+                        View on GitHub
+                    </a>
+                </div>
+            </div>
         </div>
-    </section>
+    </article>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
+    <footer class="bg-gray-900 text-gray-400 text-center py-8">
+        <div class="max-w-6xl mx-auto px-5">
             <p>&copy; 2024 Ramshankar Bhuvaneswaran. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="../script.js"></script>
-    
-    <!-- Chatbot Widget -->
-    <!--
-    <div class="chatbot-widget" id="chatbotWidget">
-        <div class="chatbot-header" id="chatbotHeader">
-            <div class="chatbot-title">
-                <i class="fas fa-robot"></i>
-                <span>Portfolio Assistant</span>
-            </div>
-            <button class="chatbot-toggle" id="chatbotToggle">
-                <i class="fas fa-comments"></i>
-            </button>
-        </div>
-        <div class="chatbot-body" id="chatbotBody">
-            <div class="chatbot-messages" id="chatbotMessages">
-                <div class="message bot-message">
-                    <div class="message-content">
-                        <i class="fas fa-robot"></i>
-                        <p>Hello! 👋 I'm your AI assistant. Ask me anything about Ramshankar's portfolio, skills, or projects!</p>
-                    </div>
-                    <div class="message-time">Just now</div>
-                </div>
-            </div>
-            <div class="chatbot-input">
-                <input type="text" id="chatbotInput" placeholder="Type your message..." maxlength="200">
-                <button id="chatbotSend">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-    -->
 </body>
 </html>

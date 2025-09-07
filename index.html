@@ -26,6 +26,90 @@
             }
         }
     </script>
+    <style>
+        /* Enhanced Glass Morphism Styles */
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        
+        .glass-morphism-dark {
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Custom scrollbar for chat messages */
+        #chat-messages::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        #chat-messages::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+        
+        #chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+        }
+        
+        #chat-messages::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Smooth animations */
+        .chat-enter {
+            animation: chatSlideIn 0.3s ease-out;
+        }
+        
+        @keyframes chatSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Message typing animation */
+        .typing-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.6);
+            animation: typing 1.4s infinite ease-in-out;
+        }
+        
+        .typing-indicator:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes typing {
+            0%, 80%, 100% {
+                transform: scale(0);
+                opacity: 0.5;
+            }
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            #chatbot-widget {
+                max-width: 100%;
+                margin: 0 1rem;
+            }
+        }
+    </style>
 </head>
 <body class="font-inter text-gray-800 bg-white">
     <!-- Navigation -->
@@ -77,8 +161,78 @@
                         </a>
                     </div>
                 </div>
-                <div class="flex justify-center items-center p-8">
+                <div class="flex flex-col justify-center items-center p-8 space-y-8">
                     <img src="img/hero-section.jpg" alt="Ramshankar Bhuvaneswaran" class="w-80 h-80 rounded-full object-cover border-4 border-white shadow-2xl hover:scale-105 transition-transform duration-300">
+                    
+                    <!-- AI Chatbot Widget -->
+                    <div id="chatbot-widget" class="w-full max-w-md">
+                        <!-- Chat Toggle Button -->
+                        <button id="chat-toggle" class="w-full bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl p-4 shadow-xl hover:bg-white/30 transition-all duration-300 group">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-robot text-white text-lg"></i>
+                                    </div>
+                                    <div class="text-left">
+                                        <h3 class="text-white font-semibold text-lg">Ask me anything!</h3>
+                                        <p class="text-white/80 text-sm">AI-powered portfolio assistant</p>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-up text-white/60 group-hover:text-white transition-colors duration-300" id="chat-arrow"></i>
+                            </div>
+                        </button>
+
+                        <!-- Chat Interface -->
+                        <div id="chat-interface" class="hidden mt-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl overflow-hidden">
+                            <!-- Chat Header -->
+                            <div class="bg-white/20 backdrop-blur-md p-4 border-b border-white/20">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-robot text-white text-sm"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-white font-semibold">Portfolio Assistant</h4>
+                                            <p class="text-white/70 text-xs">Powered by Gemini AI</p>
+                                        </div>
+                                    </div>
+                                    <button id="chat-close" class="text-white/60 hover:text-white transition-colors duration-200">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Chat Messages -->
+                            <div id="chat-messages" class="h-80 overflow-y-auto p-4 space-y-4">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-8 h-8 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-robot text-white text-sm"></i>
+                                    </div>
+                                    <div class="bg-white/20 backdrop-blur-md rounded-2xl rounded-tl-sm p-3 max-w-xs">
+                                        <p class="text-white text-sm">Hi! I'm your AI assistant. Ask me about Ramshankar's projects, skills, or experience! 🚀</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Chat Input -->
+                            <div class="p-4 border-t border-white/20 bg-white/10 backdrop-blur-md">
+                                <div class="flex space-x-3">
+                                    <input 
+                                        type="text" 
+                                        id="chat-input" 
+                                        placeholder="Ask about projects, skills, experience..."
+                                        class="flex-1 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl px-4 py-2 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
+                                    >
+                                    <button 
+                                        id="chat-send" 
+                                        class="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white rounded-xl px-4 py-2 transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

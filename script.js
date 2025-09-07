@@ -188,11 +188,13 @@ class PortfolioChatbot {
             }
         });
 
-        // Auto-focus input when chat opens
+        // Focus input when chat opens (only when manually opened)
         this.chatToggle?.addEventListener('click', () => {
-            setTimeout(() => {
-                this.chatInput?.focus();
-            }, 300);
+            if (this.isOpen) {
+                setTimeout(() => {
+                    this.chatInput?.focus();
+                }, 300);
+            }
         });
     }
 
@@ -279,7 +281,7 @@ class PortfolioChatbot {
         }`;
         
         const avatarIcon = document.createElement('i');
-        avatarIcon.className = sender === 'user' ? 'fas fa-user text-white text-sm' : 'fas fa-robot text-white text-sm';
+        avatarIcon.className = sender === 'user' ? 'fas fa-user text-white text-sm' : 'fas fa-comments text-white text-sm';
         avatarDiv.appendChild(avatarIcon);
         
         const messageContent = document.createElement('div');
@@ -290,7 +292,7 @@ class PortfolioChatbot {
         }`;
         
         const messageText = document.createElement('p');
-        messageText.className = 'text-white text-sm';
+        messageText.className = 'text-gray-700 text-sm';
         messageText.textContent = content;
         messageContent.appendChild(messageText);
         
@@ -327,7 +329,7 @@ class PortfolioChatbot {
         avatarDiv.className = 'w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-gradient-to-r from-primary-500 to-primary-600';
         
         const avatarIcon = document.createElement('i');
-        avatarIcon.className = 'fas fa-robot text-white text-sm';
+        avatarIcon.className = 'fas fa-comments text-white text-sm';
         avatarDiv.appendChild(avatarIcon);
         
         const messageContent = document.createElement('div');

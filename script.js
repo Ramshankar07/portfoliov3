@@ -175,10 +175,6 @@ class PortfolioChatbot {
     }
 
     bindEvents() {
-        // Toggle chat interface
-        this.chatToggle?.addEventListener('click', () => this.toggleChat());
-        this.chatClose?.addEventListener('click', () => this.closeChat());
-        
         // Send message
         this.chatSend?.addEventListener('click', () => this.sendMessage());
         this.chatInput?.addEventListener('keypress', (e) => {
@@ -188,14 +184,10 @@ class PortfolioChatbot {
             }
         });
 
-        // Focus input when chat opens (only when manually opened)
-        this.chatToggle?.addEventListener('click', () => {
-            if (this.isOpen) {
-                setTimeout(() => {
-                    this.chatInput?.focus();
-                }, 300);
-            }
-        });
+        // Auto-focus input on page load
+        setTimeout(() => {
+            this.chatInput?.focus();
+        }, 500);
     }
 
     toggleChat() {
@@ -223,15 +215,8 @@ class PortfolioChatbot {
         const message = this.chatInput?.value.trim();
         if (!message || this.isLoading) return;
 
-        // Add user message to chat
-        this.addMessage(message, 'user');
-        this.chatInput.value = '';
-        
         // Show loading state
         this.setLoading(true);
-        
-        // Add typing indicator
-        const typingId = this.addTypingIndicator();
         
         try {
             const response = await fetch(`${this.apiUrl}/api/chat`, {
@@ -251,22 +236,64 @@ class PortfolioChatbot {
 
             const data = await response.json();
             
-            // Remove typing indicator
-            this.removeTypingIndicator(typingId);
-            
-            // Simulate typing delay
-            await this.delay(data.delay || 1000);
-            
-            // Add bot response
-            this.addMessage(data.response, 'bot');
+            // Show result in a modal or alert
+            this.showResult(data.response);
+            this.chatInput.value = '';
             
         } catch (error) {
             console.error('Chat error:', error);
-            this.removeTypingIndicator(typingId);
-            this.addMessage('Sorry, I encountered an error. Please try again later.', 'bot');
+            this.showResult('Sorry, I encountered an error. Please try again later.');
         } finally {
             this.setLoading(false);
         }
+    }
+
+    showResult(message) {
+        // Create or update result modal
+        let resultModal = document.getElementById('search-result-modal');
+        
+        if (!resultModal) {
+            resultModal = document.createElement('div');
+            resultModal.id = 'search-result-modal';
+            resultModal.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4';
+            document.body.appendChild(resultModal);
+        }
+
+        resultModal.innerHTML = `
+            <div class="bg-gray-900 border-2 border-blue-400 rounded-2xl p-6 max-w-2xl w-full max-h-96 overflow-y-auto shadow-2xl dark-search-bar">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                            <i class="fas fa-search text-white text-sm"></i>
+                        </div>
+                        <h3 class="text-white text-lg font-semibold">Search Result</h3>
+                    </div>
+                    <button id="close-result" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="text-gray-300 leading-relaxed whitespace-pre-wrap">${message}</div>
+            </div>
+        `;
+
+        // Show modal
+        resultModal.classList.remove('hidden');
+        
+        // Close modal events
+        document.getElementById('close-result')?.addEventListener('click', () => {
+            resultModal.classList.add('hidden');
+        });
+        
+        resultModal.addEventListener('click', (e) => {
+            if (e.target === resultModal) {
+                resultModal.classList.add('hidden');
+            }
+        });
+
+        // Auto-focus back to input
+        setTimeout(() => {
+            this.chatInput?.focus();
+        }, 100);
     }
 
     addMessage(content, sender) {
@@ -274,18 +301,18 @@ class PortfolioChatbot {
         messageDiv.className = `flex items-start space-x-3 ${sender === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`;
         
         const avatarDiv = document.createElement('div');
-        avatarDiv.className = `w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+        avatarDiv.className = `w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg ${
             sender === 'user' 
                 ? 'bg-gradient-to-r from-gray-500 to-gray-600' 
-                : 'bg-gradient-to-r from-primary-500 to-primary-600'
+                : 'bg-gradient-to-r from-blue-500 to-blue-600'
         }`;
         
         const avatarIcon = document.createElement('i');
-        avatarIcon.className = sender === 'user' ? 'fas fa-user text-white text-sm' : 'fas fa-comments text-white text-sm';
+        avatarIcon.className = sender === 'user' ? 'fas fa-user text-white text-sm' : 'fas fa-search text-white text-sm';
         avatarDiv.appendChild(avatarIcon);
         
         const messageContent = document.createElement('div');
-        messageContent.className = `backdrop-blur-md rounded-2xl p-3 max-w-xs ${
+        messageContent.className = `backdrop-blur-md rounded-2xl p-3 max-w-xs shadow-lg ${
             sender === 'user' 
                 ? 'bg-white/30 rounded-tr-sm' 
                 : 'bg-white/20 rounded-tl-sm'
@@ -326,10 +353,10 @@ class PortfolioChatbot {
         messageDiv.className = 'flex items-start space-x-3';
         
         const avatarDiv = document.createElement('div');
-        avatarDiv.className = 'w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-gradient-to-r from-primary-500 to-primary-600';
+        avatarDiv.className = 'w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-gradient-to-r from-blue-500 to-blue-600 shadow-lg';
         
         const avatarIcon = document.createElement('i');
-        avatarIcon.className = 'fas fa-comments text-white text-sm';
+        avatarIcon.className = 'fas fa-search text-white text-sm';
         avatarDiv.appendChild(avatarIcon);
         
         const messageContent = document.createElement('div');

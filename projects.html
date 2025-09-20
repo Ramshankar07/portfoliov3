@@ -211,6 +211,45 @@
 
                 <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
                     <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight">Qwen600 CUDA to ROCm Port for AMD MI300X</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">C++</span>
+                            <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">HIP</span>
+                            <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">CUDA</span>
+                            <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">ROCm</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Ported six essential transformer kernels from NVIDIA CUDA to AMD ROCm/HIP, optimizing for MI300X architecture (304 CUs, 192GB HBM3, 5.2TB/s bandwidth). Achieved 12.1ms per token generation with 79-83% memory bandwidth utilization. Implemented BFloat16 optimizations with coalesced memory access patterns and fused operations, reducing memory traffic by 50%. Features full CUDA to HIP conversion with multi-GPU architecture support and optimized softmax implementation.
+                    </p>
+                    <div class="flex flex-wrap gap-4 mb-4">
+                        <a href="https://github.com/Ramshankar07/qwen600-AMD" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-200">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub Repository</span>
+                        </a>
+                        <a href="https://ramshankar07.substack.com/p/optimizing-llms-on-amd-mi300x-what" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                            <i class="fas fa-blog"></i>
+                            <span>Technical Blog</span>
+                        </a>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200">
+                        <div class="flex items-center gap-2 text-sm text-gray-600">
+                            <i class="fas fa-microchip text-primary-600"></i>
+                            <span>12.1ms token generation</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-gray-600">
+                            <i class="fas fa-memory text-primary-600"></i>
+                            <span>50% memory traffic reduction</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-gray-600">
+                            <i class="fas fa-cogs text-primary-600"></i>
+                            <span>Multi-GPU architecture support</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                    <div class="mb-6">
                         <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight">Stock Price Forecaster</h3>
                         <div class="flex flex-wrap gap-2">
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">Streamlit</span>

@@ -26,6 +26,62 @@
             }
         }
     </script>
+    <style>
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .contact-grid-mobile {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .contact-form-mobile {
+                padding: 1.5rem;
+            }
+            
+            .contact-info-mobile {
+                padding: 1.5rem;
+            }
+            
+            .contact-method-mobile {
+                padding: 1rem;
+            }
+            
+            .contact-method-mobile h3 {
+                font-size: 1.25rem;
+            }
+            
+            .form-grid-mobile {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contact-form-mobile {
+                padding: 1rem;
+            }
+            
+            .contact-info-mobile {
+                padding: 1rem;
+            }
+            
+            .contact-method-mobile {
+                padding: 0.75rem;
+            }
+            
+            .contact-method-mobile h3 {
+                font-size: 1.125rem;
+            }
+            
+            .form-input-mobile {
+                padding: 0.75rem;
+            }
+            
+            .form-textarea-mobile {
+                padding: 0.75rem;
+            }
+        }
+    </style>
 </head>
 <body class="font-inter text-gray-800 bg-white">
     <!-- Navigation -->
@@ -64,13 +120,13 @@
     <section class="py-20 bg-gray-50">
         <div class="max-w-6xl mx-auto px-5">
             <div class="max-w-2xl mx-auto">
-                <div class="bg-white p-12 rounded-xl shadow-lg border border-gray-200 text-center">
+                <div class="bg-white p-12 rounded-xl shadow-lg border border-gray-200 text-center contact-form-mobile">
                     <h3 class="text-2xl font-semibold text-gray-900 mb-4">Let's Connect</h3>
                     <p class="text-gray-600 mb-8 leading-relaxed">
                         I'm always interested in new opportunities and collaborations. Feel free to reach out!
                     </p>
                     <div class="space-y-6">
-                        <div class="flex items-center gap-6 p-6 bg-gray-50 rounded-xl border border-gray-200 hover:transform hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+                        <div class="flex items-center gap-6 p-6 bg-gray-50 rounded-xl border border-gray-200 hover:transform hover:-translate-y-1 hover:shadow-md transition-all duration-300 contact-method-mobile">
                             <div class="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full flex-shrink-0">
                                 <i class="fas fa-envelope text-white text-xl"></i>
                             </div>
@@ -79,7 +135,7 @@
                                 <p class="text-gray-600">bhuvaneshwaran.r@northeastern.edu</p>
                             </div>
                         </div>
-                        <div class="flex items-center gap-6 p-6 bg-gray-50 rounded-xl border border-gray-200 hover:transform hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+                        <div class="flex items-center gap-6 p-6 bg-gray-50 rounded-xl border border-gray-200 hover:transform hover:-translate-y-1 hover:shadow-md transition-all duration-300 contact-method-mobile">
                             <div class="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full flex-shrink-0">
                                 <i class="fas fa-phone text-white text-xl"></i>
                             </div>
@@ -88,7 +144,7 @@
                                 <p class="text-gray-600">(857)-693-4328</p>
                             </div>
                         </div>
-                        <div class="flex items-center gap-6 p-6 bg-gray-50 rounded-xl border border-gray-200 hover:transform hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+                        <div class="flex items-center gap-6 p-6 bg-gray-50 rounded-xl border border-gray-200 hover:transform hover:-translate-y-1 hover:shadow-md transition-all duration-300 contact-method-mobile">
                             <div class="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full flex-shrink-0">
                                 <i class="fab fa-linkedin text-white text-xl"></i>
                             </div>
@@ -99,7 +155,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="flex items-center gap-6 p-6 bg-gray-50 rounded-xl border border-gray-200 hover:transform hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+                        <div class="flex items-center gap-6 p-6 bg-gray-50 rounded-xl border border-gray-200 hover:transform hover:-translate-y-1 hover:shadow-md transition-all duration-300 contact-method-mobile">
                             <div class="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full flex-shrink-0">
                                 <i class="fas fa-map-marker-alt text-white text-xl"></i>
                             </div>

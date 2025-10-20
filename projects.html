@@ -26,6 +26,66 @@
             }
         }
     </script>
+    <style>
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .projects-grid-mobile {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .project-card-mobile {
+                padding: 1.5rem;
+            }
+            
+            .project-title-mobile {
+                font-size: 1.5rem;
+            }
+            
+            .project-tags-mobile {
+                justify-content: center;
+            }
+            
+            .project-links-mobile {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .project-links-mobile a {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .academic-grid-mobile {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .work-grid-mobile {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .project-card-mobile {
+                padding: 1rem;
+            }
+            
+            .project-title-mobile {
+                font-size: 1.25rem;
+            }
+            
+            .project-description-mobile {
+                font-size: 0.9rem;
+            }
+            
+            .project-metrics-mobile {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 <body class="font-inter text-gray-800 bg-white">
     <!-- Navigation -->
@@ -63,18 +123,18 @@
     <!-- Main Projects Section -->
     <section class="py-20 bg-white">
         <div class="max-w-6xl mx-auto px-5">
-            <div class="grid lg:grid-cols-2 gap-8">
-                <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+            <div class="grid lg:grid-cols-2 gap-8 projects-grid-mobile">
+                <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 project-card-mobile">
                     <div class="mb-6">
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight">Parallelizing Text-to-Image Generation Using Diffusion</h3>
-                        <div class="flex flex-wrap gap-2">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight project-title-mobile">Parallelizing Text-to-Image Generation Using Diffusion</h3>
+                        <div class="flex flex-wrap gap-2 project-tags-mobile">
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">Python</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">PyTorch</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">Dask</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">CLIP</span>
                         </div>
                     </div>
-                    <ul class="space-y-3 text-gray-600 mb-6 leading-relaxed">
+                    <ul class="space-y-3 text-gray-600 mb-6 leading-relaxed project-description-mobile">
                         <li class="flex items-start gap-3">
                             <span class="text-primary-600 font-bold mt-1">→</span>
                             <span>Built DDPM model from scratch and Engineered Dask-powered distributed preprocessing pipeline (Multiprocessing backend) for text-to-image datasets, achieving 1.48x CPU throughput scaling versus single-thread baselines.</span>
@@ -84,7 +144,7 @@
                             <span>Accelerated training via Automatic Mixed Precision (AMP) with Exponential Moving Average (EMA) weight averaging (β = 0.999), reducing training time by 11% (23.5 → 20.9 hrs/epoch) and loss variance by 29% through gradient histogram stabilization.</span>
                         </li>
                     </ul>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200 project-metrics-mobile">
                         <div class="flex items-center gap-2 text-sm text-gray-600">
                             <i class="fas fa-rocket text-primary-600"></i>
                             <span>1.48x CPU throughput scaling</span>
@@ -100,17 +160,17 @@
                     </div>
                 </div>
 
-                <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 project-card-mobile">
                     <div class="mb-6">
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight">Fintech-Data-Processing-ETL-Platform</h3>
-                        <div class="flex flex-wrap gap-2">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight project-title-mobile">Fintech-Data-Processing-ETL-Platform</h3>
+                        <div class="flex flex-wrap gap-2 project-tags-mobile">
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">Python</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">Snowflake</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">Airflow</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">FastAPI</span>
                         </div>
                     </div>
-                    <ul class="space-y-3 text-gray-600 mb-6 leading-relaxed">
+                    <ul class="space-y-3 text-gray-600 mb-6 leading-relaxed project-description-mobile">
                         <li class="flex items-start gap-3">
                             <span class="text-primary-600 font-bold mt-1">→</span>
                             <span>Built a master financial statement database for US public companies, implementing three distinct storage strategies (Raw Staging, JSON Transformation, Denormalized Fact Tables) with Snowflake to optimize data access patterns.</span>
@@ -124,7 +184,7 @@
                             <span>Developed a client-facing analytics solution combining Streamlit for visualization and FastAPI backend services, enabling financial analysts to perform real-time fundamental analysis of public company data.</span>
                         </li>
                     </ul>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200 project-metrics-mobile">
                         <div class="flex items-center gap-2 text-sm text-gray-600">
                             <i class="fas fa-database text-primary-600"></i>
                             <span>Master financial database</span>
@@ -150,21 +210,21 @@
                 Academic Projects
                 <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full"></div>
             </h2>
-            <div class="grid lg:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+            <div class="grid lg:grid-cols-2 gap-8 academic-grid-mobile">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 project-card-mobile">
                     <div class="mb-6">
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight">Medical Knowledge Graph RAG System</h3>
-                        <div class="flex flex-wrap gap-2">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight project-title-mobile">Medical Knowledge Graph RAG System</h3>
+                        <div class="flex flex-wrap gap-2 project-tags-mobile">
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">Neo4j</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">LangChain</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">Graph RAG</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">Python</span>
                         </div>
                     </div>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
+                    <p class="text-gray-600 mb-6 leading-relaxed project-description-mobile">
                         Developed comprehensive Graph RAG framework for medical data retrieval using automated triplet extraction and dynamic knowledge graph construction with Neo4j. System implements semantic search optimization through LangChain and provides enhanced medical information retrieval with superior contextual understanding compared to traditional retrieval methods.
                     </p>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200 project-metrics-mobile">
                         <div class="flex items-center gap-2 text-sm text-gray-600">
                             <i class="fas fa-brain text-primary-600"></i>
                             <span>Automated triplet extraction</span>
@@ -180,20 +240,20 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 project-card-mobile">
                     <div class="mb-6">
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight">Llama3 - Pure C/CUDA Implementation</h3>
-                        <div class="flex flex-wrap gap-2">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight project-title-mobile">Llama3 - Pure C/CUDA Implementation</h3>
+                        <div class="flex flex-wrap gap-2 project-tags-mobile">
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">C/CUDA</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">llm.c</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">Performance Optimization</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">GPU Kernels</span>
                         </div>
                     </div>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
+                    <p class="text-gray-600 mb-6 leading-relaxed project-description-mobile">
                         Implementation of Llama 3.1 in pure C/CUDA built on Karpathy's llm.c. Optimized various kernels including RMSNorm (2.3x speedup), SwiGLU with bfloat16, and integrated optimizations into MHA implementation. Achieved significant performance gains through cooperative groups, coalesced memory access, and efficient load/store operations. Features complete forward/backward pass implementation with attention mechanisms and RoPE embeddings.
                     </p>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200 project-metrics-mobile">
                         <div class="flex items-center gap-2 text-sm text-gray-600">
                             <i class="fas fa-tachometer-alt text-primary-600"></i>
                             <span>2.3x RMSNorm speedup</span>
@@ -209,20 +269,20 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 project-card-mobile">
                     <div class="mb-6">
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight">Qwen600 CUDA to ROCm Port for AMD MI300X</h3>
-                        <div class="flex flex-wrap gap-2">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight project-title-mobile">Qwen600 CUDA to ROCm Port for AMD MI300X</h3>
+                        <div class="flex flex-wrap gap-2 project-tags-mobile">
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">C++</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">HIP</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">CUDA</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">ROCm</span>
                         </div>
                     </div>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
+                    <p class="text-gray-600 mb-6 leading-relaxed project-description-mobile">
                         Ported six essential transformer kernels from NVIDIA CUDA to AMD ROCm/HIP, optimizing for MI300X architecture (304 CUs, 192GB HBM3, 5.2TB/s bandwidth). Achieved 12.1ms per token generation with 79-83% memory bandwidth utilization. Implemented BFloat16 optimizations with coalesced memory access patterns and fused operations, reducing memory traffic by 50%. Features full CUDA to HIP conversion with multi-GPU architecture support and optimized softmax implementation.
                     </p>
-                    <div class="flex flex-wrap gap-4 mb-4">
+                    <div class="flex flex-wrap gap-4 mb-4 project-links-mobile">
                         <a href="https://github.com/Ramshankar07/qwen600-AMD" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-200">
                             <i class="fab fa-github"></i>
                             <span>GitHub Repository</span>
@@ -232,7 +292,7 @@
                             <span>Technical Blog</span>
                         </a>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200 project-metrics-mobile">
                         <div class="flex items-center gap-2 text-sm text-gray-600">
                             <i class="fas fa-microchip text-primary-600"></i>
                             <span>12.1ms token generation</span>
@@ -248,20 +308,20 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 project-card-mobile">
                     <div class="mb-6">
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight">Stock Price Forecaster</h3>
-                        <div class="flex flex-wrap gap-2">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight project-title-mobile">Stock Price Forecaster</h3>
+                        <div class="flex flex-wrap gap-2 project-tags-mobile">
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">Streamlit</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">Hidden Markov Models</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">Time Series</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">Python</span>
                         </div>
                     </div>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
+                    <p class="text-gray-600 mb-6 leading-relaxed project-description-mobile">
                         Streamlit application forecasting stock prices using Hidden Markov Models based on historical data. Supports 1-day and multi-day forecasts for major tech stocks (AAPL, TSLA, NVDA). Models multivariate time series capturing opening price, closing price, and volume. Trained using maximum likelihood estimation with hidden states tuned via Akaike Information Criterion to prevent overfitting. Deployed at stock-hmm-analysis.streamlit.app.
                     </p>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200 project-metrics-mobile">
                         <div class="flex items-center gap-2 text-sm text-gray-600">
                             <i class="fas fa-chart-line text-primary-600"></i>
                             <span>Multi-day forecasting</span>
@@ -287,21 +347,21 @@
                 Work Experience Projects
                 <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full"></div>
             </h2>
-            <div class="grid lg:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-l-green-500 border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+            <div class="grid lg:grid-cols-2 gap-8 work-grid-mobile">
+                <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-l-green-500 border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 project-card-mobile">
                     <div class="mb-6">
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight">Advanced Suicidal Ideation Classification System</h3>
-                        <div class="flex flex-wrap gap-2">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight project-title-mobile">Advanced Suicidal Ideation Classification System</h3>
+                        <div class="flex flex-wrap gap-2 project-tags-mobile">
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">AWS SageMaker</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">ETL Pipelines</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">SFT-DPO Training</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">Model Sharding</span>
                         </div>
                     </div>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
+                    <p class="text-gray-600 mb-6 leading-relaxed project-description-mobile">
                         Led development of a multi-conversation classification system processing diverse text inputs to detect mental health risks. Created comprehensive ETL pipelines for 123,000 training samples, implemented hybrid SFT-DPO training methodologies, and deployed on AWS SageMaker with model sharding across GPU instances. Achieved 71% macro-AUC improvement and 40% output consistency improvement through constitutional AI controls and real-time monitoring.
                     </p>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200 project-metrics-mobile">
                         <div class="flex items-center gap-2 text-sm text-gray-600">
                             <i class="fas fa-chart-line text-primary-600"></i>
                             <span>71% macro-AUC improvement</span>
@@ -317,20 +377,20 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-l-green-500 border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-l-green-500 border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 project-card-mobile">
                     <div class="mb-6">
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight">Two-Stage Cardiac Arrhythmia Detection System</h3>
-                        <div class="flex flex-wrap gap-2">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight project-title-mobile">Two-Stage Cardiac Arrhythmia Detection System</h3>
+                        <div class="flex flex-wrap gap-2 project-tags-mobile">
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">PyTorch</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">CNN-Transformer</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">Signal Processing</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">Medical AI</span>
                         </div>
                     </div>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
+                    <p class="text-gray-600 mb-6 leading-relaxed project-description-mobile">
                         Designed novel neural architecture processing ECG signals through specialized CNN-Transformer hybrids. First stage classifies overall rhythm patterns with 94-98% accuracy, while second stage provides adaptive ectopic beat detection with 90-95% accuracy. Features dynamic windowing algorithms adjusting to patient-specific heart rates and achieves perfect classification for critical arrhythmias like atrial flutter, enabling reliable automated cardiac screening.
                     </p>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200 project-metrics-mobile">
                         <div class="flex items-center gap-2 text-sm text-gray-600">
                             <i class="fas fa-heartbeat text-primary-600"></i>
                             <span>94-98% rhythm accuracy</span>
@@ -346,19 +406,19 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-l-green-500 border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-l-green-500 border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 project-card-mobile">
                     <div class="mb-6">
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight">OCR Pipeline with Layout Detection</h3>
-                        <div class="flex flex-wrap gap-2">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4 leading-tight project-title-mobile">OCR Pipeline with Layout Detection</h3>
+                        <div class="flex flex-wrap gap-2 project-tags-mobile">
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">PyTorch</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">ONNX</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">CUDA</span>
                         </div>
                     </div>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
+                    <p class="text-gray-600 mb-6 leading-relaxed project-description-mobile">
                         Deep learning-based OCR system for financial documents using ViT + CRNN architectures with 98% text extraction accuracy and 42% faster processing through ONNX runtime optimization and CUDA kernels.
                     </p>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200 project-metrics-mobile">
                         <div class="flex items-center gap-2 text-sm text-gray-600">
                             <i class="fas fa-eye text-primary-600"></i>
                             <span>98% text extraction accuracy</span>

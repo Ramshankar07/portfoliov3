@@ -26,6 +26,47 @@
             }
         }
     </script>
+    <style>
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .blogs-grid-mobile {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .blog-card-mobile {
+                padding: 1.5rem;
+            }
+            
+            .blog-title-mobile {
+                font-size: 1.5rem;
+            }
+            
+            .blog-tags-mobile {
+                justify-content: center;
+            }
+            
+            .blog-meta-mobile {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .blog-card-mobile {
+                padding: 1rem;
+            }
+            
+            .blog-title-mobile {
+                font-size: 1.25rem;
+            }
+            
+            .blog-description-mobile {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body class="font-inter text-gray-800 bg-white">
     <!-- Navigation -->
@@ -113,22 +154,22 @@
                 Recent Posts
                 <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full"></div>
             </h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 blogs-grid-mobile">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 blog-card-mobile">
                     <div class="mb-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-4 leading-tight">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4 leading-tight blog-title-mobile">
                             Optimizing LLMs on AMD MI300X: What I Learned Porting Qwen to ROCm
                         </h3>
-                        <p class="text-gray-600 mb-4 leading-relaxed">
+                        <p class="text-gray-600 mb-4 leading-relaxed blog-description-mobile">
                             A deep dive into porting transformer kernels from NVIDIA CUDA to AMD ROCm/HIP, achieving 12.1ms token generation with 79-83% memory bandwidth utilization on MI300X architecture.
                         </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
+                        <div class="flex flex-wrap gap-2 mb-4 blog-tags-mobile">
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">GPU Optimization</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">CUDA to HIP</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">AMD MI300X</span>
                         </div>
                     </div>
-                    <div class="flex items-center justify-between pt-6 border-t border-gray-200">
+                    <div class="flex items-center justify-between pt-6 border-t border-gray-200 blog-meta-mobile">
                         <span class="text-sm text-gray-500">Jan 2025</span>
                         <a href="https://ramshankar07.substack.com/p/optimizing-llms-on-amd-mi300x-what" 
                            target="_blank"
@@ -138,21 +179,21 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 blog-card-mobile">
                     <div class="mb-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-4 leading-tight">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4 leading-tight blog-title-mobile">
                             How I Customized Llama 3.1 8B on a Budget
                         </h3>
-                        <p class="text-gray-600 mb-4 leading-relaxed">
+                        <p class="text-gray-600 mb-4 leading-relaxed blog-description-mobile">
                             Learn how to fine-tune large language models without expensive hardware, using LoRA and smart optimization techniques.
                         </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
+                        <div class="flex flex-wrap gap-2 mb-4 blog-tags-mobile">
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">LLM Fine-tuning</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">LoRA</span>
                             <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">Budget AI</span>
                         </div>
                     </div>
-                    <div class="flex items-center justify-between pt-6 border-t border-gray-200">
+                    <div class="flex items-center justify-between pt-6 border-t border-gray-200 blog-meta-mobile">
                         <span class="text-sm text-gray-500">Dec 15, 2024</span>
                         <a href="blogs/llama3-budget-finetuning.html" 
                            class="text-primary-600 hover:text-primary-700 font-medium transition-colors duration-300">

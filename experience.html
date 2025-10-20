@@ -26,6 +26,68 @@
             }
         }
     </script>
+    <style>
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .experience-timeline-mobile {
+                padding-left: 1rem;
+            }
+            
+            .experience-item-mobile {
+                padding-left: 3rem;
+                margin-bottom: 2rem;
+            }
+            
+            .experience-card-mobile {
+                padding: 1.5rem;
+            }
+            
+            .experience-title-mobile {
+                font-size: 1.5rem;
+            }
+            
+            .experience-meta-mobile {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+            
+            .achievements-grid-mobile {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .achievement-card-mobile {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .experience-timeline-mobile {
+                padding-left: 0.5rem;
+            }
+            
+            .experience-item-mobile {
+                padding-left: 2rem;
+            }
+            
+            .experience-card-mobile {
+                padding: 1rem;
+            }
+            
+            .experience-title-mobile {
+                font-size: 1.25rem;
+            }
+            
+            .achievement-icon-mobile {
+                font-size: 3rem;
+            }
+            
+            .achievement-title-mobile {
+                font-size: 1.125rem;
+            }
+        }
+    </style>
 </head>
 <body class="font-inter text-gray-800 bg-white">
     <!-- Navigation -->
@@ -63,17 +125,17 @@
     <!-- Experience Section -->
     <section class="py-20 bg-gray-50">
         <div class="max-w-4xl mx-auto px-5">
-            <div class="relative">
+            <div class="relative experience-timeline-mobile">
                 <!-- Timeline line -->
                 <div class="absolute left-5 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-600 to-primary-500"></div>
                 
                 <!-- Experience Item 1 -->
-                <div class="relative mb-12 pl-20">
+                <div class="relative mb-12 pl-20 experience-item-mobile">
                     <div class="absolute left-2.5 top-0 w-5 h-5 bg-white border-4 border-primary-600 rounded-full z-10"></div>
-                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 experience-card-mobile">
                         <div class="mb-6">
-                            <h3 class="text-2xl font-semibold text-gray-900 mb-2">AI Engineer</h3>
-                            <div class="flex flex-wrap items-center gap-4 text-sm">
+                            <h3 class="text-2xl font-semibold text-gray-900 mb-2 experience-title-mobile">AI Engineer</h3>
+                            <div class="flex flex-wrap items-center gap-4 text-sm experience-meta-mobile">
                                 <span class="text-primary-600 font-medium">BulkBeings</span>
                                 <span class="text-gray-500">Chennai, India</span>
                                 <span class="text-gray-500">May 2024 – Aug 2024</span>
@@ -101,12 +163,12 @@
                 </div>
 
                 <!-- Experience Item 2 -->
-                <div class="relative mb-12 pl-20">
+                <div class="relative mb-12 pl-20 experience-item-mobile">
                     <div class="absolute left-2.5 top-0 w-5 h-5 bg-white border-4 border-primary-600 rounded-full z-10"></div>
-                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 experience-card-mobile">
                         <div class="mb-6">
-                            <h3 class="text-2xl font-semibold text-gray-900 mb-2">ML Engineer (Research)</h3>
-                            <div class="flex flex-wrap items-center gap-4 text-sm">
+                            <h3 class="text-2xl font-semibold text-gray-900 mb-2 experience-title-mobile">ML Engineer (Research)</h3>
+                            <div class="flex flex-wrap items-center gap-4 text-sm experience-meta-mobile">
                                 <span class="text-primary-600 font-medium">BulkBeings</span>
                                 <span class="text-gray-500">Chennai, India</span>
                                 <span class="text-gray-500">May 2023 – Dec 2023</span>
@@ -134,12 +196,12 @@
                 </div>
 
                 <!-- Experience Item 3 -->
-                <div class="relative mb-12 pl-20">
+                <div class="relative mb-12 pl-20 experience-item-mobile">
                     <div class="absolute left-2.5 top-0 w-5 h-5 bg-white border-4 border-primary-600 rounded-full z-10"></div>
-                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 experience-card-mobile">
                         <div class="mb-6">
-                            <h3 class="text-2xl font-semibold text-gray-900 mb-2">ML Engineer Intern</h3>
-                            <div class="flex flex-wrap items-center gap-4 text-sm">
+                            <h3 class="text-2xl font-semibold text-gray-900 mb-2 experience-title-mobile">ML Engineer Intern</h3>
+                            <div class="flex flex-wrap items-center gap-4 text-sm experience-meta-mobile">
                                 <span class="text-primary-600 font-medium">Velozity Global Solutions Pvt</span>
                                 <span class="text-gray-500">Chennai, India</span>
                                 <span class="text-gray-500">Jan 2022 – Aug 2022</span>
@@ -176,20 +238,20 @@
                 Technical Achievements
                 <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full"></div>
             </h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 text-center hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-                    <i class="fas fa-microchip text-5xl text-primary-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4">GPU Kernel Optimization</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 achievements-grid-mobile">
+                <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 text-center hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 achievement-card-mobile">
+                    <i class="fas fa-microchip text-5xl text-primary-600 mb-4 achievement-icon-mobile"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4 achievement-title-mobile">GPU Kernel Optimization</h3>
                     <p class="text-gray-600">Developed and optimized high-performance GPU kernels for inference/training workloads, demonstrating deep knowledge of memory hierarchy and compute/memory-bound optimization strategies.</p>
                 </div>
-                <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 text-center hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-                    <i class="fas fa-cogs text-5xl text-primary-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Compiler Integration</h3>
+                <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 text-center hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 achievement-card-mobile">
+                    <i class="fas fa-cogs text-5xl text-primary-600 mb-4 achievement-icon-mobile"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4 achievement-title-mobile">Compiler Integration</h3>
                     <p class="text-gray-600">Worked with graph compilers (CUDA, HIP) to optimize deep learning frameworks for various hardware architectures including AMD GPUs, ensuring streams integration.</p>
                 </div>
-                <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 text-center hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-                    <i class="fas fa-chart-line text-5xl text-primary-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Performance Crisis Resolution</h3>
+                <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 text-center hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 achievement-card-mobile">
+                    <i class="fas fa-chart-line text-5xl text-primary-600 mb-4 achievement-icon-mobile"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4 achievement-title-mobile">Performance Crisis Resolution</h3>
                     <p class="text-gray-600">Identified 70% redundant model calls through profiling; architected Redis caching system reducing monthly GPU costs by <strong>$12K</strong> and inference latency by <strong>42%</strong>.</p>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,49 +36,50 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
         }
-        
+
         .glass-morphism-dark {
             background: rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         /* Custom scrollbar for chat messages */
         #chat-messages::-webkit-scrollbar {
             width: 4px;
         }
-        
+
         #chat-messages::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 2px;
         }
-        
+
         #chat-messages::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0.3);
             border-radius: 2px;
         }
-        
+
         #chat-messages::-webkit-scrollbar-thumb:hover {
             background: rgba(255, 255, 255, 0.5);
         }
-        
+
         /* Smooth animations */
         .chat-enter {
             animation: chatSlideIn 0.3s ease-out;
         }
-        
+
         @keyframes chatSlideIn {
             from {
                 opacity: 0;
                 transform: translateY(-10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         /* Message typing animation */
         .typing-indicator {
             display: inline-block;
@@ -87,47 +89,56 @@
             background-color: rgba(255, 255, 255, 0.6);
             animation: typing 1.4s infinite ease-in-out;
         }
-        
-        .typing-indicator:nth-child(1) { animation-delay: -0.32s; }
-        .typing-indicator:nth-child(2) { animation-delay: -0.16s; }
-        
+
+        .typing-indicator:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .typing-indicator:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
         @keyframes typing {
-            0%, 80%, 100% {
+
+            0%,
+            80%,
+            100% {
                 transform: scale(0);
                 opacity: 0.5;
             }
+
             40% {
                 transform: scale(1);
                 opacity: 1;
             }
         }
-        
+
         /* Enhanced blue gradient shadows */
         .search-glow {
             box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(59, 130, 246, 0.1);
         }
-        
+
         .search-glow:hover {
             box-shadow: 0 0 30px rgba(59, 130, 246, 0.4), 0 0 60px rgba(59, 130, 246, 0.2);
         }
-        
+
         /* Dark search bar styling */
         .dark-search-bar {
             background: linear-gradient(135deg, #1f2937, #111827);
             border: 2px solid #60a5fa;
             box-shadow: 0 0 20px rgba(96, 165, 250, 0.3), 0 0 40px rgba(96, 165, 250, 0.1);
         }
-        
+
         .dark-search-bar:hover {
             box-shadow: 0 0 30px rgba(96, 165, 250, 0.4), 0 0 60px rgba(96, 165, 250, 0.2);
             border-color: #93c5fd;
         }
-        
+
         .dark-search-bar:focus-within {
             box-shadow: 0 0 40px rgba(96, 165, 250, 0.5), 0 0 80px rgba(96, 165, 250, 0.3);
             border-color: #93c5fd;
         }
-        
+
         /* Blue gradient text effect */
         .gradient-text {
             background: linear-gradient(135deg, #3b82f6, #8b5cf6, #3b82f6);
@@ -135,95 +146,103 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
+
         /* Animated gradient background */
         .animated-gradient {
             background: linear-gradient(-45deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
             background-size: 400% 400%;
             animation: gradientShift 3s ease infinite;
         }
-        
+
         @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
-        
+
         /* Mobile responsive adjustments */
         @media (max-width: 768px) {
             #chatbot-widget {
                 max-width: 100%;
                 margin: 0 0.5rem;
             }
-            
+
             .dark-search-bar {
                 padding: 0.75rem;
             }
-            
+
             .dark-search-bar input {
                 font-size: 1rem;
             }
-            
+
             #chat-interface {
                 margin-top: 1rem;
             }
-            
+
             #chat-messages {
                 height: 16rem;
                 padding: 1rem;
             }
-            
+
             .hero-section-mobile {
                 padding-top: 2rem;
                 padding-bottom: 2rem;
             }
-            
+
             .hero-image-mobile {
                 width: 16rem;
                 height: 16rem;
                 margin-bottom: 2rem;
             }
-            
+
             .hero-text-mobile {
                 text-align: center;
                 margin-bottom: 2rem;
             }
-            
+
             .hero-buttons-mobile {
                 justify-content: center;
                 flex-direction: column;
                 gap: 1rem;
             }
-            
+
             .hero-buttons-mobile a {
                 width: 100%;
                 text-align: center;
             }
         }
-        
+
         @media (max-width: 480px) {
             .hero-title-mobile {
                 font-size: 2.5rem;
                 line-height: 1.2;
             }
-            
+
             .hero-subtitle-mobile {
                 font-size: 1.25rem;
             }
-            
+
             .hero-description-mobile {
                 font-size: 1rem;
             }
-            
+
             .overview-grid-mobile {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-            
+
             .overview-card-mobile {
                 padding: 1.5rem;
             }
-            
+
             .substack-iframe-mobile {
                 width: 100%;
                 height: 280px;
@@ -231,21 +250,35 @@
         }
     </style>
 </head>
+
 <body class="font-inter text-gray-800 bg-white">
     <!-- Navigation -->
     <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 shadow-lg">
         <div class="max-w-6xl mx-auto px-5">
             <div class="flex justify-between items-center py-4">
-                <div class="text-3xl font-bold text-primary-600 bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent">
+                <div
+                    class="text-3xl font-bold text-primary-600 bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent">
                     RB
                 </div>
                 <ul class="hidden md:flex space-x-8">
-                    <li><a href="index.html" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Home</a></li>
-                    <li><a href="about.html" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">About</a></li>
-                    <li><a href="experience.html" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Experience</a></li>
-                    <li><a href="projects.html" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Projects</a></li>
-                    <li><a href="blogs.html" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Blogs</a></li>
-                    <li><a href="contact.html" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Contact</a></li>
+                    <li><a href="index.html"
+                            class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Home</a>
+                    </li>
+                    <li><a href="about.html"
+                            class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">About</a>
+                    </li>
+                    <li><a href="experience.html"
+                            class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Experience</a>
+                    </li>
+                    <li><a href="projects.html"
+                            class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Projects</a>
+                    </li>
+                    <li><a href="blogs.html"
+                            class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Blogs</a>
+                    </li>
+                    <li><a href="contact.html"
+                            class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Contact</a>
+                    </li>
                 </ul>
                 <div class="md:hidden flex flex-col cursor-pointer">
                     <span class="w-6 h-0.5 bg-gray-700 mb-1 transition-all duration-300"></span>
@@ -257,41 +290,43 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-20 bg-gradient-to-br from-gray-50 to-gray-200 min-h-screen flex items-center hero-section-mobile">
+    <section
+        class="pt-32 pb-20 bg-gradient-to-br from-gray-50 to-gray-200 min-h-screen flex items-center hero-section-mobile">
         <div class="max-w-6xl mx-auto px-5">
             <div class="grid md:grid-cols-2 gap-16 items-center">
                 <div class="hero-text-mobile">
                     <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-4 leading-tight hero-title-mobile">
                         Hi, I'm <span class="text-primary-600">Ramshankar</span>
                     </h1>
-                    <h2 class="text-2xl text-primary-600 font-semibold mb-6 hero-subtitle-mobile">
-                        AI/ML Engineer & Researcher
-                    </h2>
-                    <p class="text-lg text-gray-600 mb-8 leading-relaxed hero-description-mobile">
-                        Passionate about developing innovative AI solutions and pushing the boundaries of machine learning. 
-                        Currently pursuing my Master's at Northeastern University with expertise in computer vision, 
-                        natural language processing, and distributed systems.
+                    <p class="text-xl text-gray-600 mb-10 max-w-lg leading-relaxed hero-subtitle-mobile">
+                        Crafting next-generation AI solutions with a focus on Large Language Models, Computer Vision,
+                        and Distributed Systems. <strong>I graduated!</strong>
                     </p>
                     <div class="flex gap-4 flex-wrap hero-buttons-mobile">
-                        <a href="projects.html" class="px-6 py-3 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                        <a href="projects.html"
+                            class="px-6 py-3 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
                             View Projects
                         </a>
-                        <a href="contact.html" class="px-6 py-3 border-2 border-primary-600 text-primary-600 font-semibold rounded-lg hover:bg-primary-600 hover:text-white transform hover:-translate-y-1 transition-all duration-300">
+                        <a href="contact.html"
+                            class="px-6 py-3 border-2 border-primary-600 text-primary-600 font-semibold rounded-lg hover:bg-primary-600 hover:text-white transform hover:-translate-y-1 transition-all duration-300">
                             Get In Touch
                         </a>
                     </div>
                 </div>
                 <div class="flex flex-col justify-center items-center p-8 space-y-8">
-                    <img src="img/hero-section.jpg" alt="Ramshankar Bhuvaneswaran" class="w-80 h-80 rounded-full object-cover border-4 border-white shadow-2xl hover:scale-105 transition-transform duration-300 hero-image-mobile">
-                    
+                    <img src="img/hero-section.jpg" alt="Ramshankar Bhuvaneswaran"
+                        class="w-80 h-80 rounded-full object-cover border-4 border-white shadow-2xl hover:scale-105 transition-transform duration-300 hero-image-mobile">
+
                     <!-- AI Search Bar Widget -->
                     <div id="chatbot-widget" class="w-full max-w-2xl">
                         <!-- Direct Search Input -->
                         <div class="relative">
                             <div class="relative dark-search-bar rounded-2xl p-4 transition-all duration-300 group">
                                 <!-- Blue gradient glow effect -->
-                                <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-cyan-500/10 to-blue-600/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                                
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-cyan-500/10 to-blue-600/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                </div>
+
                                 <div class="relative flex items-center space-x-4">
                                     <!-- Search Icon with AI Sparkles -->
                                     <div class="relative flex items-center">
@@ -301,26 +336,21 @@
                                                 <div class="w-1 h-1 bg-white rounded-full animate-pulse"></div>
                                             </div>
                                             <div class="absolute -top-1 -right-2">
-                                                <div class="w-1 h-1 bg-white rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
+                                                <div class="w-1 h-1 bg-white rounded-full animate-pulse"
+                                                    style="animation-delay: 0.5s;"></div>
                                             </div>
                                             <!-- Search Icon -->
                                             <i class="fas fa-search text-white text-lg"></i>
                                         </div>
                                     </div>
-                                    
+
                                     <!-- Direct Input Field -->
-                                    <input 
-                                        type="text" 
-                                        id="chat-input" 
-                                        placeholder="Ask a question"
-                                        class="flex-1 bg-transparent text-white placeholder-white/70 text-lg focus:outline-none border-none"
-                                    >
-                                    
+                                    <input type="text" id="chat-input" placeholder="Ask a question"
+                                        class="flex-1 bg-transparent text-white placeholder-white/70 text-lg focus:outline-none border-none">
+
                                     <!-- Send Button -->
-                                    <button 
-                                        id="chat-send" 
-                                        class="bg-gray-800 hover:bg-gray-700 text-white rounded-xl p-2 transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
-                                    >
+                                    <button id="chat-send"
+                                        class="bg-gray-800 hover:bg-gray-700 text-white rounded-xl p-2 transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
                                         <i class="fas fa-paper-plane text-sm"></i>
                                     </button>
                                 </div>
@@ -328,15 +358,19 @@
                         </div>
 
                         <!-- Search Interface -->
-                        <div id="chat-interface" class="hidden mt-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl overflow-hidden relative">
+                        <div id="chat-interface"
+                            class="hidden mt-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl overflow-hidden relative">
                             <!-- Blue gradient shadow effect -->
-                            <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-600/10 rounded-2xl"></div>
-                            
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-600/10 rounded-2xl">
+                            </div>
+
                             <!-- Search Header -->
                             <div class="relative bg-white/20 backdrop-blur-md p-4 border-b border-white/20">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center space-x-3">
-                                        <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                                        <div
+                                            class="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
                                             <i class="fas fa-search text-white text-sm"></i>
                                         </div>
                                         <div>
@@ -344,7 +378,8 @@
                                             <p class="text-gray-600 text-xs">Powered by Gemini AI</p>
                                         </div>
                                     </div>
-                                    <button id="chat-close" class="text-gray-600 hover:text-gray-800 transition-colors duration-200">
+                                    <button id="chat-close"
+                                        class="text-gray-600 hover:text-gray-800 transition-colors duration-200">
                                         <i class="fas fa-times"></i>
                                     </button>
                                 </div>
@@ -353,11 +388,14 @@
                             <!-- Search Results -->
                             <div id="chat-messages" class="h-80 overflow-y-auto p-4 space-y-4 relative">
                                 <div class="flex items-start space-x-3">
-                                    <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
+                                    <div
+                                        class="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
                                         <i class="fas fa-search text-white text-sm"></i>
                                     </div>
-                                    <div class="bg-white/20 backdrop-blur-md rounded-2xl rounded-tl-sm p-3 max-w-xs shadow-lg">
-                                        <p class="text-gray-700 text-sm">Hi! I'm your AI search assistant. Ask me about Ramshankar's projects, skills, or experience! 🔍</p>
+                                    <div
+                                        class="bg-white/20 backdrop-blur-md rounded-2xl rounded-tl-sm p-3 max-w-xs shadow-lg">
+                                        <p class="text-gray-700 text-sm">Hi! I'm your AI search assistant. Ask me about
+                                            Ramshankar's projects, skills, or experience! 🔍</p>
                                     </div>
                                 </div>
                             </div>
@@ -365,24 +403,21 @@
                             <!-- Search Input -->
                             <div class="relative p-4 border-t border-white/20 bg-white/10 backdrop-blur-md">
                                 <!-- Blue gradient shadow for input area -->
-                                <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-blue-600/5 rounded-b-2xl"></div>
-                                
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-blue-600/5 rounded-b-2xl">
+                                </div>
+
                                 <div class="relative flex space-x-3">
                                     <div class="flex-1 relative">
-                                        <input 
-                                            type="text" 
-                                            id="chat-input" 
+                                        <input type="text" id="chat-input"
                                             placeholder="Search projects, skills, experience..."
-                                            class="w-full bg-white/20 backdrop-blur-md border border-white/30 rounded-xl px-4 py-3 pl-12 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-lg"
-                                        >
+                                            class="w-full bg-white/20 backdrop-blur-md border border-white/30 rounded-xl px-4 py-3 pl-12 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-lg">
                                         <div class="absolute left-4 top-1/2 transform -translate-y-1/2">
                                             <i class="fas fa-search text-gray-500 text-sm"></i>
                                         </div>
                                     </div>
-                                    <button 
-                                        id="chat-send" 
-                                        class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-xl px-6 py-3 transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
-                                    >
+                                    <button id="chat-send"
+                                        class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-xl px-6 py-3 transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg">
                                         <i class="fas fa-paper-plane"></i>
                                     </button>
                                 </div>
@@ -399,46 +434,56 @@
         <div class="max-w-6xl mx-auto px-5">
             <h2 class="text-4xl font-bold text-center text-gray-900 mb-16 relative">
                 Quick Overview
-                <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full"></div>
+                <div
+                    class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full">
+                </div>
             </h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 overview-grid-mobile">
-                <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 text-center hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 overview-card-mobile">
+                <div
+                    class="bg-gray-50 p-8 rounded-xl border border-gray-200 text-center hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 overview-card-mobile">
                     <i class="fas fa-user text-5xl text-primary-600 mb-4"></i>
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">About Me</h3>
                     <p class="text-gray-600 mb-6 leading-relaxed">
                         Learn about my background, education, and passion for AI/ML technologies.
                     </p>
-                    <a href="about.html" class="text-primary-600 font-medium hover:text-primary-700 transition-colors duration-300">
+                    <a href="about.html"
+                        class="text-primary-600 font-medium hover:text-primary-700 transition-colors duration-300">
                         Learn More →
                     </a>
                 </div>
-                <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 text-center hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 overview-card-mobile">
+                <div
+                    class="bg-gray-50 p-8 rounded-xl border border-gray-200 text-center hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 overview-card-mobile">
                     <i class="fas fa-briefcase text-5xl text-primary-600 mb-4"></i>
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">Experience</h3>
                     <p class="text-gray-600 mb-6 leading-relaxed">
                         Explore my professional journey and key achievements in the field.
                     </p>
-                    <a href="experience.html" class="text-primary-600 font-medium hover:text-primary-700 transition-colors duration-300">
+                    <a href="experience.html"
+                        class="text-primary-600 font-medium hover:text-primary-700 transition-colors duration-300">
                         Learn More →
                     </a>
                 </div>
-                <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 text-center hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 overview-card-mobile">
+                <div
+                    class="bg-gray-50 p-8 rounded-xl border border-gray-200 text-center hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 overview-card-mobile">
                     <i class="fas fa-code text-5xl text-primary-600 mb-4"></i>
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">Projects</h3>
                     <p class="text-gray-600 mb-6 leading-relaxed">
                         Discover my technical projects and innovative solutions.
                     </p>
-                    <a href="projects.html" class="text-primary-600 font-medium hover:text-primary-700 transition-colors duration-300">
+                    <a href="projects.html"
+                        class="text-primary-600 font-medium hover:text-primary-700 transition-colors duration-300">
                         Learn More →
                     </a>
                 </div>
-                <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 text-center hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 overview-card-mobile">
+                <div
+                    class="bg-gray-50 p-8 rounded-xl border border-gray-200 text-center hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 overview-card-mobile">
                     <i class="fas fa-blog text-5xl text-primary-600 mb-4"></i>
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">Blogs</h3>
                     <p class="text-gray-600 mb-6 leading-relaxed">
                         Read my thoughts on AI/ML trends and technical insights.
                     </p>
-                    <a href="blogs.html" class="text-primary-600 font-medium hover:text-primary-700 transition-colors duration-300">
+                    <a href="blogs.html"
+                        class="text-primary-600 font-medium hover:text-primary-700 transition-colors duration-300">
                         Learn More →
                     </a>
                 </div>
@@ -454,9 +499,12 @@
                 Stay updated with my latest thoughts on AI/ML, research findings, and industry trends
             </p>
             <div class="flex justify-center mb-8">
-                <iframe src="https://ramshankar07.substack.com/embed" width="480" height="320" style="border:1px solid #EEE; background:white;" frameborder="0" scrolling="no" class="rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 substack-iframe-mobile"></iframe>
+                <iframe src="https://ramshankar07.substack.com/embed" width="480" height="320"
+                    style="border:1px solid #EEE; background:white;" frameborder="0" scrolling="no"
+                    class="rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 substack-iframe-mobile"></iframe>
             </div>
-            <a href="https://ramshankar07.substack.com/?r=1rtqqj&utm_campaign=pub-share-checklist" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+            <a href="https://ramshankar07.substack.com/?r=1rtqqj&utm_campaign=pub-share-checklist" target="_blank"
+                class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
                 <i class="fas fa-external-link-alt"></i>
                 Read More on Substack
             </a>
@@ -466,10 +514,11 @@
     <!-- Footer -->
     <footer class="bg-gray-900 text-gray-400 text-center py-8">
         <div class="max-w-6xl mx-auto px-5">
-            <p>&copy; 2024 Ramshankar Bhuvaneswaran. All rights reserved.</p>
+            <p>&copy; 2026 Ramshankar Bhuvaneswaran. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="script.js"></script>
 </body>
+
 </html>

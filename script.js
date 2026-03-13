@@ -1,5 +1,85 @@
-// Mobile Navigation Toggle
+// Theme handling
+const THEME_STORAGE_KEY = 'theme';
+
+function applyTheme(theme) {
+    const root = document.documentElement;
+    if (theme === 'dark') {
+        root.classList.add('dark');
+    } else {
+        root.classList.remove('dark');
+    }
+}
+
+function getStoredTheme() {
+    try {
+        return localStorage.getItem(THEME_STORAGE_KEY);
+    } catch {
+        return null;
+    }
+}
+
+function storeTheme(theme) {
+    try {
+        localStorage.setItem(THEME_STORAGE_KEY, theme);
+    } catch {
+        // ignore storage errors
+    }
+}
+
+function getCurrentTheme() {
+    const stored = getStoredTheme();
+    if (stored === 'light' || stored === 'dark') {
+        return stored;
+    }
+    // Default to dark if nothing stored
+    return 'dark';
+}
+
+function updateThemeToggleUI(theme) {
+    const toggles = document.querySelectorAll('[data-theme-toggle]');
+    toggles.forEach(toggle => {
+        toggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+        const moonIcon = toggle.querySelector('[data-icon="moon"]');
+        const sunIcon = toggle.querySelector('[data-icon="sun"]');
+        if (moonIcon && sunIcon) {
+            if (theme === 'dark') {
+                moonIcon.classList.remove('hidden');
+                sunIcon.classList.add('hidden');
+            } else {
+                moonIcon.classList.add('hidden');
+                sunIcon.classList.remove('hidden');
+            }
+        }
+    });
+}
+
+function initTheme() {
+    const theme = getCurrentTheme();
+    applyTheme(theme);
+    storeTheme(theme);
+    updateThemeToggleUI(theme);
+}
+
+function setupThemeToggle() {
+    const toggles = document.querySelectorAll('[data-theme-toggle]');
+    if (!toggles.length) return;
+
+    toggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            const current = getCurrentTheme();
+            const next = current === 'dark' ? 'light' : 'dark';
+            applyTheme(next);
+            storeTheme(next);
+            updateThemeToggleUI(next);
+        });
+    });
+}
+
+// Mobile Navigation Toggle and page setup
 document.addEventListener('DOMContentLoaded', function() {
+    initTheme();
+    setupThemeToggle();
+
     const hamburger = document.querySelector('.md\\:hidden');
     const navMenu = document.querySelector('ul');
 
@@ -12,7 +92,8 @@ document.addEventListener('DOMContentLoaded', function() {
             navMenu.classList.toggle('top-full');
             navMenu.classList.toggle('left-0');
             navMenu.classList.toggle('w-full');
-            navMenu.classList.toggle('bg-white');
+            const isDarkMode = document.documentElement.classList.contains('dark');
+            navMenu.classList.toggle(isDarkMode ? 'bg-black' : 'bg-white');
             navMenu.classList.toggle('shadow-lg');
             navMenu.classList.toggle('p-4');
             navMenu.classList.toggle('space-y-4');
@@ -144,12 +225,13 @@ function smoothScrollTo(target) {
 window.addEventListener('scroll', function() {
     const navbar = document.querySelector('nav');
     if (navbar) {
+        const isDark = document.documentElement.classList.contains('dark');
         if (window.scrollY > 50) {
-            navbar.classList.add('bg-white');
-            navbar.classList.remove('bg-white/95');
+            navbar.classList.add(isDark ? 'bg-black' : 'bg-white');
+            navbar.classList.remove(isDark ? 'bg-black/80' : 'bg-white/95');
         } else {
-            navbar.classList.remove('bg-white');
-            navbar.classList.add('bg-white/95');
+            navbar.classList.remove(isDark ? 'bg-black' : 'bg-white');
+            navbar.classList.add(isDark ? 'bg-black/80' : 'bg-white/95');
         }
     }
 });
@@ -259,11 +341,15 @@ class PortfolioChatbot {
             document.body.appendChild(resultModal);
         }
 
+        const isDarkTheme = document.documentElement.classList.contains('dark');
+        const accentFrom = isDarkTheme ? '#00FF41' : '#3b82f6';
+        const accentTo = isDarkTheme ? '#00CC33' : '#2563eb';
+        const borderClr = isDarkTheme ? '#00FF41' : '#60a5fa';
         resultModal.innerHTML = `
-            <div class="bg-gray-900 border-2 border-blue-400 rounded-2xl p-6 max-w-2xl w-full max-h-96 overflow-y-auto shadow-2xl dark-search-bar">
+            <div class="bg-gray-900 border-2 rounded-2xl p-6 max-w-2xl w-full max-h-96 overflow-y-auto shadow-2xl" style="border-color:${borderClr};">
                 <div class="flex items-center justify-between mb-4">
                     <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center shadow-lg" style="background:linear-gradient(to right,${accentFrom},${accentTo});">
                             <i class="fas fa-search text-white text-sm"></i>
                         </div>
                         <h3 class="text-white text-lg font-semibold">Search Result</h3>
@@ -301,10 +387,12 @@ class PortfolioChatbot {
         messageDiv.className = `flex items-start space-x-3 ${sender === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`;
         
         const avatarDiv = document.createElement('div');
+        const isDarkAvatar = document.documentElement.classList.contains('dark');
+        const botGradient = isDarkAvatar ? 'from-green-500 to-green-600' : 'from-blue-500 to-blue-600';
         avatarDiv.className = `w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg ${
-            sender === 'user' 
-                ? 'bg-gradient-to-r from-gray-500 to-gray-600' 
-                : 'bg-gradient-to-r from-blue-500 to-blue-600'
+            sender === 'user'
+                ? 'bg-gradient-to-r from-gray-500 to-gray-600'
+                : `bg-gradient-to-r ${botGradient}`
         }`;
         
         const avatarIcon = document.createElement('i');
@@ -353,7 +441,9 @@ class PortfolioChatbot {
         messageDiv.className = 'flex items-start space-x-3';
         
         const avatarDiv = document.createElement('div');
-        avatarDiv.className = 'w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-gradient-to-r from-blue-500 to-blue-600 shadow-lg';
+        const isDarkTyping = document.documentElement.classList.contains('dark');
+        const typingGradient = isDarkTyping ? 'from-green-500 to-green-600' : 'from-blue-500 to-blue-600';
+        avatarDiv.className = `w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-gradient-to-r ${typingGradient} shadow-lg`;
         
         const avatarIcon = document.createElement('i');
         avatarIcon.className = 'fas fa-search text-white text-sm';

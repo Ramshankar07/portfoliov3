@@ -1,0 +1,314 @@
+/* ========================================
+   Dark Mode Overrides
+   Theme: White + Green (#00FF41) on Black
+   No blue in dark mode
+   ======================================== */
+
+/* --- Headings: always white in dark --- */
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    color: #ffffff !important;
+}
+
+/* --- Body/paragraph text --- */
+.dark p, .dark span, .dark li {
+    color: #d1d5db;
+}
+
+.dark strong {
+    color: #ffffff;
+}
+
+/* --- Override gray text shades to white/light --- */
+.dark .text-gray-900 { color: #ffffff !important; }
+.dark .text-gray-800 { color: #f3f4f6 !important; }
+.dark .text-gray-700 { color: #e5e7eb !important; }
+.dark .text-gray-600 { color: #d1d5db !important; }
+
+/* --- Primary blue → green in dark --- */
+.dark .text-primary-600 { color: #00FF41 !important; }
+.dark .text-primary-700 { color: #00FF41 !important; }
+.dark .text-primary-500 { color: #00FF41 !important; }
+
+/* --- Background overrides --- */
+.dark .bg-white {
+    background-color: #000000 !important;
+}
+
+.dark .bg-gray-50 {
+    background-color: #0a0a0a !important;
+}
+
+.dark .bg-gray-100 {
+    background-color: #111111 !important;
+}
+
+/* Section gradient backgrounds */
+.dark .from-gray-50 { --tw-gradient-from: #0a0a0a !important; }
+.dark .to-gray-200 { --tw-gradient-to: #000000 !important; }
+.dark .from-gray-100 { --tw-gradient-from: #111111 !important; }
+
+/* --- Border overrides --- */
+.dark .border-gray-200 { border-color: #1f2937 !important; }
+.dark .border-gray-300 { border-color: #374151 !important; }
+.dark .border-gray-100 { border-color: #1f2937 !important; }
+.dark .border-l-green-500 { border-left-color: #00FF41 !important; }
+
+/* --- Pill/Tag overrides --- */
+.dark .bg-primary-100 {
+    background-color: rgba(0, 255, 65, 0.12) !important;
+}
+
+.dark .bg-gray-200 {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark .bg-gray-200.text-gray-700 {
+    color: #d1d5db !important;
+}
+
+/* --- Primary gradient → green gradient in dark --- */
+.dark .from-primary-600 { --tw-gradient-from: #00FF41 !important; }
+.dark .to-primary-500 { --tw-gradient-to: #00CC33 !important; }
+.dark .from-primary-500 { --tw-gradient-from: #00FF41 !important; }
+
+/* --- Buttons with primary bg → green bg, black text --- */
+.dark .bg-primary-600 {
+    background-color: #00FF41 !important;
+    color: #000000 !important;
+}
+
+.dark .bg-primary-600:hover,
+.dark .hover\:bg-primary-700:hover {
+    background-color: #00CC33 !important;
+    color: #000000 !important;
+}
+
+/* Gradient buttons in dark mode */
+.dark .bg-gradient-to-r.from-primary-600.to-primary-500,
+.dark [class*="from-primary-600"][class*="to-primary-500"] {
+    background: linear-gradient(to right, #00FF41, #00CC33) !important;
+    color: #000000 !important;
+}
+
+/* Border buttons with primary */
+.dark .border-primary-600 {
+    border-color: #00FF41 !important;
+}
+
+.dark .hover\:bg-primary-600:hover {
+    background-color: #00FF41 !important;
+    color: #000000 !important;
+}
+
+/* --- Timeline line --- */
+.dark .from-primary-600.to-primary-500 {
+    --tw-gradient-from: #00FF41 !important;
+    --tw-gradient-to: #00CC33 !important;
+}
+
+/* Timeline dots */
+.dark .border-primary-600.rounded-full {
+    border-color: #00FF41 !important;
+}
+
+/* --- Focus states → green --- */
+.dark .focus\:border-primary-600:focus {
+    border-color: #00FF41 !important;
+}
+
+.dark .focus\:ring-primary-600\/20:focus {
+    --tw-ring-color: rgba(0, 255, 65, 0.2) !important;
+}
+
+/* --- Input/form overrides --- */
+.dark input, .dark textarea, .dark select {
+    background-color: #111111;
+    color: #ffffff;
+    border-color: #374151;
+}
+
+.dark input::placeholder, .dark textarea::placeholder {
+    color: #6b7280;
+}
+
+.dark input:focus, .dark textarea:focus {
+    border-color: #00FF41;
+    box-shadow: 0 0 0 3px rgba(0, 255, 65, 0.15);
+}
+
+/* --- Label text in forms --- */
+.dark label {
+    color: #d1d5db !important;
+}
+
+/* --- Card shadows in dark mode (subtle green glow) --- */
+.dark .hover\:shadow-xl:hover {
+    box-shadow: 0 8px 25px -5px rgba(0, 255, 65, 0.08), 0 4px 10px -6px rgba(0, 255, 65, 0.05) !important;
+}
+
+/* --- RB Logo: override gradient to green in dark --- */
+.dark .bg-clip-text.text-transparent {
+    background: linear-gradient(to right, #00FF41, #00CC33) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+/* --- Gradient text effect --- */
+.dark .gradient-text {
+    background: linear-gradient(135deg, #00FF41, #00CC33, #00FF41) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+/* --- Search bar in dark mode --- */
+.dark .dark-search-bar {
+    background: linear-gradient(135deg, #0a0a0a, #000000) !important;
+    border-color: #00FF41 !important;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.2), 0 0 40px rgba(0, 255, 65, 0.05) !important;
+}
+
+.dark .dark-search-bar:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 65, 0.3), 0 0 60px rgba(0, 255, 65, 0.1) !important;
+    border-color: #00FF41 !important;
+}
+
+.dark .dark-search-bar:focus-within {
+    box-shadow: 0 0 40px rgba(0, 255, 65, 0.4), 0 0 80px rgba(0, 255, 65, 0.2) !important;
+    border-color: #00FF41 !important;
+}
+
+/* --- Featured blog card gradient --- */
+.dark .from-gray-50.to-gray-100 {
+    --tw-gradient-from: #0a0a0a !important;
+    --tw-gradient-to: #111111 !important;
+}
+
+/* --- Contact icon circles → green gradient --- */
+.dark .from-primary-600.to-primary-500.rounded-full {
+    background: linear-gradient(to right, #00FF41, #00CC33) !important;
+}
+
+/* Icons inside green circles stay black */
+.dark .from-primary-600.to-primary-500.rounded-full i {
+    color: #000000 !important;
+}
+
+/* --- Substack section dark override --- */
+.dark .bg-gray-900 {
+    background-color: #0a0a0a !important;
+}
+
+/* --- Nav shadow in dark --- */
+.dark nav.shadow-lg {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* --- Footer (already dark, keep as is) --- */
+footer.bg-gray-900 {
+    background-color: #111111;
+}
+
+/* --- Link colors in dark: green --- */
+.dark a.text-primary-600 {
+    color: #00FF41 !important;
+}
+
+.dark a.text-primary-600:hover,
+.dark a.hover\:text-primary-700:hover {
+    color: #00CC33 !important;
+}
+
+/* --- Hamburger menu bars → white in dark --- */
+.dark .bg-gray-700 {
+    background-color: #ffffff !important;
+}
+
+/* ========================================
+   Light Mode Overrides
+   Ensure NO green in light mode
+   ======================================== */
+
+/* Hero buttons: make sure they're blue in light mode */
+html:not(.dark) .hero-btn-primary {
+    background-color: #2563eb;
+    color: #ffffff;
+    box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.2);
+}
+
+html:not(.dark) .hero-btn-primary:hover {
+    background-color: #1d4ed8;
+    box-shadow: 0 4px 20px 0 rgba(37, 99, 235, 0.4);
+}
+
+html:not(.dark) .hero-btn-outline {
+    border-color: rgba(37, 99, 235, 0.5);
+    color: #2563eb;
+}
+
+html:not(.dark) .hero-btn-outline:hover {
+    background-color: rgba(37, 99, 235, 0.1);
+    border-color: #2563eb;
+}
+
+/* Dark mode hero buttons: green */
+.dark .hero-btn-primary {
+    background-color: #00FF41 !important;
+    color: #000000 !important;
+    box-shadow: 0 4px 14px 0 rgba(0, 255, 65, 0.2) !important;
+}
+
+.dark .hero-btn-primary:hover {
+    background-color: #00CC33 !important;
+    box-shadow: 0 4px 20px 0 rgba(0, 255, 65, 0.4) !important;
+}
+
+.dark .hero-btn-outline {
+    border-color: rgba(0, 255, 65, 0.5) !important;
+    color: #00FF41 !important;
+}
+
+.dark .hero-btn-outline:hover {
+    background-color: rgba(0, 255, 65, 0.1) !important;
+    border-color: #00FF41 !important;
+}
+
+/* Animated gradient → green in dark */
+.dark .animated-gradient {
+    background: linear-gradient(-45deg, #00FF41, #00CC33, #00FF41, #00CC33) !important;
+    background-size: 400% 400% !important;
+}
+
+/* --- Blue gradient overrides in dark (search widget, etc.) --- */
+.dark .from-blue-500 { --tw-gradient-from: #00FF41 !important; }
+.dark .to-blue-600 { --tw-gradient-to: #00CC33 !important; }
+.dark .from-blue-600 { --tw-gradient-from: #00CC33 !important; }
+.dark .to-blue-700 { --tw-gradient-to: #009926 !important; }
+
+.dark .from-blue-500\/10 { --tw-gradient-from: rgba(0, 255, 65, 0.1) !important; }
+.dark .to-blue-600\/10 { --tw-gradient-to: rgba(0, 204, 51, 0.1) !important; }
+.dark .from-blue-500\/5 { --tw-gradient-from: rgba(0, 255, 65, 0.05) !important; }
+.dark .to-blue-600\/5 { --tw-gradient-to: rgba(0, 204, 51, 0.05) !important; }
+.dark .via-cyan-500\/10 { --tw-gradient-via: rgba(0, 255, 65, 0.1) !important; }
+.dark .via-purple-500\/10 { --tw-gradient-via: rgba(0, 255, 65, 0.1) !important; }
+.dark .via-purple-500\/5 { --tw-gradient-via: rgba(0, 255, 65, 0.05) !important; }
+
+.dark .focus\:ring-blue-500:focus {
+    --tw-ring-color: #00FF41 !important;
+}
+
+.dark .hover\:from-blue-600:hover { --tw-gradient-from: #00CC33 !important; }
+.dark .hover\:to-blue-700:hover { --tw-gradient-to: #009926 !important; }
+
+/* Search result modal in dark */
+.dark .border-blue-400 { border-color: #00FF41 !important; }
+
+/* --- Gray-600 bg for secondary buttons → dark gray with green text --- */
+.dark .bg-gray-600 {
+    background-color: #1f2937 !important;
+    color: #00FF41 !important;
+}
+.dark .hover\:bg-gray-700:hover {
+    background-color: #374151 !important;
+}

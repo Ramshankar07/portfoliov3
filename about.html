@@ -8,8 +8,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
@@ -140,32 +142,34 @@
     </style>
 </head>
 
-<body class="font-inter text-gray-800 bg-white">
+<body class="font-inter text-gray-800 bg-white dark:bg-black dark:text-gray-100">
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 shadow-lg">
+    <nav class="fixed top-0 w-full bg-white/95 dark:bg-black/80 backdrop-blur-md z-50 shadow-lg">
         <div class="max-w-6xl mx-auto px-5">
             <div class="flex justify-between items-center py-4">
-                <div
-                    class="text-3xl font-bold text-primary-600 bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent">
-                    RB
-                </div>
                 <ul class="hidden md:flex space-x-8">
                     <li><a href="index.html"
-                            class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Home</a>
+                            class="text-gray-700 dark:text-white hover:text-primary-600 hover:dark:text-[#00FF41] font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 dark:after:from-[#00FF41] dark:after:to-[#00FF41] after:transition-all after:duration-300 hover:after:w-full">Home</a>
                     </li>
                     <li><a href="about.html"
-                            class="text-primary-600 font-medium relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500">About</a>
+                            class="text-primary-600 dark:text-[#00FF41] font-medium relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 dark:after:from-[#00FF41] dark:after:to-[#00FF41]">About</a>
                     </li>
                     <li><a href="projects.html"
-                            class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Projects</a>
+                            class="text-gray-700 dark:text-white hover:text-primary-600 hover:dark:text-[#00FF41] font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 dark:after:from-[#00FF41] dark:after:to-[#00FF41] after:transition-all after:duration-300 hover:after:w-full">Projects</a>
                     </li>
                     <li><a href="blogs.html"
-                            class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Blogs</a>
+                            class="text-gray-700 dark:text-white hover:text-primary-600 hover:dark:text-[#00FF41] font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 dark:after:from-[#00FF41] dark:after:to-[#00FF41] after:transition-all after:duration-300 hover:after:w-full">Blogs</a>
                     </li>
                     <li><a href="contact.html"
-                            class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Contact</a>
+                            class="text-gray-700 dark:text-white hover:text-primary-600 hover:dark:text-[#00FF41] font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 dark:after:from-[#00FF41] dark:after:to-[#00FF41] after:transition-all after:duration-300 hover:after:w-full">Contact</a>
                     </li>
                 </ul>
+                <button data-theme-toggle
+                    class="ml-4 inline-flex items-center justify-center w-10 h-10 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:text-gray-100 dark:hover:bg-gray-800"
+                    aria-label="Toggle dark mode" aria-pressed="true">
+                    <i class="fas fa-moon text-sm" data-icon="moon"></i>
+                    <i class="fas fa-sun text-sm hidden" data-icon="sun"></i>
+                </button>
                 <div class="md:hidden flex flex-col cursor-pointer">
                     <span class="w-6 h-0.5 bg-gray-700 mb-1 transition-all duration-300"></span>
                     <span class="w-6 h-0.5 bg-gray-700 mb-1 transition-all duration-300"></span>
@@ -176,7 +180,7 @@
     </nav>
 
     <!-- Page Header -->
-    <section class="pt-32 pb-16 bg-gradient-to-br from-gray-50 to-gray-200 text-center">
+    <section class="pt-32 pb-16 bg-gradient-to-br from-gray-50 to-gray-200 dark:from-gray-900 dark:to-black text-center">
         <div class="max-w-6xl mx-auto px-5">
             <h1 class="text-5xl font-bold text-gray-900 mb-4">About & Experience</h1>
             <p class="text-xl text-gray-600 max-w-2xl mx-auto">My background, education, professional journey, and
@@ -185,7 +189,7 @@
     </section>
 
     <!-- About Section -->
-    <section class="py-20 bg-white">
+    <section class="py-20 bg-white dark:bg-black">
         <div class="max-w-6xl mx-auto px-5">
             <div class="max-w-4xl mx-auto about-text-mobile">
                 <h2 class="text-3xl font-bold text-gray-900 mb-6 about-title-mobile">Who I Am</h2>
@@ -214,7 +218,7 @@
     </section>
 
     <!-- Education Section -->
-    <section class="py-20 bg-gray-50">
+    <section class="py-20 bg-gray-50 dark:bg-gray-900">
         <div class="max-w-6xl mx-auto px-5">
             <h2 class="text-4xl font-bold text-center text-gray-900 mb-16 relative education-title-mobile">
                 Education
@@ -224,37 +228,37 @@
             </h2>
             <div class="grid md:grid-cols-2 gap-8 education-grid-mobile">
                 <div
-                    class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 education-card-mobile">
+                    class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 education-card-mobile">
                     <div class="mb-4">
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-2">Northeastern University</h3>
+                        <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Northeastern University</h3>
                         <p class="text-gray-500 text-sm mb-2">Boston, MA</p>
                         <p class="text-lg font-medium text-primary-600 mb-2">Master of Science in Information Systems
                         </p>
                         <p class="text-gray-500 text-sm">2023 - 2025</p>
                     </div>
-                    <p class="text-gray-600 leading-relaxed mb-4">
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
                         Specializing in AI/ML, Data Engineering, and Distributed Systems.
                         Focus on cutting-edge technologies including large language models,
                         computer vision, and scalable data processing platforms.
                     </p>
                     <div class="pt-4 border-t border-gray-100">
-                        <p class="text-gray-700 font-semibold mb-1">Master's Thesis:</p>
-                        <p class="text-gray-600 text-sm italic leading-relaxed">
+                        <p class="text-gray-700 dark:text-gray-200 font-semibold mb-1">Master's Thesis:</p>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm italic leading-relaxed">
                             ModelOpt: Research Framework for Zero-Shot Computer Vision Model Optimization With Tree
                             Search and Federated Knowledge Sharing, Northeastern University, 2025.
                         </p>
                     </div>
                 </div>
                 <div
-                    class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 education-card-mobile">
+                    class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 education-card-mobile">
                     <div class="mb-4">
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-2">Anna University</h3>
+                        <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Anna University</h3>
                         <p class="text-gray-500 text-sm mb-2">Chennai, India</p>
                         <p class="text-lg font-medium text-primary-600 mb-2">Bachelor of Technology in Computer Science
                         </p>
                         <p class="text-gray-500 text-sm">2019 - 2023</p>
                     </div>
-                    <p class="text-gray-600 leading-relaxed">
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
                         Comprehensive foundation in computer science fundamentals,
                         algorithms, data structures, and software engineering principles.
                         Graduated with distinction and active involvement in technical projects.

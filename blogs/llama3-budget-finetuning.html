@@ -7,8 +7,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
@@ -27,22 +29,24 @@
         }
     </script>
 </head>
-<body class="font-inter text-gray-800 bg-white">
+<body class="font-inter text-gray-800 bg-white dark:bg-black dark:text-gray-100">
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 shadow-lg">
+    <nav class="fixed top-0 w-full bg-white/95 dark:bg-black/80 backdrop-blur-md z-50 shadow-lg">
         <div class="max-w-6xl mx-auto px-5">
             <div class="flex justify-between items-center py-4">
-                <div class="text-3xl font-bold text-primary-600 bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent">
-                    RB
-                </div>
                 <ul class="hidden md:flex space-x-8">
-                    <li><a href="../index.html" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Home</a></li>
-                    <li><a href="../about.html" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">About</a></li>
-                    <li><a href="../experience.html" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Experience</a></li>
-                    <li><a href="../projects.html" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Projects</a></li>
-                    <li><a href="../blogs.html" class="text-primary-600 font-medium relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500">Blogs</a></li>
-                    <li><a href="../contact.html" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Contact</a></li>
+                    <li><a href="../index.html" class="text-gray-700 dark:text-white hover:text-primary-600 hover:dark:text-[#00FF41] font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 dark:after:from-[#00FF41] dark:after:to-[#00FF41] after:transition-all after:duration-300 hover:after:w-full">Home</a></li>
+                    <li><a href="../about.html" class="text-gray-700 dark:text-white hover:text-primary-600 hover:dark:text-[#00FF41] font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 dark:after:from-[#00FF41] dark:after:to-[#00FF41] after:transition-all after:duration-300 hover:after:w-full">About</a></li>
+                    <li><a href="../projects.html" class="text-gray-700 dark:text-white hover:text-primary-600 hover:dark:text-[#00FF41] font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 dark:after:from-[#00FF41] dark:after:to-[#00FF41] after:transition-all after:duration-300 hover:after:w-full">Projects</a></li>
+                    <li><a href="../blogs.html" class="text-primary-600 dark:text-[#00FF41] font-medium relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 dark:after:from-[#00FF41] dark:after:to-[#00FF41]">Blogs</a></li>
+                    <li><a href="../contact.html" class="text-gray-700 dark:text-white hover:text-primary-600 hover:dark:text-[#00FF41] font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 dark:after:from-[#00FF41] dark:after:to-[#00FF41] after:transition-all after:duration-300 hover:after:w-full">Contact</a></li>
                 </ul>
+                <button data-theme-toggle
+                    class="ml-4 inline-flex items-center justify-center w-10 h-10 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:text-gray-100 dark:hover:bg-gray-800"
+                    aria-label="Toggle dark mode" aria-pressed="true">
+                    <i class="fas fa-moon text-sm" data-icon="moon"></i>
+                    <i class="fas fa-sun text-sm hidden" data-icon="sun"></i>
+                </button>
                 <div class="md:hidden flex flex-col cursor-pointer">
                     <span class="w-6 h-0.5 bg-gray-700 mb-1 transition-all duration-300"></span>
                     <span class="w-6 h-0.5 bg-gray-700 mb-1 transition-all duration-300"></span>
@@ -53,7 +57,7 @@
     </nav>
 
     <!-- Blog Header -->
-    <section class="pt-32 pb-16 bg-gradient-to-br from-gray-50 to-gray-200">
+    <section class="pt-32 pb-16 bg-gradient-to-br from-gray-50 to-gray-200 dark:from-gray-900 dark:to-black">
         <div class="max-w-4xl mx-auto px-5">
             <div class="text-center">
                 <div class="mb-6">

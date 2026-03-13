@@ -86,9 +86,6 @@
                     <li><a href="about.html"
                             class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">About</a>
                     </li>
-                    <li><a href="experience.html"
-                            class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Experience</a>
-                    </li>
                     <li><a href="projects.html"
                             class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Projects</a>
                     </li>
@@ -178,6 +175,71 @@
                 </div>
             </h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 blogs-grid-mobile">
+                <!-- NEW: GPU MODE NVFP4 Blackwell Challenge -->
+                <div
+                    class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 blog-card-mobile">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4 leading-tight blog-title-mobile">
+                            GPU MODE NVFP4 Blackwell Challenge
+                        </h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed blog-description-mobile">
+                            The unfiltered worklog of tackling nvfp4_gemm, nvfp4_dual_gemm, and nvfp4_group_gemm
+                            challenges — from MLIR serialization errors to PTX-optimized SwiGLU epilogues and
+                            persistent kernels on Blackwell.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4 blog-tags-mobile">
+                            <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">CUDA</span>
+                            <span
+                                class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">CuTeDSL</span>
+                            <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">GPU
+                                Kernels</span>
+                            <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">NVIDIA
+                                Blackwell</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-6 border-t border-gray-200 blog-meta-mobile">
+                        <span class="text-sm text-gray-500">Mar 13, 2026</span>
+                        <a href="https://open.substack.com/pub/ramshankar07/p/gpu-mode-nvfp4-blackwell-challenge?r=1rtqqj&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true"
+                            target="_blank"
+                            class="text-primary-600 hover:text-primary-700 font-medium transition-colors duration-300">
+                            Read More →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- NEW: AMD FlyDSL -->
+                <div
+                    class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 blog-card-mobile">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4 leading-tight blog-title-mobile">
+                            AMD FlyDSL — is it enough to compete CuTe/Cutlass?
+                        </h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed blog-description-mobile">
+                            Comparing NVIDIA CuTile and AMD FlyDSL MLIR-based tile programming frameworks by porting a
+                            fused MoE kernel and analyzing the generated IR side-by-side.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4 blog-tags-mobile">
+                            <span
+                                class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">AMD</span>
+                            <span
+                                class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">MLIR</span>
+                            <span
+                                class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">FlyDSL</span>
+                            <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">GPU
+                                Compilers</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-6 border-t border-gray-200 blog-meta-mobile">
+                        <span class="text-sm text-gray-500">Mar 4, 2026</span>
+                        <a href="https://ramshankar07.substack.com/p/amd-flydsl-is-it-enough-to-compete?r=1rtqqj"
+                            target="_blank"
+                            class="text-primary-600 hover:text-primary-700 font-medium transition-colors duration-300">
+                            Read More →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Existing: Optimizing LLMs on AMD MI300X -->
                 <div
                     class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 blog-card-mobile">
                     <div class="mb-6">

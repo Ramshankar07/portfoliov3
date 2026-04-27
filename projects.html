@@ -144,6 +144,61 @@
                     class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl border border-gray-200 dark:border-gray-800 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 project-card-mobile">
                     <div class="mb-6">
                         <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4 leading-tight project-title-mobile">
+                            AMD-GPU-Kernel Agent Trained via GRPO Using verl
+                        </h3>
+                        <div class="flex flex-wrap gap-2 project-tags-mobile">
+                            <span
+                                class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">SkyPilot</span>
+                            <span
+                                class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">verl</span>
+                            <span
+                                class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">FastAPI</span>
+                            <span
+                                class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">Redis</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-3 text-gray-600 dark:text-gray-300 mb-6 leading-relaxed project-description-mobile">
+                        <li class="flex items-start gap-3">
+                            <span class="text-primary-600 font-bold mt-1">→</span>
+                            <span>Trained Qwen2.5-Coder-7B via GRPO using verl to autonomously optimize GPU kernels
+                                across NVIDIA (H100/A10) and AMD (MI300X) targets, achieving rewards of
+                                log2(speedup) clipped at <strong>4.0x</strong> for FP8/MXFP4 kernel classes.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-primary-600 font-bold mt-1">→</span>
+                            <span>Architected a three-cluster SkyPilot pipeline decoupling trainer, bench queue
+                                (FastAPI + Redis), and spot GPU workers, enabling hardware-agnostic kernel evaluation
+                                with content-hash caching and fault-tolerant spot preemption handling.</span>
+                        </li>
+                    </ul>
+                    <div class="flex flex-wrap gap-4 mb-4 project-links-mobile">
+                        <a href="https://github.com/Ramshankar07/Kernel-Writer-RL-v2" target="_blank"
+                            class="inline-flex items-center gap-2 px-4 py-2 border-2 border-primary-600 text-primary-600 rounded-lg hover:bg-primary-600 hover:text-white transition-colors duration-200">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub Repository</span>
+                        </a>
+                    </div>
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200 project-metrics-mobile">
+                        <div class="flex items-center gap-2 text-sm text-gray-600">
+                            <i class="fas fa-robot text-primary-600"></i>
+                            <span>Qwen2.5-Coder-7B + GRPO</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-gray-600">
+                            <i class="fas fa-microchip text-primary-600"></i>
+                            <span>NVIDIA + AMD GPU targets</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-gray-600">
+                            <i class="fas fa-bolt text-primary-600"></i>
+                            <span>Rewards clipped at 4.0x</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl border border-gray-200 dark:border-gray-800 hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 project-card-mobile">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4 leading-tight project-title-mobile">
                             Parallelizing Text-to-Image Generation Using Diffusion</h3>
                         <div class="flex flex-wrap gap-2 project-tags-mobile">
                             <span
@@ -172,7 +227,7 @@
                     </ul>
                     <div class="flex flex-wrap gap-4 mb-4 project-links-mobile">
                         <a href="https://github.com/Ramshankar07/Parallelizing-Text-to-Image-Generation" target="_blank"
-                            class="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-200">
+                            class="inline-flex items-center gap-2 px-4 py-2 border-2 border-primary-600 text-primary-600 rounded-lg hover:bg-primary-600 hover:text-white transition-colors duration-200">
                             <i class="fab fa-github"></i>
                             <span>GitHub Repository</span>
                         </a>
@@ -232,7 +287,7 @@
                     </ul>
                     <div class="flex flex-wrap gap-4 mb-4 project-links-mobile">
                         <a href="https://github.com/Ramshankar07/Fintech-Data-Processing-ETL-Platform" target="_blank"
-                            class="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-200">
+                            class="inline-flex items-center gap-2 px-4 py-2 border-2 border-primary-600 text-primary-600 rounded-lg hover:bg-primary-600 hover:text-white transition-colors duration-200">
                             <i class="fab fa-github"></i>
                             <span>GitHub Repository</span>
                         </a>
@@ -339,7 +394,7 @@
                     </p>
                     <div class="flex flex-wrap gap-4 mb-4 project-links-mobile">
                         <a href="https://github.com/Ramshankar07/Enhancing-Retrieval-via-GraphRAG" target="_blank"
-                            class="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-200">
+                            class="inline-flex items-center gap-2 px-4 py-2 border-2 border-primary-600 text-primary-600 rounded-lg hover:bg-primary-600 hover:text-white transition-colors duration-200">
                             <i class="fab fa-github"></i>
                             <span>GitHub Repository</span>
                         </a>
@@ -385,6 +440,13 @@
                         memory access, and efficient load/store operations. Features complete forward/backward pass
                         implementation with attention mechanisms and RoPE embeddings.
                     </p>
+                    <div class="flex flex-wrap gap-4 mb-4 project-links-mobile">
+                        <a href="https://github.com/Ramshankar07/CUDA-llama3.1-inference" target="_blank"
+                            class="inline-flex items-center gap-2 px-4 py-2 border-2 border-primary-600 text-primary-600 rounded-lg hover:bg-primary-600 hover:text-white transition-colors duration-200">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub Repository</span>
+                        </a>
+                    </div>
                     <div
                         class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200 project-metrics-mobile">
                         <div class="flex items-center gap-2 text-sm text-gray-600">
@@ -427,7 +489,7 @@
                     </p>
                     <div class="flex flex-wrap gap-4 mb-4 project-links-mobile">
                         <a href="https://github.com/Ramshankar07/qwen600-AMD" target="_blank"
-                            class="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-200">
+                            class="inline-flex items-center gap-2 px-4 py-2 border-2 border-primary-600 text-primary-600 rounded-lg hover:bg-primary-600 hover:text-white transition-colors duration-200">
                             <i class="fab fa-github"></i>
                             <span>GitHub Repository</span>
                         </a>
@@ -479,7 +541,7 @@
                     </p>
                     <div class="flex flex-wrap gap-4 mb-4 project-links-mobile">
                         <a href="https://github.com/Ramshankar07/Stock-HMM" target="_blank"
-                            class="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-200">
+                            class="inline-flex items-center gap-2 px-4 py-2 border-2 border-primary-600 text-primary-600 rounded-lg hover:bg-primary-600 hover:text-white transition-colors duration-200">
                             <i class="fab fa-github"></i>
                             <span>GitHub Repository</span>
                         </a>

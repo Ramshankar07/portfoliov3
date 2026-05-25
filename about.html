@@ -307,15 +307,20 @@
                             <ul class="space-y-3 text-gray-600 leading-relaxed">
                                 <li class="flex items-start gap-3">
                                     <span class="text-primary-600 font-bold mt-1">•</span>
-                                    <span>Designed and deployed LLM-powered backend services using FastAPI and LangChain,
-                                        integrating RAG pipelines with grounded retrieval to surface context-aware,
-                                        real-world information for end users across web and mobile surfaces.</span>
+                                    <span>Shipped an LLM-powered concierge and operations assistant for a hotel client,
+                                        building agent workflows in LangChain and LangGraph on vLLM behind FastAPI, with
+                                        RAG over property data (room inventory, policies, local guides).</span>
                                 </li>
                                 <li class="flex items-start gap-3">
                                     <span class="text-primary-600 font-bold mt-1">•</span>
-                                    <span>Built generative UX features backed by structured LLM prompting strategies
-                                        (chain-of-thought, few-shot, tool-use), enabling proactive and location-aware
-                                        AI responses.</span>
+                                    <span>Wired up custom Skills and MCP connectors to the hotel’s booking system, PMS,
+                                        and internal knowledge base over REST APIs, so the agent could actually answer
+                                        guest questions and take actions instead of just summarizing docs.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-primary-600 font-bold mt-1">•</span>
+                                    <span>Built an eval harness with curated guest-query sets and regression checks on
+                                        every prompt change.</span>
                                 </li>
                             </ul>
                         </div>

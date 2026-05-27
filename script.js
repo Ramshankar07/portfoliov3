@@ -1,4 +1,11 @@
-// Theme handling
+/**
+ * Editorial Single-Page Portfolio Controller
+ * Coordinates theme toggling, scroll-spy navigation, category filtering,
+ * the Gemini-powered search chatbot, EmailJS form validation, WebMCP AI Agent tools,
+ * and the interactive visual "Agent Mode" console.
+ */
+
+// ── Theme Handling ──
 const THEME_STORAGE_KEY = 'theme';
 
 function applyTheme(theme) {
@@ -22,7 +29,7 @@ function storeTheme(theme) {
     try {
         localStorage.setItem(THEME_STORAGE_KEY, theme);
     } catch {
-        // ignore storage errors
+        // Ignore storage errors
     }
 }
 
@@ -31,7 +38,7 @@ function getCurrentTheme() {
     if (stored === 'light' || stored === 'dark') {
         return stored;
     }
-    // Default to dark if nothing stored
+    // Default to dark mode
     return 'dark';
 }
 
@@ -43,11 +50,11 @@ function updateThemeToggleUI(theme) {
         const sunIcon = toggle.querySelector('[data-icon="sun"]');
         if (moonIcon && sunIcon) {
             if (theme === 'dark') {
-                moonIcon.classList.remove('hidden');
-                sunIcon.classList.add('hidden');
-            } else {
                 moonIcon.classList.add('hidden');
                 sunIcon.classList.remove('hidden');
+            } else {
+                moonIcon.classList.remove('hidden');
+                sunIcon.classList.add('hidden');
             }
         }
     });
@@ -75,64 +82,187 @@ function setupThemeToggle() {
     });
 }
 
-// Mobile Navigation Toggle and page setup
+// ── Core DOM Setup ──
 document.addEventListener('DOMContentLoaded', function() {
+    // 1. Initialize Theme
     initTheme();
     setupThemeToggle();
 
-    const hamburger = document.querySelector('.md\\:hidden');
-    const navMenu = document.querySelector('ul');
+    // 2. Mobile Navigation Toggle Drawer
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileNavMenu = document.getElementById('mobile-nav-menu');
 
-    if (hamburger && navMenu) {
-        hamburger.addEventListener('click', function() {
-            navMenu.classList.toggle('hidden');
-            navMenu.classList.toggle('flex');
-            navMenu.classList.toggle('flex-col');
-            navMenu.classList.toggle('absolute');
-            navMenu.classList.toggle('top-full');
-            navMenu.classList.toggle('left-0');
-            navMenu.classList.toggle('w-full');
-            const isDarkMode = document.documentElement.classList.contains('dark');
-            navMenu.classList.toggle(isDarkMode ? 'bg-black' : 'bg-white');
-            navMenu.classList.toggle('shadow-lg');
-            navMenu.classList.toggle('p-4');
-            navMenu.classList.toggle('space-y-4');
+    if (mobileMenuBtn && mobileNavMenu) {
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileNavMenu.classList.toggle('hidden');
+            mobileNavMenu.classList.toggle('flex');
+            
+            // Toggle hamburger icon animation
+            const spans = mobileMenuBtn.querySelectorAll('span');
+            if (spans.length === 3) {
+                spans[0].classList.toggle('rotate-45');
+                spans[0].classList.toggle('translate-y-2');
+                spans[1].classList.toggle('opacity-0');
+                spans[2].classList.toggle('-rotate-45');
+                spans[2].classList.toggle('-translate-y-2');
+            }
+        });
+
+        // Close mobile menu when a nav link is clicked
+        const mobileLinks = mobileNavMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNavMenu.classList.add('hidden');
+                mobileNavMenu.classList.remove('flex');
+                const spans = mobileMenuBtn.querySelectorAll('span');
+                if (spans.length === 3) {
+                    spans[0].classList.remove('rotate-45', 'translate-y-2');
+                    spans[1].classList.remove('opacity-0');
+                    spans[2].classList.remove('-rotate-45', '-translate-y-2');
+                }
+            });
         });
     }
 
-    // Newsletter form handling
-    const newsletterForm = document.querySelector('form');
+    // 3. Smooth Scrolling for Navigation Anchor Hashes
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                history.pushState(null, null, targetId);
+            }
+        });
+    });
+
+    // 4. Scroll-Spy Navigation Highlighting (IntersectionObserver)
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('#nav-links a');
+
+    if (sections.length && navLinks.length) {
+        const observerOptions = {
+            root: null,
+            rootMargin: '-30% 0px -50% 0px', // Highlights active navigation as sections cross middle viewport
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const activeId = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href === `#${activeId}`) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+    }
+
+    // 5. Client-Side Projects Filtering
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('#projects-grid > div');
+
+    if (filterButtons.length && projectCards.length) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Toggle active styles
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                const filter = this.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    const categories = card.getAttribute('data-category').split(' ');
+                    if (filter === 'all' || categories.includes(filter)) {
+                        card.style.display = 'block';
+                        card.style.opacity = '0';
+                        setTimeout(() => {
+                            card.style.transition = 'opacity 0.3s ease';
+                            card.style.opacity = '1';
+                        }, 30);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
+
+    // 6. Newsletter Subscription Form Handling
+    const newsletterForm = document.getElementById('newsletter-form');
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const email = this.querySelector('input[type="email"]').value;
             if (email) {
-                // Show success message
-                showNotification('Thank you for subscribing!', 'success');
+                showNotification('Thank you for subscribing to my Substack newsletter!', 'success');
                 this.reset();
             }
         });
     }
 
-    // Contact form handling with EmailJS
+    // 7. Contact Form Handling (EmailJS + Submit Button States + WebMCP Interceptor)
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         // Initialize EmailJS
         emailjs.init("pD3wkchfGF0LDwUTX");
 
         contactForm.addEventListener('submit', function(e) {
+            // Check if triggered by WebMCP agent invocation
+            if (e.agentInvoked) {
+                e.preventDefault();
+                const resultPromise = new Promise((resolve) => {
+                    const nameVal = document.getElementById('name').value;
+                    const emailVal = document.getElementById('email').value;
+                    const subjectVal = document.getElementById('subject').value;
+                    const messageVal = document.getElementById('message').value;
+
+                    emailjs.send('service_7rphve8', 'template_7iwzlui', {
+                        from_name: nameVal,
+                        from_email: emailVal,
+                        subject: subjectVal,
+                        message: messageVal
+                    })
+                    .then(function() {
+                        resolve("Success: Message successfully delivered to Ramshankar's inbox.");
+                        showNotification('Direct message dispatched via WebMCP agent call!', 'success');
+                        contactForm.reset();
+                    })
+                    .catch(function(err) {
+                        resolve(`Error: Failed to deliver message via EmailJS. Details: ${err.message || err}`);
+                    });
+                });
+                
+                e.respondWith(resultPromise);
+                return;
+            }
+
+            // Normal manual browser submission
             e.preventDefault();
             
             const submitBtn = document.getElementById('submitBtn');
             const btnText = submitBtn.querySelector('.btn-text');
             const btnLoading = submitBtn.querySelector('.btn-loading');
             
-            // Show loading state
+            // Activate loader state
             btnText.classList.add('hidden');
             btnLoading.classList.remove('hidden');
             submitBtn.disabled = true;
             
-            // Get form data
+            // Get payload
             const formData = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
@@ -140,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 message: document.getElementById('message').value
             };
             
-            // Send email using EmailJS
+            // Send payload via EmailJS REST API
             emailjs.send('service_7rphve8', 'template_7iwzlui', {
                 from_name: formData.name,
                 from_email: formData.email,
@@ -148,156 +278,133 @@ document.addEventListener('DOMContentLoaded', function() {
                 message: formData.message
             })
             .then(function(response) {
-                showNotification('Message sent successfully!', 'success');
+                showNotification('Message sent successfully! I will reach out shortly.', 'success');
                 contactForm.reset();
             })
             .catch(function(error) {
-                showNotification('Failed to send message. Please try again.', 'error');
+                console.error('EmailJS Error:', error);
+                showNotification('Failed to deliver message. Please contact via email directly.', 'error');
             })
             .finally(function() {
-                // Reset button state
+                // Reset submit states
                 btnText.classList.remove('hidden');
                 btnLoading.classList.add('hidden');
                 submitBtn.disabled = false;
             });
         });
     }
+
+    // 8. Search Chatbot Form Handling (WebMCP Interceptor)
+    const searchForm = document.getElementById('chat-search-form');
+    if (searchForm) {
+        searchForm.addEventListener('submit', function(e) {
+            // Check if triggered by WebMCP agent invocation
+            if (e.agentInvoked) {
+                e.preventDefault();
+                const queryVal = document.getElementById('chat-input').value.trim();
+                if (!queryVal) {
+                    e.respondWith(Promise.resolve("Error: Search query cannot be empty."));
+                    return;
+                }
+
+                const resultPromise = new Promise((resolve) => {
+                    fetch('https://portfolio-chatbot-staging.picographer0214.workers.dev/api/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: queryVal, useGemini: true })
+                    })
+                    .then(response => {
+                        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                        return response.json();
+                    })
+                    .then(data => {
+                        resolve(data.response);
+                        showNotification('Semantic query dispatched via WebMCP agent call!', 'success');
+                    })
+                    .catch(err => {
+                        resolve(`Error fetching chatbot insights: ${err.message}`);
+                    });
+                });
+
+                e.respondWith(resultPromise);
+            }
+        });
+    }
+
+    // 9. Initialize Search Chatbot Client
+    new PortfolioChatbot();
+
+    // 10. Interactive visual Agent Mode Dashboard Controller
+    setupAgentModeDashboard();
 });
 
-// Notification system
+// ── Notification Alert Toast ──
 function showNotification(message, type) {
-    // Remove existing notifications
-    const existingNotifications = document.querySelectorAll('.notification');
-    existingNotifications.forEach(notification => notification.remove());
+    const existing = document.querySelectorAll('.notification');
+    existing.forEach(n => n.remove());
     
-    // Create notification element
     const notification = document.createElement('div');
-    notification.className = `notification fixed top-20 right-5 z-50 p-4 rounded-lg shadow-lg transform transition-all duration-300 translate-x-full`;
+    notification.className = `notification fixed top-24 right-6 z-50 p-4 rounded-xl shadow-2xl transform transition-all duration-300 translate-x-[150%] max-w-sm font-medium text-sm`;
     
-    // Set notification styles based on type
     if (type === 'success') {
-        notification.classList.add('bg-green-500', 'text-white');
-    } else if (type === 'error') {
-        notification.classList.add('bg-red-500', 'text-white');
+        notification.classList.add('bg-black', 'text-white', 'border', 'border-neutral-800', 'dark:bg-white', 'dark:text-black');
+    } else {
+        notification.classList.add('bg-red-600', 'text-white');
     }
     
     notification.textContent = message;
-    
-    // Add to page
     document.body.appendChild(notification);
     
-    // Animate in
+    // Slide in
     setTimeout(() => {
-        notification.classList.remove('translate-x-full');
-    }, 100);
+        notification.classList.remove('translate-x-[150%]');
+    }, 50);
     
-    // Auto remove after 5 seconds
+    // Slide out and remove
     setTimeout(() => {
-        notification.classList.add('translate-x-full');
+        notification.classList.add('translate-x-[150%]');
         setTimeout(() => {
             if (notification.parentNode) {
                 notification.parentNode.removeChild(notification);
             }
         }, 300);
-    }, 5000);
+    }, 4500);
 }
 
-// Update Substack URL function
-function updateSubstackURL() {
-    const substackLink = document.getElementById('substackLink');
-    if (substackLink) {
-        substackLink.href = 'https://ramshankar07.substack.com/?r=1rtqqj&utm_campaign=pub-share-checklist';
-    }
-}
-
-// Smooth scrolling for anchor links (if needed)
-function smoothScrollTo(target) {
-    const element = document.querySelector(target);
-    if (element) {
-        element.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-    }
-}
-
-// Add scroll event listener for navbar background
-window.addEventListener('scroll', function() {
-    const navbar = document.querySelector('nav');
-    if (navbar) {
-        const isDark = document.documentElement.classList.contains('dark');
-        if (window.scrollY > 50) {
-            navbar.classList.add(isDark ? 'bg-black' : 'bg-white');
-            navbar.classList.remove(isDark ? 'bg-black/80' : 'bg-white/95');
-        } else {
-            navbar.classList.remove(isDark ? 'bg-black' : 'bg-white');
-            navbar.classList.add(isDark ? 'bg-black/80' : 'bg-white/95');
-        }
-    }
-});
-
-// Chatbot functionality
+// ── Search Chatbot Widget Class ──
 class PortfolioChatbot {
     constructor() {
         this.apiUrl = 'https://portfolio-chatbot-staging.picographer0214.workers.dev';
-        this.isOpen = false;
         this.isLoading = false;
         this.initializeElements();
         this.bindEvents();
     }
 
     initializeElements() {
-        this.chatToggle = document.getElementById('chat-toggle');
-        this.chatInterface = document.getElementById('chat-interface');
-        this.chatClose = document.getElementById('chat-close');
+        this.chatSearchForm = document.getElementById('chat-search-form');
         this.chatInput = document.getElementById('chat-input');
         this.chatSend = document.getElementById('chat-send');
-        this.chatMessages = document.getElementById('chat-messages');
-        this.chatArrow = document.getElementById('chat-arrow');
     }
 
     bindEvents() {
-        // Send message
-        this.chatSend?.addEventListener('click', () => this.sendMessage());
-        this.chatInput?.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
+        this.chatSearchForm?.addEventListener('submit', (e) => {
+            // Prevent normal submission from reloading the page
+            e.preventDefault();
+            if (!e.agentInvoked) {
                 this.sendMessage();
             }
         });
-
-        // Auto-focus input on page load
+        
+        // Auto focus search widget on initial load
         setTimeout(() => {
             this.chatInput?.focus();
-        }, 500);
-    }
-
-    toggleChat() {
-        this.isOpen = !this.isOpen;
-        
-        if (this.isOpen) {
-            this.chatInterface?.classList.remove('hidden');
-            this.chatArrow?.classList.remove('fa-chevron-up');
-            this.chatArrow?.classList.add('fa-chevron-down');
-        } else {
-            this.chatInterface?.classList.add('hidden');
-            this.chatArrow?.classList.remove('fa-chevron-down');
-            this.chatArrow?.classList.add('fa-chevron-up');
-        }
-    }
-
-    closeChat() {
-        this.isOpen = false;
-        this.chatInterface?.classList.add('hidden');
-        this.chatArrow?.classList.remove('fa-chevron-down');
-        this.chatArrow?.classList.add('fa-chevron-up');
+        }, 600);
     }
 
     async sendMessage() {
-        const message = this.chatInput?.value.trim();
-        if (!message || this.isLoading) return;
+        const query = this.chatInput?.value.trim();
+        if (!query || this.isLoading) return;
 
-        // Show loading state
         this.setLoading(true);
         
         try {
@@ -307,7 +414,7 @@ class PortfolioChatbot {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    message: message,
+                    message: query,
                     useGemini: true
                 })
             });
@@ -317,181 +424,130 @@ class PortfolioChatbot {
             }
 
             const data = await response.json();
-            
-            // Show result in a modal or alert
             this.showResult(data.response);
             this.chatInput.value = '';
             
         } catch (error) {
-            console.error('Chat error:', error);
-            this.showResult('Sorry, I encountered an error. Please try again later.');
+            console.error('Chatbot search error:', error);
+            this.showResult('Sorry, I encountered an error attempting to process your search. Please check your network and try again.');
         } finally {
             this.setLoading(false);
         }
     }
 
     showResult(message) {
-        // Create or update result modal
-        let resultModal = document.getElementById('search-result-modal');
-        
-        if (!resultModal) {
-            resultModal = document.createElement('div');
-            resultModal.id = 'search-result-modal';
-            resultModal.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4';
-            document.body.appendChild(resultModal);
-        }
+        const resultModal = document.getElementById('search-result-modal');
+        if (!resultModal) return;
 
-        const isDarkTheme = document.documentElement.classList.contains('dark');
-        const accentFrom = isDarkTheme ? '#00FF41' : '#3b82f6';
-        const accentTo = isDarkTheme ? '#00CC33' : '#2563eb';
-        const borderClr = isDarkTheme ? '#00FF41' : '#60a5fa';
         resultModal.innerHTML = `
-            <div class="bg-gray-900 border-2 rounded-2xl p-6 max-w-2xl w-full max-h-96 overflow-y-auto shadow-2xl" style="border-color:${borderClr};">
-                <div class="flex items-center justify-between mb-4">
+            <div class="bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-2xl p-8 max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl relative transition-all duration-300 transform scale-100 flex flex-col justify-between space-y-6">
+                
+                <div class="flex items-center justify-between border-b dark:border-neutral-800 pb-4">
                     <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 rounded-full flex items-center justify-center shadow-lg" style="background:linear-gradient(to right,${accentFrom},${accentTo});">
-                            <i class="fas fa-search text-white text-sm"></i>
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center bg-black dark:bg-white text-white dark:text-black">
+                            <i class="fas fa-search text-xs"></i>
                         </div>
-                        <h3 class="text-white text-lg font-semibold">Search Result</h3>
+                        <h3 class="text-lg font-bold">Search Insights</h3>
                     </div>
-                    <button id="close-result" class="text-gray-400 hover:text-white transition-colors">
-                        <i class="fas fa-times text-xl"></i>
+                    <button id="close-result" class="text-gray-400 hover:text-black dark:hover:text-white transition-colors" aria-label="Close modal">
+                        <i class="fas fa-times text-lg"></i>
                     </button>
                 </div>
-                <div class="text-gray-300 leading-relaxed whitespace-pre-wrap">${message}</div>
+                
+                <div class="text-sm text-gray-600 dark:text-neutral-300 leading-relaxed font-light whitespace-pre-wrap flex-1">${message}</div>
+                
+                <div class="flex justify-end pt-4 border-t dark:border-neutral-800">
+                    <button id="ok-result" class="px-6 py-2.5 bg-black dark:bg-white text-white dark:text-black font-semibold text-xs rounded-lg hover:opacity-85">
+                        Dismiss
+                    </button>
+                </div>
             </div>
         `;
 
-        // Show modal
+        // Slide in overlay
         resultModal.classList.remove('hidden');
-        
-        // Close modal events
-        document.getElementById('close-result')?.addEventListener('click', () => {
+        document.body.classList.add('overflow-hidden'); // Disable background scroll
+
+        const closeElements = [
+            document.getElementById('close-result'),
+            document.getElementById('ok-result'),
+            resultModal
+        ];
+
+        const hideModal = () => {
             resultModal.classList.add('hidden');
-        });
-        
-        resultModal.addEventListener('click', (e) => {
-            if (e.target === resultModal) {
-                resultModal.classList.add('hidden');
-            }
-        });
-
-        // Auto-focus back to input
-        setTimeout(() => {
+            document.body.classList.remove('overflow-hidden');
             this.chatInput?.focus();
-        }, 100);
-    }
+        };
 
-    addMessage(content, sender) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `flex items-start space-x-3 ${sender === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`;
-        
-        const avatarDiv = document.createElement('div');
-        const isDarkAvatar = document.documentElement.classList.contains('dark');
-        const botGradient = isDarkAvatar ? 'from-green-500 to-green-600' : 'from-blue-500 to-blue-600';
-        avatarDiv.className = `w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg ${
-            sender === 'user'
-                ? 'bg-gradient-to-r from-gray-500 to-gray-600'
-                : `bg-gradient-to-r ${botGradient}`
-        }`;
-        
-        const avatarIcon = document.createElement('i');
-        avatarIcon.className = sender === 'user' ? 'fas fa-user text-white text-sm' : 'fas fa-search text-white text-sm';
-        avatarDiv.appendChild(avatarIcon);
-        
-        const messageContent = document.createElement('div');
-        messageContent.className = `backdrop-blur-md rounded-2xl p-3 max-w-xs shadow-lg ${
-            sender === 'user' 
-                ? 'bg-white/30 rounded-tr-sm' 
-                : 'bg-white/20 rounded-tl-sm'
-        }`;
-        
-        const messageText = document.createElement('p');
-        messageText.className = 'text-gray-700 text-sm';
-        messageText.textContent = content;
-        messageContent.appendChild(messageText);
-        
-        messageDiv.appendChild(avatarDiv);
-        messageDiv.appendChild(messageContent);
-        
-        this.chatMessages?.appendChild(messageDiv);
-        
-        // Scroll to bottom
-        this.chatMessages?.scrollTo({
-            top: this.chatMessages.scrollHeight,
-            behavior: 'smooth'
+        closeElements.forEach((el, index) => {
+            if (!el) return;
+            if (index === 2) {
+                // Click outside modal container
+                el.addEventListener('click', (e) => {
+                    if (e.target === resultModal) hideModal();
+                });
+            } else {
+                el.addEventListener('click', hideModal);
+            }
         });
     }
 
     setLoading(loading) {
         this.isLoading = loading;
-        this.chatSend.disabled = loading;
-        
-        if (loading) {
-            this.chatSend.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-        } else {
-            this.chatSend.innerHTML = '<i class="fas fa-paper-plane"></i>';
+        if (this.chatSend) {
+            this.chatSend.disabled = loading;
+            if (loading) {
+                this.chatSend.innerHTML = '<i class="fas fa-spinner fa-spin text-xs"></i>';
+            } else {
+                this.chatSend.innerHTML = '<i class="fas fa-paper-plane text-xs"></i>';
+            }
         }
-    }
-
-    addTypingIndicator() {
-        const typingId = 'typing-' + Date.now();
-        const messageDiv = document.createElement('div');
-        messageDiv.id = typingId;
-        messageDiv.className = 'flex items-start space-x-3';
-        
-        const avatarDiv = document.createElement('div');
-        const isDarkTyping = document.documentElement.classList.contains('dark');
-        const typingGradient = isDarkTyping ? 'from-green-500 to-green-600' : 'from-blue-500 to-blue-600';
-        avatarDiv.className = `w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-gradient-to-r ${typingGradient} shadow-lg`;
-        
-        const avatarIcon = document.createElement('i');
-        avatarIcon.className = 'fas fa-search text-white text-sm';
-        avatarDiv.appendChild(avatarIcon);
-        
-        const messageContent = document.createElement('div');
-        messageContent.className = 'backdrop-blur-md rounded-2xl rounded-tl-sm p-3 max-w-xs bg-white/20';
-        
-        const typingContainer = document.createElement('div');
-        typingContainer.className = 'flex space-x-1';
-        
-        for (let i = 0; i < 3; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'typing-indicator';
-            typingContainer.appendChild(dot);
-        }
-        
-        messageContent.appendChild(typingContainer);
-        messageDiv.appendChild(avatarDiv);
-        messageDiv.appendChild(messageContent);
-        
-        this.chatMessages?.appendChild(messageDiv);
-        
-        // Scroll to bottom
-        this.chatMessages?.scrollTo({
-            top: this.chatMessages.scrollHeight,
-            behavior: 'smooth'
-        });
-        
-        return typingId;
-    }
-
-    removeTypingIndicator(typingId) {
-        const typingElement = document.getElementById(typingId);
-        if (typingElement) {
-            typingElement.remove();
-        }
-    }
-
-    delay(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
     }
 }
 
-// Initialize functions when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    updateSubstackURL();
+// ── Visual Agent Mode Dashboard Control ──
+function setupAgentModeDashboard() {
+    const toggleBtn = document.getElementById('agent-mode-toggle');
+    const overlay = document.getElementById('agent-mode-overlay');
+    const closeBtn = document.getElementById('close-agent-mode');
+    const copyBtn = document.getElementById('copy-prompt-btn');
+    const promptText = document.getElementById('agent-prompt-text');
+
+    if (!toggleBtn || !overlay) return;
+
+    // Toggle Overlay Visible
+    toggleBtn.addEventListener('click', () => {
+        overlay.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden'); // Block page scroll
+    });
+
+    const hideOverlay = () => {
+        overlay.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+    };
+
+    closeBtn?.addEventListener('click', hideOverlay);
     
-    // Initialize chatbot
-    new PortfolioChatbot();
-});
+    // Close on clicking overlay background
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) hideOverlay();
+    });
+
+    // Copy Prompt to Clipboard
+    copyBtn?.addEventListener('click', () => {
+        if (promptText) {
+            promptText.select();
+            promptText.setSelectionRange(0, 99999); // Mobile compatibility
+            
+            try {
+                navigator.clipboard.writeText(promptText.value);
+                showNotification('Agent System Prompt copied to clipboard!', 'success');
+            } catch (err) {
+                // Fallback command
+                document.execCommand('copy');
+                showNotification('Agent System Prompt copied to clipboard!', 'success');
+            }
+        }
+    });
+}

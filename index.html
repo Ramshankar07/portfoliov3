@@ -1,519 +1,1023 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramshankar Bhuvaneswaran - Portfolio</title>
+    <title>Ramshankar Bhuvaneswaran - AI & GPU Kernel Engineer</title>
+    
+    <!-- Advanced SEO Optimization -->
+    <meta name="description" content="Portfolio of Ramshankar Bhuvaneswaran - AI/ML and GPU Kernel Engineer. Specializing in Large Language Models, PyTorch pipelines, and custom CUDA/HIP kernels. Graduated from Northeastern University.">
+    <meta name="keywords" content="Ramshankar Bhuvaneswaran, AI Engineer, GPU Kernel, CUDA, HIP, PyTorch, LangChain, Northeastern University, ROCm, AMD MI300X, Blackwell FP4">
+    
+    <!-- Canonical & Robot Scraper Hints -->
+    <link rel="canonical" href="https://ramshankar07.github.io/portfolio">
+    <link rel="agent-link" type="text/markdown" href="https://agnts.sh/ramshankar?raw" title="Plain-text Agent Markdown Link">
+    <meta name="agent-docs" content="https://agnts.sh/docs">
+
+    <!-- Open Graph (OG) Meta Tags -->
+    <meta property="og:title" content="Ramshankar Bhuvaneswaran - AI & GPU Kernel Engineer">
+    <meta property="og:description" content="Portfolio of Ramshankar Bhuvaneswaran. Specializing in Large Language Models, PyTorch pipelines, and custom CUDA/HIP kernels. Graduated from Northeastern University.">
+    <meta property="og:image" content="https://ramshankar07.github.io/portfolio/img/hero-section.jpg">
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://ramshankar07.github.io/portfolio">
+    <meta property="og:site_name" content="Ramshankar Bhuvaneswaran Portfolio">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ramshankar Bhuvaneswaran - AI & GPU Kernel Engineer">
+    <meta name="twitter:description" content="Portfolio of Ramshankar Bhuvaneswaran. Specializing in Large Language Models, PyTorch pipelines, and custom CUDA/HIP kernels.">
+    <meta name="twitter:image" content="https://ramshankar07.github.io/portfolio/img/hero-section.jpg">
+
+    <!-- Structured JSON-LD Semantic Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Ramshankar Bhuvaneswaran",
+      "jobTitle": "AI & GPU Kernel Engineer",
+      "url": "https://ramshankar07.github.io/portfolio",
+      "image": "https://ramshankar07.github.io/portfolio/img/hero-section.jpg",
+      "sameAs": [
+        "https://linkedin.com/in/ramshankarb",
+        "https://github.com/Ramshankar07",
+        "https://ramshankar07.substack.com"
+      ],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Northeastern University",
+        "location": "Boston, MA"
+      },
+      "knowsAbout": [
+        "Large Language Models",
+        "GPU Programming",
+        "CUDA",
+        "HIP",
+        "Triton",
+        "PyTorch",
+        "Distributed Systems",
+        "ROCm"
+      ]
+    }
+    </script>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom Design Styling -->
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- EmailJS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
-                        'inter': ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        primary: {
-                            50: '#eff6ff',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                        }
+                        'sans': ['Inter', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
-    <style>
-        /* Enhanced Glass Morphism Styles */
-        .glass-morphism {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-        }
-
-        .glass-morphism-dark {
-            background: rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Custom scrollbar for chat messages */
-        #chat-messages::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        #chat-messages::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-        }
-
-        #chat-messages::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 2px;
-        }
-
-        #chat-messages::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.5);
-        }
-
-        /* Smooth animations */
-        .chat-enter {
-            animation: chatSlideIn 0.3s ease-out;
-        }
-
-        @keyframes chatSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Message typing animation */
-        .typing-indicator {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.6);
-            animation: typing 1.4s infinite ease-in-out;
-        }
-
-        .typing-indicator:nth-child(1) {
-            animation-delay: -0.32s;
-        }
-
-        .typing-indicator:nth-child(2) {
-            animation-delay: -0.16s;
-        }
-
-        @keyframes typing {
-
-            0%,
-            80%,
-            100% {
-                transform: scale(0);
-                opacity: 0.5;
-            }
-
-            40% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        /* Enhanced blue gradient shadows */
-        .search-glow {
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(59, 130, 246, 0.1);
-        }
-
-        .search-glow:hover {
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4), 0 0 60px rgba(59, 130, 246, 0.2);
-        }
-
-        /* Dark search bar styling */
-        .dark-search-bar {
-            background: linear-gradient(135deg, #1f2937, #111827);
-            border: 2px solid #60a5fa;
-            box-shadow: 0 0 20px rgba(96, 165, 250, 0.3), 0 0 40px rgba(96, 165, 250, 0.1);
-        }
-
-        .dark-search-bar:hover {
-            box-shadow: 0 0 30px rgba(96, 165, 250, 0.4), 0 0 60px rgba(96, 165, 250, 0.2);
-            border-color: #93c5fd;
-        }
-
-        .dark-search-bar:focus-within {
-            box-shadow: 0 0 40px rgba(96, 165, 250, 0.5), 0 0 80px rgba(96, 165, 250, 0.3);
-            border-color: #93c5fd;
-        }
-
-        /* Blue gradient text effect */
-        .gradient-text {
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Animated gradient background */
-        .animated-gradient {
-            background: linear-gradient(-45deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
-            background-size: 400% 400%;
-            animation: gradientShift 3s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        /* Mobile responsive adjustments */
-        @media (max-width: 768px) {
-            #chatbot-widget {
-                max-width: 100%;
-                margin: 0 0.5rem;
-            }
-
-            .dark-search-bar {
-                padding: 0.75rem;
-            }
-
-            .dark-search-bar input {
-                font-size: 1rem;
-            }
-
-            #chat-interface {
-                margin-top: 1rem;
-            }
-
-            #chat-messages {
-                height: 16rem;
-                padding: 1rem;
-            }
-
-            .hero-section-mobile {
-                padding-top: 2rem;
-                padding-bottom: 2rem;
-            }
-
-            .hero-image-mobile {
-                width: 16rem;
-                height: 16rem;
-                margin-bottom: 2rem;
-            }
-
-            .hero-text-mobile {
-                text-align: center;
-                margin-bottom: 2rem;
-            }
-
-            .hero-buttons-mobile {
-                justify-content: center;
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .hero-buttons-mobile a {
-                width: 100%;
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-title-mobile {
-                font-size: 2.5rem;
-                line-height: 1.2;
-            }
-
-            .hero-subtitle-mobile {
-                font-size: 1.25rem;
-            }
-
-            .hero-description-mobile {
-                font-size: 1rem;
-            }
-
-            .overview-grid-mobile {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .overview-card-mobile {
-                padding: 1.5rem;
-            }
-
-            .substack-iframe-mobile {
-                width: 100%;
-                height: 280px;
-            }
-        }
-    </style>
 </head>
 
-<body class="font-inter text-gray-800 bg-white dark:bg-black dark:text-gray-100">
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-white/95 dark:bg-black/80 backdrop-blur-md z-50 shadow-lg">
-        <div class="max-w-6xl mx-auto px-5">
-            <div class="flex justify-between items-center py-4">
-                <ul class="hidden md:flex space-x-8">
-                    <li><a href="index.html"
-                            class="text-gray-700 dark:text-white hover:text-primary-600 hover:dark:text-[#00FF41] font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 dark:after:from-[#00FF41] dark:after:to-[#00FF41] after:transition-all after:duration-300 hover:after:w-full">Home</a>
-                    </li>
-                    <li><a href="about.html"
-                            class="text-gray-700 dark:text-white hover:text-primary-600 hover:dark:text-[#00FF41] font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 dark:after:from-[#00FF41] dark:after:to-[#00FF41] after:transition-all after:duration-300 hover:after:w-full">About</a>
-                    </li>
-                    <li><a href="projects.html"
-                            class="text-gray-700 dark:text-white hover:text-primary-600 hover:dark:text-[#00FF41] font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 dark:after:from-[#00FF41] dark:after:to-[#00FF41] after:transition-all after:duration-300 hover:after:w-full">Projects</a>
-                    </li>
-                    <li><a href="blogs.html"
-                            class="text-gray-700 dark:text-white hover:text-primary-600 hover:dark:text-[#00FF41] font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 dark:after:from-[#00FF41] dark:after:to-[#00FF41] after:transition-all after:duration-300 hover:after:w-full">Blogs</a>
-                    </li>
-                    <li><a href="contact.html"
-                            class="text-gray-700 dark:text-white hover:text-primary-600 hover:dark:text-[#00FF41] font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 dark:after:from-[#00FF41] dark:after:to-[#00FF41] after:transition-all after:duration-300 hover:after:w-full">Contact</a>
-                    </li>
-                    <li><a href="https://cal.com/ramshankar07" target="_blank" rel="noopener noreferrer"
-                            class="text-gray-700 dark:text-white hover:text-primary-600 hover:dark:text-[#00FF41] font-medium transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary-600 after:to-primary-500 dark:after:from-[#00FF41] dark:after:to-[#00FF41] after:transition-all after:duration-300 hover:after:w-full">Schedule</a>
-                    </li>
+<body class="bg-[#FAF9F6] text-[#111111] dark:bg-[#080808] dark:text-[#F5F5F7] antialiased">
+    
+    <!-- Sticky Responsive Navigation -->
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-xl font-bold tracking-tight text-[#111111] dark:text-[#F5F5F7]">
+                R<span class="serif-italic font-normal">B</span>
+            </a>
+            
+            <div class="flex items-center space-x-8">
+                <ul class="hidden md:flex space-x-8 items-center" id="nav-links">
+                    <li><a href="#hero" class="nav-link relative py-1 after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[1px] after:transition-all after:duration-300 hover:after:w-full font-medium active">Home</a></li>
+                    <li><a href="#about" class="nav-link relative py-1 after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[1px] after:transition-all after:duration-300 hover:after:w-full font-medium">About</a></li>
+                    <li><a href="#experience" class="nav-link relative py-1 after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[1px] after:transition-all after:duration-300 hover:after:w-full font-medium">Experience</a></li>
+                    <li><a href="#projects" class="nav-link relative py-1 after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[1px] after:transition-all after:duration-300 hover:after:w-full font-medium">Projects</a></li>
+                    <li><a href="#blogs" class="nav-link relative py-1 after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[1px] after:transition-all after:duration-300 hover:after:w-full font-medium">Blogs</a></li>
+                    <li><a href="#contact" class="nav-link relative py-1 after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[1px] after:transition-all after:duration-300 hover:after:w-full font-medium">Contact</a></li>
+                    <li><a href="https://cal.com/ramshankar07" target="_blank" rel="noopener noreferrer" class="nav-link py-1 font-medium text-gray-500 hover:text-black dark:hover:text-white transition-colors">Schedule <i class="fas fa-arrow-up-right text-[10px] ml-0.5"></i></a></li>
                 </ul>
-                <button data-theme-toggle
-                    class="ml-4 inline-flex items-center justify-center w-10 h-10 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:text-gray-100 dark:hover:bg-gray-800"
-                    aria-label="Toggle dark mode" aria-pressed="true">
-                    <i class="fas fa-moon text-sm" data-icon="moon"></i>
-                    <i class="fas fa-sun text-sm hidden" data-icon="sun"></i>
-                </button>
-                <div class="md:hidden flex flex-col cursor-pointer">
-                    <span class="w-6 h-0.5 bg-gray-700 mb-1 transition-all duration-300"></span>
-                    <span class="w-6 h-0.5 bg-gray-700 mb-1 transition-all duration-300"></span>
-                    <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300"></span>
+                
+                <!-- Navbar Toggles -->
+                <div class="flex items-center space-x-3">
+                    <button id="agent-mode-toggle" class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-gray-200 dark:border-neutral-800 text-gray-700 dark:text-neutral-300 hover:bg-gray-100 dark:hover:bg-neutral-900 transition-colors" aria-label="Toggle Agent Mode" title="Toggle AI Agent Mode Dashboard">
+                        <i class="fas fa-robot text-xs"></i>
+                    </button>
+                    
+                    <button data-theme-toggle class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-gray-200 dark:border-neutral-800 text-gray-700 dark:text-neutral-300 hover:bg-gray-100 dark:hover:bg-neutral-900 transition-colors" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon text-xs" data-icon="moon"></i>
+                        <i class="fas fa-sun text-xs hidden" data-icon="sun"></i>
+                    </button>
+                    
+                    <div class="md:hidden flex flex-col cursor-pointer space-y-1.5" id="mobile-menu-btn">
+                        <span class="w-6 h-[1.5px] bg-[#111111] dark:bg-[#F5F5F7] transition-all duration-300"></span>
+                        <span class="w-6 h-[1.5px] bg-[#111111] dark:bg-[#F5F5F7] transition-all duration-300"></span>
+                        <span class="w-6 h-[1.5px] bg-[#111111] dark:bg-[#F5F5F7] transition-all duration-300"></span>
+                    </div>
                 </div>
             </div>
         </div>
+        
+        <!-- Mobile Dropdown Menu -->
+        <ul id="mobile-nav-menu" class="hidden flex-col bg-white dark:bg-black w-full border-b border-gray-200 dark:border-neutral-800 p-6 space-y-4 shadow-xl">
+            <li><a href="#hero" class="block font-medium py-1">Home</a></li>
+            <li><a href="#about" class="block font-medium py-1">About</a></li>
+            <li><a href="#experience" class="block font-medium py-1">Experience</a></li>
+            <li><a href="#projects" class="block font-medium py-1">Projects</a></li>
+            <li><a href="#blogs" class="block font-medium py-1">Blogs</a></li>
+            <li><a href="#contact" class="block font-medium py-1">Contact</a></li>
+            <li><a href="https://cal.com/ramshankar07" target="_blank" rel="noopener noreferrer" class="block font-medium py-1">Schedule <i class="fas fa-arrow-up-right text-[10px] ml-0.5"></i></a></li>
+        </ul>
     </nav>
 
     <!-- Hero Section -->
-    <section
-        class="relative pt-32 pb-20 bg-white dark:bg-[#000000] min-h-screen flex items-center hero-section-mobile overflow-hidden">
-        <!-- ASCII Canvas -->
-        <canvas id="three-canvas" class="absolute inset-0 w-full h-full" style="z-index:0;"></canvas>
-        <div class="max-w-6xl mx-auto px-5 relative" style="z-index:1;">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div class="hero-text-mobile">
-                    <h1
-                        class="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4 leading-tight hero-title-mobile">
-                        Hi, I'm <span class="text-primary-600 dark:text-[#00FF41]">Ramshankar</span>
+    <section id="hero" class="relative min-h-screen flex items-center py-20 overflow-hidden">
+        <!-- Interactive Monochromatic ASCII Canvas Background -->
+        <canvas id="three-canvas" class="absolute inset-0 w-full h-full object-cover pointer-events-none opacity-40 dark:opacity-30" style="z-index: 0;"></canvas>
+        
+        <div class="max-w-6xl mx-auto px-6 w-full relative" style="z-index: 1;">
+            <div class="grid md:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Core Bio Text -->
+                <div class="md:col-span-7 space-y-8 text-left">
+                    <h1 class="text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight">
+                        Hi, I'm <span class="serif-italic font-normal block md:inline mt-1 text-[#111111] dark:text-[#FFFFFF]">Ramshankar</span>
                     </h1>
-                    <p
-                        class="text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-lg leading-relaxed hero-subtitle-mobile">
-                        Crafting next-generation AI solutions with a focus on Large Language Models, Computer Vision,
-                        and Distributed Systems. <strong class="text-white">I graduated!</strong>
+                    <p class="text-xl md:text-2xl text-gray-600 dark:text-neutral-400 font-light leading-relaxed max-w-xl">
+                        Crafting next-generation AI solutions with a focus on <strong class="text-black dark:text-white font-medium">Large Language Models</strong>, <strong class="text-black dark:text-white font-medium">Computer Vision</strong>, and <strong class="text-black dark:text-white font-medium">GPU Kernel Optimization</strong>. I graduated!
                     </p>
-                    <div class="flex gap-4 flex-wrap hero-buttons-mobile">
-                        <a href="projects.html"
-                            class="hero-btn-primary px-6 py-3 font-semibold rounded-lg transform hover:-translate-y-1 transition-all duration-300">
-                            View Projects
+                    <div class="flex gap-4 flex-wrap pt-2">
+                        <a href="#projects" class="hero-btn-primary px-8 py-3.5 font-medium rounded-lg text-sm transition-all duration-300">
+                            View Technical Projects
                         </a>
-                        <a href="contact.html"
-                            class="hero-btn-outline px-6 py-3 border-2 font-semibold rounded-lg transform hover:-translate-y-1 transition-all duration-300">
+                        <a href="#contact" class="hero-btn-outline px-8 py-3.5 border font-medium rounded-lg text-sm transition-all duration-300">
                             Get In Touch
                         </a>
                     </div>
                 </div>
-                <div class="flex flex-col justify-center items-center p-8 space-y-8">
-                    <img src="img/hero-section.jpg" alt="Ramshankar Bhuvaneswaran"
-                        class="w-80 h-80 rounded-full object-cover border-4 border-white shadow-2xl hover:scale-105 transition-transform duration-300 hero-image-mobile">
+                
+                <!-- Hero Image & AI Chatbot Widget -->
+                <div class="md:col-span-5 flex flex-col items-center space-y-8">
+                    <div class="relative group">
+                        <div class="absolute inset-0 bg-[#FAF9F6] dark:bg-[#080808] border border-gray-200 dark:border-neutral-800 rounded-full -m-2 opacity-50 scale-105 transition-all duration-500"></div>
+                        <img src="img/hero-section.jpg" alt="Ramshankar Bhuvaneswaran - Portrait"
+                            class="w-72 h-72 rounded-full object-cover border border-gray-300 dark:border-neutral-700 shadow-2xl relative transition-transform duration-500 group-hover:scale-[1.02]">
+                    </div>
 
-                    <!-- AI Search Bar Widget -->
-                    <div id="chatbot-widget" class="w-full max-w-2xl">
-                        <!-- Direct Search Input -->
+                    <!-- AI Search Bar Widget (Fully WebMCP Instrumented) -->
+                    <div id="chatbot-widget" class="w-full max-w-md">
                         <div class="relative">
-                            <div class="relative dark-search-bar rounded-2xl p-4 transition-all duration-300 group">
-                                <!-- Blue gradient glow effect -->
-                                <div
-                                    class="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-cyan-500/10 to-blue-600/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                </div>
-
-                                <div class="relative flex items-center space-x-4">
-                                    <!-- Search Icon with AI Sparkles -->
-                                    <div class="relative flex items-center">
-                                        <div class="relative">
-                                            <!-- AI Sparkles -->
-                                            <div class="absolute -top-2 -right-1">
-                                                <div class="w-1 h-1 bg-white rounded-full animate-pulse"></div>
-                                            </div>
-                                            <div class="absolute -top-1 -right-2">
-                                                <div class="w-1 h-1 bg-white rounded-full animate-pulse"
-                                                    style="animation-delay: 0.5s;"></div>
-                                            </div>
-                                            <!-- Search Icon -->
-                                            <i class="fas fa-search text-white text-lg"></i>
-                                        </div>
+                            <form id="chat-search-form" toolname="search-portfolio" tooldescription="Search through Ramshankar's portfolio (projects, skills, education, and achievements) using semantic AI query." toolautosubmit class="dark-search-bar rounded-xl p-3.5 transition-all duration-300">
+                                <div class="relative flex items-center space-x-3">
+                                    <div class="flex items-center text-gray-500">
+                                        <label for="chat-input" class="sr-only">Search query</label>
+                                        <i class="fas fa-search text-base"></i>
                                     </div>
-
-                                    <!-- Direct Input Field -->
-                                    <input type="text" id="chat-input" placeholder="Ask a question"
-                                        class="flex-1 bg-transparent text-white placeholder-white/70 text-lg focus:outline-none border-none">
-
-                                    <!-- Send Button -->
-                                    <button id="chat-send"
-                                        class="bg-gray-800 hover:bg-gray-700 text-white rounded-xl p-2 transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
-                                        <i class="fas fa-paper-plane text-sm"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Search Interface -->
-                        <div id="chat-interface"
-                            class="hidden mt-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl overflow-hidden relative">
-                            <!-- Blue gradient shadow effect -->
-                            <div
-                                class="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-600/10 rounded-2xl">
-                            </div>
-
-                            <!-- Search Header -->
-                            <div class="relative bg-white/20 backdrop-blur-md p-4 border-b border-white/20">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <div
-                                            class="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
-                                            <i class="fas fa-search text-white text-sm"></i>
-                                        </div>
-                                        <div>
-                                            <h4 class="text-gray-700 font-semibold">Portfolio Search</h4>
-                                            <p class="text-gray-600 text-xs">Powered by Gemini AI</p>
-                                        </div>
-                                    </div>
-                                    <button id="chat-close"
-                                        class="text-gray-600 hover:text-gray-800 transition-colors duration-200">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Search Results -->
-                            <div id="chat-messages" class="h-80 overflow-y-auto p-4 space-y-4 relative">
-                                <div class="flex items-start space-x-3">
-                                    <div
-                                        class="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
-                                        <i class="fas fa-search text-white text-sm"></i>
-                                    </div>
-                                    <div
-                                        class="bg-white/20 backdrop-blur-md rounded-2xl rounded-tl-sm p-3 max-w-xs shadow-lg">
-                                        <p class="text-gray-700 text-sm">Hi! I'm your AI search assistant. Ask me about
-                                            Ramshankar's projects, skills, or experience! 🔍</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Search Input -->
-                            <div class="relative p-4 border-t border-white/20 bg-white/10 backdrop-blur-md">
-                                <!-- Blue gradient shadow for input area -->
-                                <div
-                                    class="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-blue-600/5 rounded-b-2xl">
-                                </div>
-
-                                <div class="relative flex space-x-3">
-                                    <div class="flex-1 relative">
-                                        <input type="text" id="chat-input"
-                                            placeholder="Search projects, skills, experience..."
-                                            class="w-full bg-white/20 backdrop-blur-md border border-white/30 rounded-xl px-4 py-3 pl-12 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-lg">
-                                        <div class="absolute left-4 top-1/2 transform -translate-y-1/2">
-                                            <i class="fas fa-search text-gray-500 text-sm"></i>
-                                        </div>
-                                    </div>
-                                    <button id="chat-send"
-                                        class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-xl px-6 py-3 transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg">
+                                    <input type="text" id="chat-input" name="query" placeholder="Ask a question about Ramshankar..." required
+                                        class="flex-1 bg-transparent text-sm focus:outline-none border-none" toolparamdescription="The search terms or question about Ramshankar's skills, projects, or background.">
+                                    <button id="chat-send" type="submit"
+                                        class="bg-[#111111] dark:bg-[#F5F5F7] text-white dark:text-black rounded-lg p-2 text-xs transition-all duration-200 hover:scale-105 disabled:opacity-50" aria-label="Submit search">
                                         <i class="fas fa-paper-plane"></i>
                                     </button>
                                 </div>
-                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Wrapper -->
+    <main class="max-w-6xl mx-auto px-6 space-y-32 py-16">
+        
+        <!-- 01. About & Skills Section -->
+        <section id="about" class="scroll-mt-24 space-y-16">
+            <h2 class="text-4xl font-bold flex items-center gap-4 border-b border-gray-200 dark:border-neutral-800 pb-4">
+                <span class="text-xl font-mono text-gray-400 dark:text-neutral-600">01.</span>
+                <span class="serif-italic">Who I Am</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-12 gap-12">
+                <!-- Bio Copy -->
+                <div class="md:col-span-7 space-y-6 text-base md:text-lg text-gray-600 dark:text-neutral-400 font-light leading-relaxed">
+                    <p>
+                        I'm a passionate <strong class="text-black dark:text-white font-medium">AI/ML Engineer and Researcher</strong> recently graduated from Northeastern University with a Master's in Information Systems. My journey in technology began with a deep fascination for artificial intelligence and its potential to solve complex real-world problems.
+                    </p>
+                    <p>
+                        With a strong foundation in computer science and extensive experience in machine learning, I specialize in developing innovative AI solutions, optimizing ML pipelines, and building scalable data systems. My work spans across computer vision, natural language processing, and distributed computing, with a particular focus on large language models and compiler integrations.
+                    </p>
+                    <p>
+                        I believe in the power of open-source collaboration. I recently contributed to the <strong class="text-black dark:text-white font-medium">LLVM project</strong> by refactoring the `ilogbf128` math function to a header-only implementation in libc (
+                        <a href="https://github.com/llvm/llvm-project/pull/175396" class="text-[#111111] dark:text-[#FFFFFF] underline underline-offset-4 hover:opacity-70 font-normal" target="_blank" rel="noopener noreferrer">
+                            LLVM libc open-source contribution
+                        </a>).
+                    </p>
+                </div>
+                
+                <!-- Achievements Mini-Cards -->
+                <div class="md:col-span-5 space-y-6">
+                    <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-neutral-500">Core Expertise</h3>
+                    <div class="grid gap-4">
+                        <div class="p-6 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl shadow-sm">
+                            <h4 class="font-bold text-base mb-2">GPU Kernel Optimization</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed">Developed and optimized high-performance GPU kernels for inference/training workloads, demonstrating deep knowledge of memory hierarchy.</p>
+                        </div>
+                        <div class="p-6 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl shadow-sm">
+                            <h4 class="font-bold text-base mb-2">Compiler Integration</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed">Worked with graph compilers (CUDA, HIP) to optimize deep learning frameworks for various hardware architectures including AMD GPUs.</p>
+                        </div>
+                        <div class="p-6 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl shadow-sm">
+                            <h4 class="font-bold text-base mb-2">Performance & Cost Resolution</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed">Identified redundant model calls; architected caching systems reducing monthly GPU costs by $12K and latency by 42%.</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Quick Overview Section -->
-    <section class="py-20 bg-white dark:bg-black">
-        <div class="max-w-6xl mx-auto px-5">
-            <h2 class="text-4xl font-bold text-center text-gray-900 mb-16 relative">
-                Quick Overview
-                <div
-                    class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full">
+            
+            <!-- Technical Skills Category Grid -->
+            <div class="space-y-8 pt-8">
+                <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-neutral-500">Technical Skills</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Languages -->
+                    <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6">
+                        <h4 class="font-bold text-lg flex items-center gap-3">
+                            <i class="fas fa-code text-sm"></i>
+                            Languages
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">C++</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Python</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">CUDA</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">HIP</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Triton</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">C</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">SQL</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">PySpark</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">R</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Shell</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Frameworks -->
+                    <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6">
+                        <h4 class="font-bold text-lg flex items-center gap-3">
+                            <i class="fas fa-brain text-sm"></i>
+                            ML & Frameworks
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">PyTorch</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">TensorFlow</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">JAX</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Hugging Face</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">TRL</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Unsloth</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">vLLM</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Scikit-learn</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">XGBoost</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Cloud -->
+                    <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6">
+                        <h4 class="font-bold text-lg flex items-center gap-3">
+                            <i class="fas fa-cloud text-sm"></i>
+                            Cloud & Scale
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">AWS</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">GCP</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Docker</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Kubernetes</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">HPC</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Multi-GPU</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">SageMaker</span>
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Vertex AI</span>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- 02. Experience & Education Section -->
+        <section id="experience" class="scroll-mt-24 space-y-16">
+            <h2 class="text-4xl font-bold flex items-center gap-4 border-b border-gray-200 dark:border-neutral-800 pb-4">
+                <span class="text-xl font-mono text-gray-400 dark:text-neutral-600">02.</span>
+                <span class="serif-italic">Experience & Education</span>
             </h2>
-            <div class="grid md:grid-cols-3 gap-8 overview-grid-mobile">
-                <div
-                    class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl border border-gray-200 dark:border-gray-800 text-center hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 overview-card-mobile">
-                    <i class="fas fa-user-tie text-5xl text-primary-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">About & Experience</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                        My background, education, professional journey, and technical expertise.
-                    </p>
-                    <a href="about.html"
-                        class="text-primary-600 font-medium hover:text-primary-700 transition-colors duration-300">
-                        Learn More →
-                    </a>
-                </div>
-                <div
-                    class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl border border-gray-200 dark:border-gray-800 text-center hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 overview-card-mobile">
-                    <i class="fas fa-code text-5xl text-primary-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Projects</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                        Discover my technical projects and innovative solutions.
-                    </p>
-                    <a href="projects.html"
-                        class="text-primary-600 font-medium hover:text-primary-700 transition-colors duration-300">
-                        Learn More →
-                    </a>
-                </div>
-                <div
-                    class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl border border-gray-200 dark:border-gray-800 text-center hover:transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 overview-card-mobile">
-                    <i class="fas fa-blog text-5xl text-primary-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Blogs</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                        Read my thoughts on AI/ML trends and technical insights.
-                    </p>
-                    <a href="blogs.html"
-                        class="text-primary-600 font-medium hover:text-primary-700 transition-colors duration-300">
-                        Learn More →
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="relative experience-timeline-mobile space-y-12">
+                    <!-- Timeline vertical line -->
+                    <div class="absolute left-5 top-2 bottom-2 w-[1px] bg-gray-200 dark:bg-neutral-800"></div>
+                    
+                    <!-- Experience Item 0 -->
+                    <div class="relative pl-12 experience-item-mobile">
+                        <div class="absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
+                        <div class="bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                            <div class="flex flex-wrap justify-between items-start gap-2">
+                                <div>
+                                    <h3 class="text-xl font-bold">AI Engineer</h3>
+                                    <p class="text-sm font-medium text-gray-600 dark:text-neutral-400">Community Dream Foundation</p>
+                                </div>
+                                <div class="text-right text-xs text-gray-500">
+                                    <span class="block">Remote</span>
+                                    <span class="block mt-0.5">Apr 2026 – Present</span>
+                                </div>
+                            </div>
+                            <ul class="space-y-3 text-sm text-gray-500 leading-relaxed list-disc pl-4">
+                                <li>Shipped an LLM-powered concierge and operations assistant for a hotel client, building agent workflows in LangChain and LangGraph on vLLM behind FastAPI, with RAG over property data (room inventory, policies, local guides).</li>
+                                <li>Wired up custom Skills and MCP connectors to the hotel's booking system, PMS, and internal knowledge base over REST APIs, so the agent could execute transactional operations.</li>
+                                <li>Built an evaluation harness with curated guest-query sets and regression checks on prompt changes.</li>
+                            </ul>
+                        </div>
+                    </div>
 
-    <!-- Substack Integration Section -->
-    <section class="py-20 bg-gray-50 dark:bg-gray-900">
-        <div class="max-w-4xl mx-auto px-5 text-center">
-            <h2 class="text-4xl font-bold text-gray-900 mb-4">Latest Insights</h2>
-            <p class="text-xl text-gray-600 mb-12 leading-relaxed">
-                Stay updated with my latest thoughts on AI/ML, research findings, and industry trends
-            </p>
-            <div class="flex justify-center mb-8">
-                <iframe src="https://ramshankar07.substack.com/embed" width="480" height="320"
-                    style="border:1px solid #EEE; background:white;" frameborder="0" scrolling="no"
-                    class="rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 substack-iframe-mobile"></iframe>
+                    <!-- Experience Item 1 -->
+                    <div class="relative pl-12 experience-item-mobile">
+                        <div class="absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
+                        <div class="bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                            <div class="flex flex-wrap justify-between items-start gap-2">
+                                <div>
+                                    <h3 class="text-xl font-bold">Graduate Teaching and Research Assistant</h3>
+                                    <p class="text-sm font-medium text-gray-600 dark:text-neutral-400">Northeastern University</p>
+                                </div>
+                                <div class="text-right text-xs text-gray-500">
+                                    <span class="block">Boston, MA</span>
+                                    <span class="block mt-0.5">Jan 2025 – Dec 2025</span>
+                                </div>
+                            </div>
+                            <ul class="space-y-3 text-sm text-gray-500 leading-relaxed list-disc pl-4">
+                                <li>Implemented a knowledge distillation pipeline compressing a Qwen image-to-image model into lightweight GAN architectures, achieving a <strong class="text-black dark:text-white">65% parameter reduction</strong> while maintaining visual quality.</li>
+                                <li>Authored the research paper <strong class="text-black dark:text-white italic">BitSkip</strong> investigating compositional effects of quantization and early exit in Large Language Models.</li>
+                                <li>Served as a Teaching Assistant, mentoring students on distributed computing workflows including SLURM job scheduling and parallel processing across CPU and GPU environments.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Education: NEU -->
+                    <div class="relative pl-12 experience-item-mobile">
+                        <div class="absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
+                        <div class="bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                            <div class="flex flex-wrap justify-between items-start gap-2">
+                                <div>
+                                    <h3 class="text-xl font-bold">Master of Science in Information Systems</h3>
+                                    <p class="text-sm font-medium text-gray-600 dark:text-neutral-400">Northeastern University</p>
+                                </div>
+                                <div class="text-right text-xs text-gray-500">
+                                    <span class="block">Boston, MA</span>
+                                    <span class="block mt-0.5">2023 - 2025</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 font-light">
+                                Specializing in AI/ML, Data Engineering, and Distributed Systems. Focus on large language models, computer vision, and scalable data processing platforms.
+                            </p>
+                            <div class="pt-3 border-t border-gray-100 dark:border-neutral-800">
+                                <span class="block text-xs font-semibold uppercase text-gray-400">Master's Thesis:</span>
+                                <p class="text-xs text-gray-500 italic mt-1 font-light">"ModelOpt: Research Framework for Zero-Shot Computer Vision Model Optimization With Tree Search and Federated Knowledge Sharing, Northeastern University, 2025."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Experience Item 2 -->
+                    <div class="relative pl-12 experience-item-mobile">
+                        <div class="absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
+                        <div class="bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                            <div class="flex flex-wrap justify-between items-start gap-2">
+                                <div>
+                                    <h3 class="text-xl font-bold">AI Engineer</h3>
+                                    <p class="text-sm font-medium text-gray-600 dark:text-neutral-400">BulkBeings</p>
+                                </div>
+                                <div class="text-right text-xs text-gray-500">
+                                    <span class="block">Chennai, India</span>
+                                    <span class="block mt-0.5">May 2024 – Aug 2024</span>
+                                </div>
+                            </div>
+                            <ul class="space-y-3 text-sm text-gray-500 leading-relaxed list-disc pl-4">
+                                <li>Optimized PyTorch training pipelines for Mixtral and Llama models, achieving a <strong class="text-black dark:text-white">42% training acceleration</strong> across 8 A100 GPUs FSDP configuration through memory coalescing and kernel fusion.</li>
+                                <li>Designed and scaled ML cluster orchestration using Kubernetes and Ray for distributed training, managing GPU scheduling and resource allocation.</li>
+                                <li>Engineered high-performance GPU kernels for attention mechanisms and feedforward layers using CUDA (CUTLASS); reduced OOM errors by 85% through systematic memory profiling.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Experience Item 3 -->
+                    <div class="relative pl-12 experience-item-mobile">
+                        <div class="absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
+                        <div class="bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                            <div class="flex flex-wrap justify-between items-start gap-2">
+                                <div>
+                                    <h3 class="text-xl font-bold">ML Engineer (Research)</h3>
+                                    <p class="text-sm font-medium text-gray-600 dark:text-neutral-400">BulkBeings</p>
+                                </div>
+                                <div class="text-right text-xs text-gray-500">
+                                    <span class="block">Chennai, India</span>
+                                    <span class="block mt-0.5">May 2023 – Dec 2023</span>
+                                </div>
+                            </div>
+                            <ul class="space-y-3 text-sm text-gray-500 leading-relaxed list-disc pl-4">
+                                <li>Prototyped OCR model (ViT+CRNN) achieving 98% precision and 42% faster inference via ONNX/CUDA optimization, meeting sub-100ms P99 latency.</li>
+                                <li>Implemented an observability stack with Prometheus, Grafana, and OpenTelemetry to track model throughput, latency and GPU utilization.</li>
+                                <li>Developed a two-stage Conv1D-Transformer for beat-level ECG classification (89% F1-score) deployed on an L4 GPU.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Education: Anna University -->
+                    <div class="relative pl-12 experience-item-mobile">
+                        <div class="absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
+                        <div class="bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                            <div class="flex flex-wrap justify-between items-start gap-2">
+                                <div>
+                                    <h3 class="text-xl font-bold">Bachelor of Technology in Computer Science</h3>
+                                    <p class="text-sm font-medium text-gray-600 dark:text-neutral-400">Anna University</p>
+                                </div>
+                                <div class="text-right text-xs text-gray-500">
+                                    <span class="block">Chennai, India</span>
+                                    <span class="block mt-0.5">2019 - 2023</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 font-light">
+                                Comprehensive foundation in computer science fundamentals, data structures, algorithms, and software engineering. Graduated with distinction.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Experience Item 4 -->
+                    <div class="relative pl-12 experience-item-mobile">
+                        <div class="absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
+                        <div class="bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                            <div class="flex flex-wrap justify-between items-start gap-2">
+                                <div>
+                                    <h3 class="text-xl font-bold">ML Engineer Intern</h3>
+                                    <p class="text-sm font-medium text-gray-600 dark:text-neutral-400">Velozity Global Solutions Pvt</p>
+                                </div>
+                                <div class="text-right text-xs text-gray-500">
+                                    <span class="block">Chennai, India</span>
+                                    <span class="block mt-0.5">Jan 2022 – Aug 2022</span>
+                                </div>
+                            </div>
+                            <ul class="space-y-3 text-sm text-gray-500 leading-relaxed list-disc pl-4">
+                                <li>Architected end-to-end ML pipelines in AWS, implementing predictive segments using XGBoost on behavioral patterns, resulting in a 45% increase in campaign conversions.</li>
+                                <li>Redesigned temporal feature extraction logic to prevent temporal data leakage, ensuring robust temporal train-test splits.</li>
+                                <li>Collaborated on developing retail mix optimization systems using Bayesian hierarchical models (PyMC3), increasing LTV prediction accuracy by 34%.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
             </div>
-            <a href="https://ramshankar07.substack.com/?r=1rtqqj&utm_campaign=pub-share-checklist" target="_blank"
-                class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
-                <i class="fas fa-external-link-alt"></i>
-                Read More on Substack
-            </a>
-        </div>
-    </section>
+        </section>
+
+        <!-- 03. Projects Section -->
+        <section id="projects" class="scroll-mt-24 space-y-16">
+            <h2 class="text-4xl font-bold flex items-center gap-4 border-b border-gray-200 dark:border-neutral-800 pb-4">
+                <span class="text-xl font-mono text-gray-400 dark:text-neutral-600">03.</span>
+                <span class="serif-italic">Technical Projects</span>
+            </h2>
+            
+            <!-- Category Filter Controls -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12" id="filter-controls">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="ai-gpu">AI & GPU Kernels</button>
+                <button class="filter-btn" data-filter="data-systems">Data & Systems</button>
+                <button class="filter-btn" data-filter="academic">Academic / Research</button>
+            </div>
+            
+            <!-- Filterable Project Grid -->
+            <div class="grid md:grid-cols-2 gap-8" id="projects-grid">
+                
+                <!-- Project 1 -->
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="ai-gpu">
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold leading-snug">AMD-GPU-Kernel Agent Trained via GRPO Using verl</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">SkyPilot</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">verl</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">FastAPI</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Redis</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-2 text-sm text-gray-500 list-disc pl-4">
+                        <li>Trained Qwen2.5-Coder-7B via GRPO using verl to autonomously optimize GPU kernels across NVIDIA and AMD targets, achieving rewards up to 4.0x speedup for FP8 classes.</li>
+                        <li>Architected a three-cluster SkyPilot pipeline decoupling trainer, queue (FastAPI + Redis) and spot GPU workers, enabling fault-tolerant spot preemption handling.</li>
+                    </ul>
+                    <a href="https://github.com/Ramshankar07/Kernel-Writer-RL-v2" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-black dark:text-white hover:opacity-75 transition-opacity">
+                        <i class="fab fa-github"></i> Repository <i class="fas fa-arrow-right text-[10px] ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="ai-gpu">
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold leading-snug">Parallelizing Text-to-Image Generation Using Diffusion</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Python</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">PyTorch</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Dask</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">CLIP</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-2 text-sm text-gray-500 list-disc pl-4">
+                        <li>Built DDPM model from scratch and engineered a Dask-powered distributed preprocessing pipeline for image datasets, achieving 1.48x CPU throughput scaling.</li>
+                        <li>Accelerated training via Automatic Mixed Precision (AMP) with Exponential Moving Average (EMA) weight averaging, reducing training time by 11% and loss variance by 29%.</li>
+                    </ul>
+                    <a href="https://github.com/Ramshankar07/Parallelizing-Text-to-Image-Generation" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-black dark:text-white hover:opacity-75 transition-opacity">
+                        <i class="fab fa-github"></i> Repository <i class="fas fa-arrow-right text-[10px] ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="ai-gpu academic">
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold leading-snug">NVIDIA GB200 GPU Programming Challenge</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">CuteDSL</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">CUDA</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">PTX</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Blackwell FP4</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500">
+                        Ranked <strong class="text-black dark:text-white font-medium">24th place</strong> in GPUMODE's NVFP4 Gated Dual GEMM competition. Optimized Blackwell B200 tensor core kernels for block-scaled matrix operations using CuteDSL and inline PTX assembly, achieving <strong class="text-black dark:text-white font-medium">3-6x speedup</strong> over baseline through SwiGLU epilogues and TMA memory pipelining.
+                    </p>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="ai-gpu academic">
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold leading-snug">Llama3 - Pure C/CUDA Implementation</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">C/CUDA</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">llm.c</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Optimization</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">RoPE</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500">
+                        An implementation of Llama 3.1 in pure C/CUDA built on Karpathy's llm.c. Optimized various kernels including RMSNorm (yielding 2.3x speedup), SwiGLU with bfloat16, and coalesced memory access, supporting complete forward and backward passes with attention mechanisms.
+                    </p>
+                    <a href="https://github.com/Ramshankar07/CUDA-llama3.1-inference" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-black dark:text-white hover:opacity-75 transition-opacity">
+                        <i class="fab fa-github"></i> Repository <i class="fas fa-arrow-right text-[10px] ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="ai-gpu">
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold leading-snug">Qwen600 CUDA to ROCm Port for AMD MI300X</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">C++</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">HIP</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">ROCm</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">AMD MI300X</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500">
+                        Ported six essential transformer kernels from NVIDIA CUDA to AMD ROCm/HIP, optimizing for MI300X architecture. Achieved 12.1ms per token generation with 79-83% memory bandwidth utilization, implementing BFloat16 coalesced memory access and reducing memory traffic by 50%.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="https://github.com/Ramshankar07/qwen600-AMD" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-black dark:text-white hover:opacity-75 transition-opacity">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="https://ramshankar07.substack.com/p/optimizing-llms-on-amd-mi300x-what" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-black dark:text-white hover:opacity-75 transition-opacity">
+                            <i class="fas fa-blog"></i> Technical Blog
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="ai-gpu">
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold leading-snug">Advanced Suicidal Ideation Classification System</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">AWS SageMaker</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">ETL</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">SFT-DPO</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Sharding</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500">
+                        Led development of a multi-conversation classification system to detect mental health risks. Created comprehensive ETL pipelines for 123K samples, implemented hybrid SFT-DPO training, and deployed on SageMaker. Achieved 71% macro-AUC and 40% output consistency improvements.
+                    </p>
+                </div>
+
+                <!-- Project 7 -->
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="ai-gpu">
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold leading-snug">Two-Stage Cardiac Arrhythmia Detection System</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">PyTorch</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Transformer</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Signal Processing</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500">
+                        Designed a CNN-Transformer neural architecture processing ECG signals. First stage classifies overall rhythm patterns with 94-98% accuracy; second stage provides adaptive ectopic beat detection with 90-95% accuracy, featuring dynamic patient-specific rate windowing.
+                    </p>
+                </div>
+
+                <!-- Project 8 -->
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="ai-gpu">
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold leading-snug">OCR Pipeline with Layout Detection</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">PyTorch</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">ONNX</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">CUDA Kernels</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500">
+                        Deep learning-based OCR system for complex financial documents using ViT + CRNN architectures, achieving 98% text extraction accuracy and 42% faster processing through ONNX runtime and custom CUDA kernel optimization.
+                    </p>
+                </div>
+
+                <!-- Project 9 -->
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="data-systems">
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold leading-snug">Fintech Data Processing ETL Platform</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Python</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Snowflake</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Airflow</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">FastAPI</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-2 text-sm text-gray-500 list-disc pl-4">
+                        <li>Built a master financial database for US public companies implementing raw, transformed, and denormalizedfact table schemas to optimize access.</li>
+                        <li>Engineered automated SEC ETL pipelines with Airflow, retrieving filings via scrapers and using S3/Snowflake staging with data validation validation checks.</li>
+                    </ul>
+                    <a href="https://github.com/Ramshankar07/Fintech-Data-Processing-ETL-Platform" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-black dark:text-white hover:opacity-75 transition-opacity">
+                        <i class="fab fa-github"></i> Repository <i class="fas fa-arrow-right text-[10px] ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- Project 10 -->
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="data-systems academic">
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold leading-snug">Medical Knowledge Graph RAG System</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Neo4j</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">LangChain</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Graph RAG</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Python</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500">
+                        Developed a Graph RAG framework for complex medical data retrieval using automated medical triplet extraction and dynamic knowledge graph construction with Neo4j. The system integrates semantic search optimization via LangChain, providing contextual medical answers.
+                    </p>
+                    <a href="https://github.com/Ramshankar07/Enhancing-Retrieval-via-GraphRAG" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-black dark:text-white hover:opacity-75 transition-opacity">
+                        <i class="fab fa-github"></i> Repository <i class="fas fa-arrow-right text-[10px] ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- Project 11 -->
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="data-systems academic">
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold leading-snug">Stock Price Forecaster</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Streamlit</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">HMM</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Time Series</span>
+                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Python</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500">
+                        Streamlit application forecasting stock prices using multivariate Hidden Markov Models, capturing opening/closing price differentials and volume triggers. Deployed live with Akaike Information Criterion parameters optimization to prevent state overfitting.
+                    </p>
+                    <a href="https://github.com/Ramshankar07/Stock-HMM" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-black dark:text-white hover:opacity-75 transition-opacity">
+                        <i class="fab fa-github"></i> Repository <i class="fas fa-arrow-right text-[10px] ml-1"></i>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 04. Blogs Section -->
+        <section id="blogs" class="scroll-mt-24 space-y-16">
+            <h2 class="text-4xl font-bold flex items-center gap-4 border-b border-gray-200 dark:border-neutral-800 pb-4">
+                <span class="text-xl font-mono text-gray-400 dark:text-neutral-600">04.</span>
+                <span class="serif-italic">Latest Insights</span>
+            </h2>
+            
+            <!-- Featured Blog Post -->
+            <div class="bg-white dark:bg-[#151515] p-10 md:p-12 rounded-2xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-6">
+                <span class="px-3 py-1 text-xs font-semibold uppercase tracking-wider bg-gray-100 dark:bg-neutral-800 border rounded-full">Featured Article</span>
+                <div class="space-y-4">
+                    <h3 class="text-3xl font-bold leading-tight">How I Customized Llama 3.1 8B on a Budget</h3>
+                    <p class="text-lg text-gray-500 leading-relaxed font-light">Democratizing AI: Fine-tuning Large Language Models with Limited Resources.</p>
+                </div>
+                <p class="text-sm text-gray-500 leading-relaxed max-w-3xl font-light">
+                    Fine-tuned large language models consistently outperform generic retrieval-augmented systems. In this article, I document a detailed, step-by-step roadmap to fine-tuning Meta's open-source Llama 3.1 8B parameter model using LoRA adapters, quantization techniques, and budget cloud resources.
+                </p>
+                <a href="blogs/llama3-budget-finetuning.html" class="inline-flex items-center gap-2 px-6 py-3 bg-[#111111] dark:bg-[#F5F5F7] text-white dark:text-black font-semibold rounded-lg text-sm transition-all duration-300 hover:opacity-85 hover:translate-x-1">
+                    Read Full Article <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <!-- Recent Blog Grid -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Blog 1 -->
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <h4 class="text-xl font-bold leading-snug">GPU MODE NVFP4 Blackwell Challenge</h4>
+                        <p class="text-xs text-gray-400">Mar 13, 2026</p>
+                        <p class="text-sm text-gray-500 leading-relaxed font-light">
+                            The unfiltered worklog of tackling nvfp4_gemm, nvfp4_dual_gemm, and nvfp4_group_gemm challenges — from MLIR serialization errors to PTX-optimized SwiGLU epilogues.
+                        </p>
+                    </div>
+                    <a href="https://open.substack.com/pub/ramshankar07/p/gpu-mode-nvfp4-blackwell-challenge?r=1rtqqj&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true" target="_blank" class="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-black dark:text-white hover:opacity-75 pt-4">
+                        Read Substack <i class="fas fa-arrow-right text-[10px] ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- Blog 2 -->
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <h4 class="text-xl font-bold leading-snug">AMD FlyDSL — competes with CuTe/Cutlass?</h4>
+                        <p class="text-xs text-gray-400">Mar 4, 2026</p>
+                        <p class="text-sm text-gray-500 leading-relaxed font-light">
+                            Comparing NVIDIA CuTile and AMD FlyDSL MLIR-based tile programming frameworks by porting a fused MoE kernel and analyzing the generated IR.
+                        </p>
+                    </div>
+                    <a href="https://ramshankar07.substack.com/p/amd-flydsl-is-it-enough-to-compete?r=1rtqqj" target="_blank" class="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-black dark:text-white hover:opacity-75 pt-4">
+                        Read Substack <i class="fas fa-arrow-right text-[10px] ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- Blog 3 -->
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <h4 class="text-xl font-bold leading-snug">Optimizing LLMs on AMD MI300X</h4>
+                        <p class="text-xs text-gray-400">Jan 2025</p>
+                        <p class="text-sm text-gray-500 leading-relaxed font-light">
+                            A deep dive into porting transformer kernels from NVIDIA CUDA to AMD ROCm/HIP, achieving 12.1ms token generation with 83% memory bandwidth.
+                        </p>
+                    </div>
+                    <a href="https://ramshankar07.substack.com/p/optimizing-llms-on-amd-mi300x-what" target="_blank" class="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-black dark:text-white hover:opacity-75 pt-4">
+                        Read Substack <i class="fas fa-arrow-right text-[10px] ml-1"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Substack Box -->
+            <div class="grid md:grid-cols-12 gap-8 items-center pt-8 border-t border-gray-200 dark:border-neutral-800">
+                <div class="md:col-span-6 space-y-4">
+                    <h3 class="text-2xl font-bold">Subscribe to My Newsletter</h3>
+                    <p class="text-sm text-gray-500 font-light leading-relaxed">
+                        Stay updated with my latest research papers, architectural design explorations, technical blogs, and deep-dives into high-performance computing and GPU compilers.
+                    </p>
+                    <form class="flex gap-2 max-w-md pt-2" id="newsletter-form">
+                        <input type="email" placeholder="Enter your email" required
+                            class="flex-1 px-4 py-3 text-sm border rounded-lg focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white">
+                        <button type="submit" class="px-6 py-3 bg-[#111111] dark:bg-[#F5F5F7] text-white dark:text-black font-semibold rounded-lg text-sm hover:opacity-85">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+                <div class="md:col-span-6 flex justify-center">
+                    <iframe src="https://ramshankar07.substack.com/embed" width="100%" height="220"
+                        style="max-width: 420px; border:1px solid #EEE; background:white;" frameborder="0" scrolling="no" class="rounded-xl shadow-md"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05. Contact Section -->
+        <section id="contact" class="scroll-mt-24 space-y-16">
+            <h2 class="text-4xl font-bold flex items-center gap-4 border-b border-gray-200 dark:border-neutral-800 pb-4">
+                <span class="text-xl font-mono text-gray-400 dark:text-neutral-600">05.</span>
+                <span class="serif-italic">Get In Touch</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-12 gap-12">
+                <!-- Info Columns -->
+                <div class="md:col-span-5 space-y-8">
+                    <div class="space-y-2">
+                        <h3 class="text-2xl font-bold">Let's Connect</h3>
+                        <p class="text-sm text-gray-500 font-light leading-relaxed">I'm open to discussing technical challenges, HPC research collaborations, or compiler engineering opportunities. Reach out!</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full border flex items-center justify-center text-sm text-black dark:text-white bg-gray-100 dark:bg-neutral-800" aria-hidden="true">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] uppercase tracking-wider text-gray-400">Email</span>
+                                <a href="mailto:bhuvaneshwaran.r@northeastern.edu" class="text-sm font-medium hover:underline text-black dark:text-white">bhuvaneshwaran.r@northeastern.edu</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full border flex items-center justify-center text-sm text-black dark:text-white bg-gray-100 dark:bg-neutral-800" aria-hidden="true">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] uppercase tracking-wider text-gray-400">Phone</span>
+                                <span class="text-sm font-medium text-black dark:text-white">(857) 693-4328</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full border flex items-center justify-center text-sm text-black dark:text-white bg-gray-100 dark:bg-neutral-800" aria-hidden="true">
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] uppercase tracking-wider text-gray-400">LinkedIn</span>
+                                <a href="https://linkedin.com/in/ramshankarb" target="_blank" class="text-sm font-medium hover:underline text-black dark:text-white">linkedin.com/in/ramshankarb</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full border flex items-center justify-center text-sm text-black dark:text-white bg-gray-100 dark:bg-neutral-800" aria-hidden="true">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] uppercase tracking-wider text-gray-400">Location</span>
+                                <span class="text-sm font-medium text-black dark:text-white">Boston, MA</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 bg-white dark:bg-[#151515] border rounded-xl space-y-4">
+                        <h4 class="font-bold text-base flex items-center gap-2">
+                            <i class="fas fa-calendar-alt text-xs" aria-hidden="true"></i> Schedule Synchronously
+                        </h4>
+                        <p class="text-xs text-gray-500 font-light leading-relaxed">Book a direct meeting to align, share technical feedback, or discuss roles.</p>
+                        <a href="https://cal.com/ramshankar07" target="_blank" rel="noopener noreferrer" class="inline-block text-xs font-semibold uppercase tracking-wider text-black dark:text-white underline underline-offset-4 hover:opacity-70">
+                            Book on Cal.com <i class="fas fa-arrow-right text-[8px] ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- EmailJS Direct Form (Fully WebMCP Instrumented) -->
+                <div class="md:col-span-7">
+                    <form id="contactForm" toolname="send-direct-message" tooldescription="Deliver a structured message directly to Ramshankar's email inbox. Requires manual user review and sending." class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 shadow-sm">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label for="name" class="block text-xs font-semibold uppercase text-gray-400">Name</label>
+                                <input type="text" id="name" name="name" required placeholder="Your Name"
+                                    class="w-full px-4 py-3 text-sm rounded-lg" toolparamdescription="The sender's name.">
+                            </div>
+                            <div class="space-y-2">
+                                <label for="email" class="block text-xs font-semibold uppercase text-gray-400">Email Address</label>
+                                <input type="email" id="email" name="email" required placeholder="your@email.com"
+                                    class="w-full px-4 py-3 text-sm rounded-lg" toolparamdescription="The sender's contact email.">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label for="subject" class="block text-xs font-semibold uppercase text-gray-400">Subject</label>
+                            <input type="text" id="subject" name="subject" required placeholder="Subject"
+                                class="w-full px-4 py-3 text-sm rounded-lg" toolparamdescription="The subject line of the message.">
+                        </div>
+                        <div class="space-y-2">
+                            <label for="message" class="block text-xs font-semibold uppercase text-gray-400">Message</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Your message here..."
+                                class="w-full px-4 py-3 text-sm rounded-lg" toolparamdescription="The detailed content of the message you want to send to Ramshankar."></textarea>
+                        </div>
+                        
+                        <button type="submit" id="submitBtn" class="w-full py-4 bg-[#111111] dark:bg-[#F5F5F7] text-white dark:text-black font-semibold rounded-lg text-sm hover:opacity-90 flex justify-center items-center transition-all">
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-loading hidden"><i class="fas fa-spinner fa-spin mr-2"></i> Sending...</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400 text-center py-8">
-        <div class="max-w-6xl mx-auto px-5">
+    <footer class="border-t border-gray-200 dark:border-neutral-800 py-12 mt-32 text-center text-xs text-gray-500 font-light">
+        <div class="max-w-6xl mx-auto px-6 space-y-4">
             <p>&copy; 2026 Ramshankar Bhuvaneswaran. All rights reserved.</p>
+            <p class="text-[10px] text-gray-400">🤖 AI Agent friendly. Exposing plain-text links in accordance with <a href="https://agnts.sh/docs" target="_blank" class="underline hover:text-black dark:hover:text-white">agnts.sh/docs</a>. Try activating [Agent Mode] in the navigation bar.</p>
         </div>
     </footer>
 
+    <!-- Search Result Modal overlay (dynamic) -->
+    <div id="search-result-modal" class="hidden fixed inset-0 bg-black/50 dark:bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <!-- Rendered dynamically by script.js -->
+    </div>
+
+    <!-- Visual Agent Mode Overlay Console -->
+    <div id="agent-mode-overlay" class="hidden fixed inset-0 bg-black/95 backdrop-blur-md z-50 overflow-y-auto p-6 md:p-12 flex justify-center items-center">
+        <div class="bg-[#0B0B0B] border border-neutral-800 rounded-2xl max-w-4xl w-full p-8 md:p-10 space-y-8 shadow-2xl relative text-neutral-300 font-mono">
+            
+            <!-- Close Button -->
+            <button id="close-agent-mode" class="absolute top-6 right-6 text-neutral-500 hover:text-white transition-colors" aria-label="Close Agent Mode">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <!-- Dashboard Header -->
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-800 pb-6">
+                <div class="space-y-1">
+                    <div class="flex items-center gap-3">
+                        <span class="w-3 h-3 bg-white rounded-full animate-pulse"></span>
+                        <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight">[AGENT_MODE_DASHBOARD: ACTIVE]</h2>
+                    </div>
+                    <p class="text-xs text-neutral-500">Exposing structured API tools and markdown documentation optimized for LLMs & AI Scrapers.</p>
+                </div>
+                <div class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-neutral-900 border border-neutral-800 text-[10px] text-neutral-400">
+                    <span>STANDARD:</span>
+                    <a href="https://agnts.sh/docs" target="_blank" class="hover:underline text-white font-bold">agnts.sh/docs</a>
+                </div>
+            </div>
+            
+            <!-- Dashboard Grid -->
+            <div class="grid md:grid-cols-2 gap-8">
+                
+                <!-- WebMCP Tools Registry -->
+                <div class="space-y-6">
+                    <h3 class="text-sm font-bold text-white uppercase border-b border-neutral-900 pb-2">🤖 WebMCP Tools Registry</h3>
+                    
+                    <div class="space-y-4">
+                        <!-- Tool 1 -->
+                        <div class="p-4 bg-neutral-900/60 rounded-xl border border-neutral-900 space-y-2">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="font-bold text-white font-sans">search-portfolio</span>
+                                <span class="px-2 py-0.5 rounded bg-white/10 text-[9px] text-white">AUTO-SUBMIT</span>
+                            </div>
+                            <p class="text-[11px] text-neutral-400 font-light">Query Ramshankar's projects, experience, or achievements using semantic search.</p>
+                            <pre class="text-[9px] text-neutral-500 bg-black/40 p-2 rounded">
+GET /api/chat {
+  query: string // "Ask a question"
+}</pre>
+                        </div>
+                        
+                        <!-- Tool 2 -->
+                        <div class="p-4 bg-neutral-900/60 rounded-xl border border-neutral-900 space-y-2">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="font-bold text-white font-sans">send-direct-message</span>
+                                <span class="px-2 py-0.5 rounded bg-neutral-800 text-[9px] text-neutral-400 border border-neutral-800">REVIEW REQUIRED</span>
+                            </div>
+                            <p class="text-[11px] text-neutral-400 font-light">Deliver a structured message directly to Ramshankar's email inbox.</p>
+                            <pre class="text-[9px] text-neutral-500 bg-black/40 p-2 rounded">
+POST /api/links {
+  name, email, subject, message
+}</pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AI Agent System Prompt -->
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
+                        <h3 class="text-sm font-bold text-white uppercase">📋 System Prompt</h3>
+                        <button id="copy-prompt-btn" class="text-xs hover:text-white text-neutral-500 flex items-center gap-1.5 transition-colors">
+                            <i class="fas fa-copy"></i> Copy Prompt
+                        </button>
+                    </div>
+                    <textarea id="agent-prompt-text" readonly class="w-full h-64 p-4 text-[10px] text-neutral-400 bg-neutral-900/60 border border-neutral-900 rounded-xl focus:outline-none scrollbar-thin"># Ramshankar Bhuvaneswaran - Agent Instructions
+You are an AI assistant analyzing Ramshankar's portfolio.
+- Profile: AI & GPU Kernel Engineer. Graduate of Northeastern MSIS (2025).
+- Main Link: https://agnts.sh/ramshankar (Plain-text markdown specs)
+- Standard Docs: https://agnts.sh/docs
+- Key Skills: C++, CUDA, HIP, Triton, PyTorch, Ray, LLVM, ROCm MI300X.
+- Key Achievements:
+  - 24th place GPUMODE Blackwell Dual GEMM optimization.
+  - Ported Qwen transformer kernels to ROCm/HIP for AMD MI300X.
+  - Shipped LangGraph-based RAG operations assistant for CDF hotel client.
+  - Authored "BitSkip" research on compositional quantization in LLMs.
+- Forms on this page are fully annotated with standard WebMCP tool attributes.</textarea>
+                </div>
+                
+            </div>
+            
+            <!-- Raw Markdown Viewer -->
+            <div class="space-y-4 pt-4 border-t border-neutral-800">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-sm font-bold text-white uppercase">📄 Raw Profile Markdown</h3>
+                    <a href="https://agnts.sh/ramshankar?raw" target="_blank" class="text-xs text-neutral-500 hover:text-white flex items-center gap-1 transition-colors">
+                         agnts.sh/ramshankar?raw <i class="fas fa-external-link-alt text-[9px] ml-0.5"></i>
+                    </a>
+                </div>
+                <div class="bg-neutral-900/40 border border-neutral-900 p-6 rounded-xl text-[10px] text-neutral-400 max-h-48 overflow-y-auto space-y-4">
+                    <p># Ramshankar Bhuvaneswaran</p>
+                    <p>AI/ML Engineer & Researcher. Specializing in LLMs, Distributed Systems, and GPU Kernel Optimization.</p>
+                    <p>## Education<br>- M.S. Information Systems, Northeastern University (2025)<br>- B.Tech. Computer Science, Anna University (2023)</p>
+                    <p>## Core Achievements<br>- Refactored math libraries in LLVM compiler libc project.<br>- Ranked 24th in Blackwell Dual GEMM challenge.<br>- Designed Ray cluster scaling with CUDA/CUTLASS optimizations.</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Core Script Assets -->
     <script src="script.js"></script>
     <script src="three-bg.js"></script>
 </body>

@@ -1,314 +1,386 @@
-/* ========================================
-   Dark Mode Overrides
-   Theme: White + Green (#00FF41) on Black
-   No blue in dark mode
-   ======================================== */
+/* ==========================================================================
+   Editorial Monochromatic Design System
+   Color Palette: Pure Black, Slate Grays, Warm Off-White, Pure White
+   Typography: Inter (Modern Sans-Serif) & Times New Roman Italics (Editorial Serif)
+   ========================================================================== */
 
-/* --- Headings: always white in dark --- */
-.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
-    color: #ffffff !important;
+/* ── Theme Definitions ── */
+:root {
+    --bg-primary: #FAF9F6;      /* Premium Warm Alabaster Off-White */
+    --bg-secondary: #F2F1EA;    /* Soft Gray-Ivory for alternating sections */
+    --card-bg: #FFFFFF;         /* Pure White Cards */
+    --text-primary: #111111;    /* Deep Charcoal Off-Black */
+    --text-secondary: #666666;  /* Neutral Mid-Gray for readable body copy */
+    --border-color: #E2E1DA;    /* Delicate thin borders */
+    --accent: #000000;          /* High-contrast pure black solid accent */
+    --accent-glow: rgba(0, 0, 0, 0.04);
+    
+    --font-serif: "Times New Roman", Times, Baskerville, Georgia, serif;
+    --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* --- Body/paragraph text --- */
-.dark p, .dark span, .dark li {
-    color: #d1d5db;
+.dark {
+    --bg-primary: #080808;      /* Deep Rich Velvet Black */
+    --bg-secondary: #101010;    /* Alternating Deep Charcoal */
+    --card-bg: #151515;         /* Elegant Dark Card Gray */
+    --text-primary: #F5F5F7;    /* Crisp Soft Off-White */
+    --text-secondary: #A1A1AA;  /* Silver-Gray for subtext */
+    --border-color: #222222;    /* Subtle dark charcoal borders */
+    --accent: #FFFFFF;          /* High-contrast pure white solid accent */
+    --accent-glow: rgba(255, 255, 255, 0.04);
 }
 
-.dark strong {
-    color: #ffffff;
+/* ── Base Styles ── */
+body {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    font-family: var(--font-sans);
+    transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    letter-spacing: -0.01em;
 }
 
-/* --- Override gray text shades to white/light --- */
-.dark .text-gray-900 { color: #ffffff !important; }
-.dark .text-gray-800 { color: #f3f4f6 !important; }
-.dark .text-gray-700 { color: #e5e7eb !important; }
-.dark .text-gray-600 { color: #d1d5db !important; }
-
-/* --- Primary blue → green in dark --- */
-.dark .text-primary-600 { color: #00FF41 !important; }
-.dark .text-primary-700 { color: #00FF41 !important; }
-.dark .text-primary-500 { color: #00FF41 !important; }
-
-/* --- Background overrides --- */
-.dark .bg-white {
-    background-color: #000000 !important;
+/* ── Typography & Headings ── */
+.serif-italic {
+    font-family: var(--font-serif) !important;
+    font-style: italic !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.02em;
 }
 
-.dark .bg-gray-50 {
-    background-color: #0a0a0a !important;
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary) !important;
+    letter-spacing: -0.02em;
 }
 
-.dark .bg-gray-100 {
-    background-color: #111111 !important;
+p, li, span {
+    color: var(--text-secondary);
 }
 
-/* Section gradient backgrounds */
-.dark .from-gray-50 { --tw-gradient-from: #0a0a0a !important; }
-.dark .to-gray-200 { --tw-gradient-to: #000000 !important; }
-.dark .from-gray-100 { --tw-gradient-from: #111111 !important; }
-
-/* --- Border overrides --- */
-.dark .border-gray-200 { border-color: #1f2937 !important; }
-.dark .border-gray-300 { border-color: #374151 !important; }
-.dark .border-gray-100 { border-color: #1f2937 !important; }
-.dark .border-l-green-500 { border-left-color: #00FF41 !important; }
-
-/* --- Pill/Tag overrides --- */
-.dark .bg-primary-100 {
-    background-color: rgba(0, 255, 65, 0.12) !important;
+strong {
+    color: var(--text-primary) !important;
 }
 
-.dark .bg-gray-200 {
-    background-color: rgba(255, 255, 255, 0.08) !important;
+/* Global utility overrides to enforce the monochrome system over Tailwind classes */
+.text-gray-900, .dark\:text-white, .text-gray-800, .dark\:text-gray-100 {
+    color: var(--text-primary) !important;
 }
 
-.dark .bg-gray-200.text-gray-700 {
-    color: #d1d5db !important;
+.text-gray-700, .text-gray-600, .dark\:text-gray-400, .text-gray-500, .dark\:text-gray-300 {
+    color: var(--text-secondary) !important;
 }
 
-/* --- Primary gradient → green gradient in dark --- */
-.dark .from-primary-600 { --tw-gradient-from: #00FF41 !important; }
-.dark .to-primary-500 { --tw-gradient-to: #00CC33 !important; }
-.dark .from-primary-500 { --tw-gradient-from: #00FF41 !important; }
-
-/* --- Buttons with primary bg → green bg, black text --- */
-.dark .bg-primary-600 {
-    background-color: #00FF41 !important;
-    color: #000000 !important;
+/* ── Sections & Cards ── */
+.bg-white, .dark\:bg-black, .bg-gradient-to-br.from-gray-50.to-gray-200, .dark\:from-gray-900.dark\:to-black {
+    background: var(--bg-primary) !important;
+    background-image: none !important;
 }
 
-.dark .bg-primary-600:hover,
-.dark .hover\:bg-primary-700:hover {
-    background-color: #00CC33 !important;
-    color: #000000 !important;
+.bg-gray-50, .dark\:bg-gray-900, .bg-gradient-to-br.from-gray-50.to-gray-100 {
+    background: var(--bg-secondary) !important;
+    background-image: none !important;
 }
 
-/* Gradient buttons in dark mode */
-.dark .bg-gradient-to-r.from-primary-600.to-primary-500,
-.dark [class*="from-primary-600"][class*="to-primary-500"] {
-    background: linear-gradient(to right, #00FF41, #00CC33) !important;
-    color: #000000 !important;
+.bg-gray-100, .dark\:bg-gray-800 {
+    background-color: var(--card-bg) !important;
 }
 
-/* Border buttons with primary */
-.dark .border-primary-600 {
-    border-color: #00FF41 !important;
+/* Borders */
+.border, .border-gray-200, .border-gray-300, .dark\:border-gray-800, .dark\:border-gray-700, .border-gray-100 {
+    border-color: var(--border-color) !important;
 }
 
-.dark .hover\:bg-primary-600:hover {
-    background-color: #00FF41 !important;
-    color: #000000 !important;
+/* ── Navigation ── */
+nav {
+    background-color: rgba(250, 249, 246, 0.8) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    box-shadow: none !important;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-/* --- Timeline line --- */
-.dark .from-primary-600.to-primary-500 {
-    --tw-gradient-from: #00FF41 !important;
-    --tw-gradient-to: #00CC33 !important;
+.dark nav {
+    background-color: rgba(8, 8, 8, 0.8) !important;
 }
 
-/* Timeline dots */
-.dark .border-primary-600.rounded-full {
-    border-color: #00FF41 !important;
+nav a {
+    color: var(--text-secondary) !important;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
 }
 
-/* --- Focus states → green --- */
-.dark .focus\:border-primary-600:focus {
-    border-color: #00FF41 !important;
+nav a:hover, nav a.active {
+    color: var(--text-primary) !important;
 }
 
-.dark .focus\:ring-primary-600\/20:focus {
-    --tw-ring-color: rgba(0, 255, 65, 0.2) !important;
+nav a.active::after {
+    width: 100% !important;
 }
 
-/* --- Input/form overrides --- */
-.dark input, .dark textarea, .dark select {
-    background-color: #111111;
-    color: #ffffff;
-    border-color: #374151;
+nav a::after {
+    background: var(--accent) !important;
 }
 
-.dark input::placeholder, .dark textarea::placeholder {
-    color: #6b7280;
+/* ── Modern Glassmorphism ── */
+.glass-morphism {
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05) !important;
 }
 
-.dark input:focus, .dark textarea:focus {
-    border-color: #00FF41;
-    box-shadow: 0 0 0 3px rgba(0, 255, 65, 0.15);
+.dark .glass-morphism {
+    background: rgba(10, 10, 10, 0.6) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4) !important;
 }
 
-/* --- Label text in forms --- */
-.dark label {
-    color: #d1d5db !important;
+/* ── Buttons (Monochrome Dynamic Accent) ── */
+.hero-btn-primary,
+.bg-primary-600,
+.dark\:bg-primary-600,
+.bg-gradient-to-r.from-primary-600.to-primary-500,
+.dark\:.from-primary-600.to-primary-500 {
+    background: var(--accent) !important;
+    background-image: none !important;
+    color: var(--bg-primary) !important;
+    border: 1px solid var(--accent) !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-/* --- Card shadows in dark mode (subtle green glow) --- */
-.dark .hover\:shadow-xl:hover {
-    box-shadow: 0 8px 25px -5px rgba(0, 255, 65, 0.08), 0 4px 10px -6px rgba(0, 255, 65, 0.05) !important;
+.hero-btn-primary:hover,
+.bg-primary-600:hover,
+.dark\:bg-primary-600:hover,
+.bg-gradient-to-r.from-primary-600.to-primary-500:hover {
+    background: transparent !important;
+    color: var(--text-primary) !important;
+    border-color: var(--accent) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--accent-glow) !important;
 }
 
-/* --- RB Logo: override gradient to green in dark --- */
-.dark .bg-clip-text.text-transparent {
-    background: linear-gradient(to right, #00FF41, #00CC33) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
+.hero-btn-outline {
+    border: 2px solid var(--accent) !important;
+    color: var(--accent) !important;
+    background: transparent !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-/* --- Gradient text effect --- */
-.dark .gradient-text {
-    background: linear-gradient(135deg, #00FF41, #00CC33, #00FF41) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
+.hero-btn-outline:hover {
+    background: var(--accent) !important;
+    color: var(--bg-primary) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--accent-glow) !important;
 }
 
-/* --- Search bar in dark mode --- */
-.dark .dark-search-bar {
-    background: linear-gradient(135deg, #0a0a0a, #000000) !important;
-    border-color: #00FF41 !important;
-    box-shadow: 0 0 20px rgba(0, 255, 65, 0.2), 0 0 40px rgba(0, 255, 65, 0.05) !important;
+/* Secondary/gray buttons */
+.bg-gray-600, .dark\:bg-gray-600 {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
 }
 
-.dark .dark-search-bar:hover {
-    box-shadow: 0 0 30px rgba(0, 255, 65, 0.3), 0 0 60px rgba(0, 255, 65, 0.1) !important;
-    border-color: #00FF41 !important;
+.bg-gray-600:hover, .dark\:bg-gray-600:hover {
+    background-color: var(--border-color) !important;
 }
 
-.dark .dark-search-bar:focus-within {
-    box-shadow: 0 0 40px rgba(0, 255, 65, 0.4), 0 0 80px rgba(0, 255, 65, 0.2) !important;
-    border-color: #00FF41 !important;
+/* ── Skill Tags & Badges ── */
+.bg-primary-100, .bg-gray-200, .dark\:bg-gray-800, .dark\:bg-primary-100 {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    transition: all 0.2s ease;
 }
 
-/* --- Featured blog card gradient --- */
-.dark .from-gray-50.to-gray-100 {
-    --tw-gradient-from: #0a0a0a !important;
-    --tw-gradient-to: #111111 !important;
+.bg-primary-100:hover, .bg-gray-200:hover {
+    background-color: var(--accent) !important;
+    color: var(--bg-primary) !important;
+    border-color: var(--accent) !important;
 }
 
-/* --- Contact icon circles → green gradient --- */
-.dark .from-primary-600.to-primary-500.rounded-full {
-    background: linear-gradient(to right, #00FF41, #00CC33) !important;
+/* ── Interactive Experience Timeline ── */
+.experience-timeline-mobile .absolute.left-5 {
+    background: var(--border-color) !important;
+    width: 1px !important;
 }
 
-/* Icons inside green circles stay black */
-.dark .from-primary-600.to-primary-500.rounded-full i {
-    color: #000000 !important;
+.experience-item-mobile .absolute.border-primary-600,
+.experience-item-mobile .absolute.border-4 {
+    border-color: var(--accent) !important;
+    background-color: var(--bg-primary) !important;
 }
 
-/* --- Substack section dark override --- */
-.dark .bg-gray-900 {
-    background-color: #0a0a0a !important;
+/* Custom left-accent borders for specific sections */
+.border-l-green-500 {
+    border-left-color: var(--accent) !important;
 }
 
-/* --- Nav shadow in dark --- */
-.dark nav.shadow-lg {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.3) !important;
+/* ── Chat & Search Widget ── */
+.dark-search-bar {
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 4px 20px var(--accent-glow) !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* --- Footer (already dark, keep as is) --- */
-footer.bg-gray-900 {
-    background-color: #111111;
+.dark-search-bar:hover {
+    border-color: var(--text-secondary) !important;
 }
 
-/* --- Link colors in dark: green --- */
-.dark a.text-primary-600 {
-    color: #00FF41 !important;
+.dark-search-bar:focus-within {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 15px var(--accent-glow) !important;
 }
 
-.dark a.text-primary-600:hover,
-.dark a.hover\:text-primary-700:hover {
-    color: #00CC33 !important;
+.dark-search-bar input {
+    color: var(--text-primary) !important;
 }
 
-/* --- Hamburger menu bars → white in dark --- */
-.dark .bg-gray-700 {
-    background-color: #ffffff !important;
+.dark-search-bar i, .dark-search-bar button {
+    color: var(--text-primary) !important;
 }
 
-/* ========================================
-   Light Mode Overrides
-   Ensure NO green in light mode
-   ======================================== */
-
-/* Hero buttons: make sure they're blue in light mode */
-html:not(.dark) .hero-btn-primary {
-    background-color: #2563eb;
-    color: #ffffff;
-    box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.2);
+/* Chat results overlay */
+#chat-interface {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1) !important;
 }
 
-html:not(.dark) .hero-btn-primary:hover {
-    background-color: #1d4ed8;
-    box-shadow: 0 4px 20px 0 rgba(37, 99, 235, 0.4);
+#chat-interface h4, #chat-interface p {
+    color: var(--text-primary) !important;
 }
 
-html:not(.dark) .hero-btn-outline {
-    border-color: rgba(37, 99, 235, 0.5);
-    color: #2563eb;
+#chat-interface .bg-white\/20 {
+    background-color: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color) !important;
 }
 
-html:not(.dark) .hero-btn-outline:hover {
-    background-color: rgba(37, 99, 235, 0.1);
-    border-color: #2563eb;
+#chat-messages::-webkit-scrollbar {
+    width: 5px;
 }
 
-/* Dark mode hero buttons: green */
-.dark .hero-btn-primary {
-    background-color: #00FF41 !important;
-    color: #000000 !important;
-    box-shadow: 0 4px 14px 0 rgba(0, 255, 65, 0.2) !important;
+#chat-messages::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
 }
 
-.dark .hero-btn-primary:hover {
-    background-color: #00CC33 !important;
-    box-shadow: 0 4px 20px 0 rgba(0, 255, 65, 0.4) !important;
+#chat-messages::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
 }
 
-.dark .hero-btn-outline {
-    border-color: rgba(0, 255, 65, 0.5) !important;
-    color: #00FF41 !important;
+#chat-messages::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
 }
 
-.dark .hero-btn-outline:hover {
-    background-color: rgba(0, 255, 65, 0.1) !important;
-    border-color: #00FF41 !important;
+/* Chat result modal */
+#search-result-modal > div {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
 }
 
-/* Animated gradient → green in dark */
-.dark .animated-gradient {
-    background: linear-gradient(-45deg, #00FF41, #00CC33, #00FF41, #00CC33) !important;
-    background-size: 400% 400% !important;
+#search-result-modal h3, #search-result-modal .text-gray-300 {
+    color: var(--text-primary) !important;
 }
 
-/* --- Blue gradient overrides in dark (search widget, etc.) --- */
-.dark .from-blue-500 { --tw-gradient-from: #00FF41 !important; }
-.dark .to-blue-600 { --tw-gradient-to: #00CC33 !important; }
-.dark .from-blue-600 { --tw-gradient-from: #00CC33 !important; }
-.dark .to-blue-700 { --tw-gradient-to: #009926 !important; }
-
-.dark .from-blue-500\/10 { --tw-gradient-from: rgba(0, 255, 65, 0.1) !important; }
-.dark .to-blue-600\/10 { --tw-gradient-to: rgba(0, 204, 51, 0.1) !important; }
-.dark .from-blue-500\/5 { --tw-gradient-from: rgba(0, 255, 65, 0.05) !important; }
-.dark .to-blue-600\/5 { --tw-gradient-to: rgba(0, 204, 51, 0.05) !important; }
-.dark .via-cyan-500\/10 { --tw-gradient-via: rgba(0, 255, 65, 0.1) !important; }
-.dark .via-purple-500\/10 { --tw-gradient-via: rgba(0, 255, 65, 0.1) !important; }
-.dark .via-purple-500\/5 { --tw-gradient-via: rgba(0, 255, 65, 0.05) !important; }
-
-.dark .focus\:ring-blue-500:focus {
-    --tw-ring-color: #00FF41 !important;
+/* ── Form Inputs ── */
+input, textarea, select {
+    background-color: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    transition: all 0.3s ease;
 }
 
-.dark .hover\:from-blue-600:hover { --tw-gradient-from: #00CC33 !important; }
-.dark .hover\:to-blue-700:hover { --tw-gradient-to: #009926 !important; }
-
-/* Search result modal in dark */
-.dark .border-blue-400 { border-color: #00FF41 !important; }
-
-/* --- Gray-600 bg for secondary buttons → dark gray with green text --- */
-.dark .bg-gray-600 {
-    background-color: #1f2937 !important;
-    color: #00FF41 !important;
+input::placeholder, textarea::placeholder {
+    color: var(--text-secondary) !important;
+    opacity: 0.6;
 }
-.dark .hover\:bg-gray-700:hover {
-    background-color: #374151 !important;
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 2px var(--accent-glow) !important;
+    outline: none !important;
+}
+
+/* ── Project Filter Controls ── */
+.filter-btn {
+    padding: 0.5rem 1.2rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: var(--accent);
+    color: var(--bg-primary);
+    border-color: var(--accent);
+}
+
+/* ── Animations & Transitions ── */
+.chat-enter {
+    animation: chatSlideIn 0.3s ease-out;
+}
+
+@keyframes chatSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.typing-indicator {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--text-primary);
+    animation: typing 1.4s infinite ease-in-out;
+}
+
+.typing-indicator:nth-child(1) { animation-delay: -0.32s; }
+.typing-indicator:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typing {
+    0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
+    40% { transform: scale(1); opacity: 1; }
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}
+
+/* ── Card Subtle Glow on Hover ── */
+.hover\:shadow-xl:hover {
+    box-shadow: 0 12px 30px -10px var(--accent-glow) !important;
+}
+
+/* Substack dynamic modifications */
+iframe {
+    border: 1px solid var(--border-color) !important;
+    background: var(--card-bg) !important;
 }

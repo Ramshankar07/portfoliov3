@@ -1,7 +1,7 @@
 /**
  * Editorial Single-Page Portfolio Controller
  * Coordinates theme toggling, scroll-spy navigation, category filtering,
- * the Gemini-powered search chatbot, EmailJS form validation, WebMCP AI Agent tools,
+ * the Gemini-powered search chatbot, WebMCP AI Agent tools,
  * and the interactive visual "Agent Mode" console.
  */
 
@@ -201,100 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 6. Newsletter Subscription Form Handling
-    const newsletterForm = document.getElementById('newsletter-form');
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('input[type="email"]').value;
-            if (email) {
-                showNotification('Thank you for subscribing to my Substack newsletter!', 'success');
-                this.reset();
-            }
-        });
-    }
-
-    // 7. Contact Form Handling (EmailJS + Submit Button States + WebMCP Interceptor)
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        // Initialize EmailJS
-        emailjs.init("pD3wkchfGF0LDwUTX");
-
-        contactForm.addEventListener('submit', function(e) {
-            // Check if triggered by WebMCP agent invocation
-            if (e.agentInvoked) {
-                e.preventDefault();
-                const resultPromise = new Promise((resolve) => {
-                    const nameVal = document.getElementById('name').value;
-                    const emailVal = document.getElementById('email').value;
-                    const subjectVal = document.getElementById('subject').value;
-                    const messageVal = document.getElementById('message').value;
-
-                    emailjs.send('service_7rphve8', 'template_7iwzlui', {
-                        from_name: nameVal,
-                        from_email: emailVal,
-                        subject: subjectVal,
-                        message: messageVal
-                    })
-                    .then(function() {
-                        resolve("Success: Message successfully delivered to Ramshankar's inbox.");
-                        showNotification('Direct message dispatched via WebMCP agent call!', 'success');
-                        contactForm.reset();
-                    })
-                    .catch(function(err) {
-                        resolve(`Error: Failed to deliver message via EmailJS. Details: ${err.message || err}`);
-                    });
-                });
-                
-                e.respondWith(resultPromise);
-                return;
-            }
-
-            // Normal manual browser submission
-            e.preventDefault();
-            
-            const submitBtn = document.getElementById('submitBtn');
-            const btnText = submitBtn.querySelector('.btn-text');
-            const btnLoading = submitBtn.querySelector('.btn-loading');
-            
-            // Activate loader state
-            btnText.classList.add('hidden');
-            btnLoading.classList.remove('hidden');
-            submitBtn.disabled = true;
-            
-            // Get payload
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value
-            };
-            
-            // Send payload via EmailJS REST API
-            emailjs.send('service_7rphve8', 'template_7iwzlui', {
-                from_name: formData.name,
-                from_email: formData.email,
-                subject: formData.subject,
-                message: formData.message
-            })
-            .then(function(response) {
-                showNotification('Message sent successfully! I will reach out shortly.', 'success');
-                contactForm.reset();
-            })
-            .catch(function(error) {
-                console.error('EmailJS Error:', error);
-                showNotification('Failed to deliver message. Please contact via email directly.', 'error');
-            })
-            .finally(function() {
-                // Reset submit states
-                btnText.classList.remove('hidden');
-                btnLoading.classList.add('hidden');
-                submitBtn.disabled = false;
-            });
-        });
-    }
-
-    // 8. Search Chatbot Form Handling (WebMCP Interceptor)
+    // 6. Search Chatbot Form Handling (WebMCP Interceptor)
     const searchForm = document.getElementById('chat-search-form');
     if (searchForm) {
         searchForm.addEventListener('submit', function(e) {

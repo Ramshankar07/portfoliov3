@@ -74,7 +74,6 @@
     <link rel="stylesheet" href="styles.css">
     
     <!-- EmailJS Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
     <!-- Tailwind Config -->
     <script>
@@ -795,26 +794,10 @@
                     </a>
                 </div>
             </div>
-            
-            <!-- Substack Box -->
-            <div class="grid md:grid-cols-12 gap-8 items-center pt-8 border-t border-gray-200 dark:border-neutral-800">
-                <div class="md:col-span-6 space-y-4">
-                    <h3 class="text-2xl font-bold">Subscribe to My Newsletter</h3>
-                    <p class="text-sm text-gray-500 font-light leading-relaxed">
-                        Stay updated with my latest research papers, architectural design explorations, technical blogs, and deep-dives into high-performance computing and GPU compilers.
-                    </p>
-                    <form class="flex gap-2 max-w-md pt-2" id="newsletter-form">
-                        <input type="email" placeholder="Enter your email" required
-                            class="flex-1 px-4 py-3 text-sm border rounded-lg focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white">
-                        <button type="submit" class="px-6 py-3 bg-[#111111] dark:bg-[#F5F5F7] text-white dark:text-black font-semibold rounded-lg text-sm hover:opacity-85">
-                            Subscribe
-                        </button>
-                    </form>
-                </div>
-                <div class="md:col-span-6 flex justify-center">
-                    <iframe src="https://ramshankar07.substack.com/embed" width="100%" height="220"
-                        style="max-width: 420px; border:1px solid #EEE; background:white;" frameborder="0" scrolling="no" class="rounded-xl shadow-md"></iframe>
-                </div>
+
+            <div class="flex justify-center pt-8 border-t border-gray-200 dark:border-neutral-800">
+                <iframe src="https://ramshankar07.substack.com/embed" width="100%" height="220"
+                    style="max-width: 420px; border:1px solid #EEE; background:white;" frameborder="0" scrolling="no" class="rounded-xl shadow-md"></iframe>
             </div>
         </section>
 
@@ -825,9 +808,7 @@
                 <span class="serif-italic">Get In Touch</span>
             </h2>
             
-            <div class="grid md:grid-cols-12 gap-12">
-                <!-- Info Columns -->
-                <div class="md:col-span-5 space-y-8">
+            <div class="max-w-2xl space-y-8">
                     <div class="space-y-2">
                         <h3 class="text-2xl font-bold">Let's Connect</h3>
                         <p class="text-sm text-gray-500 font-light leading-relaxed">I'm open to discussing technical challenges, HPC research collaborations, or compiler engineering opportunities. Reach out!</p>
@@ -884,40 +865,6 @@
                             Book on Cal.com <i class="fas fa-arrow-right text-[8px] ml-1"></i>
                         </a>
                     </div>
-                </div>
-                
-                <!-- EmailJS Direct Form (Fully WebMCP Instrumented) -->
-                <div class="md:col-span-7">
-                    <form id="contactForm" toolname="send-direct-message" tooldescription="Deliver a structured message directly to Ramshankar's email inbox. Requires manual user review and sending." class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 shadow-sm">
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="space-y-2">
-                                <label for="name" class="block text-xs font-semibold uppercase text-gray-400">Name</label>
-                                <input type="text" id="name" name="name" required placeholder="Your Name"
-                                    class="w-full px-4 py-3 text-sm rounded-lg" toolparamdescription="The sender's name.">
-                            </div>
-                            <div class="space-y-2">
-                                <label for="email" class="block text-xs font-semibold uppercase text-gray-400">Email Address</label>
-                                <input type="email" id="email" name="email" required placeholder="your@email.com"
-                                    class="w-full px-4 py-3 text-sm rounded-lg" toolparamdescription="The sender's contact email.">
-                            </div>
-                        </div>
-                        <div class="space-y-2">
-                            <label for="subject" class="block text-xs font-semibold uppercase text-gray-400">Subject</label>
-                            <input type="text" id="subject" name="subject" required placeholder="Subject"
-                                class="w-full px-4 py-3 text-sm rounded-lg" toolparamdescription="The subject line of the message.">
-                        </div>
-                        <div class="space-y-2">
-                            <label for="message" class="block text-xs font-semibold uppercase text-gray-400">Message</label>
-                            <textarea id="message" name="message" rows="5" required placeholder="Your message here..."
-                                class="w-full px-4 py-3 text-sm rounded-lg" toolparamdescription="The detailed content of the message you want to send to Ramshankar."></textarea>
-                        </div>
-                        
-                        <button type="submit" id="submitBtn" class="w-full py-4 bg-[#111111] dark:bg-[#F5F5F7] text-white dark:text-black font-semibold rounded-lg text-sm hover:opacity-90 flex justify-center items-center transition-all">
-                            <span class="btn-text">Send Message</span>
-                            <span class="btn-loading hidden"><i class="fas fa-spinner fa-spin mr-2"></i> Sending...</span>
-                        </button>
-                    </form>
-                </div>
             </div>
         </section>
 
@@ -981,18 +928,6 @@ GET /api/chat {
 }</pre>
                         </div>
                         
-                        <!-- Tool 2 -->
-                        <div class="p-4 bg-neutral-900/60 rounded-xl border border-neutral-900 space-y-2">
-                            <div class="flex justify-between items-center text-xs">
-                                <span class="font-bold text-white font-sans">send-direct-message</span>
-                                <span class="px-2 py-0.5 rounded bg-neutral-800 text-[9px] text-neutral-400 border border-neutral-800">REVIEW REQUIRED</span>
-                            </div>
-                            <p class="text-[11px] text-neutral-400 font-light">Deliver a structured message directly to Ramshankar's email inbox.</p>
-                            <pre class="text-[9px] text-neutral-500 bg-black/40 p-2 rounded">
-POST /api/links {
-  name, email, subject, message
-}</pre>
-                        </div>
                     </div>
                 </div>
                 
@@ -1015,7 +950,7 @@ You are an AI assistant analyzing Ramshankar's portfolio.
   - Ported Qwen transformer kernels to ROCm/HIP for AMD MI300X.
   - Shipped LangGraph-based RAG operations assistant for CDF hotel client.
   - Authored "BitSkip" research on compositional quantization in LLMs.
-- Forms on this page are fully annotated with standard WebMCP tool attributes.</textarea>
+- Contact via email, LinkedIn, or Cal.com scheduling link on this page.</textarea>
                 </div>
                 
             </div>

@@ -1,0 +1,22 @@
+# Ramshankar Bhuvaneswaran
+
+> AI & GPU Kernel Engineer. Portfolio and technical writing.
+
+- Site: https://ramshankar07.github.io/portfolio/
+- Agent profile: https://agnts.sh/ramshankar?raw
+- Contact: bhuvaneshwaran.r@northeastern.edu
+- LinkedIn: https://linkedin.com/in/ramshankarb
+- GitHub: https://github.com/Ramshankar07
+- Schedule: https://cal.com/ramshankar07
+
+## Focus
+
+- Large Language Models, CUDA/HIP GPU kernels, PyTorch, distributed systems
+- Alumni of Northeastern University (MSIS) and Anna University (B.Tech CSE)
+
+## Key pages
+
+- Home: https://ramshankar07.github.io/portfolio/
+- Blog — Llama 3.1 budget fine-tuning: https://ramshankar07.github.io/portfolio/blogs/llama3-budget-finetuning.html
+- Blog — LLM guide: https://ramshankar07.github.io/portfolio/blogs/llm-guide.html
+- Sitemap: https://ramshankar07.github.io/portfolio/sitemap.xml

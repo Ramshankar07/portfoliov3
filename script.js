@@ -93,34 +93,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileNavMenu = document.getElementById('mobile-nav-menu');
 
     if (mobileMenuBtn && mobileNavMenu) {
-        mobileMenuBtn.addEventListener('click', function() {
-            mobileNavMenu.classList.toggle('hidden');
-            mobileNavMenu.classList.toggle('flex');
-            
-            // Toggle hamburger icon animation
+        const setMenuOpen = (open) => {
+            mobileNavMenu.classList.toggle('hidden', !open);
+            mobileNavMenu.classList.toggle('flex', open);
+            mobileMenuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            mobileMenuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+
             const spans = mobileMenuBtn.querySelectorAll('span');
             if (spans.length === 3) {
-                spans[0].classList.toggle('rotate-45');
-                spans[0].classList.toggle('translate-y-2');
-                spans[1].classList.toggle('opacity-0');
-                spans[2].classList.toggle('-rotate-45');
-                spans[2].classList.toggle('-translate-y-2');
+                spans[0].classList.toggle('rotate-45', open);
+                spans[0].classList.toggle('translate-y-2', open);
+                spans[1].classList.toggle('opacity-0', open);
+                spans[2].classList.toggle('-rotate-45', open);
+                spans[2].classList.toggle('-translate-y-2', open);
             }
+        };
+
+        mobileMenuBtn.addEventListener('click', function() {
+            const isOpen = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+            setMenuOpen(!isOpen);
         });
 
         // Close mobile menu when a nav link is clicked
         const mobileLinks = mobileNavMenu.querySelectorAll('a');
         mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNavMenu.classList.add('hidden');
-                mobileNavMenu.classList.remove('flex');
-                const spans = mobileMenuBtn.querySelectorAll('span');
-                if (spans.length === 3) {
-                    spans[0].classList.remove('rotate-45', 'translate-y-2');
-                    spans[1].classList.remove('opacity-0');
-                    spans[2].classList.remove('-rotate-45', '-translate-y-2');
-                }
-            });
+            link.addEventListener('click', () => setMenuOpen(false));
         });
     }
 
@@ -178,9 +175,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (filterButtons.length && projectCards.length) {
         filterButtons.forEach(button => {
             button.addEventListener('click', function() {
-                // Toggle active styles
-                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Toggle active styles + pressed state for a11y
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-pressed', 'false');
+                });
                 this.classList.add('active');
+                this.setAttribute('aria-pressed', 'true');
 
                 const filter = this.getAttribute('data-filter');
 

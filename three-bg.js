@@ -402,18 +402,53 @@
     }
 
     /* ══════════════════════════════════════════════════════════
-       ANIMATION LOOP — 60fps cap
+       ANIMATION LOOP — 60fps cap (paused when hidden / reduced motion)
        ══════════════════════════════════════════════════════════ */
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let animating = false;
+
     function loop(ts) {
+        if (!animating) return;
         requestAnimationFrame(loop);
+        if (document.hidden) return;
         const delta = ts - lastTime;
         if (delta < 16) return; // ~60fps
         lastTime = ts - (delta % 16);
         render(ts);
     }
-    requestAnimationFrame(loop);
+
+    function startLoop() {
+        if (animating || prefersReducedMotion.matches) return;
+        animating = true;
+        lastTime = performance.now();
+        requestAnimationFrame(loop);
+    }
+
+    function stopLoop() {
+        animating = false;
+    }
+
+    if (prefersReducedMotion.matches) {
+        // Static first frame for accessibility
+        render(0);
+    } else {
+        startLoop();
+    }
+
+    prefersReducedMotion.addEventListener('change', (e) => {
+        if (e.matches) {
+            stopLoop();
+            render(0);
+        } else {
+            startLoop();
+        }
+    });
 
     document.addEventListener('visibilitychange', () => {
-        if (!document.hidden) lastTime = performance.now();
+        if (document.hidden) {
+            stopLoop();
+        } else if (!prefersReducedMotion.matches) {
+            startLoop();
+        }
     });
 })();

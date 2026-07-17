@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ramshankar07.github.io/portfolio/sitemap.xml
+# LLM-oriented site summary
+# https://ramshankar07.github.io/portfolio/llms.txt

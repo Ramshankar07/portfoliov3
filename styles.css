@@ -676,8 +676,11 @@ iframe {
 }
 
 /* Right rail: accent fill that tracks scroll depth. Drawn at full height and
-   scaled from the top, so every scroll frame is a compositor transform rather
-   than a layout-triggering height change. */
+   scaled from the top, so a scroll frame mutates a transform instead of a
+   height and never reaches layout. will-change earns its keep here because
+   the transform is rewritten on every scroll frame the rail is visible for;
+   the layer it costs is 1px wide, and the parent is display:none below
+   1280px, so it buys nothing on the viewports that can least afford it. */
 .rail-progress {
     position: absolute;
     top: 0;
@@ -688,6 +691,7 @@ iframe {
     transform: scaleY(0);
     transform-origin: top;
     transition: transform 0.1s linear;
+    will-change: transform;
 }
 
 @media (min-width: 1280px) {

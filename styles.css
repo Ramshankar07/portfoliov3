@@ -527,7 +527,7 @@ iframe {
 }
 
 .proj-metric__label {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--text-secondary) !important;
@@ -560,7 +560,7 @@ iframe {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.12em;
@@ -706,6 +706,11 @@ iframe {
     color: var(--text-primary);
 }
 
+/* min-width stays below the 960-unit viewBox on purpose: raising it to 960 would
+   clip the third cluster at ~1024px viewports, where macOS overlay scrollbars
+   give no hint that the figure scrolls. Labels are authored at 12 user units and
+   render at or above 12px from ~1200px up; below that the figcaption and the
+   <desc> carry the same information as real 12px text. */
 .sys-diagram svg {
     min-width: 680px;
     width: 100%;
@@ -767,7 +772,7 @@ iframe {
 }
 
 .contrib-status {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.12em;

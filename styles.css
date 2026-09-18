@@ -211,6 +211,77 @@ nav a::after {
     background-color: var(--bg-primary) !important;
 }
 
+/* ── Timeline drawn on scroll ──
+   The rail is a chronology, so the one piece of motion in this section traces
+   it: a line of ink lays itself down the hairline track at the reader's own
+   scroll position, and each role's node sets solid as the tip reaches it.
+   Scroll-linked, not an entrance effect — nothing moves on its own.
+
+   Base state is today's static design (plain hairline, outlined nodes), so a
+   browser without scroll-driven animation support just gets the static page.  */
+.timeline-rail::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    /* Two pixels over the one-pixel track, centred on it: the drawn part has to
+       read as ink laid down over the path, not as the same hairline again.   */
+    left: -0.5px;
+    width: 2px;
+    border-radius: 2px;
+    background: var(--text-primary);
+    transform: scaleY(0);
+    transform-origin: top center;
+}
+
+@keyframes timeline-draw {
+    to { transform: scaleY(1); }
+}
+
+@keyframes timeline-card-in {
+    from {
+        opacity: 0;
+        transform: translateX(-14px);
+    }
+}
+
+@keyframes timeline-node-set {
+    to {
+        background-color: var(--text-primary);
+        border-color: var(--text-primary);
+    }
+}
+
+@supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+        .timeline-rail::after {
+            animation: timeline-draw linear both;
+            animation-timeline: view(block);
+            /* Completes a little before the section leaves, so the last role
+               is never still being drawn as it scrolls out of frame. */
+            animation-range: cover 0% cover 85%;
+        }
+
+        /* Fires as the node crosses the middle of the viewport, which is where
+           the drawing tip sits — the two read as one movement. */
+        .timeline-node {
+            animation: timeline-node-set linear both;
+            animation-timeline: view(block);
+            animation-range: cover 44% cover 52%;
+        }
+
+        /* Each role arrives from its own point on the rail rather than rising
+           off the page: the card is settled and readable by the lower-middle
+           of the viewport, and only then does its node set. One movement per
+           role, sequenced by the same scroll the ink line answers to. */
+        .timeline-card {
+            animation: timeline-card-in ease-out both;
+            animation-timeline: view(block);
+            animation-range: cover 18% cover 42%;
+        }
+    }
+}
+
 /* Custom left-accent borders for specific sections */
 .border-l-green-500 {
     border-left-color: var(--accent) !important;
@@ -419,5 +490,204 @@ iframe {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
+}
+
+/* ==========================================================================
+   Refinement pass — contrast, hero metrics, project hierarchy
+   Extends the monochrome system above; no new palette introduced.
+   ========================================================================== */
+
+/* ── Contrast fix: gray-400 labels/dates failed AA in light mode ──
+   Route them through the readable secondary token in both themes.        */
+.text-gray-400 {
+    color: var(--text-secondary) !important;
+}
+
+/* ── Project metric callouts (per-card headline number) ── */
+.proj-metric {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.proj-metric__value {
+    font-size: 1.9rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--text-primary) !important;
+    font-variant-numeric: tabular-nums;
+}
+
+.proj-metric__value .unit {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary) !important;
+}
+
+.proj-metric__label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary) !important;
+}
+
+.proj-metric--lg .proj-metric__value {
+    font-size: 3rem;
+}
+
+/* Two leaderboard placements read as a small results table rather than one
+   headline number — the pairing of the two boards is the information. */
+.proj-metric-stack {
+    display: grid;
+    gap: 0.85rem;
+}
+
+.proj-metric-stack .proj-metric {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 0.7rem;
+    align-items: baseline;
+}
+
+.proj-metric-stack .proj-metric__value {
+    font-size: 2.4rem;
+}
+
+/* ── Featured project (spans full grid width) ── */
+.feat-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-primary) !important;
+}
+
+.feat-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    background: var(--accent);
+    display: inline-block;
+}
+
+.feat-divider {
+    border-color: var(--border-color) !important;
+}
+
+/* Featured cards span the full projects grid and use an explicit two-column
+   layout — avoids relying on Tailwind span utilities that aren't in the
+   pre-built CSS subset. */
+.feat-grid {
+    display: grid;
+    gap: 2rem;
+    align-items: start;
+}
+
+@media (min-width: 768px) {
+    .project-featured {
+        grid-column: 1 / -1;
+    }
+
+    .feat-grid {
+        grid-template-columns: minmax(0, 240px) 1fr;
+        gap: 2.5rem;
+    }
+}
+
+/* ── Hero ambient GPU-chip canvas ──
+   Visible enough to read as the subject's own artifact, but faded to a
+   whisper across the left third so the headline stays crisp. Opacity is set
+   here (not via Tailwind utilities, which aren't all in the built subset).  */
+#three-canvas.hero-canvas {
+    opacity: 0.48;
+    -webkit-mask-image: linear-gradient(105deg, rgba(0,0,0,0.09) 0%, rgba(0,0,0,0.09) 42%, #000 70%, #000 100%);
+            mask-image: linear-gradient(105deg, rgba(0,0,0,0.09) 0%, rgba(0,0,0,0.09) 42%, #000 70%, #000 100%);
+}
+
+.dark #three-canvas.hero-canvas {
+    opacity: 0.42;
+}
+
+/* On phones the hero is a single stacked column, so keep the canvas a faint
+   uniform texture that never sits under the copy at readable strength. */
+@media (max-width: 767px) {
+    #three-canvas.hero-canvas {
+        opacity: 0.18 !important;
+        -webkit-mask-image: none;
+                mask-image: none;
+    }
+}
+
+/* ==========================================================================
+   Margin furniture — fixed side rails (wide screens only)
+   Fills the empty page margins with quiet, on-brand editorial detail: a
+   social rail on the left, a scroll-progress rail on the right. Hidden below
+   1280px, where there is no spare margin to hold them.
+   ========================================================================== */
+.margin-rail {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border-color);
+    z-index: 40;
+    display: none;
+    pointer-events: none;
+}
+
+.margin-rail--left  { left: 2.25rem; }
+.margin-rail--right { right: 2.25rem; }
+
+/* Left rail: social cluster, centred on the line with the page colour behind
+   each icon so the hairline appears to thread between them. */
+.rail-social {
+    position: fixed;
+    left: 2.25rem;
+    bottom: 2.5rem;
+    transform: translateX(-50%);
+    z-index: 41;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.15rem;
+}
+
+.rail-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 9999px;
+    background: var(--bg-primary);
+    color: var(--text-secondary) !important;
+    font-size: 0.85rem;
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.rail-social a:hover {
+    color: var(--text-primary) !important;
+    transform: translateY(-2px);
+}
+
+/* Right rail: accent fill that tracks scroll depth. */
+.rail-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 0;
+    background: var(--accent);
+    transition: height 0.1s linear;
+}
+
+@media (min-width: 1280px) {
+    .margin-rail { display: block; }
+    .rail-social { display: flex; }
 }
 

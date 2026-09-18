@@ -277,7 +277,9 @@
         ctx.globalAlpha = 1;
 
         // ── 3. 3D GPU Chip (ASCII rendered) ──
-        const chipCx = W * 0.38;
+        // Sits right-of-centre, in the gutter between headline and portrait,
+        // so it never competes with the hero copy on the left.
+        const chipCx = W * 0.62;
         const chipCy = H * 0.45;
         const chipScale = Math.min(W, H) * 0.20;
 
@@ -451,4 +453,19 @@
             startLoop();
         }
     });
+
+    // Pause the loop once the hero scrolls out of view — the canvas only
+    // lives behind the hero, so there's no reason to keep painting it while
+    // the visitor reads the rest of the page.
+    if ('IntersectionObserver' in window) {
+        const heroEl = document.getElementById('hero') || canvas;
+        const io = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                if (!document.hidden && !prefersReducedMotion.matches) startLoop();
+            } else {
+                stopLoop();
+            }
+        }, { threshold: 0 });
+        io.observe(heroEl);
+    }
 })();

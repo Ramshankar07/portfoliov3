@@ -135,7 +135,7 @@
     <link rel="stylesheet" href="css/icons.css">
 
     <!-- Custom Design Styling -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20260819c">
 </head>
 
 <body class="bg-[#FAF9F6] text-[#111111] dark:bg-[#080808] dark:text-[#F5F5F7] antialiased">
@@ -194,7 +194,7 @@
     <!-- Hero Section -->
     <section id="hero" class="relative min-h-screen flex items-center py-20 overflow-hidden">
         <!-- Interactive Monochromatic ASCII Canvas Background -->
-        <canvas id="three-canvas" class="absolute inset-0 w-full h-full object-cover pointer-events-none opacity-40 dark:opacity-30" style="z-index: 0;"></canvas>
+        <canvas id="three-canvas" class="absolute inset-0 w-full h-full object-cover pointer-events-none hero-canvas" style="z-index: 0;"></canvas>
         
         <div class="max-w-6xl mx-auto px-6 w-full relative" style="z-index: 1;">
             <div class="grid md:grid-cols-12 gap-12 items-center">
@@ -205,7 +205,7 @@
                         Hi, I'm <span class="serif-italic font-normal block md:inline mt-1 text-[#111111] dark:text-[#FFFFFF]">Ramshankar</span>
                     </h1>
                     <p class="text-xl md:text-2xl text-gray-600 dark:text-neutral-400 font-light leading-relaxed max-w-xl">
-                        Crafting next-generation AI solutions with a focus on <strong class="text-black dark:text-white font-medium">Large Language Models</strong>, <strong class="text-black dark:text-white font-medium">Computer Vision</strong>, and <strong class="text-black dark:text-white font-medium">GPU Kernel Optimization</strong>. I graduated!
+                        I'm an <strong class="text-black dark:text-white font-medium">AI/ML engineer</strong> working across the stack — from <strong class="text-black dark:text-white font-medium">LLM inference</strong> and training down to the <strong class="text-black dark:text-white font-medium">GPU kernels</strong> (CUDA, HIP, Triton) underneath. I build models and make them faster: recently <strong class="text-black dark:text-white font-medium">3–6× on Blackwell tensor-core GEMMs</strong> and <strong class="text-black dark:text-white font-medium">12.1 ms/token</strong> inference on AMD MI300X.
                     </p>
                     <div class="flex gap-4 flex-wrap pt-2">
                         <a href="#projects" class="hero-btn-primary px-8 py-3.5 font-medium rounded-lg text-sm transition-all duration-300">
@@ -250,7 +250,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </section>
@@ -265,40 +265,21 @@
                 <span class="serif-italic">Who I Am</span>
             </h2>
             
-            <div class="grid md:grid-cols-12 gap-12">
+            <div>
                 <!-- Bio Copy -->
-                <div class="md:col-span-7 space-y-6 text-base md:text-lg text-gray-600 dark:text-neutral-400 font-light leading-relaxed">
+                <div class="max-w-3xl space-y-6 text-base md:text-lg text-gray-600 dark:text-neutral-400 font-light leading-relaxed">
                     <p>
-                        I'm a passionate <strong class="text-black dark:text-white font-medium">AI/ML Engineer and Researcher</strong> recently graduated from Northeastern University with a Master's in Information Systems. My journey in technology began with a deep fascination for artificial intelligence and its potential to solve complex real-world problems.
+                        I'm an <strong class="text-black dark:text-white font-medium">AI/ML engineer and researcher</strong> who recently earned a Master's in Information Systems from Northeastern University. I work across the machine-learning stack — training and fine-tuning models, and especially <strong class="text-black dark:text-white font-medium">LLM inference</strong>: making large language models run faster, cheaper, and more reliably in production.
                     </p>
                     <p>
-                        With a strong foundation in computer science and extensive experience in machine learning, I specialize in developing innovative AI solutions, optimizing ML pipelines, and building scalable data systems. My work spans across computer vision, natural language processing, and distributed computing, with a particular focus on large language models and compiler integrations.
+                        My work spans the breadth of modern ML — <strong class="text-black dark:text-white font-medium">large language models</strong>, computer vision, NLP, and distributed training — down to the systems layer, where I optimize inference and training pipelines and write custom GPU kernels. I care about the whole path, from a research idea to a model serving real traffic.
                     </p>
                     <p>
-                        I believe in the power of open-source collaboration. I recently contributed to the <strong class="text-black dark:text-white font-medium">LLVM project</strong> by refactoring the `ilogbf128` math function to a header-only implementation in libc (
-                        <a href="https://github.com/llvm/llvm-project/pull/175396" class="text-[#111111] dark:text-[#FFFFFF] underline underline-offset-4 hover:opacity-70 font-normal" target="_blank" rel="noopener noreferrer">
-                            LLVM libc open-source contribution
-                        </a>).
+                        I work in the open. I fixed Mamba2 chunked prefill in HuggingFace <strong class="text-black dark:text-white font-medium">transformers</strong>
+                        (<a href="https://github.com/huggingface/transformers/pull/46084" class="text-[#111111] dark:text-[#FFFFFF] underline underline-offset-4 hover:opacity-70 font-normal" target="_blank" rel="noopener noreferrer">PR #46084</a>)
+                        and refactored `ilogbf128` to header-only in <strong class="text-black dark:text-white font-medium">LLVM</strong>'s libc
+                        (<a href="https://github.com/llvm/llvm-project/pull/175396" class="text-[#111111] dark:text-[#FFFFFF] underline underline-offset-4 hover:opacity-70 font-normal" target="_blank" rel="noopener noreferrer">PR #175396</a>).
                     </p>
-                </div>
-                
-                <!-- Achievements Mini-Cards -->
-                <div class="md:col-span-5 space-y-6">
-                    <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-neutral-500">Core Expertise</h3>
-                    <div class="grid gap-4">
-                        <div class="p-6 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl shadow-sm">
-                            <h4 class="font-bold text-base mb-2">GPU Kernel Optimization</h4>
-                            <p class="text-xs text-gray-500 leading-relaxed">Developed and optimized high-performance GPU kernels for inference/training workloads, demonstrating deep knowledge of memory hierarchy.</p>
-                        </div>
-                        <div class="p-6 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl shadow-sm">
-                            <h4 class="font-bold text-base mb-2">Compiler Integration</h4>
-                            <p class="text-xs text-gray-500 leading-relaxed">Worked with graph compilers (CUDA, HIP) to optimize deep learning frameworks for various hardware architectures including AMD GPUs.</p>
-                        </div>
-                        <div class="p-6 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl shadow-sm">
-                            <h4 class="font-bold text-base mb-2">Performance & Cost Resolution</h4>
-                            <p class="text-xs text-gray-500 leading-relaxed">Identified redundant model calls; architected caching systems reducing monthly GPU costs by $12K and latency by 42%.</p>
-                        </div>
-                    </div>
                 </div>
             </div>
             
@@ -376,34 +357,52 @@
             <div class="max-w-4xl mx-auto">
                 <div class="relative experience-timeline-mobile space-y-12">
                     <!-- Timeline vertical line -->
-                    <div class="absolute left-5 top-2 bottom-2 w-[1px] bg-gray-200 dark:bg-neutral-800"></div>
-                    
+                    <div class="timeline-rail absolute left-5 top-2 bottom-2 w-[1px] bg-gray-200 dark:bg-neutral-800"></div>
+
+                    <!-- Experience Item: Abundant (current) -->
+                    <div class="relative pl-12 experience-item-mobile">
+                        <div class="timeline-node absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
+                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                            <div class="flex flex-wrap justify-between items-start gap-2">
+                                <div>
+                                    <h3 class="text-xl font-bold">GPU Kernel Engineer</h3>
+                                    <p class="text-sm font-medium text-gray-600 dark:text-neutral-400">Abundant</p>
+                                </div>
+                                <div class="text-right text-xs text-gray-500">
+                                    <span class="block mt-0.5">Aug 2026 – Present</span>
+                                </div>
+                            </div>
+                            <ul class="space-y-3 text-sm text-gray-500 leading-relaxed list-disc pl-4">
+                                <li>Engineered <strong class="text-black dark:text-white">persistent megakernels</strong> for four LLM architectures using ThunderKittens primitives, collapsing the forward pass into a single launch and cutting per-request scheduling and launch overhead.</li>
+                                <li>Building <strong class="text-black dark:text-white">Harbor RL environments</strong> and synthesizing novel ML-systems problems on GPUs and TPUs that frontier models fail to solve — expanding the models' capability frontier.</li>
+                            </ul>
+                        </div>
+                    </div>
+
                     <!-- Experience Item 0 -->
                     <div class="relative pl-12 experience-item-mobile">
-                        <div class="absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
-                        <div class="bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                        <div class="timeline-node absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
+                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
                             <div class="flex flex-wrap justify-between items-start gap-2">
                                 <div>
                                     <h3 class="text-xl font-bold">GPU Kernel Engineer</h3>
                                     <p class="text-sm font-medium text-gray-600 dark:text-neutral-400">Parsewave</p>
                                 </div>
                                 <div class="text-right text-xs text-gray-500">
-                                    <span class="block mt-0.5">Present</span>
+                                    <span class="block mt-0.5">Jun 2026 – Aug 2026</span>
                                 </div>
                             </div>
                             <ul class="space-y-3 text-sm text-gray-500 leading-relaxed list-disc pl-4">
-                                <li>Designing, implementing, and optimizing CUDA compute kernels.</li>
-                                <li>Validating, testing, and benchmarking kernel implementations for correctness and performance.</li>
-                                <li>Reviewing CUDA-code datasets and related submissions, assessing correctness, quality, and performance against applicable criteria.</li>
-                                <li>Collaborating with the engineering team on related GPU and compute tasks as needed.</li>
+                                <li>Built <strong class="text-black dark:text-white">Harbor RL environments</strong> and synthesized novel CUDA kernel problems on Blackwell (SM100/B200) that frontier models fail to solve, targeting NVFP4 and TMA-driven workloads to expand the models' capability frontier.</li>
+                                <li>Designed verifiable, reward-hacking-resistant reward signals that couple numerical correctness with profiled performance, blocking exploits such as hardcoded outputs, timing-loop manipulation, and cache-warming artifacts.</li>
                             </ul>
                         </div>
                     </div>
 
                     <!-- Experience Item 1 -->
                     <div class="relative pl-12 experience-item-mobile">
-                        <div class="absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
-                        <div class="bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                        <div class="timeline-node absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
+                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
                             <div class="flex flex-wrap justify-between items-start gap-2">
                                 <div>
                                     <h3 class="text-xl font-bold">AI Engineer</h3>
@@ -411,7 +410,7 @@
                                 </div>
                                 <div class="text-right text-xs text-gray-500">
                                     <span class="block">Remote</span>
-                                    <span class="block mt-0.5">Apr 2026 – Present</span>
+                                    <span class="block mt-0.5">Apr 2026 – Jun 2026</span>
                                 </div>
                             </div>
                             <ul class="space-y-3 text-sm text-gray-500 leading-relaxed list-disc pl-4">
@@ -424,8 +423,8 @@
 
                     <!-- Experience Item 2 -->
                     <div class="relative pl-12 experience-item-mobile">
-                        <div class="absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
-                        <div class="bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                        <div class="timeline-node absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
+                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
                             <div class="flex flex-wrap justify-between items-start gap-2">
                                 <div>
                                     <h3 class="text-xl font-bold">Graduate Teaching and Research Assistant</h3>
@@ -446,8 +445,8 @@
 
                     <!-- Education: NEU -->
                     <div class="relative pl-12 experience-item-mobile">
-                        <div class="absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
-                        <div class="bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                        <div class="timeline-node absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
+                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
                             <div class="flex flex-wrap justify-between items-start gap-2">
                                 <div>
                                     <h3 class="text-xl font-bold">Master of Science in Information Systems</h3>
@@ -470,8 +469,8 @@
 
                     <!-- Experience Item 3 -->
                     <div class="relative pl-12 experience-item-mobile">
-                        <div class="absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
-                        <div class="bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                        <div class="timeline-node absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
+                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
                             <div class="flex flex-wrap justify-between items-start gap-2">
                                 <div>
                                     <h3 class="text-xl font-bold">AI Engineer</h3>
@@ -492,8 +491,8 @@
 
                     <!-- Experience Item 4 -->
                     <div class="relative pl-12 experience-item-mobile">
-                        <div class="absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
-                        <div class="bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                        <div class="timeline-node absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
+                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
                             <div class="flex flex-wrap justify-between items-start gap-2">
                                 <div>
                                     <h3 class="text-xl font-bold">ML Engineer (Research)</h3>
@@ -514,8 +513,8 @@
 
                     <!-- Education: Anna University -->
                     <div class="relative pl-12 experience-item-mobile">
-                        <div class="absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
-                        <div class="bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                        <div class="timeline-node absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
+                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
                             <div class="flex flex-wrap justify-between items-start gap-2">
                                 <div>
                                     <h3 class="text-xl font-bold">Bachelor of Technology in Computer Science</h3>
@@ -534,8 +533,8 @@
 
                     <!-- Experience Item 5 -->
                     <div class="relative pl-12 experience-item-mobile">
-                        <div class="absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
-                        <div class="bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                        <div class="timeline-node absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
+                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
                             <div class="flex flex-wrap justify-between items-start gap-2">
                                 <div>
                                     <h3 class="text-xl font-bold">ML Engineer Intern</h3>
@@ -576,30 +575,40 @@
             <!-- Filterable Project Grid -->
             <div class="grid md:grid-cols-2 gap-8" id="projects-grid">
                 
-                <!-- Project 1 -->
-                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="ai-gpu">
-                    <div class="space-y-4">
-                        <h3 class="text-2xl font-bold leading-snug">AMD-GPU-Kernel Agent Trained via GRPO Using verl</h3>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">SkyPilot</span>
-                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">verl</span>
-                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">FastAPI</span>
-                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Redis</span>
+                <!-- Project 1 — Featured -->
+                <div class="project-featured md:col-span-2 p-8 md:p-10 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-2xl hover:shadow-xl transition-all duration-300" data-category="ai-gpu">
+                    <div class="feat-grid">
+                        <div class="space-y-4 md:border-r feat-divider md:pr-8">
+                            <span class="feat-eyebrow"><span class="feat-dot"></span> Featured</span>
+                            <div class="proj-metric proj-metric--lg"><span class="proj-metric__value">3<span class="unit"> clusters</span></span></div>
+                            <div class="proj-metric__label">Trainer, queue, spot workers</div>
+                        </div>
+                        <div class="feat-content space-y-6">
+                            <div class="space-y-4">
+                                <h3 class="text-2xl font-bold leading-snug">AMD-GPU-Kernel Agent Trained via GRPO Using verl</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">SkyPilot</span>
+                                    <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">verl</span>
+                                    <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">FastAPI</span>
+                                    <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Redis</span>
+                                </div>
+                            </div>
+                            <ul class="space-y-2 text-sm text-gray-500 list-disc pl-4">
+                                <li>Trained Qwen2.5-Coder-7B via GRPO with verl to autonomously optimize GPU kernels across NVIDIA and AMD targets, scoring rollouts on a speedup reward clipped at 4.0× so the policy could not farm unbounded timing gains.</li>
+                                <li>Architected a three-cluster SkyPilot pipeline decoupling trainer, queue (FastAPI + Redis) and spot GPU workers, enabling fault-tolerant spot preemption handling.</li>
+                            </ul>
+                            <a href="https://github.com/Ramshankar07/Kernel-Writer-RL-v2" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-black dark:text-white hover:opacity-75 transition-opacity" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i> Repository <i class="fas fa-arrow-right text-[10px] ml-1"></i>
+                            </a>
                         </div>
                     </div>
-                    <ul class="space-y-2 text-sm text-gray-500 list-disc pl-4">
-                        <li>Trained Qwen2.5-Coder-7B via GRPO using verl to autonomously optimize GPU kernels across NVIDIA and AMD targets, achieving rewards up to 4.0x speedup for FP8 classes.</li>
-                        <li>Architected a three-cluster SkyPilot pipeline decoupling trainer, queue (FastAPI + Redis) and spot GPU workers, enabling fault-tolerant spot preemption handling.</li>
-                    </ul>
-                    <a href="https://github.com/Ramshankar07/Kernel-Writer-RL-v2" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-black dark:text-white hover:opacity-75 transition-opacity" rel="noopener noreferrer">
-                        <i class="fab fa-github"></i> Repository <i class="fas fa-arrow-right text-[10px] ml-1"></i>
-                    </a>
                 </div>
 
                 <!-- Project 2 -->
                 <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="ai-gpu">
                     <div class="space-y-4">
                         <h3 class="text-2xl font-bold leading-snug">Parallelizing Text-to-Image Generation Using Diffusion</h3>
+                        <div class="proj-metric"><span class="proj-metric__value">1.48×</span><span class="proj-metric__label">CPU throughput scaling</span></div>
                         <div class="flex flex-wrap gap-2">
                             <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Python</span>
                             <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">PyTorch</span>
@@ -616,26 +625,39 @@
                     </a>
                 </div>
 
-                <!-- Project 3 -->
-                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="ai-gpu academic">
-                    <div class="space-y-4">
-                        <h3 class="text-2xl font-bold leading-snug">NVIDIA GB200 GPU Programming Challenge</h3>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">CuteDSL</span>
-                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">CUDA</span>
-                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">PTX</span>
-                            <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Blackwell FP4</span>
+                <!-- Project 3 — Featured -->
+                <div class="project-featured md:col-span-2 p-8 md:p-10 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-2xl hover:shadow-xl transition-all duration-300" data-category="ai-gpu academic">
+                    <div class="feat-grid">
+                        <div class="space-y-4 md:border-r feat-divider md:pr-8">
+                            <span class="feat-eyebrow"><span class="feat-dot"></span> Featured</span>
+                            <div class="proj-metric-stack">
+                                <div class="proj-metric"><span class="proj-metric__value">42<span class="unit">nd</span></span><span class="proj-metric__label">Grouped GEMM</span></div>
+                                <div class="proj-metric"><span class="proj-metric__value">95<span class="unit">th</span></span><span class="proj-metric__label">Gated Dual GEMM</span></div>
+                            </div>
+                            <div class="proj-metric__label">GPUMODE NVFP4 leaderboards</div>
+                        </div>
+                        <div class="feat-content space-y-6">
+                            <div class="space-y-4">
+                                <h3 class="text-2xl font-bold leading-snug">NVIDIA GB200 GPU Programming Challenge</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">CuteDSL</span>
+                                    <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">CUDA</span>
+                                    <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">PTX</span>
+                                    <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Blackwell FP4</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500">
+                                Placed <strong class="text-black dark:text-white font-medium">42nd</strong> on GPUMODE's NVFP4 Grouped GEMM leaderboard and <strong class="text-black dark:text-white font-medium">95th</strong> on Gated Dual GEMM. Optimized Blackwell B200 tensor core kernels for block-scaled matrix operations using CuteDSL and inline PTX assembly, achieving <strong class="text-black dark:text-white font-medium">3-6x speedup</strong> over baseline through SwiGLU epilogues and TMA memory pipelining.
+                            </p>
                         </div>
                     </div>
-                    <p class="text-sm text-gray-500">
-                        Ranked <strong class="text-black dark:text-white font-medium">24th place</strong> in GPUMODE's NVFP4 Gated Dual GEMM competition. Optimized Blackwell B200 tensor core kernels for block-scaled matrix operations using CuteDSL and inline PTX assembly, achieving <strong class="text-black dark:text-white font-medium">3-6x speedup</strong> over baseline through SwiGLU epilogues and TMA memory pipelining.
-                    </p>
                 </div>
 
                 <!-- Project 4 -->
                 <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="ai-gpu academic">
                     <div class="space-y-4">
                         <h3 class="text-2xl font-bold leading-snug">Llama3 - Pure C/CUDA Implementation</h3>
+                        <div class="proj-metric"><span class="proj-metric__value">2.3×</span><span class="proj-metric__label">RMSNorm kernel speedup</span></div>
                         <div class="flex flex-wrap gap-2">
                             <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">C/CUDA</span>
                             <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">llm.c</span>
@@ -655,6 +677,7 @@
                 <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="ai-gpu">
                     <div class="space-y-4">
                         <h3 class="text-2xl font-bold leading-snug">Qwen600 CUDA to ROCm Port for AMD MI300X</h3>
+                        <div class="proj-metric"><span class="proj-metric__value">12.1<span class="unit"> ms</span></span><span class="proj-metric__label">Per-token latency · MI300X</span></div>
                         <div class="flex flex-wrap gap-2">
                             <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">C++</span>
                             <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">HIP</span>
@@ -679,6 +702,7 @@
                 <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="ai-gpu">
                     <div class="space-y-4">
                         <h3 class="text-2xl font-bold leading-snug">Advanced Suicidal Ideation Classification System</h3>
+                        <div class="proj-metric"><span class="proj-metric__value">71<span class="unit">%</span></span><span class="proj-metric__label">Macro-AUC</span></div>
                         <div class="flex flex-wrap gap-2">
                             <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">AWS SageMaker</span>
                             <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">ETL</span>
@@ -695,6 +719,7 @@
                 <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="ai-gpu">
                     <div class="space-y-4">
                         <h3 class="text-2xl font-bold leading-snug">Two-Stage Cardiac Arrhythmia Detection System</h3>
+                        <div class="proj-metric"><span class="proj-metric__value">94–98<span class="unit">%</span></span><span class="proj-metric__label">Rhythm accuracy</span></div>
                         <div class="flex flex-wrap gap-2">
                             <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">PyTorch</span>
                             <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">Transformer</span>
@@ -710,6 +735,7 @@
                 <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="ai-gpu">
                     <div class="space-y-4">
                         <h3 class="text-2xl font-bold leading-snug">OCR Pipeline with Layout Detection</h3>
+                        <div class="proj-metric"><span class="proj-metric__value">98<span class="unit">%</span></span><span class="proj-metric__label">Text extraction accuracy</span></div>
                         <div class="flex flex-wrap gap-2">
                             <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">PyTorch</span>
                             <span class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-neutral-800 border">ONNX</span>
@@ -733,8 +759,8 @@
                         </div>
                     </div>
                     <ul class="space-y-2 text-sm text-gray-500 list-disc pl-4">
-                        <li>Built a master financial database for US public companies implementing raw, transformed, and denormalizedfact table schemas to optimize access.</li>
-                        <li>Engineered automated SEC ETL pipelines with Airflow, retrieving filings via scrapers and using S3/Snowflake staging with data validation validation checks.</li>
+                        <li>Built a master financial database for US public companies implementing raw, transformed, and denormalized fact-table schemas to optimize access.</li>
+                        <li>Engineered automated SEC ETL pipelines with Airflow, retrieving filings via scrapers and using S3/Snowflake staging with data validation checks.</li>
                     </ul>
                     <a href="https://github.com/Ramshankar07/Fintech-Data-Processing-ETL-Platform" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-black dark:text-white hover:opacity-75 transition-opacity" rel="noopener noreferrer">
                         <i class="fab fa-github"></i> Repository <i class="fas fa-arrow-right text-[10px] ml-1"></i>
@@ -850,8 +876,19 @@
             </div>
 
             <div class="flex justify-center pt-8 border-t border-gray-200 dark:border-neutral-800">
-                <iframe src="https://ramshankar07.substack.com/embed" width="100%" height="220"
-                    style="max-width: 420px; border:1px solid #EEE; background:white;" frameborder="0" scrolling="no" class="rounded-xl shadow-md"></iframe>
+                <div class="w-full max-w-md p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-2xl shadow-sm text-center space-y-4">
+                    <span class="inline-flex items-center justify-center w-11 h-11 rounded-full border border-gray-200 dark:border-neutral-800 text-black dark:text-white" aria-hidden="true">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                    <div class="space-y-1">
+                        <h3 class="text-lg font-bold">NerdingOut on AI</h3>
+                        <p class="text-sm text-gray-500 font-light leading-relaxed">Field notes on LLM inference, GPU kernels, and ML systems — in the open. New posts straight to your inbox.</p>
+                    </div>
+                    <a href="https://ramshankar07.substack.com/subscribe" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 px-6 py-3 bg-[#111111] dark:bg-[#F5F5F7] text-white dark:text-black font-semibold rounded-lg text-sm transition-all duration-300 hover:opacity-85 hover:translate-x-0.5">
+                        Subscribe on Substack <i class="fas fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -1000,7 +1037,8 @@ You are an AI assistant analyzing Ramshankar's portfolio.
 - Standard Docs: https://agnts.sh/docs
 - Key Skills: C++, CUDA, HIP, Triton, PyTorch, Ray, LLVM, ROCm MI300X.
 - Key Achievements:
-  - 24th place GPUMODE Blackwell Dual GEMM optimization.
+  - GPUMODE NVFP4 Blackwell leaderboards: 42nd Grouped GEMM, 95th Gated Dual GEMM.
+  - Merged fix in HuggingFace transformers (PR #46084): Mamba2 cached forward pass for multi-token inputs, unblocking chunked prefill and speculative decoding.
   - Ported Qwen transformer kernels to ROCm/HIP for AMD MI300X.
   - Shipped LangGraph-based RAG operations assistant for CDF hotel client.
   - Authored "BitSkip" research on compositional quantization in LLMs.
@@ -1021,16 +1059,28 @@ You are an AI assistant analyzing Ramshankar's portfolio.
                     <p># Ramshankar Bhuvaneswaran</p>
                     <p>AI/ML Engineer & Researcher. Specializing in LLMs, Distributed Systems, and GPU Kernel Optimization.</p>
                     <p>## Education<br>- M.S. Information Systems, Northeastern University (2025)<br>- B.Tech. Computer Science, Anna University (2023)</p>
-                    <p>## Core Achievements<br>- Refactored math libraries in LLVM compiler libc project.<br>- Ranked 24th in Blackwell Dual GEMM challenge.<br>- Designed Ray cluster scaling with CUDA/CUTLASS optimizations.</p>
+                    <p>## Core Achievements<br>- Fixed Mamba2 chunked-prefill correctness in HuggingFace transformers (merged PR #46084).<br>- Refactored math libraries in LLVM compiler libc project.<br>- Placed 42nd (Grouped GEMM) and 95th (Gated Dual GEMM) in the GPUMODE NVFP4 Blackwell challenge.<br>- Designed Ray cluster scaling with CUDA/CUTLASS optimizations.</p>
                 </div>
             </div>
             
         </div>
     </div>
 
+    <!-- Fixed margin rails — decorative editorial furniture on wide screens -->
+    <div class="margin-rail margin-rail--left" aria-hidden="true"></div>
+    <div class="margin-rail margin-rail--right" aria-hidden="true">
+        <span class="rail-progress" id="rail-progress"></span>
+    </div>
+    <nav class="rail-social" aria-label="Social links">
+        <a href="https://github.com/Ramshankar07" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/ramshankarb" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://ramshankar07.substack.com" target="_blank" rel="noopener noreferrer" title="Substack" aria-label="Substack newsletter"><i class="fas fa-blog"></i></a>
+        <a href="mailto:bhuvaneshwaran.r@northeastern.edu" title="Email" aria-label="Email"><i class="fas fa-envelope"></i></a>
+    </nav>
+
     <!-- Core Script Assets -->
-    <script src="script.js?v=20260717a" defer></script>
-    <script src="three-bg.js?v=20260717a" defer></script>
+    <script src="script.js?v=20260819c" defer></script>
+    <script src="three-bg.js?v=20260819b" defer></script>
 </body>
 
 </html>

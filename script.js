@@ -244,7 +244,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 10. Interactive visual Agent Mode Dashboard Controller
     setupAgentModeDashboard();
+
+    // 11. Right-margin scroll-progress rail
+    setupScrollProgress();
 });
+
+// ── Margin Scroll-Progress Rail ──
+function setupScrollProgress() {
+    const fill = document.getElementById('rail-progress');
+    if (!fill) return;
+
+    let ticking = false;
+    const update = () => {
+        const doc = document.documentElement;
+        const max = doc.scrollHeight - doc.clientHeight;
+        const pct = max > 0 ? (doc.scrollTop / max) * 100 : 0;
+        fill.style.height = pct.toFixed(2) + '%';
+        ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(update);
+            ticking = true;
+        }
+    }, { passive: true });
+
+    update();
+}
 
 // ── Notification Alert Toast ──
 function showNotification(message, type) {

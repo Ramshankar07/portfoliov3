@@ -258,17 +258,31 @@ function setupScrollProgress() {
     const update = () => {
         const doc = document.documentElement;
         const max = doc.scrollHeight - doc.clientHeight;
-        const pct = max > 0 ? (doc.scrollTop / max) * 100 : 0;
-        fill.style.height = pct.toFixed(2) + '%';
+        const ratio = max > 0 ? Math.min(Math.max(doc.scrollTop / max, 0), 1) : 0;
+        fill.style.transform = 'scaleY(' + ratio.toFixed(4) + ')';
         ticking = false;
     };
 
-    window.addEventListener('scroll', () => {
+    // One rAF-coalesced scheduler for every trigger, so a resize that arrives
+    // in the same frame as a scroll still costs a single measurement.
+    const schedule = () => {
         if (!ticking) {
-            window.requestAnimationFrame(update);
             ticking = true;
+            window.requestAnimationFrame(update);
         }
-    }, { passive: true });
+    };
+
+    window.addEventListener('scroll', schedule, { passive: true });
+
+    // The ratio is a function of document height as well as scroll offset, so
+    // anything that reflows the page invalidates it. Filtering the project
+    // grid or opening the agent dashboard changes the height without emitting
+    // a scroll event, which used to leave the rail showing a stale depth until
+    // the next scroll. Observing the body covers those and window resizes both.
+    window.addEventListener('resize', schedule);
+    if (typeof ResizeObserver !== 'undefined') {
+        new ResizeObserver(schedule).observe(document.body);
+    }
 
     update();
 }

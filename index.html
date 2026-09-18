@@ -149,7 +149,7 @@
     <!-- Sticky Responsive Navigation -->
     <nav class="fixed top-0 w-full z-50 backdrop-blur-md" aria-label="Primary">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#hero" class="text-xl font-bold tracking-tight text-[#111111] dark:text-[#F5F5F7]">
+            <a href="#hero" class="nav-logo text-xl font-bold tracking-tight text-[#111111] dark:text-[#F5F5F7]">
                 R<span class="serif-italic font-normal">B</span>
             </a>
             
@@ -165,16 +165,16 @@
                 </ul>
                 
                 <!-- Navbar Toggles -->
-                <div class="flex items-center space-x-3">
-                    <button id="agent-mode-toggle" class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-gray-200 dark:border-neutral-800 text-gray-700 dark:text-neutral-300 hover:bg-gray-100 dark:hover:bg-neutral-900 transition-colors" aria-label="Toggle Agent Mode" title="Toggle AI Agent Mode Dashboard">
+                <div class="nav-toggles flex items-center">
+                    <button id="agent-mode-toggle" class="nav-icon-btn text-gray-700 dark:text-neutral-300" aria-label="Toggle Agent Mode" title="Toggle AI Agent Mode Dashboard">
                         <i class="fas fa-robot text-xs"></i>
                     </button>
-                    
-                    <button data-theme-toggle class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-gray-200 dark:border-neutral-800 text-gray-700 dark:text-neutral-300 hover:bg-gray-100 dark:hover:bg-neutral-900 transition-colors" aria-label="Toggle dark mode">
+
+                    <button data-theme-toggle class="nav-icon-btn text-gray-700 dark:text-neutral-300" aria-label="Toggle dark mode">
                         <i class="fas fa-moon text-xs" data-icon="moon"></i>
                         <i class="fas fa-sun text-xs hidden" data-icon="sun"></i>
                     </button>
-                    
+
                     <button type="button" class="md:hidden flex flex-col cursor-pointer space-y-1.5" id="mobile-menu-btn" aria-label="Open menu" aria-controls="mobile-nav-menu" aria-expanded="false">
                         <span class="w-6 h-[1.5px] bg-[#111111] dark:bg-[#F5F5F7] transition-all duration-300" aria-hidden="true"></span>
                         <span class="w-6 h-[1.5px] bg-[#111111] dark:bg-[#F5F5F7] transition-all duration-300" aria-hidden="true"></span>
@@ -247,7 +247,7 @@
                                     <input type="text" id="chat-input" name="query" placeholder="Ask a question about Ramshankar..." required
                                         class="flex-1 bg-transparent text-sm focus:outline-none border-none" toolparamdescription="The search terms or question about Ramshankar's skills, projects, or background.">
                                     <button id="chat-send" type="submit"
-                                        class="bg-[#111111] dark:bg-[#F5F5F7] text-white dark:text-black rounded-lg p-2 text-xs transition-all duration-200 hover:scale-105 disabled:opacity-50" aria-label="Submit search">
+                                        class="text-white dark:text-black text-xs transition-all duration-200 hover:scale-105 disabled:opacity-50" aria-label="Submit search">
                                         <i class="fas fa-paper-plane"></i>
                                     </button>
                                 </div>

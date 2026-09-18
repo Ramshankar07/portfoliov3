@@ -1,6 +1,6 @@
 # Ramshankar Bhuvaneswaran
 
-> AI & GPU Kernel Engineer. Portfolio and technical writing.
+> ML Systems Engineer — training and inference infrastructure. Portfolio and technical writing.
 
 - Site: https://ramshankar07.github.io/portfolio/
 - Agent profile: https://agnts.sh/ramshankar?raw
@@ -11,7 +11,10 @@
 
 ## Focus
 
-- Large Language Models, CUDA/HIP GPU kernels, PyTorch, distributed systems
+- Training stack: PyTorch, FSDP, verl/GRPO, distributed orchestration on Ray, Kubernetes, SkyPilot, SLURM
+- Inference stack: vLLM, ONNX, CUDA/HIP/Triton kernels, CuteDSL and PTX on Blackwell NVFP4, ROCm on AMD MI300X
+- Benchmarking and profiling: timing-and-correctness harnesses, roofline/bandwidth measurement, regression evaluation
+- Upstream: HuggingFace transformers PR #46084 (merged), LLVM libc PR #175396
 - Alumni of Northeastern University (MSIS) and Anna University (B.Tech CSE)
 
 ## Key pages

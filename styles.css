@@ -691,3 +691,98 @@ iframe {
     .rail-social { display: flex; }
 }
 
+
+/* ============================================
+   SYSTEMS DIAGRAM (inline SVG, theme-aware)
+   ============================================ */
+.sys-rule {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.sys-diagram {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    color: var(--text-primary);
+}
+
+.sys-diagram svg {
+    min-width: 680px;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.sys-diagram text {
+    font-family: var(--font-sans);
+    fill: currentColor;
+}
+
+.sys-diagram [data-dim] {
+    opacity: 0.55;
+}
+
+/* ============================================
+   UPSTREAM CONTRIBUTIONS LIST
+   ============================================ */
+.contrib-list {
+    border-top: 1px solid var(--border-color);
+}
+
+.contrib-row {
+    display: grid;
+    gap: 0.35rem 1.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+    align-items: baseline;
+}
+
+@media (min-width: 768px) {
+    .contrib-row {
+        grid-template-columns: minmax(0, 15rem) minmax(0, 1fr) auto;
+    }
+}
+
+.contrib-repo {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.contrib-pr {
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.contrib-what {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.contrib-what code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.8125rem;
+    color: var(--text-primary);
+}
+
+.contrib-status {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+    white-space: nowrap;
+    justify-self: start;
+}
+
+/* Grid items default to min-width:auto, which lets the min-width on the
+   diagram SVG stretch the whole card past the viewport on narrow screens.
+   Pinning min-width:0 lets .sys-diagram's own overflow-x actually scroll. */
+#projects-grid > div,
+.feat-grid > * {
+    min-width: 0;
+}

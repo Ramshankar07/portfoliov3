@@ -13,4 +13,4 @@
 /src/
 /src/worker.js
 /src/worker_enhanced.js
-/vector_db_setup.py
+/vector_db_setup.py/.claude/worktrees/

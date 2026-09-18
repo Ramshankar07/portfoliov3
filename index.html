@@ -118,7 +118,13 @@
     <link rel="dns-prefetch" href="https://ramshankar07.substack.com">
     <link rel="preload" as="image" href="img/hero-section-576.webp" type="image/webp" fetchpriority="high">
     <link rel="preload" href="css/tailwind.min.css" as="style">
+    <!-- Above the fold uses three Inter weights: body 400, nav links 500, hero h1 700.
+         Preloading only 400 let 500/700 swap in late and reflow the nav row and hero
+         container (CLS 0.14). Weight 600 is deliberately not preloaded — its only
+         above-the-fold user is the off-canvas skip link. -->
     <link rel="preload" href="fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/inter-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/inter-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- Prevent theme FOUC before body paint -->
     <script>

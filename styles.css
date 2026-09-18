@@ -675,15 +675,19 @@ iframe {
     transform: translateY(-2px);
 }
 
-/* Right rail: accent fill that tracks scroll depth. */
+/* Right rail: accent fill that tracks scroll depth. Drawn at full height and
+   scaled from the top, so every scroll frame is a compositor transform rather
+   than a layout-triggering height change. */
 .rail-progress {
     position: absolute;
     top: 0;
     left: 0;
     width: 1px;
-    height: 0;
+    height: 100%;
     background: var(--accent);
-    transition: height 0.1s linear;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.1s linear;
 }
 
 @media (min-width: 1280px) {

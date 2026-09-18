@@ -258,8 +258,8 @@ function setupScrollProgress() {
     const update = () => {
         const doc = document.documentElement;
         const max = doc.scrollHeight - doc.clientHeight;
-        const pct = max > 0 ? (doc.scrollTop / max) * 100 : 0;
-        fill.style.height = pct.toFixed(2) + '%';
+        const ratio = max > 0 ? Math.min(Math.max(doc.scrollTop / max, 0), 1) : 0;
+        fill.style.transform = 'scaleY(' + ratio.toFixed(4) + ')';
         ticking = false;
     };
 

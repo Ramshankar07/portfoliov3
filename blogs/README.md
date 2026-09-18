@@ -7,7 +7,6 @@ This folder contains all the blog posts for Ramshankar Bhuvaneswaran's portfolio
 ```
 blogs/
 ├── README.md                           # This file
-├── llm-guide.html                     # Sample blog post about LLMs
 ├── llama3-budget-finetuning.html      # Budget-friendly Llama 3.1 fine-tuning with LoRA
 ├── airflow-etl-pipelines.html         # ETL pipelines with Airflow (planned)
 ├── pytorch-production-optimization.html # PyTorch optimization (planned)
@@ -78,7 +77,7 @@ Each blog post follows a consistent structure:
 
 - Use descriptive, kebab-case filenames
 - Include main topic in filename
-- Example: `llm-guide.html`, `airflow-etl-pipelines.html`
+- Example: `llama3-budget-finetuning.html`
 
 ## Styling
 

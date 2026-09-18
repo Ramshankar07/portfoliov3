@@ -21,5 +21,4 @@
 
 - Home: https://ramshankar07.github.io/portfoliov3/
 - Blog — Llama 3.1 budget fine-tuning: https://ramshankar07.github.io/portfoliov3/blogs/llama3-budget-finetuning.html
-- Blog — LLM guide: https://ramshankar07.github.io/portfoliov3/blogs/llm-guide.html
 - Sitemap: https://ramshankar07.github.io/portfoliov3/sitemap.xml

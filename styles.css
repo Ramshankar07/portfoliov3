@@ -375,22 +375,56 @@ input:focus, textarea:focus, select:focus {
 }
 
 /* ── Project Filter Controls ── */
+/* The button box is 44px tall for the hit test; ::before paints the 39px
+   pill the design calls for, and the negative margin keeps the row height. */
 .filter-btn {
-    padding: 0.5rem 1.2rem;
+    position: relative;
+    z-index: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    margin-block: -2.5px;
+    /* 1px of the horizontal padding stands in for the border now on ::before. */
+    padding: 0 calc(1.2rem + 1px);
+    border: 0;
     border-radius: 9999px;
+    background: none;
     font-size: 0.875rem;
     font-weight: 500;
-    border: 1px solid var(--border-color);
-    background: transparent;
     color: var(--text-secondary);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease;
+}
+
+.filter-btn::before {
+    content: "";
+    position: absolute;
+    inset: 2.5px 0;
+    z-index: -1;
+    border: 1px solid var(--border-color);
+    border-radius: 9999px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .filter-btn:hover, .filter-btn.active {
-    background: var(--accent);
     color: var(--bg-primary);
+}
+
+.filter-btn:hover::before, .filter-btn.active::before {
+    background: var(--accent);
     border-color: var(--accent);
+}
+
+/* The focus ring belongs to the pill, not to the larger hit box, so it is
+   drawn on ::before — the only element whose size still matches the pill. */
+.filter-btn:focus-visible {
+    outline: none;
+}
+
+.filter-btn:focus-visible::before {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
 }
 
 /* ── Animations & Transitions ── */
@@ -938,3 +972,252 @@ iframe {
     overflow-wrap: anywhere;
 }
 
+
+/* ==========================================================================
+   Touch targets — WCAG 2.5.5 Target Size (Enhanced) / 2.5.8 (Minimum)
+   Every control reaches a 44x44 CSS-px hit box while still drawing exactly
+   what it drew before. Two techniques carry the whole section:
+     1. Padding cancelled by an equal negative margin — the border box (what
+        getBoundingClientRect and the browser's hit test read) grows; the
+        outer box the layout reserves does not move.
+     2. The painted shape moves to an inset ::before with z-index:-1, so a
+        ring, pill, or block can stay its original size inside a larger
+        transparent button.
+   No new colours: rings and fills come from the existing custom properties.
+   ========================================================================== */
+
+/* ── Nav: the monogram ── */
+.nav-logo {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding-inline: 10px;
+    margin-inline: -10px;
+    margin-block: -4px;
+}
+
+/* Traces the monogram itself (the 44px box is padding on every side), so the
+   focus ring hugs the lettering rather than the hit box. */
+.nav-logo::before {
+    content: "";
+    position: absolute;
+    inset: 8px 10px;
+    pointer-events: none;
+}
+
+.nav-logo:focus-visible {
+    outline: none;
+}
+
+.nav-logo:focus-visible::before {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* ── Nav: the two 36px circular toggles ──
+   The button is 44x44 and transparent; ::before draws the 36px ring. */
+.nav-toggles {
+    gap: 12px;
+}
+
+.nav-icon-btn {
+    position: relative;
+    z-index: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin: -4px;
+    padding: 0;
+    border: 0;
+    border-radius: 9999px;
+    background: none;
+    cursor: pointer;
+    /* the timing `transition-colors` used to supply */
+    transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-icon-btn::before {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    z-index: -1;
+    border: 1px solid var(--border-color);
+    border-radius: 9999px;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-icon-btn:hover::before {
+    background-color: var(--accent-glow);
+}
+
+.nav-icon-btn:focus-visible {
+    outline-offset: -2px;
+}
+
+/* ── Nav: the hamburger ──
+   The three 24x1.5px bars keep their size and position; the button around
+   them grows to 44x44 and the negative margin keeps the bar height at 36. */
+#mobile-menu-btn {
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    margin: -4px -10px;
+}
+
+#mobile-menu-btn:focus-visible {
+    outline-offset: -4px;
+}
+
+/* ── Nav: mobile dropdown rows ──
+   These were 31px tall on `py-1`. Padding, not flex, so the trailing arrow
+   icon in "Schedule" stays inline with its label. */
+#mobile-nav-menu a {
+    display: block;
+    min-height: 44px;
+    padding-block: 11px;
+}
+
+/* ── Hero: the search submit button ──
+   ::before paints the original 28x32 rounded block inside a 44x44 button.
+   --text-primary is #111111 light / #F5F5F7 dark, the two literals this
+   button used to carry. */
+#chat-send {
+    position: relative;
+    z-index: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    /* -6px keeps the row 32px tall; -8px on the right pins the block to the
+       bar's edge; +4px on the left restores the 12px gutter that `space-x-3`
+       used to supply (this id selector outranks it). */
+    margin: -6px -8px -6px 4px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+#chat-send::before {
+    content: "";
+    position: absolute;
+    inset: 6px 8px;
+    z-index: -1;
+    background: var(--text-primary);
+    border-radius: 0.5rem;
+    /* the button's own `transition-all duration-200` no longer reaches the
+       fill, so the theme swap is animated here instead */
+    transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* `.dark-search-bar i` forces every icon in the bar to --text-primary, which
+   is the exact colour of this button's fill — the paper plane has been sitting
+   at 1:1 contrast, invisible in both themes. The button's own
+   `text-white dark:text-black` cannot reach it past that rule's !important. */
+#chat-send i {
+    color: var(--bg-primary) !important;
+}
+
+#chat-send:focus-visible {
+    outline: none;
+}
+
+#chat-send:focus-visible::before {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* ── Search result modal ──
+   script.js renders this dialog's markup, so its two controls can only be
+   sized from here: the close glyph was ~18x20 and Dismiss was 36px tall. */
+#close-result {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    /* holds the dialog header at the 32px its avatar sets */
+    margin: -6px;
+}
+
+#ok-result {
+    min-height: 44px;
+}
+
+/* ── Coarse pointers only ──
+   Text links and the search field cannot grow their hit box without either
+   disturbing a line of type or resizing a focus ring, so they grow only
+   where a fingertip is the pointer. Desktop rendering is untouched. */
+@media (pointer: coarse), (hover: none) {
+    /* The horizontal nav (md and up, so touch tablets). Same padding trick;
+       the hover/active underline is repositioned by the same offset so it
+       still sits 2px under the word rather than under the padding. */
+    #nav-links > li > a {
+        padding-block: 14px;
+        padding-inline: 3px;
+        margin-inline: -3px;
+    }
+
+    #nav-links > li > a::after {
+        bottom: 8px;
+        left: 3px;
+    }
+
+    /* `w-full` and the `.active` rule both measure the padded box, which is
+       6px wider than the word. Subtracting the padding keeps the rule the
+       width of the word — and unlike `auto`, calc() still animates. */
+    #nav-links > li > a:hover::after,
+    #nav-links > li > a.active::after {
+        width: calc(100% - 6px) !important;
+    }
+
+    /* Links set in running text. Padding on an inline box enlarges the hit
+       box without changing line height, and the negative inline margin
+       cancels the horizontal growth, so no word moves. */
+    #about p a,
+    #projects li a,
+    #blogs .contrib-repo a,
+    #contact p a,
+    #contact a[href^="mailto:"],
+    #contact a[href*="linkedin.com"],
+    footer p a {
+        padding: 16px 6px;
+        margin-inline: -6px;
+    }
+
+    /* Exception. The "I work in the open, upstream" paragraph carries two
+       links that wrap onto adjacent 26px lines, so a 52px hit box would put
+       26px of the LLVM link on top of the transformers link and send taps to
+       the wrong PR. Overlapping a line of prose is harmless — that is the
+       point of the rule above — but overlapping another target is not. These
+       two grow to the line pitch instead: 25x96 and 25x100, over SC 2.5.8's
+       24x24 floor and, as inline targets, exempt from the 44x44 one. */
+    #about p a {
+        padding-block: 2.5px;
+    }
+
+    /* Standalone action links — 16px tall as drawn, 32px for the ones
+       carrying `pt-4`. These grow downward only: `space-y-*` owns their
+       margin-top, and padding on the top edge would push the label down. */
+    #projects-grid a.inline-flex,
+    #contact a.inline-block,
+    #blogs a.inline-flex:not(.px-6) {
+        padding-bottom: 30px;
+        margin-bottom: -30px;
+    }
+
+    /* The search field. Symmetric padding keeps the caret and placeholder on
+       the same baseline; the negative margin keeps the bar 60px tall. */
+    #chat-input {
+        min-height: 44px;
+        padding-block: 11px;
+        margin-block: -11px;
+    }
+}

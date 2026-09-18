@@ -481,13 +481,61 @@ iframe {
     outline-offset: 2px;
 }
 
+/* ── Reduced motion ──
+   Not a blanket kill. Looping and decorative motion stops outright; the
+   transitions that report a state change (filter fade, theme swap, focus and
+   hover recolour) survive at a single instant-but-noticed beat, because a
+   change the reader cannot see is a change they have to hunt for.          */
 @media (prefers-reduced-motion: reduce) {
+    /* Looping and entrance motion: off, not merely shortened. The pulse dot is
+       live in the agent overlay; the chat dots and slide-in cover the widget's
+       own rules above so they stay disabled wherever that markup lands. */
+    .animate-pulse,
+    .typing-indicator,
+    .chat-enter {
+        animation: none !important;
+    }
+
+    /* The dots idle at scale(0) inside the loop; with the loop gone they have
+       to be drawn at rest size or the indicator would render invisible. */
+    .typing-indicator {
+        transform: none;
+        opacity: 1;
+    }
+
+    /* Hover displacement is decoration here — the colour, border and shadow
+       change already say "interactive". Hold position, keep the recolour. */
+    .hero-btn-primary:hover,
+    .hero-btn-outline:hover,
+    .bg-primary-600:hover,
+    .bg-gradient-to-r.from-primary-600.to-primary-500:hover,
+    .rail-social a:hover,
+    .group:hover img,
+    [class*="hover:scale-"]:hover,
+    [class*="hover:translate-"]:hover,
+    [class*="hover:-translate-"]:hover {
+        transform: none !important;
+    }
+
+    /* These two declare `transition: ... !important` at class specificity, so
+       the universal cap below cannot reach them. Capped here instead. */
+    .hero-btn-primary,
+    .hero-btn-outline {
+        transition-duration: 0.06s !important;
+    }
+
+    /* Scroll-driven timeline motion is already gated on
+       (prefers-reduced-motion: no-preference) further up — nothing to undo. */
+
     *,
     *::before,
     *::after {
+        /* Safety net for any keyframe animation not named above. */
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+        /* 60ms: past the ~1-frame threshold where a change reads as a jump,
+           short enough that nothing travels. State stays perceptible. */
+        transition-duration: 0.06s !important;
         scroll-behavior: auto !important;
     }
 }

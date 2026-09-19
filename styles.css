@@ -673,22 +673,53 @@ iframe {
    whisper across the left third so the headline stays crisp. Opacity is set
    here (not via Tailwind utilities, which aren't all in the built subset).  */
 #three-canvas.hero-canvas {
-    opacity: 0.48;
-    -webkit-mask-image: linear-gradient(105deg, rgba(0,0,0,0.09) 0%, rgba(0,0,0,0.09) 42%, #000 70%, #000 100%);
-            mask-image: linear-gradient(105deg, rgba(0,0,0,0.09) 0%, rgba(0,0,0,0.09) 42%, #000 70%, #000 100%);
+    /* Confident but secondary: the lattice is meant to read as hardware at a
+       glance while the copy stays the thing you read. The old mask held the
+       left 42% at 9% alpha and multiplied it by a 0.42 base, leaving roughly
+       4% where the grid actually lived — which is why nothing was visible.
+       Now the canvas runs at full strength and the mask does one job: carve a
+       quiet well under the text column, falling away to full density on the
+       right where there is nothing to compete with. */
+    opacity: 0.72;
+    -webkit-mask-image: linear-gradient(100deg,
+        rgba(0, 0, 0, 0.03) 0%,
+        rgba(0, 0, 0, 0.05) 30%,
+        rgba(0, 0, 0, 0.28) 50%,
+        rgba(0, 0, 0, 0.8) 72%,
+        #000 88%);
+            mask-image: linear-gradient(100deg,
+        rgba(0, 0, 0, 0.03) 0%,
+        rgba(0, 0, 0, 0.05) 30%,
+        rgba(0, 0, 0, 0.28) 50%,
+        rgba(0, 0, 0, 0.8) 72%,
+        #000 88%);
 }
 
 .dark #three-canvas.hero-canvas {
-    opacity: 0.42;
+    opacity: 0.64;
 }
 
 /* On phones the hero is a single stacked column, so keep the canvas a faint
    uniform texture that never sits under the copy at readable strength. */
 @media (max-width: 767px) {
     #three-canvas.hero-canvas {
-        opacity: 0.18 !important;
-        -webkit-mask-image: none;
-                mask-image: none;
+        /* Mobile stacks the hero, so the copy occupies the top of the canvas
+           rather than one side of it. The desktop left-to-right mask does
+           nothing useful here; this one clears the reading band entirely and
+           lets the lattice carry the space below the CTAs, around the
+           portrait. Removing the mask outright — as the previous rule did —
+           put the grid directly behind the paragraph. */
+        opacity: 0.4 !important;
+        -webkit-mask-image: linear-gradient(to bottom,
+            transparent 0%,
+            transparent 52%,
+            rgba(0, 0, 0, 0.45) 68%,
+            #000 84%);
+                mask-image: linear-gradient(to bottom,
+            transparent 0%,
+            transparent 52%,
+            rgba(0, 0, 0, 0.45) 68%,
+            #000 84%);
     }
 }
 

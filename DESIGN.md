@@ -332,6 +332,16 @@ A headline figure in tabular numerals (1.9rem, or 2.4rem at `--lg`) with a small
 ### Contribution Row (signature)
 A three-column hairline-ruled row: subject (15px, primary ink) · description (14px, muted) · status pill, collapsing to stacked rows below 768px. Used for upstream PRs and education. Reads as a table without being one.
 
+### Hero Occupancy Grid (signature)
+
+Not a picture of a GPU — a running one. A fixed lattice of streaming multiprocessors, each holding a 4×4 block of warp slots that fill as thread blocks dispatch, hold for a residency, then retire. Three launches are in flight at once at different speeds; a per-SM bias decides who saturates and who idles, so occupancy rises and falls in waves rather than flickering randomly.
+
+**Why a lattice and not a shape.** The previous background drew a sparse vertex cloud plus matrix rain plus floating glyphs plus lightning arcs plus scanlines — five effects at once, none of which read as anything. A stable rectilinear grid changing state *in place* reads as hardware instantly, where moving streams of glyphs read as noise. Structure is what carries the meaning here.
+
+Monochrome by binding commitment: cells vary in alpha only, never hue. Fill is fast and drain is slow, because that asymmetry is what makes it read as work being done rather than a light blinking. Density falls off vertically so the field sits in the composition rather than tiling to the bleed, and a clearing measured from the portrait's own bounding box seats the photo instead of crowding it.
+
+Masked left-to-right on desktop so the copy column stays quiet and the density lands on the right; masked top-to-bottom on mobile, where the hero stacks and the copy occupies the top of the canvas instead of one side of it. Pauses when the hero scrolls out of view, when the tab is hidden, and renders a single settled frame under `prefers-reduced-motion`. 60fps, no long tasks, and 5.5KB smaller than what it replaced.
+
 ### Systems Diagram (signature)
 Hand-authored inline SVG on a 960-unit viewBox, all strokes and text at `currentColor` so it inverts with the theme for free. 1px hairlines, dashed cluster boundaries, 12px labels. Wrapped in `<figure role="img">` with `<title>`, `<desc>`, and a visible `<figcaption>`; scrolls horizontally inside `.sys-diagram` below its 680px minimum. Below 760px it carries a trailing-edge fade and a `SCROLL →` cue — macOS overlay scrollbars give no hint the figure scrolls, so without them it read as clipped rather than scrollable.
 

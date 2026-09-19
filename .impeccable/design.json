@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-19T01:39:15Z",
+  "generatedAt": "2026-09-19T03:48:52Z",
   "title": "Design System: Ramshankar Bhuvaneswaran Portfolio",
   "extensions": {
     "colorMeta": {
@@ -221,6 +221,11 @@
         "name": "status-blink",
         "value": "2.4s ease-in-out infinite, bottoming out at 0.3 opacity",
         "purpose": "The hero availability dot. A slow fade, not a hard on/off - the point is \"this is current\", not \"look here\". Disabled under prefers-reduced-motion and held lit."
+      },
+      {
+        "name": "occupancy-waves",
+        "value": "3 concurrent launches, fill rate 0.16 / drain rate 0.035",
+        "purpose": "Hero GPU occupancy grid. Fill fast, drain slow - the asymmetry is what reads as work rather than a blinking light. Paused off-screen and on hidden tabs; a single settled frame under prefers-reduced-motion."
       }
     ],
     "breakpoints": [

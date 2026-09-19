@@ -692,7 +692,15 @@ function setupDiemark() {
     const CELL_W = 6, CELL_H = 10;
 
     let W = 0, H = 0, cols = 0, rows = 0;
-    let raf = 0, running = false, visible = false, t = 0, fanAngle = 0;
+    let raf = 0, running = false, visible = false, t = 0;
+    // Three rotors, three speeds, three starting phases. Identical fans turning
+    // in lockstep is the tell that something is drawn rather than running —
+    // real cards never agree, and the eye catches the agreement immediately.
+    const fans = [
+        { angle: 0.0, rate: 0.071, drift: 0.9 },
+        { angle: 2.3, rate: 0.094, drift: 1.6 },
+        { angle: 4.9, rate: 0.058, drift: 1.2 }
+    ];
 
     /* ── Model ────────────────────────────────────────────────────────────
        x runs the length of the card, z its depth, y is height with -y up.  */
@@ -712,7 +720,7 @@ function setupDiemark() {
     // frame, which is the only motion on the card that had to be real 3D
     // rather than a brightness trick.
     const FAN_X = [-4.35, 0, 4.35];
-    for (const fx of FAN_X) {
+    FAN_X.forEach((fx, fi) => {
         // Aperture first, then the rotor above it. The rotor clears the shroud
         // lip by a clear margin — at equal heights the lip's top face simply
         // painted over the blades.
@@ -721,9 +729,9 @@ function setupDiemark() {
         for (let i = 0; i < 9; i++) {
             const a = (i / 9) * Math.PI * 2;
             part(fx + Math.cos(a) * 0.78, -0.64, Math.sin(a) * 0.78,
-                 0.78, 0.1, 0.3, 0.9, 'blade', { cx: fx, cz: 0, base: a });
+                 0.78, 0.1, 0.3, 0.9, 'blade', { cx: fx, cz: 0, base: a, fi });
         }
-    }
+    });
 
     part(-6.15, -0.2, 0.4, 0.55, 0.5, 2.4, 0.4, 'io');           // display outputs
     part(4.9, -0.78, -1.5, 1.0, 0.36, 0.9, 0.52, 'power');       // 16-pin connector
@@ -747,8 +755,8 @@ function setupDiemark() {
         ];
         if (!b.spin) return v;
         // Spin about the fan's own vertical axis.
-        const a = b.spin.base + fanAngle;
-        const ca = Math.cos(a - b.spin.base), sa = Math.sin(a - b.spin.base);
+        const a = fans[b.spin.fi].angle;
+        const ca = Math.cos(a), sa = Math.sin(a);
         return v.map(([x, y, z]) => {
             const dx = x - b.spin.cx, dz = z - b.spin.cz;
             return [b.spin.cx + dx * ca - dz * sa, y, b.spin.cz + dx * sa + dz * ca];
@@ -776,7 +784,12 @@ function setupDiemark() {
 
     function animate() {
         t += 0.016;
-        fanAngle += 0.085;                                        // ~810 rpm on screen
+        for (let i = 0; i < fans.length; i++) {
+            const f = fans[i];
+            // A slow sinusoidal wobble on top of each rate, so even fans that
+            // drift into phase fall back out of it.
+            f.angle += f.rate * (1 + Math.sin(t * 0.37 + i * 2.1) * 0.12 * f.drift);
+        }
         const head = ((t * 2.1) % 22) - 7.4;
         for (const p of parts) {
             let target = 0;
@@ -803,7 +816,7 @@ function setupDiemark() {
                 const pts = idx.map((k) => project(vs[k]));
                 const rv = idx.map((k) => yawXZ(vs[k]));
                 const depth = rv.reduce((a, q) => a + (q[0] + q[2] - q[1]), 0) / 4;
-                const base = 0.16 + lam * (0.2 + b.tone * 1.05);
+                const base = 0.2 + lam * (0.26 + b.tone * 1.1);
                 raw.push({ pts, depth, shade: Math.min(1, base + b.lit * 0.55 * lam) });
             }
         }
@@ -818,13 +831,18 @@ function setupDiemark() {
         }
         // Width-first: the brief is that the card spans the frame. Height is
         // allowed to come up short rather than cropping the length.
-        // Width-first, and the vertical allowance is deliberately over 1: the
-        // top and bottom of the frame are bare board edge, so letting them
-        // bleed is cheaper than shrinking the card away from the sides. The
-        // brief is that it spans left to right.
-        const fit = Math.min((cols * 0.995) / (maxX - minX), (rows * 1.16) / (maxY - minY));
+        // Width only. Height is deliberately unconstrained: the card is meant
+        // to run off the bottom of the frame and disappear under the mask, so
+        // a height term would only ever shrink it away from the sides — which
+        // is exactly what happened every time one was in here.
+        const fit = (cols * 0.995) / (maxX - minX);
         const ox = cols / 2 - ((minX + maxX) / 2) * fit;
-        const oy = rows / 2 - ((minY + maxY) / 2) * fit;
+        // Pushed below centre so the board's lower half runs off the frame and
+        // the mask takes it. Only the fans and the top of the shroud stay in
+        // view, which is the half worth looking at.
+        // Top-aligned, not centred: the visible half starts just inside the
+        // frame and the rest sinks past the bottom edge.
+        const oy = rows * 0.06 - minY * fit;
 
         bctx.fillStyle = '#000';
         bctx.fillRect(0, 0, cols, rows);
@@ -855,8 +873,8 @@ function setupDiemark() {
                 const ch = RAMP[Math.min(RAMP.length - 1, Math.floor((1 - lum) * (RAMP.length - 1)))];
                 if (ch === ' ') continue;
                 ctx.fillStyle = dark
-                    ? `rgba(245, 245, 247, ${0.28 + lum * 0.72})`
-                    : `rgba(17, 17, 17, ${0.26 + lum * 0.74})`;
+                    ? `rgba(245, 245, 247, ${0.36 + lum * 0.64})`
+                    : `rgba(17, 17, 17, ${0.34 + lum * 0.66})`;
                 ctx.fillText(ch, padX + c * CELL_W, padY + r * CELL_H);
             }
         }

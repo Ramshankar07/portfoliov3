@@ -334,17 +334,17 @@ A three-column hairline-ruled row: subject (15px, primary ink) · description (1
 
 ### Closing Card Render (signature)
 
-An RTX 5090 drawn in isometric ASCII, spanning the frame edge to edge, with three fans turning. Blackwell — the consumer side of the architecture the NVFP4 GEMM kernels on this page were written against.
+An RTX 5090 in isometric ASCII, spanning the frame edge to edge, half submerged, three fans turning out of step. No heading, no caption — the page's last beat is the object alone.
 
-**Orthographic, fixed camera.** No perspective divide and no camera state, so the card holds exactly the same footprint on every frame. That constancy is what lets it span the full width: a rotating object cannot, because its projected width changes as it turns. The model is pre-rotated 45° about Y so its length maps onto the screen horizontal — without that, a long board projects as a diagonal sliver.
+**Orthographic, fixed camera.** No perspective divide and no camera state, so the card holds the same footprint every frame. That constancy is what lets it span the full width; a rotating object cannot, because its projected width changes as it turns. The model is pre-rotated 45° about Y, since a long board in plain isometric projects as a diagonal sliver.
 
-**The fans are real 3D.** Each rotor's blades are rotated about its own fan axis per frame and re-projected; everything else on the card is static geometry with animated brightness. Spinning parts keep both away-faces, since their faces swap sides as they turn.
+**Fit is width-only, and top-aligned.** Height is deliberately unconstrained: the card is meant to run off the bottom and disappear. Every height term that was ever in that expression did the same thing — shrink the card away from the sides to make it fit vertically, which is the opposite of the brief.
 
-**Fit is width-first with deliberate vertical bleed.** The top and bottom of the frame are bare board edge, so letting them run past the crop is cheaper than shrinking the card away from the sides.
+**The waterline.** A gradient mask takes the lower half. A hard crop reads as a mistake; a fade reads as the card going under.
 
-Rendered the same way as the hero lattice: boxes shaded into an offscreen buffer at character resolution, then sampled per cell through a density ramp (`@%#*+=-:.`). Fades in on entry, pauses off-screen and on hidden tabs, and holds one settled frame under `prefers-reduced-motion`. The `<figcaption>` describes the card in full.
+**The fans do not agree.** Three rotors, three rates, three starting phases, plus a slow sinusoidal wobble on each so any two that drift into step fall back out of it. Identical fans turning in lockstep is the tell that something is drawn rather than running — the eye catches the agreement immediately, and that single detail was the difference between a diagram and a machine. Blades rotate about their own fan axis per frame and re-project; spinning parts keep both away-faces, since their faces swap sides as they turn.
 
-Two things learned the hard way and worth not repeating: the shroud lip originally sat at the same height as the fans and painted straight over them, and an earlier version modelled the package alone, which gave nothing to span the frame with.
+Rendered like the hero lattice: shaded into an offscreen buffer at character resolution, then sampled per cell through a density ramp (`@%#*+=-:.`). Fades in on entry, pauses off-screen and on hidden tabs, holds one settled frame under `prefers-reduced-motion`. The `<figcaption>` is `sr-only` and describes the card in full.
 
 ### Hero Occupancy Grid (signature)
 

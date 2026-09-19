@@ -1625,3 +1625,167 @@ main > section:first-of-type {
         height: 100%;
     }
 }
+
+/* ============================================
+   CLOSING PIECE — playable warp scheduler
+   The page spends 11,000px arguing that this person schedules work onto GPUs.
+   This hands the reader the job. Peak-end rule: the previous ending was a
+   centred copyright line, which is the last thing a visitor carried away.
+   ============================================ */
+.scheduler {
+    margin-top: 8rem;
+    padding: 6rem 0 5rem;
+    border-top: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.scheduler__inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* The one Display use on the page. The hero h1 that normally carries this
+   step is dormant by choice, so the step lands here instead. */
+.scheduler__title {
+    font-size: clamp(2.25rem, 4.2vw, 3.75rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.scheduler__lede {
+    max-width: 52ch;
+    margin: 1.5rem 0 0;
+    font-size: 1.125rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+}
+
+.scheduler__stage {
+    position: relative;
+    /* Sized so the two SM rows nearly fill it; a taller box just centred the
+       array inside a band of dead air. */
+    height: 300px;
+    margin: 2.5rem 0 2.5rem;
+    cursor: crosshair;
+    touch-action: manipulation;
+}
+
+.scheduler__stage canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.scheduler__controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem 3rem;
+}
+
+.scheduler__readout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin: 0;
+}
+
+.scheduler__readout dt {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-secondary);
+}
+
+.scheduler__readout dd {
+    /* This is a metric callout, so it uses the metric role exactly. 1.9rem was
+       the pre-typeset metric size and is no longer on the ramp. */
+    margin: 0.35rem 0 0;
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-primary);
+}
+
+.scheduler__punchline {
+    max-width: 52ch;
+    margin: 3rem 0 0;
+    font-size: 1.125rem;
+    line-height: 1.55;
+    color: var(--text-primary);
+    border-left: 1px solid var(--border-color);
+    padding-left: 1.25rem;
+}
+
+@media (max-width: 640px) {
+    .scheduler { margin-top: 5rem; padding: 4rem 0 3rem; }
+    .scheduler__stage { height: 300px; margin: 2rem 0 1.75rem; }
+    .scheduler__readout { gap: 1.25rem 2rem; }
+    .scheduler__readout dd { font-size: 1.5rem; }
+}
+
+/* ============================================
+   SECTION MOTION
+   Every one of these rests in its finished state. The class the observer adds
+   replays arrival; it never reveals. A page where the observer never fires is
+   simply already there.
+   ============================================ */
+@media (prefers-reduced-motion: no-preference) {
+    /* 1. Section rules: 2px of ink laid over the existing 1px track, the same
+       language the experience timeline rail already speaks. */
+    .rule-draw {
+        position: relative;
+    }
+
+    .rule-draw::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        height: 2px;
+        width: 100%;
+        background: var(--text-primary);
+        transform: scaleX(0);
+        transform-origin: left center;
+        border-radius: 2px;
+    }
+
+    .rule-draw.is-in::after {
+        animation: rule-ink 900ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes rule-ink {
+        to { transform: scaleX(1); }
+    }
+
+    /* 2. Cards arrive from their own place in the grid rather than rising off
+       the page. Opacity and transform only — the Flat-Always Rule means no
+       shadow is available to fake depth with. */
+    /* A paused `both`-fill animation holds its `from` state, so a card that
+       never gets observed would sit at opacity 0 forever — the exact failure
+       that hid five of seven job cards once already. Instead JS hides only
+       the cards that are genuinely below the fold, and the animation exists
+       solely on `.is-in`. A card nobody observes is a card that was already
+       visible. */
+    .card-rise {
+        opacity: 0;
+    }
+
+    .card-rise.is-in {
+        opacity: 1;
+        animation: card-arrive 620ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+        animation-delay: var(--rise-delay, 0ms);
+    }
+
+    @keyframes card-arrive {
+        from { opacity: 0; transform: translateY(14px); }
+        to   { opacity: 1; transform: none; }
+    }
+}

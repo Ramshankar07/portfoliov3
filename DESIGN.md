@@ -289,7 +289,7 @@ Borders are always exactly 1px and always `var(--border-color)`, with one except
 
 **The Hairline Rule.** 1px, `var(--border-color)`, no exceptions for emphasis. A heavier border is not available as an emphasis device; use fill inversion instead.
 
-**The Surface-Only Rule.** The radius scale describes *surfaces*. Two values sit outside it on purpose and are not drift: the `2px` cap on the 2px timeline ink rail, and the `4px` webkit scrollbar thumb. Both are line furniture a few pixels wide, where a surface radius would be meaningless.
+**The Surface-Only Rule.** The radius scale describes *surfaces*. Three values sit outside it on purpose and are not drift: the `2px` caps on the 2px timeline ink rail and on the section-rule ink that draws over it, and the `4px` webkit scrollbar thumb. Both are line furniture a few pixels wide, where a surface radius would be meaningless.
 
 **The Still-Image Rule.** Imagery does not move on hover. A scale or rotate on an `<img>` is a generated-UI signature, and this world already communicates interactivity through border, fill inversion, and the hairline.
 
@@ -324,13 +324,23 @@ Borders are always exactly 1px and always `var(--border-color)`, with one except
 - **Style:** Fixed, `backdrop-blur`, transparent ground. Links at 15.2px / 500.
 - **Active / hover:** A 1px underline animating from `width: 0` to full via an `::after`. Scroll-spy drives `.active`.
 - **Mobile:** Hamburger toggles a bordered dropdown; rows are 44px minimum.
-- **Contract:** Every `<section id>` must have a matching `#nav-links` href or the scroll-spy blanks the entire nav while that section is onscreen.
+- **Contract (fixed):** The scroll-spy now observes only sections that have a matching `#nav-links` href. Previously it watched every `<section>`, so any section without a link — a closing piece, an interlude — cleared `.active` from every link while onscreen and blanked the nav. Adding a section is safe by default now.
 
 ### Metric Callout (signature)
 A headline figure in tabular numerals (1.9rem, or 2.4rem at `--lg`) with a smaller inline unit and a 12px uppercase caption beneath. Stacks vertically in featured cards' left rail. This is the component that carries the site's argument — every performance claim on the page renders through it.
 
 ### Contribution Row (signature)
 A three-column hairline-ruled row: subject (15px, primary ink) · description (14px, muted) · status pill, collapsing to stacked rows below 768px. Used for upstream PRs and education. Reads as a table without being one.
+
+### Closing Scheduler (signature)
+
+The page spends 11,000px arguing that this person schedules work onto GPUs, then hands the reader the job. A coarse array of SMs you click to dispatch thread blocks into; they claim free warp slots, run for a residency, and retire, with a live readout of blocks dispatched, warps retired, and peak occupancy. Saturate an SM and the next block spills to its neighbour — which is the whole mechanic the piece exists to hand over.
+
+**Deliberately few, large SMs.** A physically honest 56-SM array meant one dispatch moved peak occupancy by 3% and the interaction felt inert. Legibility of the mechanic beats fidelity of the part count.
+
+The canvas is a pointer enhancement, never the only path: a focusable **Dispatch a block** button does the same thing from a keyboard, the readout is real text in an `aria-live` region, and the canvas itself is `aria-hidden`. A punchline reveals past five blocks.
+
+Placed after `05. Get In Touch`, against the peak-end rule — the previous ending was a centred copyright line, and that was the last thing a visitor carried away. It also carries the page's one Display use, since the hero `h1` that normally holds that step is dormant by choice.
 
 ### Hero Occupancy Grid (signature)
 

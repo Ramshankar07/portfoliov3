@@ -139,8 +139,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // 4. Scroll-Spy Navigation Highlighting (IntersectionObserver)
-    const sections = document.querySelectorAll('section');
+    // Only sections that actually have a nav link are observed. Watching every
+    // <section> meant any section without one — a closing piece, an interlude —
+    // cleared `.active` from every link while it was onscreen, blanking the
+    // whole nav. Filtering here makes adding a section safe by default instead
+    // of a footgun documented in DESIGN.md.
     const navLinks = document.querySelectorAll('#nav-links a');
+    const navTargets = new Set(
+        [...navLinks]
+            .map(a => a.getAttribute('href'))
+            .filter(h => h && h.startsWith('#'))
+            .map(h => h.slice(1))
+    );
+    const sections = [...document.querySelectorAll('section[id]')]
+        .filter(sec => navTargets.has(sec.id));
 
     if (sections.length && navLinks.length) {
         const observerOptions = {
@@ -247,6 +259,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 11. Right-margin scroll-progress rail
     setupScrollProgress();
+
+    // 12. Closing piece + section motion
+    setupScheduler();
+    setupSectionMotion();
 });
 
 // ── Margin Scroll-Progress Rail ──
@@ -561,4 +577,259 @@ function setupAgentModeDashboard() {
             }
         }
     });
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   CLOSING PIECE — playable warp scheduler
+   The canvas is a pointer enhancement. The Dispatch button does the same
+   thing from a keyboard, and the readout is real text in an aria-live
+   region, so nothing here is pointer-only or canvas-only.
+   ══════════════════════════════════════════════════════════════════ */
+function setupScheduler() {
+    const canvas = document.getElementById('scheduler-canvas');
+    const stage = canvas && canvas.parentElement;
+    if (!canvas || !stage) return;
+
+    const ctx = canvas.getContext('2d', { alpha: true });
+    const btn = document.getElementById('scheduler-dispatch');
+    const outBlocks = document.getElementById('sched-blocks');
+    const outWarps = document.getElementById('sched-warps');
+    const outPeak = document.getElementById('sched-peak');
+    const punchline = document.getElementById('scheduler-punchline');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    // Deliberately few, large SMs. A physically honest 56-SM array meant one
+    // dispatch moved peak occupancy by 3% and the interaction felt inert —
+    // legibility of the mechanic beats fidelity of the part count here.
+    const SLOT = 24, GAP = 6, SM_COLS = 4, SM_ROWS = 4, SM_GAP = 28;
+    const SM_W = SM_COLS * SLOT + (SM_COLS - 1) * GAP;
+    const SM_H = SM_ROWS * SLOT + (SM_ROWS - 1) * GAP;
+
+    let W = 0, H = 0, sms = [], running = false, raf = 0;
+    let blocks = 0, warps = 0, peak = 0;
+
+    function ink() {
+        return document.documentElement.classList.contains('dark') ? '255, 255, 255' : '17, 17, 17';
+    }
+
+    function build() {
+        const r = stage.getBoundingClientRect();
+        W = Math.max(1, Math.floor(r.width));
+        H = Math.max(1, Math.floor(r.height));
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(W * dpr);
+        canvas.height = Math.floor(H * dpr);
+        canvas.style.width = W + 'px';
+        canvas.style.height = H + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        sms = [];
+        const stepX = SM_W + SM_GAP, stepY = SM_H + SM_GAP;
+        const cols = Math.max(1, Math.floor((W + SM_GAP) / stepX));
+        const rows = Math.max(1, Math.floor((H + SM_GAP) / stepY));
+        const offX = (W - (cols * stepX - SM_GAP)) / 2;
+        const offY = (H - (rows * stepY - SM_GAP)) / 2;
+        for (let r2 = 0; r2 < rows; r2++) {
+            for (let c = 0; c < cols; c++) {
+                const slots = [];
+                for (let i = 0; i < SM_COLS * SM_ROWS; i++) slots.push({ load: 0, target: 0, until: 0, counted: false });
+                sms.push({ x: offX + c * stepX, y: offY + r2 * stepY, slots, flash: 0 });
+            }
+        }
+    }
+
+    // Dispatch into the SM nearest the point, spilling to neighbours when it
+    // saturates — which is the whole lesson the piece is trying to hand over.
+    function dispatch(px, py) {
+        if (!sms.length) return;
+        let order = sms.map((sm, i) => {
+            const dx = sm.x + SM_W / 2 - px;
+            const dy = sm.y + SM_H / 2 - py;
+            return { i, d: Math.sqrt(dx * dx + dy * dy) };
+        }).sort((a, b) => a.d - b.d);
+
+        let want = 10 + Math.floor(Math.random() * 10);
+        const now = performance.now();
+        for (const { i } of order) {
+            if (want <= 0) break;
+            const sm = sms[i];
+            let placed = 0;
+            for (const s of sm.slots) {
+                if (want <= 0) break;
+                if (s.target === 0) {
+                    s.target = 0.66 + Math.random() * 0.34;
+                    s.until = now + 1100 + Math.random() * 1900;
+                    s.counted = false;
+                    want--; placed++;
+                }
+            }
+            if (placed) sm.flash = 1;
+        }
+        blocks++;
+        if (outBlocks) outBlocks.textContent = String(blocks);
+        if (blocks >= 5 && punchline && punchline.hidden) punchline.hidden = false;
+        start();
+    }
+
+    function step(now) {
+        let occNow = 0, total = 0;
+        for (const sm of sms) {
+            sm.flash *= 0.9;
+            for (const s of sm.slots) {
+                if (s.target > 0 && now > s.until) {
+                    s.target = 0;
+                    if (!s.counted) { s.counted = true; warps++; }
+                }
+                const rate = s.target > s.load ? 0.17 : 0.04;
+                s.load += (s.target - s.load) * rate;
+                if (s.load < 0.004) s.load = 0;
+                occNow += s.load; total++;
+            }
+        }
+        const pct = total ? Math.round((occNow / total) * 100) : 0;
+        if (pct > peak) { peak = pct; if (outPeak) outPeak.textContent = peak + '%'; }
+        if (outWarps) outWarps.textContent = String(warps);
+        return occNow > 0.01;
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, W, H);
+        const rgb = ink();
+        for (const sm of sms) {
+            let occ = 0;
+            for (const s of sm.slots) occ += s.load;
+            occ /= sm.slots.length;
+
+            if (occ > 0.02 || sm.flash > 0.02) {
+                ctx.strokeStyle = `rgba(${rgb}, ${0.05 + occ * 0.16 + sm.flash * 0.3})`;
+                ctx.lineWidth = 1;
+                ctx.strokeRect(Math.round(sm.x) - 4.5, Math.round(sm.y) - 4.5, SM_W + 9, SM_H + 9);
+            }
+            for (let i = 0; i < sm.slots.length; i++) {
+                const s = sm.slots[i];
+                const sx = sm.x + (i % SM_COLS) * (SLOT + GAP);
+                const sy = sm.y + Math.floor(i / SM_COLS) * (SLOT + GAP);
+                ctx.fillStyle = s.load < 0.01
+                    ? `rgba(${rgb}, 0.05)`
+                    : `rgba(${rgb}, ${0.08 + s.load * 0.86})`;
+                ctx.fillRect(sx, sy, SLOT, SLOT);
+            }
+        }
+    }
+
+    function frame(now) {
+        const alive = step(now);
+        draw();
+        if (alive && running) raf = requestAnimationFrame(frame);
+        else { running = false; draw(); }
+    }
+
+    function start() {
+        if (running) return;
+        if (reduced.matches) { step(performance.now() + 4000); draw(); return; }
+        running = true;
+        raf = requestAnimationFrame(frame);
+    }
+
+    canvas.addEventListener('pointerdown', (e) => {
+        const r = canvas.getBoundingClientRect();
+        dispatch(e.clientX - r.left, e.clientY - r.top);
+    });
+    canvas.addEventListener('pointermove', (e) => {
+        if (e.buttons !== 1) return;
+        const r = canvas.getBoundingClientRect();
+        dispatch(e.clientX - r.left, e.clientY - r.top);
+    });
+    btn?.addEventListener('click', () => dispatch(W * Math.random(), H * Math.random()));
+
+    window.addEventListener('resize', () => { build(); draw(); }, { passive: true });
+    build();
+    draw();
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SECTION MOTION — three systems, each one-way and fail-visible.
+   Resting state is always the finished state; the observer adds a class to
+   replay arrival. If JS or the observer never runs, the page is simply
+   already there rather than blank — the failure mode that hid five of seven
+   job cards before.
+   ══════════════════════════════════════════════════════════════════ */
+function setupSectionMotion() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!('IntersectionObserver' in window)) return;
+
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            e.target.classList.add('is-in');
+            io.unobserve(e.target);
+        });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
+
+    // 1. Section rules draw ink over their existing hairline track.
+    document.querySelectorAll('main section > h2').forEach((h2) => {
+        h2.classList.add('rule-draw');
+        io.observe(h2);
+    });
+
+    // 2. Cards arrive in a light stagger — but only the ones actually below
+    // the fold get hidden first. Hiding a card that is already on screen buys
+    // a flash and nothing else, and hiding one that never gets observed is how
+    // content disappears.
+    const fold = window.innerHeight * 0.9;
+    let staggerIndex = 0;
+    document.querySelectorAll('#projects-grid > div').forEach((card) => {
+        if (card.getBoundingClientRect().top <= fold) return;
+        card.classList.add('card-rise');
+        card.style.setProperty('--rise-delay', (staggerIndex++ % 4) * 70 + 'ms');
+        io.observe(card);
+    });
+
+    // Failsafe: whatever is still hidden after four seconds gets shown. No
+    // observer bug, scroll anchor, or restored session should be able to leave
+    // a project card blank.
+    setTimeout(() => {
+        document.querySelectorAll('.card-rise:not(.is-in)').forEach((el) => el.classList.add('is-in'));
+    }, 4000);
+
+    // 3. Metric callouts count to their value.
+    const counters = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            countUp(e.target);
+            counters.unobserve(e.target);
+        });
+    }, { threshold: 0.6 });
+    document.querySelectorAll('.proj-metric__value').forEach((el) => counters.observe(el));
+}
+
+// Animates the leading number(s) of a metric, leaving units and suffixes
+// alone. Ranges ("79–83") advance together so the label never reads as a
+// contradiction mid-count. Tabular figures mean the box never reflows.
+function countUp(el) {
+    const node = [...el.childNodes].find((n) => n.nodeType === 3 && n.textContent.trim());
+    if (!node) return;
+    const raw = node.textContent;
+    const m = raw.match(/^(\s*)(\d+(?:\.\d+)?)(\s*[–—-]\s*(\d+(?:\.\d+)?))?(.*)$/s);
+    if (!m) return;
+
+    const [, lead, aStr, rangeSep, bStr, tail] = m;
+    const a = parseFloat(aStr);
+    const b = bStr !== undefined ? parseFloat(bStr) : null;
+    const decimals = (aStr.split('.')[1] || '').length;
+    const fmt = (v) => v.toFixed(decimals);
+
+    const dur = 900;
+    const t0 = performance.now();
+    function tick(now) {
+        const p = Math.min(1, (now - t0) / dur);
+        const e = 1 - Math.pow(1 - p, 3); // ease-out cubic
+        let out = lead + fmt(a * e);
+        if (b !== null) out += rangeSep.replace(/\d+(?:\.\d+)?/, '') + fmt(b * e);
+        node.textContent = out + tail;
+        if (p < 1) requestAnimationFrame(tick);
+        else node.textContent = raw;
+    }
+    node.textContent = lead + fmt(0) + (b !== null ? rangeSep.replace(/\d+(?:\.\d+)?/, '') + fmt(0) : '') + tail;
+    requestAnimationFrame(tick);
 }

@@ -448,37 +448,10 @@ input:focus, textarea:focus, select:focus {
 }
 
 /* ── Animations & Transitions ── */
-.chat-enter {
-    animation: chatSlideIn 0.3s ease-out;
-}
 
-@keyframes chatSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
-.typing-indicator {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: var(--text-primary);
-    animation: typing 1.4s infinite ease-in-out;
-}
 
-.typing-indicator:nth-child(1) { animation-delay: -0.32s; }
-.typing-indicator:nth-child(2) { animation-delay: -0.16s; }
 
-@keyframes typing {
-    0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
-    40% { transform: scale(1); opacity: 1; }
-}
 
 /* ── Custom Scrollbar ── */
 ::-webkit-scrollbar {
@@ -500,9 +473,6 @@ input:focus, textarea:focus, select:focus {
 }
 
 /* ── Card Subtle Glow on Hover ── */
-.hover\:shadow-xl:hover {
-    box-shadow: 0 12px 30px -10px var(--accent-glow) !important;
-}
 
 /* Substack dynamic modifications */
 iframe {
@@ -545,12 +515,7 @@ iframe {
        live in the agent overlay; the chat dots and slide-in cover the widget's
        own rules above so they stay disabled wherever that markup lands. */
     .animate-pulse,
-    .typing-indicator,
-    .chat-enter,
-    .hero-status__dot {
-        animation: none !important;
-    }
-
+    
     /* Held lit rather than mid-fade: the dot still has to read as "available". */
     .hero-status__dot {
         opacity: 1;
@@ -558,11 +523,7 @@ iframe {
 
     /* The dots idle at scale(0) inside the loop; with the loop gone they have
        to be drawn at rest size or the indicator would render invisible. */
-    .typing-indicator {
-        transform: none;
-        opacity: 1;
-    }
-
+    
     /* Hover displacement is decoration here — the colour, border and shadow
        change already say "interactive". Hold position, keep the recolour. */
     .hero-btn-primary:hover,
@@ -1412,4 +1373,88 @@ h2 .font-mono {
     letter-spacing: 0.12em;
     font-variant-numeric: tabular-nums;
     line-height: 1.5;
+}
+
+/* ============================================
+   POLISH PASS
+   ============================================ */
+
+/* The Flat-Always Rule, enforced rather than described. Surfaces were carrying
+   shadow-sm at rest and a 30px hover shadow on top of it; both halves of the
+   rule were breaking in the shipped render. Depth is the hairline and the tonal
+   step, nothing else. The hero search field keeps its documented exception. */
+.timeline-card,
+.project-featured,
+#projects-grid > div,
+#mobile-nav-menu,
+#agent-mode-overlay > div,
+#hero picture img,
+#hero img {
+    box-shadow: none;
+}
+
+/* Agent Mode dialog: controls sized to a real target. The close button was
+   20x25 — under WCAG 2.5.8's 24x24 floor on its narrow axis — inside a dialog
+   that, until this pass, could not be dismissed from the keyboard at all. */
+.agent-close {
+    /* Position lives here, not in utilities: `top-3` and `right-3` are not in
+       the frozen Tailwind subset, and using them silently dropped the button to
+       the panel's left edge. Insets are pulled in so the 44px target sits flush
+       with the panel's corner without pushing the title down. */
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 9999px;
+}
+
+.agent-close:focus-visible,
+#copy-prompt-btn:focus-visible {
+    outline: 2px solid var(--text-primary);
+    outline-offset: 2px;
+}
+
+#copy-prompt-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 44px;
+    padding-inline: 8px;
+    margin-inline: -8px;
+}
+
+#agent-mode-overlay:focus-visible {
+    outline: none;
+}
+
+/* The field owns no border: the pill around it already draws one, and the two
+   together rendered as a visible box inside a box on the most-used control
+   above the fold. */
+#chat-input {
+    /* !important because the global `input, textarea, select` shim sets a 1px
+       bordered field with !important, which an ID selector alone cannot beat.
+       Narrowed to this one control rather than weakening the shim. */
+    border: 0 !important;
+    background: transparent !important;
+}
+
+/* "Check my work" should not be the quietest thing in the card. These are the
+   only route a sceptical reader has to verify a claim, and they were 16px tall
+   at the bottom of every project. Same label treatment, real target. */
+#projects-grid a.inline-flex,
+#blogs a.inline-flex {
+    min-height: 44px;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 2px;
+    transition: border-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#projects-grid a.inline-flex:hover,
+#blogs a.inline-flex:hover {
+    border-bottom-color: var(--accent);
 }

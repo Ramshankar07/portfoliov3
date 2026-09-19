@@ -474,22 +474,75 @@ function setupAgentModeDashboard() {
 
     if (!toggleBtn || !overlay) return;
 
-    // Toggle Overlay Visible
-    toggleBtn.addEventListener('click', () => {
+    // The overlay is a modal dialog. Before this it was a div that appeared:
+    // focus never entered it, the eight controls behind it stayed tabbable and
+    // invisible, Escape did nothing, and the only way out was a mouse click on
+    // the backdrop or a 20x25px close button. Keyboard and screen-reader users
+    // were simply stuck.
+    const FOCUSABLE = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+    let lastFocused = null;
+
+    const focusablesIn = () =>
+        [...overlay.querySelectorAll(FOCUSABLE)].filter((el) => el.offsetParent !== null);
+
+    const showOverlay = () => {
+        lastFocused = document.activeElement;
         overlay.classList.remove('hidden');
         document.body.classList.add('overflow-hidden'); // Block page scroll
-    });
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        // Land on the panel itself rather than the close button, so a screen
+        // reader announces the dialog and its title before its first control.
+        overlay.focus({ preventScroll: true });
+    };
 
     const hideOverlay = () => {
         overlay.classList.add('hidden');
         document.body.classList.remove('overflow-hidden');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        // Return focus where it came from; otherwise it falls to <body> and the
+        // next Tab restarts at the top of the page.
+        (lastFocused || toggleBtn).focus({ preventScroll: true });
+        lastFocused = null;
     };
 
+    const isOpen = () => !overlay.classList.contains('hidden');
+
+    toggleBtn.addEventListener('click', showOverlay);
     closeBtn?.addEventListener('click', hideOverlay);
-    
+
     // Close on clicking overlay background
     overlay.addEventListener('click', (e) => {
         if (e.target === overlay) hideOverlay();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (!isOpen()) return;
+
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            hideOverlay();
+            return;
+        }
+
+        if (e.key !== 'Tab') return;
+
+        // Trap: cycle within the dialog instead of walking the page behind it.
+        const items = focusablesIn();
+        if (!items.length) { e.preventDefault(); return; }
+        const first = items[0];
+        const last = items[items.length - 1];
+        const active = document.activeElement;
+
+        if (!overlay.contains(active)) {
+            e.preventDefault();
+            (e.shiftKey ? last : first).focus();
+        } else if (e.shiftKey && active === first) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && active === last) {
+            e.preventDefault();
+            first.focus();
+        }
     });
 
     // Copy Prompt to Clipboard

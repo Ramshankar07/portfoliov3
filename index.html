@@ -151,7 +151,7 @@
     <link rel="stylesheet" href="css/icons.css">
 
     <!-- Custom Design Styling -->
-    <link rel="stylesheet" href="styles.css?v=20260919c">
+    <link rel="stylesheet" href="styles.css?v=20260919d">
 </head>
 
 <body class="bg-[#FAF9F6] text-[#111111] dark:bg-[#080808] dark:text-[#F5F5F7] antialiased">
@@ -177,7 +177,7 @@
                 
                 <!-- Navbar Toggles -->
                 <div class="nav-toggles flex items-center">
-                    <button id="agent-mode-toggle" class="nav-icon-btn text-gray-700 dark:text-neutral-300" aria-label="Toggle Agent Mode" title="Toggle AI Agent Mode Dashboard">
+                    <button id="agent-mode-toggle" class="nav-icon-btn text-gray-700 dark:text-neutral-300" aria-label="Open Agent Mode" aria-expanded="false" aria-controls="agent-mode-overlay" title="Toggle AI Agent Mode Dashboard">
                         <i class="fas fa-robot text-xs"></i>
                     </button>
 
@@ -196,7 +196,7 @@
         </div>
         
         <!-- Mobile Dropdown Menu -->
-        <ul id="mobile-nav-menu" class="hidden flex-col bg-white dark:bg-black w-full border-b border-gray-200 dark:border-neutral-800 p-6 space-y-4 shadow-xl" role="menu" aria-label="Mobile">
+        <ul id="mobile-nav-menu" class="hidden flex-col bg-white dark:bg-black w-full border-b border-gray-200 dark:border-neutral-800 p-6 space-y-4" role="menu" aria-label="Mobile">
             <li><a href="#hero" class="block font-medium py-1">Home</a></li>
             <li><a href="#about" class="block font-medium py-1">About</a></li>
             <li><a href="#projects" class="block font-medium py-1">Systems</a></li>
@@ -246,7 +246,7 @@
                             <img src="img/hero-section-576.jpg" alt="Ramshankar Bhuvaneswaran - Portrait"
                                 width="288" height="288"
                                 fetchpriority="high" decoding="async"
-                                class="w-72 h-72 rounded-full object-cover border border-gray-300 dark:border-neutral-700 shadow-2xl relative transition-transform duration-500 group-hover:scale-[1.02]">
+                                class="w-72 h-72 rounded-full object-cover border border-gray-300 dark:border-neutral-700 relative">
                         </picture>
                     </div>
 
@@ -392,7 +392,7 @@
             <div class="grid md:grid-cols-2 gap-8" id="projects-grid">
 
                 <!-- Featured 1 — GRPO kernel agent -->
-                <div class="project-featured p-8 md:p-10 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-2xl hover:shadow-xl transition-all duration-300" data-category="distributed training inference eval">
+                <div class="project-featured p-8 md:p-10 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-2xl transition-all duration-300" data-category="distributed training inference eval">
                     <div class="feat-grid">
                         <div class="space-y-4 md:border-r feat-divider md:pr-8">
                             <span class="feat-eyebrow"><span class="feat-dot"></span> Featured</span>
@@ -463,7 +463,7 @@
                 </div>
 
                 <!-- Featured 2 — Blackwell NVFP4 -->
-                <div class="project-featured p-8 md:p-10 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-2xl hover:shadow-xl transition-all duration-300" data-category="inference training">
+                <div class="project-featured p-8 md:p-10 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-2xl transition-all duration-300" data-category="inference training">
                     <div class="feat-grid">
                         <div class="space-y-4 md:border-r feat-divider md:pr-8">
                             <span class="feat-eyebrow"><span class="feat-dot"></span> Featured</span>
@@ -493,7 +493,7 @@
                 </div>
 
                 <!-- Qwen600 ROCm port -->
-                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="inference">
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 transition-all duration-300" data-category="inference">
                     <div class="space-y-4">
                         <h3 class="text-2xl font-bold leading-snug">Qwen600 Inference: CUDA &#8594; ROCm Port for AMD MI300X</h3>
                         <div class="proj-metric-stack">
@@ -522,7 +522,7 @@
                 </div>
 
                 <!-- Llama3 pure C/CUDA -->
-                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="training inference">
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 transition-all duration-300" data-category="training inference">
                     <div class="space-y-4">
                         <h3 class="text-2xl font-bold leading-snug">Llama 3.1 Training &amp; Inference in Pure C/CUDA</h3>
                         <div class="proj-metric"><span class="proj-metric__value">2.3&#215;</span><span class="proj-metric__label">RMSNorm kernel speedup</span></div>
@@ -542,7 +542,7 @@
                 </div>
 
                 <!-- Diffusion / Dask scaling -->
-                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="training distributed">
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 transition-all duration-300" data-category="training distributed">
                     <div class="space-y-4">
                         <h3 class="text-2xl font-bold leading-snug">Scaling Diffusion Training: Dask Preprocessing + AMP</h3>
                         <div class="proj-metric"><span class="proj-metric__value">1.48&#215;</span><span class="proj-metric__label">Preprocessing throughput scaling</span></div>
@@ -564,7 +564,7 @@
                 </div>
 
                 <!-- SFT-DPO end-to-end -->
-                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300" data-category="training eval">
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 transition-all duration-300" data-category="training eval">
                     <div class="space-y-4">
                         <h3 class="text-2xl font-bold leading-snug">End-to-End SFT&#8594;DPO Pipeline on SageMaker</h3>
                         <div class="proj-metric"><span class="proj-metric__value">123<span class="unit">K</span></span><span class="proj-metric__label">Samples through the ETL path</span></div>
@@ -611,7 +611,7 @@
                     <!-- Experience Item: Abundant (current) -->
                     <div class="relative pl-12 experience-item-mobile">
                         <div class="timeline-node absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
-                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 space-y-4 transition-all duration-300">
                             <div class="flex flex-wrap justify-between items-start gap-2">
                                 <div>
                                     <h3 class="text-xl font-bold">GPU Kernel Engineer</h3>
@@ -631,7 +631,7 @@
                     <!-- Experience Item 0 -->
                     <div class="relative pl-12 experience-item-mobile">
                         <div class="timeline-node absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
-                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 space-y-4 transition-all duration-300">
                             <div class="flex flex-wrap justify-between items-start gap-2">
                                 <div>
                                     <h3 class="text-xl font-bold">GPU Kernel Engineer</h3>
@@ -651,7 +651,7 @@
                     <!-- Experience Item 1 -->
                     <div class="relative pl-12 experience-item-mobile">
                         <div class="timeline-node absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
-                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 space-y-4 transition-all duration-300">
                             <div class="flex flex-wrap justify-between items-start gap-2">
                                 <div>
                                     <h3 class="text-xl font-bold">AI Engineer</h3>
@@ -673,7 +673,7 @@
                     <!-- Experience Item 2 -->
                     <div class="relative pl-12 experience-item-mobile">
                         <div class="timeline-node absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
-                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 space-y-4 transition-all duration-300">
                             <div class="flex flex-wrap justify-between items-start gap-2">
                                 <div>
                                     <h3 class="text-xl font-bold">Graduate Teaching and Research Assistant</h3>
@@ -696,7 +696,7 @@
                     <!-- Experience Item 3 -->
                     <div class="relative pl-12 experience-item-mobile">
                         <div class="timeline-node absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
-                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 space-y-4 transition-all duration-300">
                             <div class="flex flex-wrap justify-between items-start gap-2">
                                 <div>
                                     <h3 class="text-xl font-bold">AI Engineer</h3>
@@ -718,7 +718,7 @@
                     <!-- Experience Item 4 -->
                     <div class="relative pl-12 experience-item-mobile">
                         <div class="timeline-node absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
-                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 space-y-4 transition-all duration-300">
                             <div class="flex flex-wrap justify-between items-start gap-2">
                                 <div>
                                     <h3 class="text-xl font-bold">ML Engineer (Research)</h3>
@@ -740,7 +740,7 @@
                     <!-- Experience Item 5 -->
                     <div class="relative pl-12 experience-item-mobile">
                         <div class="timeline-node absolute left-3.5 top-1.5 w-3.5 h-3.5 bg-[#FAF9F6] dark:bg-[#080808] border-2 border-black dark:border-white rounded-full z-10"></div>
-                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-4 hover:shadow-xl transition-all duration-300">
+                        <div class="timeline-card bg-white dark:bg-[#151515] p-8 rounded-xl border border-gray-200 dark:border-neutral-800 space-y-4 transition-all duration-300">
                             <div class="flex flex-wrap justify-between items-start gap-2">
                                 <div>
                                     <h3 class="text-xl font-bold">ML Engineer Intern</h3>
@@ -809,7 +809,7 @@
             </div>
 
             <!-- Featured Blog Post -->
-            <div class="bg-white dark:bg-[#151515] p-10 md:p-12 rounded-2xl border border-gray-200 dark:border-neutral-800 shadow-sm space-y-6">
+            <div class="bg-white dark:bg-[#151515] p-10 md:p-12 rounded-2xl border border-gray-200 dark:border-neutral-800 space-y-6">
                 <span class="px-3 py-1 text-xs font-semibold uppercase tracking-wider bg-gray-100 dark:bg-neutral-800 border rounded-full">Featured Article</span>
                 <div class="space-y-4">
                     <h3 class="text-2xl font-bold leading-tight">How I Customized Llama 3.1 8B on a Budget</h3>
@@ -826,7 +826,7 @@
             <!-- Recent Blog Grid -->
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Blog 1 -->
-                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 transition-all duration-300 flex flex-col justify-between">
                     <div class="space-y-4">
                         <h4 class="text-xl font-bold leading-snug">GPU MODE NVFP4 Blackwell Challenge</h4>
                         <p class="text-xs text-gray-400">Mar 13, 2026</p>
@@ -840,7 +840,7 @@
                 </div>
 
                 <!-- Blog 2 -->
-                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 transition-all duration-300 flex flex-col justify-between">
                     <div class="space-y-4">
                         <h4 class="text-xl font-bold leading-snug">AMD FlyDSL — competes with CuTe/Cutlass?</h4>
                         <p class="text-xs text-gray-400">Mar 4, 2026</p>
@@ -854,7 +854,7 @@
                 </div>
 
                 <!-- Blog 3 -->
-                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                <div class="p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-xl space-y-6 transition-all duration-300 flex flex-col justify-between">
                     <div class="space-y-4">
                         <h4 class="text-xl font-bold leading-snug">Optimizing LLMs on AMD MI300X</h4>
                         <p class="text-xs text-gray-400">Jan 2025</p>
@@ -878,7 +878,7 @@
             </div>
 
             <div class="flex justify-center pt-8 border-t border-gray-200 dark:border-neutral-800">
-                <div class="w-full max-w-md p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-2xl shadow-sm text-center space-y-4">
+                <div class="w-full max-w-md p-8 bg-white dark:bg-[#151515] border border-gray-200 dark:border-neutral-800 rounded-2xl text-center space-y-4">
                     <span class="inline-flex items-center justify-center w-11 h-11 rounded-full border border-gray-200 dark:border-neutral-800 text-black dark:text-white" aria-hidden="true">
                         <i class="fas fa-envelope"></i>
                     </span>
@@ -950,7 +950,7 @@
     <footer class="border-t border-gray-200 dark:border-neutral-800 py-12 mt-32 text-center text-xs text-gray-500">
         <div class="max-w-6xl mx-auto px-6 space-y-4">
             <p>&copy; 2026 Ramshankar Bhuvaneswaran. All rights reserved.</p>
-            <p class="text-xs text-gray-400">🤖 AI Agent friendly. Exposing plain-text links in accordance with <a href="https://agnts.sh/docs" target="_blank" class="underline hover:text-black dark:hover:text-white" rel="noopener noreferrer">agnts.sh/docs</a>. Try activating [Agent Mode] in the navigation bar.</p>
+            <p class="text-xs text-gray-400">AI Agent friendly. Exposing plain-text links in accordance with <a href="https://agnts.sh/docs" target="_blank" class="underline hover:text-black dark:hover:text-white" rel="noopener noreferrer">agnts.sh/docs</a>. Try activating [Agent Mode] in the navigation bar.</p>
         </div>
     </footer>
 
@@ -960,11 +960,11 @@
     </div>
 
     <!-- Visual Agent Mode Overlay Console -->
-    <div id="agent-mode-overlay" class="hidden fixed inset-0 bg-black/95 backdrop-blur-md z-50 overflow-y-auto p-6 md:p-12 flex justify-center items-center">
-        <div class="bg-[#0B0B0B] border border-neutral-800 rounded-2xl max-w-4xl w-full p-8 md:p-10 space-y-8 shadow-2xl relative text-neutral-300 font-mono">
+    <div id="agent-mode-overlay" class="hidden fixed inset-0 bg-black/95 backdrop-blur-md z-50 overflow-y-auto p-6 md:p-12 flex justify-center items-center" role="dialog" aria-modal="true" aria-labelledby="agent-mode-title" tabindex="-1">
+        <div class="bg-[#0B0B0B] border border-neutral-800 rounded-2xl max-w-4xl w-full p-8 md:p-10 space-y-8 relative text-neutral-300 font-mono">
             
             <!-- Close Button -->
-            <button id="close-agent-mode" class="absolute top-6 right-6 text-neutral-500 hover:text-white transition-colors" aria-label="Close Agent Mode">
+            <button id="close-agent-mode" class="agent-close absolute text-neutral-500 hover:text-white transition-colors" aria-label="Close Agent Mode">
                 <i class="fas fa-times text-xl"></i>
             </button>
             
@@ -973,7 +973,7 @@
                 <div class="space-y-1">
                     <div class="flex items-center gap-3">
                         <span class="w-3 h-3 bg-white rounded-full animate-pulse"></span>
-                        <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight">[AGENT_MODE_DASHBOARD: ACTIVE]</h2>
+                        <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight"><span id="agent-mode-title">[AGENT_MODE_DASHBOARD: ACTIVE]</span></h2>
                     </div>
                     <p class="text-xs text-neutral-500">Exposing structured API tools and markdown documentation optimized for LLMs & AI Scrapers.</p>
                 </div>
@@ -988,7 +988,7 @@
                 
                 <!-- WebMCP Tools Registry -->
                 <div class="space-y-6">
-                    <h3 class="text-sm font-bold text-white uppercase border-b border-neutral-900 pb-2">🤖 WebMCP Tools Registry</h3>
+                    <h3 class="text-sm font-bold text-white uppercase border-b border-neutral-900 pb-2">WebMCP Tools Registry</h3>
                     
                     <div class="space-y-4">
                         <!-- Tool 1 -->
@@ -1010,8 +1010,8 @@ GET /api/chat {
                 <!-- AI Agent System Prompt -->
                 <div class="space-y-4">
                     <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
-                        <h3 class="text-sm font-bold text-white uppercase">📋 System Prompt</h3>
-                        <button id="copy-prompt-btn" class="text-xs hover:text-white text-neutral-500 flex items-center gap-1.5 transition-colors">
+                        <h3 class="text-sm font-bold text-white uppercase">System Prompt</h3>
+                        <button id="copy-prompt-btn" data-touch-target class="text-xs hover:text-white text-neutral-500 flex items-center gap-1.5 transition-colors">
                             <i class="fas fa-copy"></i> Copy Prompt
                         </button>
                     </div>
@@ -1041,7 +1041,7 @@ You are an AI assistant analyzing Ramshankar's portfolio.
             <!-- Raw Markdown Viewer -->
             <div class="space-y-4 pt-4 border-t border-neutral-800">
                 <div class="flex justify-between items-center">
-                    <h3 class="text-sm font-bold text-white uppercase">📄 Raw Profile Markdown</h3>
+                    <h3 class="text-sm font-bold text-white uppercase">Raw Profile Markdown</h3>
                     <a href="https://agnts.sh/ramshankar?raw" target="_blank" class="text-xs text-neutral-500 hover:text-white flex items-center gap-1 transition-colors" rel="noopener noreferrer">
                          agnts.sh/ramshankar?raw <i class="fas fa-external-link-alt icon-inline ml-0.5"></i>
                     </a>
@@ -1070,7 +1070,7 @@ You are an AI assistant analyzing Ramshankar's portfolio.
     </nav>
 
     <!-- Core Script Assets -->
-    <script src="script.js?v=20260919a" defer></script>
+    <script src="script.js?v=20260919d" defer></script>
     <script src="three-bg.js?v=20260819b" defer></script>
 </body>
 

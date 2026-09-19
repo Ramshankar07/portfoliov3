@@ -271,6 +271,10 @@ Borders are always exactly 1px and always `var(--border-color)`, with one except
 
 **The Hairline Rule.** 1px, `var(--border-color)`, no exceptions for emphasis. A heavier border is not available as an emphasis device; use fill inversion instead.
 
+**The Surface-Only Rule.** The radius scale describes *surfaces*. Two values sit outside it on purpose and are not drift: the `2px` cap on the 2px timeline ink rail, and the `4px` webkit scrollbar thumb. Both are line furniture a few pixels wide, where a surface radius would be meaningless.
+
+**The Still-Image Rule.** Imagery does not move on hover. A scale or rotate on an `<img>` is a generated-UI signature, and this world already communicates interactivity through border, fill inversion, and the hairline.
+
 ## Components
 
 ### Buttons

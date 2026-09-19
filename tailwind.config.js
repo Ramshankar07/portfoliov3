@@ -12,14 +12,9 @@ module.exports = {
         sans: ['Inter', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
       },
-      colors: {
-        primary: {
-          50: '#eff6ff',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-        },
-      },
+      // No `colors` block: the system is monochrome by binding commitment
+      // (DESIGN.md, The No-Color Rule). A blue `primary` ramp lived here unused
+      // and read as permission to introduce a hue.
     },
   },
   plugins: [],

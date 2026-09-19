@@ -342,11 +342,17 @@ An RTX 5090 in isometric ASCII, spanning the frame edge to edge, half submerged,
 
 **The waterline.** A gradient mask takes the lower half. A hard crop reads as a mistake; a fade reads as the card going under.
 
-**Motion thesis: the fans answer the load.** Work arrives as a wave travelling the length of the board; parts in its path light up. Heat accumulates in whichever zone the wave is over — quickly under load, bleeding off slowly, because a heatsink has mass. Each rotor's RPM then chases its own zone's temperature, and chases it slower still. That lag is the point: the fan spools up *behind* the work and is still winding down once the work has gone.
+**Motion thesis: the card runs an inference.** The loop is the argument the rest of the page makes, played out on the board. Weights sit resident in the memory zones and never go fully dark. A query enters at the PCIe edge and runs to the die. Decode is then one sweep per token, pulling weights from alternating memory zones back into the die — which is why the loop is mostly traffic and barely any compute, and why 79–83% of peak bandwidth is the number that matters. The answer leaves the way it came.
+
+**The fans answer that load.** Work arrives as a wave travelling the length of the board; parts in its path light up. Heat accumulates in whichever zone the wave is over — quickly under load, bleeding off slowly, because a heatsink has mass. Each rotor's RPM then chases its own zone's temperature, and chases it slower still. That lag is the point: the fan spools up *behind* the work and is still winding down once the work has gone.
 
 This replaced three hardcoded rates with a slow wobble. Both produce fans that disagree, but only one of them means anything — here the rotors desynchronise because their zones are loaded at different moments, and the spin-up is readable as a consequence rather than as decoration. A working rotor also brightens with its zone's temperature, so the response is visible as well as measurable. Remove the coupling and the piece loses its argument, not just an effect.
 
+**The rotor is eleven wide backward-swept blades**, spanning hub to rim and overlapping into a near-solid disc, with the hub at roughly a third of the diameter. Three shapes were built and compared before this one was chosen — a ringed variant with a rim joining the blade tips, and a deep-pitch eight-blade turbine. The version before all of them was thin boxes parked at a fixed radius: spokes, not blades, which is precisely why it never read as a fan. Blades are swept about their own centre before being rotated about the hub, so they sit at an angle to the radius rather than pointing straight out.
+
 Blades rotate about their own fan axis per frame and re-project; spinning parts keep both away-faces, since their faces swap sides as they turn.
+
+**The heatsink is 30 discrete fins**, not one slab. That is what a heatsink is, and it is also what gives the inference loop somewhere to happen — each fin lights on its own, so activity can travel the length of the card.
 
 Rendered like the hero lattice: shaded into an offscreen buffer at character resolution, then sampled per cell through a density ramp (`@%#*+=-:.`). Fades in on entry, pauses off-screen and on hidden tabs, holds one settled frame under `prefers-reduced-motion`. The `<figcaption>` is `sr-only` and describes the card in full.
 

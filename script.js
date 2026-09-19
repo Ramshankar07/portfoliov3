@@ -712,35 +712,44 @@ function setupDiemark() {
     const part = (x, y, z, w, h, d, tone, kind, spin) =>
         parts.push({ x, y, z, w, h, d, tone, kind, spin: spin || null, lit: 0 });
 
-    // An RTX 5090: Blackwell, the consumer side of the architecture the NVFP4
-    // kernels further up this page were written against. x runs the length of
-    // the card, z its depth, -y is up.
-    part(0, 0.30, 0, 13.6, 0.22, 4.6, 0.22, 'pcb');              // board
-    part(0, -0.10, 0, 12.6, 0.64, 4.3, 0.30, 'heatsink');        // fin stack
-    part(0, -0.46, 0, 12.9, 0.16, 4.5, 0.46, 'shroud');          // shroud lip
-    part(0, 0.44, 0, 12.9, 0.10, 4.5, 0.34, 'backplate');        // backplate
+    part(0, 0.30, 0, 13.6, 0.22, 4.6, 0.22, 'pcb');
+    part(0, -0.44, 0, 12.9, 0.16, 4.5, 0.38, 'shroud');
+    part(0, 0.44, 0, 12.9, 0.10, 4.5, 0.34, 'backplate');
 
-    // Three fans. The hub and blades are rotated about the fan's own axis each
-    // frame, which is the only motion on the card that had to be real 3D
-    // rather than a brightness trick.
+    // The fin stack is 30 discrete fins rather than one slab. That is what a
+    // heatsink actually is, and it is also what lets light travel through the
+    // card: each fin lights on its own, so the inference loop has somewhere to
+    // happen.
+    const FIN_N = 30;
+    for (let i = 0; i < FIN_N; i++) {
+        const fx = -6.0 + (i / (FIN_N - 1)) * 12.0;
+        part(fx, -0.12, 0, 0.16, 0.58, 4.25, 0.3, 'fin');
+        parts[parts.length - 1].fx = fx;
+        parts[parts.length - 1].fi = i;
+    }
+
     const FAN_X = [-4.35, 0, 4.35];
     FAN_X.forEach((fx, fi) => {
-        // Aperture first, then the rotor above it. The rotor clears the shroud
-        // lip by a clear margin — at equal heights the lip's top face simply
-        // painted over the blades.
-        part(fx, -0.52, 0, 2.9, 0.05, 2.9, 0.12, 'fanring');
-        part(fx, -0.66, 0, 0.5, 0.16, 0.5, 0.85, 'hub');
-        for (let i = 0; i < 9; i++) {
-            const a = (i / 9) * Math.PI * 2;
-            part(fx + Math.cos(a) * 0.78, -0.64, Math.sin(a) * 0.78,
-                 0.78, 0.1, 0.3, 0.9, 'blade', { cx: fx, cz: 0, base: a, fi });
+        part(fx, -0.5, 0, 3.0, 0.05, 3.0, 0.1, 'fanring');
+
+        // Eleven wide backward-swept blades spanning hub to rim, overlapping
+        // into a near-solid disc. The previous rotor was thin boxes parked at
+        // a fixed radius — spokes, not blades — which is why it never read as
+        // a fan. A real axial rotor is mostly blade: the hub is roughly a
+        // third of the diameter and the blades close nearly all of the rest.
+        part(fx, -0.64, 0, 1.05, 0.2, 1.05, 0.8, 'hub', { cx: fx, cz: 0, base: 0, fi });
+        for (let i = 0; i < 11; i++) {
+            const a2 = (i / 11) * Math.PI * 2;
+            part(fx + Math.cos(a2) * 0.57, -0.62, Math.sin(a2) * 0.57,
+                 1.28, 0.1, 0.62, 0.88, 'blade', { cx: fx, cz: 0, base: a2, fi, sweep: 0.5 });
         }
     });
 
-    part(-6.15, -0.2, 0.4, 0.55, 0.5, 2.4, 0.4, 'io');           // display outputs
-    part(4.9, -0.78, -1.5, 1.0, 0.36, 0.9, 0.52, 'power');       // 16-pin connector
-    for (let i = 0; i < 16; i++) {                                // PCIe edge fingers
+    part(-6.15, -0.2, 0.4, 0.55, 0.5, 2.4, 0.4, 'io');
+    part(4.9, -0.78, -1.5, 1.0, 0.36, 0.9, 0.52, 'power');
+    for (let i = 0; i < 16; i++) {
         part(-5.0 + i * 0.4, 0.46, 2.44, 0.26, 0.1, 0.5, 0.58, 'pcie');
+        parts[parts.length - 1].fx = -5.0 + i * 0.4;
     }
 
     const FACES = [
@@ -758,10 +767,21 @@ function setupDiemark() {
             [b.x+hw, b.y+hh, b.z+hd], [b.x-hw, b.y+hh, b.z+hd]
         ];
         if (!b.spin) return v;
-        // Spin about the fan's own vertical axis.
+        let pts = v;
+        // Sweep: turn the blade about its own centre first, so it sits at an
+        // angle to the radius instead of pointing straight out. Straight radial
+        // blades are the main reason the old rotor read as spokes.
+        if (b.spin.sweep) {
+            const sw = b.spin.base + Math.PI / 2 + b.spin.sweep;
+            const cs = Math.cos(sw), ss = Math.sin(sw);
+            pts = pts.map(([x, y, z]) => {
+                const dx = x - b.x, dz = z - b.z;
+                return [b.x + dx * cs - dz * ss, y, b.z + dx * ss + dz * cs];
+            });
+        }
         const a = fans[b.spin.fi].angle;
         const ca = Math.cos(a), sa = Math.sin(a);
-        return v.map(([x, y, z]) => {
+        return pts.map(([x, y, z]) => {
             const dx = x - b.spin.cx, dz = z - b.spin.cz;
             return [b.spin.cx + dx * ca - dz * sa, y, b.spin.cz + dx * sa + dz * ca];
         });
@@ -786,35 +806,99 @@ function setupDiemark() {
         return [(r[0] - r[2]) * ISO_X, ((r[0] + r[2]) * ISO_Y + r[1]) * ASPECT];
     }
 
+    // ── Inference loop ────────────────────────────────────────────────────
+    // The story the rest of this page argues, played out on the board:
+    // weights sit resident in memory, a query arrives over PCIe, and decode is
+    // the die pulling those weights back across the bus once per token. That
+    // last part is why the loop is mostly traffic and not mostly compute —
+    // decode is memory-bound, which is what 79–83% of peak bandwidth means.
+    const PHASE = { IDLE: 0, QUERY: 1, DECODE: 2, EMIT: 3 };
+    const MEM_ZONES = [-4.6, -2.6, 2.6, 4.6];   // where the weights live
+    const DIE_X = 0;
+    let phase = PHASE.IDLE, phaseT = 0, token = 0, tokensThisRun = 0, streamX = 0;
+
     function animate() {
         t += 0.016;
+        phaseT += 0.016;
 
-        // Work arrives as a wave travelling the length of the board. Parts in
-        // its path light up; that is the compute actually happening.
-        const head = ((t * 2.1) % 22) - 7.4;
+        let queryX = null, streamFrom = null, emitX = null;
+
+        if (phase === PHASE.IDLE) {
+            if (phaseT > 1.1) { phase = PHASE.QUERY; phaseT = 0; tokensThisRun = 5 + Math.floor(Math.random() * 4); token = 0; }
+        } else if (phase === PHASE.QUERY) {
+            // A prompt enters at the edge connector and runs to the die.
+            const p2 = Math.min(1, phaseT / 0.75);
+            queryX = -6.2 + p2 * (DIE_X + 6.2);
+            if (p2 >= 1) { phase = PHASE.DECODE; phaseT = 0; }
+        } else if (phase === PHASE.DECODE) {
+            // One sweep per token: weights stream from a memory zone into the
+            // die. Alternating zones, because a layer's weights are not all in
+            // one place.
+            const per = 0.42;
+            const k = Math.floor(phaseT / per);
+            const frac = (phaseT % per) / per;
+            if (k >= tokensThisRun) { phase = PHASE.EMIT; phaseT = 0; }
+            else {
+                streamFrom = MEM_ZONES[k % MEM_ZONES.length];
+                streamX = streamFrom + (DIE_X - streamFrom) * frac;
+                token = k + 1;
+            }
+        } else {
+            const p2 = Math.min(1, phaseT / 0.6);
+            emitX = DIE_X + p2 * (6.2 - DIE_X);
+            if (p2 >= 1) { phase = PHASE.IDLE; phaseT = 0; }
+        }
+
         for (const p of parts) {
             let target = 0;
-            if (p.kind === 'pcie' || p.kind === 'power' || p.kind === 'heatsink') {
-                const d = Math.abs(p.x - head);
-                if (d < 2.6) target = 1 - d / 2.6;
+            const px = p.fx !== undefined ? p.fx : p.x;
+
+            if (p.kind === 'fin') {
+                // Weights are always resident: the memory zones never go fully
+                // dark, they just idle.
+                for (const m of MEM_ZONES) {
+                    const dm = Math.abs(px - m);
+                    if (dm < 1.0) target = Math.max(target, 0.16 * (1 - dm / 1.0));
+                }
+                if (phase === PHASE.DECODE) {
+                    const dd = Math.abs(px - streamX);
+                    if (dd < 1.5) target = Math.max(target, 1 - dd / 1.5);
+                    const dc = Math.abs(px - DIE_X);
+                    if (dc < 1.1) target = Math.max(target, 0.55 * (1 - dc / 1.1));
+                }
+                if (queryX !== null) {
+                    const dq = Math.abs(px - queryX);
+                    if (dq < 1.1) target = Math.max(target, 0.9 * (1 - dq / 1.1));
+                }
+                if (emitX !== null) {
+                    const de = Math.abs(px - emitX);
+                    if (de < 1.1) target = Math.max(target, 0.9 * (1 - de / 1.1));
+                }
+            } else if (p.kind === 'pcie') {
+                if (queryX !== null && queryX < -3.5) target = 0.95;
+                if (emitX !== null && emitX > 3.5) target = 0.95;
+            } else if (p.kind === 'power') {
+                target = phase === PHASE.DECODE ? 0.7 : 0.12;
             }
-            const rate = target > p.lit ? 0.14 : 0.045;
+
+            const rate = target > p.lit ? 0.22 : 0.06;
             p.lit += (target - p.lit) * rate;
         }
 
+        if (window.__DIEMARK_DEBUG) {
+            window.__dbg = { phase, phaseT: +phaseT.toFixed(2), token, streamX: +streamX.toFixed(2),
+                finLit: parts.filter(q => q.kind === 'fin').map(q => +q.lit.toFixed(2)) };
+        }
+
+        // Fans still answer the load — and the load is now the decode itself.
         for (let i = 0; i < fans.length; i++) {
             const f = fans[i];
-
-            // Heat accumulates where the work is. Rises quickly under load and
-            // bleeds off slowly — a heatsink has mass, so the zone stays warm
-            // well after the wave has moved on.
-            const d = Math.abs(f.x - head);
-            const load = d < 3.2 ? 1 - d / 3.2 : 0;
+            let load = 0;
+            if (phase === PHASE.DECODE) {
+                const d = Math.abs(f.x - streamX);
+                load = Math.max(0.35, d < 3.4 ? 1 - d / 3.4 : 0);
+            }
             f.temp += (load - f.temp) * (load > f.temp ? 0.035 : 0.006);
-
-            // RPM chases temperature, not the wave, and chases it slower still.
-            // That lag is the whole point: the fan spools up behind the work
-            // and is still winding down once the work has gone.
             const wanted = f.idle + f.temp * 0.085;
             f.rpm += (wanted - f.rpm) * 0.022;
             f.angle += f.rpm;

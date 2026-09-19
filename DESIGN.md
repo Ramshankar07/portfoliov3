@@ -342,7 +342,11 @@ An RTX 5090 in isometric ASCII, spanning the frame edge to edge, half submerged,
 
 **The waterline.** A gradient mask takes the lower half. A hard crop reads as a mistake; a fade reads as the card going under.
 
-**The fans do not agree.** Three rotors, three rates, three starting phases, plus a slow sinusoidal wobble on each so any two that drift into step fall back out of it. Identical fans turning in lockstep is the tell that something is drawn rather than running — the eye catches the agreement immediately, and that single detail was the difference between a diagram and a machine. Blades rotate about their own fan axis per frame and re-project; spinning parts keep both away-faces, since their faces swap sides as they turn.
+**Motion thesis: the fans answer the load.** Work arrives as a wave travelling the length of the board; parts in its path light up. Heat accumulates in whichever zone the wave is over — quickly under load, bleeding off slowly, because a heatsink has mass. Each rotor's RPM then chases its own zone's temperature, and chases it slower still. That lag is the point: the fan spools up *behind* the work and is still winding down once the work has gone.
+
+This replaced three hardcoded rates with a slow wobble. Both produce fans that disagree, but only one of them means anything — here the rotors desynchronise because their zones are loaded at different moments, and the spin-up is readable as a consequence rather than as decoration. A working rotor also brightens with its zone's temperature, so the response is visible as well as measurable. Remove the coupling and the piece loses its argument, not just an effect.
+
+Blades rotate about their own fan axis per frame and re-project; spinning parts keep both away-faces, since their faces swap sides as they turn.
 
 Rendered like the hero lattice: shaded into an offscreen buffer at character resolution, then sampled per cell through a density ramp (`@%#*+=-:.`). Fades in on entry, pauses off-screen and on hidden tabs, holds one settled frame under `prefers-reduced-motion`. The `<figcaption>` is `sr-only` and describes the card in full.
 

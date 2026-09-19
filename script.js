@@ -696,10 +696,14 @@ function setupDiemark() {
     // Three rotors, three speeds, three starting phases. Identical fans turning
     // in lockstep is the tell that something is drawn rather than running —
     // real cards never agree, and the eye catches the agreement immediately.
+    // Each rotor answers its own zone. `temp` is that zone's accumulated heat,
+    // `rpm` chases it with lag — so the fans desynchronise because their zones
+    // are loaded at different moments, not because three constants were picked
+    // to disagree.
     const fans = [
-        { angle: 0.0, rate: 0.071, drift: 0.9 },
-        { angle: 2.3, rate: 0.094, drift: 1.6 },
-        { angle: 4.9, rate: 0.058, drift: 1.2 }
+        { x: -4.35, angle: 0.0, temp: 0, rpm: 0.018, idle: 0.016 },
+        { x: 0.0,   angle: 2.3, temp: 0, rpm: 0.018, idle: 0.019 },
+        { x: 4.35,  angle: 4.9, temp: 0, rpm: 0.018, idle: 0.014 }
     ];
 
     /* ── Model ────────────────────────────────────────────────────────────
@@ -784,12 +788,9 @@ function setupDiemark() {
 
     function animate() {
         t += 0.016;
-        for (let i = 0; i < fans.length; i++) {
-            const f = fans[i];
-            // A slow sinusoidal wobble on top of each rate, so even fans that
-            // drift into phase fall back out of it.
-            f.angle += f.rate * (1 + Math.sin(t * 0.37 + i * 2.1) * 0.12 * f.drift);
-        }
+
+        // Work arrives as a wave travelling the length of the board. Parts in
+        // its path light up; that is the compute actually happening.
         const head = ((t * 2.1) % 22) - 7.4;
         for (const p of parts) {
             let target = 0;
@@ -799,6 +800,24 @@ function setupDiemark() {
             }
             const rate = target > p.lit ? 0.14 : 0.045;
             p.lit += (target - p.lit) * rate;
+        }
+
+        for (let i = 0; i < fans.length; i++) {
+            const f = fans[i];
+
+            // Heat accumulates where the work is. Rises quickly under load and
+            // bleeds off slowly — a heatsink has mass, so the zone stays warm
+            // well after the wave has moved on.
+            const d = Math.abs(f.x - head);
+            const load = d < 3.2 ? 1 - d / 3.2 : 0;
+            f.temp += (load - f.temp) * (load > f.temp ? 0.035 : 0.006);
+
+            // RPM chases temperature, not the wave, and chases it slower still.
+            // That lag is the whole point: the fan spools up behind the work
+            // and is still winding down once the work has gone.
+            const wanted = f.idle + f.temp * 0.085;
+            f.rpm += (wanted - f.rpm) * 0.022;
+            f.angle += f.rpm;
         }
     }
 
@@ -816,7 +835,10 @@ function setupDiemark() {
                 const pts = idx.map((k) => project(vs[k]));
                 const rv = idx.map((k) => yawXZ(vs[k]));
                 const depth = rv.reduce((a, q) => a + (q[0] + q[2] - q[1]), 0) / 4;
-                const base = 0.2 + lam * (0.26 + b.tone * 1.1);
+                let base = 0.2 + lam * (0.26 + b.tone * 1.1);
+                // A working rotor reads brighter, so the spin-up is visible as
+                // well as measurable.
+                if (b.spin) base += fans[b.spin.fi].temp * 0.22;
                 raw.push({ pts, depth, shade: Math.min(1, base + b.lit * 0.55 * lam) });
             }
         }

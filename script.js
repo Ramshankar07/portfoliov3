@@ -667,15 +667,16 @@ function countUp(el) {
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   CLOSING PIECE — MI300X package, rendered in ASCII
-   A real 3D render, not a glyph collage: boxes are rotated, projected,
-   depth-sorted and shaded by a lambert term into an offscreen buffer, then
-   that buffer is sampled per character cell and mapped through a density
-   ramp. Shading comes from the geometry, which is why it reads as a solid
-   object rather than a pattern.
+   CLOSING PIECE — MI300X accelerator card, isometric, in ASCII
+   Orthographic isometric: no perspective divide, fixed 30° axes, so the card
+   holds exactly the same footprint on every frame. That is what lets it span
+   the frame edge to edge — a rotating object cannot, because its projected
+   width changes as it turns.
 
-   Modelled on the MI300X layout because that is the board the 12.1 ms/token
-   figure was measured on: one compute die with eight HBM stacks around it.
+   The camera is still and the board is alive instead: HBM stacks fill and
+   drain, the die's load breathes, and an activity wave travels the length of
+   the card. Modelled on the MI300X because that is the board the 12.1 ms/token
+   figure was measured on.
    ══════════════════════════════════════════════════════════════════ */
 function setupDiemark() {
     const canvas = document.getElementById('diemark-canvas');
@@ -686,35 +687,48 @@ function setupDiemark() {
     const buf = document.createElement('canvas');
     const bctx = buf.getContext('2d', { alpha: false, willReadFrequently: true });
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const coarse = window.matchMedia('(pointer: coarse)');
 
-    // Dense → sparse. The ramp is the shading; alpha only trims the extremes.
     const RAMP = '@%#*+=-:. ';
-    // Fine cells matter more than they look: `rows` binds the render scale,
-    // and at 12px rows a 460px stage gave only 38 of them, which capped the
-    // object at a third of the frame.
     const CELL_W = 6, CELL_H = 10;
 
     let W = 0, H = 0, cols = 0, rows = 0;
-    let yaw = -0.62, pitch = -0.68, tYaw = -0.62, tPitch = -0.68;
-    let raf = 0, running = false, visible = false, idle = 0;
+    let raf = 0, running = false, visible = false, t = 0, fanAngle = 0;
 
-    // ── Model. Units are arbitrary; the package is ~1 unit deep. ──────────
-    // MI300X: a square-ish substrate, a central compute die, and eight HBM
-    // stacks in two rows of four flanking it.
-    const boxes = [];
-    const box = (x, y, z, w, h, d, tone) => boxes.push({ x, y, z, w, h, d, tone });
+    /* ── Model ────────────────────────────────────────────────────────────
+       x runs the length of the card, z its depth, y is height with -y up.  */
+    const parts = [];
+    const part = (x, y, z, w, h, d, tone, kind, spin) =>
+        parts.push({ x, y, z, w, h, d, tone, kind, spin: spin || null, lit: 0 });
 
-    // The package, not the board. An earlier pass modelled the whole card and
-    // the PCB slab swallowed the frame — the substrate, die and HBM ring are
-    // the subject the copy actually describes, so everything else is gone.
-    // +y is down here.
-    box(0, 0.42, 0, 4.3, 0.26, 3.6, 0.30);           // substrate
-    box(0, -0.06, 0, 1.45, 0.70, 2.45, 1.0);         // compute die
-    for (let i = 0; i < 4; i++) {
-        const z = -1.32 + i * 0.88;
-        box(-1.52, 0.02, z, 0.82, 0.55, 0.72, 0.62); // HBM, left rank
-        box(1.52, 0.02, z, 0.82, 0.55, 0.72, 0.62);  // HBM, right rank
+    // An RTX 5090: Blackwell, the consumer side of the architecture the NVFP4
+    // kernels further up this page were written against. x runs the length of
+    // the card, z its depth, -y is up.
+    part(0, 0.30, 0, 13.6, 0.22, 4.6, 0.22, 'pcb');              // board
+    part(0, -0.10, 0, 12.6, 0.64, 4.3, 0.30, 'heatsink');        // fin stack
+    part(0, -0.46, 0, 12.9, 0.16, 4.5, 0.46, 'shroud');          // shroud lip
+    part(0, 0.44, 0, 12.9, 0.10, 4.5, 0.34, 'backplate');        // backplate
+
+    // Three fans. The hub and blades are rotated about the fan's own axis each
+    // frame, which is the only motion on the card that had to be real 3D
+    // rather than a brightness trick.
+    const FAN_X = [-4.35, 0, 4.35];
+    for (const fx of FAN_X) {
+        // Aperture first, then the rotor above it. The rotor clears the shroud
+        // lip by a clear margin — at equal heights the lip's top face simply
+        // painted over the blades.
+        part(fx, -0.52, 0, 2.9, 0.05, 2.9, 0.12, 'fanring');
+        part(fx, -0.66, 0, 0.5, 0.16, 0.5, 0.85, 'hub');
+        for (let i = 0; i < 9; i++) {
+            const a = (i / 9) * Math.PI * 2;
+            part(fx + Math.cos(a) * 0.78, -0.64, Math.sin(a) * 0.78,
+                 0.78, 0.1, 0.3, 0.9, 'blade', { cx: fx, cz: 0, base: a });
+        }
+    }
+
+    part(-6.15, -0.2, 0.4, 0.55, 0.5, 2.4, 0.4, 'io');           // display outputs
+    part(4.9, -0.78, -1.5, 1.0, 0.36, 0.9, 0.52, 'power');       // 16-pin connector
+    for (let i = 0; i < 16; i++) {                                // PCIe edge fingers
+        part(-5.0 + i * 0.4, 0.46, 2.44, 0.26, 0.1, 0.5, 0.58, 'pcie');
     }
 
     const FACES = [
@@ -725,63 +739,72 @@ function setupDiemark() {
 
     function verts(b) {
         const hw = b.w / 2, hh = b.h / 2, hd = b.d / 2;
-        return [
+        const v = [
             [b.x-hw, b.y-hh, b.z-hd], [b.x+hw, b.y-hh, b.z-hd],
             [b.x+hw, b.y-hh, b.z+hd], [b.x-hw, b.y-hh, b.z+hd],
             [b.x-hw, b.y+hh, b.z-hd], [b.x+hw, b.y+hh, b.z-hd],
             [b.x+hw, b.y+hh, b.z+hd], [b.x-hw, b.y+hh, b.z+hd]
         ];
+        if (!b.spin) return v;
+        // Spin about the fan's own vertical axis.
+        const a = b.spin.base + fanAngle;
+        const ca = Math.cos(a - b.spin.base), sa = Math.sin(a - b.spin.base);
+        return v.map(([x, y, z]) => {
+            const dx = x - b.spin.cx, dz = z - b.spin.cz;
+            return [b.spin.cx + dx * ca - dz * sa, y, b.spin.cz + dx * sa + dz * ca];
+        });
     }
 
-    function rot(v, cy, sy, cp, sp) {
-        const x = v[0] * cy - v[2] * sy;
-        const z = v[0] * sy + v[2] * cy;
-        const y = v[1] * cp - z * sp;
-        return [x, y, z * cp + v[1] * sp];
+    // True isometric: orthographic, fixed axes, no camera state. The model is
+    // pre-rotated 45° about Y so the card's length maps onto the screen
+    // horizontal — without it a long board projects as a diagonal sliver,
+    // which is the one thing the framing brief rules out.
+    const ISO_X = Math.cos(Math.PI / 6);   // 0.866
+    const ISO_Y = Math.sin(Math.PI / 6);   // 0.5
+    const YAW = -Math.PI / 4;
+    const CA = Math.cos(YAW), SA = Math.sin(YAW);
+    const ASPECT = (CELL_W / CELL_H) * 1.95;
+
+    function yawXZ(v) {
+        return [v[0] * CA - v[2] * SA, v[1], v[0] * SA + v[2] * CA];
     }
 
-    function resize() {
-        const r = stage.getBoundingClientRect();
-        W = Math.max(1, Math.floor(r.width));
-        H = Math.max(1, Math.floor(r.height));
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        canvas.width = Math.floor(W * dpr);
-        canvas.height = Math.floor(H * dpr);
-        canvas.style.width = W + 'px';
-        canvas.style.height = H + 'px';
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        cols = Math.max(8, Math.floor(W / CELL_W));
-        rows = Math.max(6, Math.floor(H / CELL_H));
-        buf.width = cols;
-        buf.height = rows;
+    function project(v) {
+        const r = yawXZ(v);
+        return [(r[0] - r[2]) * ISO_X, ((r[0] + r[2]) * ISO_Y + r[1]) * ASPECT];
+    }
+
+    function animate() {
+        t += 0.016;
+        fanAngle += 0.085;                                        // ~810 rpm on screen
+        const head = ((t * 2.1) % 22) - 7.4;
+        for (const p of parts) {
+            let target = 0;
+            if (p.kind === 'pcie' || p.kind === 'power' || p.kind === 'heatsink') {
+                const d = Math.abs(p.x - head);
+                if (d < 2.6) target = 1 - d / 2.6;
+            }
+            const rate = target > p.lit ? 0.14 : 0.045;
+            p.lit += (target - p.lit) * rate;
+        }
     }
 
     function draw() {
-        const cy = Math.cos(yaw), sy = Math.sin(yaw);
-        const cp = Math.cos(pitch), sp = Math.sin(pitch);
-        const ASPECT = (CELL_W / CELL_H) * 1.95;
-
-        // Project once in model units, then fit the result to the frame. Hand
-        // tuned scale constants kept going wrong because the projected extent
-        // changes as the object rotates; measuring it instead keeps the render
-        // centred and filled at every angle.
         const raw = [];
-        for (const b of boxes) {
-            const vs = verts(b).map(v => rot(v, cy, sy, cp, sp));
+        for (const b of parts) {
+            const vs = verts(b);
             for (const [idx, n] of FACES) {
-                const nr = rot(n, cy, sy, cp, sp);
-                if (nr[2] > 0.02) continue;                       // back-face cull
-                const lam = Math.max(0, -nr[2]) * 0.55 + Math.max(0, -nr[1]) * 0.45;
-                const pts = idx.map((k) => {
-                    const v = vs[k];
-                    const persp = 1 / (1 + (v[2] + 7) * 0.04);
-                    return [v[0] * persp, v[1] * persp * ASPECT];
-                });
-                raw.push({
-                    pts,
-                    depth: idx.reduce((a, k) => a + vs[k][2], 0) / 4,
-                    shade: Math.min(1, 0.2 + lam * (0.3 + b.tone * 1.15) * 1.45)
-                });
+                const rn = yawXZ(n);
+                if (rn[1] > 0) continue;                        // undersides
+                const facing = rn[0] + rn[2];
+                if (rn[1] >= 0 && facing <= 0) continue;
+                if (rn[1] > -0.5 && facing <= 0) continue;      // the two away sides
+                const lam = rn[1] < -0.5 ? 1 : (rn[0] > 0.3 ? 0.66 : 0.44);
+                const pts = idx.map((k) => project(vs[k]));
+                const rv = idx.map((k) => yawXZ(vs[k]));
+                const depth = rv.reduce((a, q) => a + (q[0] + q[2] - q[1]), 0) / 4;
+                const base = 0.16 + lam * (0.2 + b.tone * 1.05);
+                raw.push({ pts, depth, shade: Math.min(1, base + b.lit * 0.55 * lam) });
             }
         }
         if (!raw.length) return;
@@ -793,13 +816,19 @@ function setupDiemark() {
             if (pt[1] < minY) minY = pt[1];
             if (pt[1] > maxY) maxY = pt[1];
         }
-        const fit = Math.min((cols * 0.94) / (maxX - minX), (rows * 0.92) / (maxY - minY));
+        // Width-first: the brief is that the card spans the frame. Height is
+        // allowed to come up short rather than cropping the length.
+        // Width-first, and the vertical allowance is deliberately over 1: the
+        // top and bottom of the frame are bare board edge, so letting them
+        // bleed is cheaper than shrinking the card away from the sides. The
+        // brief is that it spans left to right.
+        const fit = Math.min((cols * 0.995) / (maxX - minX), (rows * 1.16) / (maxY - minY));
         const ox = cols / 2 - ((minX + maxX) / 2) * fit;
         const oy = rows / 2 - ((minY + maxY) / 2) * fit;
 
         bctx.fillStyle = '#000';
         bctx.fillRect(0, 0, cols, rows);
-        raw.sort((a, b2) => b2.depth - a.depth);                  // painter's algorithm
+        raw.sort((a, b2) => a.depth - b2.depth);           // painter's, back to front
 
         for (const f of raw) {
             const g = Math.round(f.shade * 255);
@@ -816,34 +845,44 @@ function setupDiemark() {
         ctx.clearRect(0, 0, W, H);
         ctx.font = `${CELL_H - 1}px "Courier New", ui-monospace, monospace`;
         ctx.textBaseline = 'top';
-
         const padX = (W - cols * CELL_W) / 2;
         const padY = (H - rows * CELL_H) / 2;
 
-        for (let r2 = 0; r2 < rows; r2++) {
+        for (let r = 0; r < rows; r++) {
             for (let c = 0; c < cols; c++) {
-                const lum = data[(r2 * cols + c) * 4] / 255;
-                if (lum < 0.06) continue;
+                const lum = data[(r * cols + c) * 4] / 255;
+                if (lum < 0.07) continue;
                 const ch = RAMP[Math.min(RAMP.length - 1, Math.floor((1 - lum) * (RAMP.length - 1)))];
                 if (ch === ' ') continue;
                 ctx.fillStyle = dark
-                    ? `rgba(245, 245, 247, ${0.3 + lum * 0.7})`
-                    : `rgba(17, 17, 17, ${0.28 + lum * 0.72})`;
-                ctx.fillText(ch, padX + c * CELL_W, padY + r2 * CELL_H);
+                    ? `rgba(245, 245, 247, ${0.28 + lum * 0.72})`
+                    : `rgba(17, 17, 17, ${0.26 + lum * 0.74})`;
+                ctx.fillText(ch, padX + c * CELL_W, padY + r * CELL_H);
             }
         }
     }
 
+    function resize() {
+        const r = stage.getBoundingClientRect();
+        W = Math.max(1, Math.floor(r.width));
+        H = Math.max(1, Math.floor(r.height));
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(W * dpr);
+        canvas.height = Math.floor(H * dpr);
+        canvas.style.width = W + 'px';
+        canvas.style.height = H + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        cols = Math.max(20, Math.floor(W / CELL_W));
+        rows = Math.max(10, Math.floor(H / CELL_H));
+        buf.width = cols;
+        buf.height = rows;
+    }
+
     function frame() {
-        // Ease toward the cursor target; drift slowly when nothing is driving it.
-        if (coarse.matches || idle > 90) tYaw += 0.0045;
-        yaw += (tYaw - yaw) * 0.06;
-        pitch += (tPitch - pitch) * 0.06;
-        idle++;
+        animate();
         draw();
         if (running) raf = requestAnimationFrame(frame);
     }
-
     function start() {
         if (running || reduced.matches) return;
         running = true;
@@ -851,25 +890,21 @@ function setupDiemark() {
     }
     function stop() { running = false; cancelAnimationFrame(raf); }
 
-    window.addEventListener('pointermove', (e) => {
-        const r = stage.getBoundingClientRect();
-        if (r.bottom < 0 || r.top > window.innerHeight) return;
-        tYaw = -0.62 + ((e.clientX / window.innerWidth) - 0.5) * 2.4;
-        tPitch = -0.68 + ((e.clientY / window.innerHeight) - 0.5) * 0.55;
-        idle = 0;
-    }, { passive: true });
+    function staticFrame() {
+        for (let i = 0; i < 80; i++) animate();
+        draw();
+    }
 
     window.addEventListener('resize', () => { resize(); draw(); }, { passive: true });
-
     resize();
-    draw();
+    staticFrame();
 
     if ('IntersectionObserver' in window) {
         const io = new IntersectionObserver((entries) => {
             visible = entries[0].isIntersecting;
             if (visible) { stage.classList.add('is-in'); if (!document.hidden) start(); }
             else stop();
-        }, { threshold: 0.08 });
+        }, { threshold: 0.06 });
         io.observe(stage);
     } else {
         stage.classList.add('is-in');
@@ -877,11 +912,9 @@ function setupDiemark() {
     }
 
     document.addEventListener('visibilitychange', () => {
-        if (document.hidden) stop();
-        else if (visible) start();
+        if (document.hidden) stop(); else if (visible) start();
     });
-
     reduced.addEventListener('change', (e) => {
-        if (e.matches) { stop(); draw(); } else if (visible) start();
+        if (e.matches) { stop(); staticFrame(); } else if (visible) start();
     });
 }

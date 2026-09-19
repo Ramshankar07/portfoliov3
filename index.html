@@ -151,7 +151,7 @@
     <link rel="stylesheet" href="css/icons.css">
 
     <!-- Custom Design Styling -->
-    <link rel="stylesheet" href="styles.css?v=20260920c">
+    <link rel="stylesheet" href="styles.css?v=20260920d">
 </head>
 
 <body class="bg-[#FAF9F6] text-[#111111] dark:bg-[#080808] dark:text-[#F5F5F7] antialiased">
@@ -1048,28 +1048,27 @@
 
     <!-- Footer -->
     <!-- ═══════════════════════════════════════════════════════════
-         Closing piece — the board itself, rendered in ASCII.
-         Modelled on the MI300X layout specifically: an 8-stack HBM ring
-         around the compute die, which is the part that made 12.1 ms/token
-         possible. Rotates to the cursor, falls back to a slow idle spin on
-         touch, and holds one still frame under reduced motion.
+         Closing piece — a Blackwell card, isometric, rendered in ASCII.
+         Orthographic projection with a fixed camera, so the card holds the
+         same footprint every frame and can span the full width. The fans are
+         real 3D: blades rotate about each fan axis per frame. Holds one
+         settled frame under reduced motion.
          ═══════════════════════════════════════════════════════════ -->
     <section class="diemark" aria-labelledby="diemark-title">
         <div class="diemark__inner">
-            <h2 id="diemark-title" class="diemark__title">The part that made it fast.</h2>
+            <h2 id="diemark-title" class="diemark__title">The thing all of this runs on.</h2>
             <p class="diemark__lede">
-                An MI300X package: one compute die ringed by eight HBM stacks. The 12.1 ms/token decode further up this page is mostly a story about keeping those stacks fed — 79–83% of peak bandwidth, which is where the time actually goes.
+                An RTX 5090 — Blackwell, the consumer side of the architecture those NVFP4 GEMM kernels were written against. Most of what is on this page is ultimately about keeping a board like this one busy: feeding its memory fast enough that the compute never waits.
             </p>
 
             <figure class="diemark__stage" role="img" aria-labelledby="diemark-alt">
                 <canvas id="diemark-canvas" aria-hidden="true"></canvas>
                 <figcaption id="diemark-alt" class="sr-only">
-                    A rotating wireframe of an AMD MI300X accelerator package drawn in ASCII characters: a package substrate carrying a central compute die, flanked by eight high-bandwidth-memory stacks in two rows of four, mounted on a board with a power connector and edge contacts.
+                    An isometric drawing of an NVIDIA RTX 5090 graphics card, rendered in ASCII characters: a long circuit board under a finned heatsink and shroud, with three spinning fans along its length, a power connector, display outputs at one end, and PCIe edge contacts along the lower edge.
                 </figcaption>
             </figure>
 
-            <p class="diemark__hint" aria-hidden="true">Move the cursor to rotate</p>
-        </div>
+                    </div>
     </section>
 
     <footer class="border-t border-gray-200 dark:border-neutral-800 py-12 mt-32 text-center text-xs text-gray-500">
@@ -1189,7 +1188,7 @@ You are an AI assistant analyzing Ramshankar's portfolio.
     </div>
 
     <!-- Core Script Assets -->
-    <script src="script.js?v=20260920c" defer></script>
+    <script src="script.js?v=20260920d" defer></script>
     <script src="three-bg.js?v=20260920a" defer></script>
 </body>
 

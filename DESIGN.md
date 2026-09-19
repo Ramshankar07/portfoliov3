@@ -332,19 +332,19 @@ A headline figure in tabular numerals (1.9rem, or 2.4rem at `--lg`) with a small
 ### Contribution Row (signature)
 A three-column hairline-ruled row: subject (15px, primary ink) · description (14px, muted) · status pill, collapsing to stacked rows below 768px. Used for upstream PRs and education. Reads as a table without being one.
 
-### Closing Die Render (signature)
+### Closing Card Render (signature)
 
-An MI300X package rendered in ASCII: one compute die ringed by eight HBM stacks on a substrate, rotating to the cursor. Modelled on that board specifically because it is where the 12.1 ms/token figure was measured — the piece and the claim are the same hardware.
+An RTX 5090 drawn in isometric ASCII, spanning the frame edge to edge, with three fans turning. Blackwell — the consumer side of the architecture the NVFP4 GEMM kernels on this page were written against.
 
-**A real 3D render, not a glyph collage.** Boxes are rotated, projected, back-face culled, depth-sorted and lambert-shaded into an offscreen buffer at character resolution; that buffer is then sampled per cell and mapped through a density ramp (`@%#*+=-:.`). The shading comes from the geometry, which is why it reads as a solid object rather than a pattern.
+**Orthographic, fixed camera.** No perspective divide and no camera state, so the card holds exactly the same footprint on every frame. That constancy is what lets it span the full width: a rotating object cannot, because its projected width changes as it turns. The model is pre-rotated 45° about Y so its length maps onto the screen horizontal — without that, a long board projects as a diagonal sliver.
 
-**The frame is measured, not assumed.** The renderer computes the projected bounding box every frame and fits to it. Hand-tuned scale constants kept going wrong because the projected extent changes as the object turns; measuring it keeps the render centred and filled at every angle. The stage is capped near the package's own ~1.3:1 aspect, since a 2:1 stage filled the height and left the object at a third of the width.
+**The fans are real 3D.** Each rotor's blades are rotated about its own fan axis per frame and re-projected; everything else on the card is static geometry with animated brightness. Spinning parts keep both away-faces, since their faces swap sides as they turn.
 
-The model is the package alone. An earlier pass modelled the whole card and the PCB slab swallowed the frame.
+**Fit is width-first with deliberate vertical bleed.** The top and bottom of the frame are bare board edge, so letting them run past the crop is cheaper than shrinking the card away from the sides.
 
-Fades in on entry, eases toward the cursor, drifts on its own when nothing is driving it or the pointer is coarse, pauses off-screen and on hidden tabs, and holds one still frame under `prefers-reduced-motion`. The `<figcaption>` describes the object in full for anyone who cannot see it.
+Rendered the same way as the hero lattice: boxes shaded into an offscreen buffer at character resolution, then sampled per cell through a density ramp (`@%#*+=-:.`). Fades in on entry, pauses off-screen and on hidden tabs, and holds one settled frame under `prefers-reduced-motion`. The `<figcaption>` describes the card in full.
 
-This is the sanctioned third use of the mono family, alongside the section ordinals and the agent console — here it is a rendering medium rather than type.
+Two things learned the hard way and worth not repeating: the shroud lip originally sat at the same height as the fans and painted straight over them, and an earlier version modelled the package alone, which gave nothing to span the frame with.
 
 ### Hero Occupancy Grid (signature)
 

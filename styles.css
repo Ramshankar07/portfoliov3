@@ -1729,9 +1729,9 @@ main > section:first-of-type {
        projected bounding box, so a 2:1 stage filled the height and left the
        object at a third of the width — the frame was the constraint, not the
        render. */
-    max-width: 820px;
-    margin-inline: auto;
-    height: 620px;
+    /* Full width on purpose: the card is long and the isometric projection is
+       constant, so it can span the frame edge to edge without cropping. */
+    height: 540px;
     margin: 2.5rem 0 0;
     opacity: 0;
     transform: translateY(10px);
@@ -1766,7 +1766,7 @@ main > section:first-of-type {
 
 @media (max-width: 640px) {
     .diemark { margin-top: 5rem; padding: 4rem 0 3rem; }
-    .diemark__stage { height: 360px; }
+    .diemark__stage { height: 260px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

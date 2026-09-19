@@ -1627,111 +1627,6 @@ main > section:first-of-type {
 }
 
 /* ============================================
-   CLOSING PIECE — playable warp scheduler
-   The page spends 11,000px arguing that this person schedules work onto GPUs.
-   This hands the reader the job. Peak-end rule: the previous ending was a
-   centred copyright line, which is the last thing a visitor carried away.
-   ============================================ */
-.scheduler {
-    margin-top: 8rem;
-    padding: 6rem 0 5rem;
-    border-top: 1px solid var(--border-color);
-    overflow: hidden;
-}
-
-.scheduler__inner {
-    max-width: 72rem;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-}
-
-/* The one Display use on the page. The hero h1 that normally carries this
-   step is dormant by choice, so the step lands here instead. */
-.scheduler__title {
-    font-size: clamp(2.25rem, 4.2vw, 3.75rem);
-    font-weight: 700;
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    color: var(--text-primary);
-    margin: 0;
-}
-
-.scheduler__lede {
-    max-width: 52ch;
-    margin: 1.5rem 0 0;
-    font-size: 1.125rem;
-    line-height: 1.55;
-    color: var(--text-secondary);
-}
-
-.scheduler__stage {
-    position: relative;
-    /* Sized so the two SM rows nearly fill it; a taller box just centred the
-       array inside a band of dead air. */
-    height: 300px;
-    margin: 2.5rem 0 2.5rem;
-    cursor: crosshair;
-    touch-action: manipulation;
-}
-
-.scheduler__stage canvas {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-.scheduler__controls {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 2rem 3rem;
-}
-
-.scheduler__readout {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    margin: 0;
-}
-
-.scheduler__readout dt {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--text-secondary);
-}
-
-.scheduler__readout dd {
-    /* This is a metric callout, so it uses the metric role exactly. 1.9rem was
-       the pre-typeset metric size and is no longer on the ramp. */
-    margin: 0.35rem 0 0;
-    font-size: 2.25rem;
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    font-variant-numeric: tabular-nums;
-    color: var(--text-primary);
-}
-
-.scheduler__punchline {
-    max-width: 52ch;
-    margin: 3rem 0 0;
-    font-size: 1.125rem;
-    line-height: 1.55;
-    color: var(--text-primary);
-    border-left: 1px solid var(--border-color);
-    padding-left: 1.25rem;
-}
-
-@media (max-width: 640px) {
-    .scheduler { margin-top: 5rem; padding: 4rem 0 3rem; }
-    .scheduler__stage { height: 300px; margin: 2rem 0 1.75rem; }
-    .scheduler__readout { gap: 1.25rem 2rem; }
-    .scheduler__readout dd { font-size: 1.5rem; }
-}
-
-/* ============================================
    SECTION MOTION
    Every one of these rests in its finished state. The class the observer adds
    replays arrival; it never reveals. A page where the observer never fires is
@@ -1787,5 +1682,97 @@ main > section:first-of-type {
     @keyframes card-arrive {
         from { opacity: 0; transform: translateY(14px); }
         to   { opacity: 1; transform: none; }
+    }
+}
+
+/* ============================================
+   CLOSING PIECE — MI300X package in ASCII
+   The page ended on a centred copyright line. It now ends on the part that
+   made the headline number possible, rendered as a solid object rather than
+   a decorative glyph field.
+   ============================================ */
+.diemark {
+    margin-top: 8rem;
+    padding: 6rem 0 5rem;
+    border-top: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.diemark__inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* The page's one Display use, since the hero h1 that normally carries this
+   step is dormant by choice. */
+.diemark__title {
+    font-size: clamp(2.25rem, 4.2vw, 3.75rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.diemark__lede {
+    max-width: 58ch;
+    margin: 1.5rem 0 0;
+    font-size: 1.125rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+}
+
+.diemark__stage {
+    position: relative;
+    /* Framed close to the package's own ~1.3:1 aspect. The renderer fits the
+       projected bounding box, so a 2:1 stage filled the height and left the
+       object at a third of the width — the frame was the constraint, not the
+       render. */
+    max-width: 820px;
+    margin-inline: auto;
+    height: 620px;
+    margin: 2.5rem 0 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 1100ms cubic-bezier(0.22, 1, 0.36, 1),
+                transform 1100ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.diemark__stage.is-in {
+    opacity: 1;
+    transform: none;
+}
+
+.diemark__stage canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.diemark__hint {
+    margin: 1.25rem 0 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-secondary);
+}
+
+@media (pointer: coarse), (hover: none) {
+    /* Nothing to move on a touch device; the object spins on its own. */
+    .diemark__hint { display: none; }
+}
+
+@media (max-width: 640px) {
+    .diemark { margin-top: 5rem; padding: 4rem 0 3rem; }
+    .diemark__stage { height: 360px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .diemark__stage {
+        opacity: 1;
+        transform: none;
+        transition: none;
     }
 }

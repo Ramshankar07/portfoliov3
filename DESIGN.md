@@ -228,7 +228,7 @@ A two-tone system that inverts wholesale between themes: one warm off-white fami
 
 **The Tabular Rule.** Every number a reader might compare sets in `tabular-nums`. That includes the hero proof points and experience dates, not only the metric callouts.
 
-**The Two-Uses Rule.** The mono family is capped at exactly two jobs: section ordinals and the agent console. It is a dateline and a terminal, not a costume for "technical". Its tracking is never negative — negative tracking on a monospace defeats the only reason to use one.
+**The Two-Uses Rule.** The mono family is capped at three jobs: section ordinals, the agent console, and the closing die render — where it is a rendering medium rather than type. It is a dateline and a terminal, not a costume for "technical". Its tracking is never negative — negative tracking on a monospace defeats the only reason to use one.
 
 **The Inherited Tracking Rule.** Never declare `letter-spacing` in `em` on `body`. It resolves to px at the declaring element and inherits as an absolute value, so a single `-0.01em` lands as `-0.0133em` on 12px text and `-0.0067em` on 24px — tightest where it should be loosest. Tracking is set per role, never globally.
 
@@ -332,15 +332,19 @@ A headline figure in tabular numerals (1.9rem, or 2.4rem at `--lg`) with a small
 ### Contribution Row (signature)
 A three-column hairline-ruled row: subject (15px, primary ink) · description (14px, muted) · status pill, collapsing to stacked rows below 768px. Used for upstream PRs and education. Reads as a table without being one.
 
-### Closing Scheduler (signature)
+### Closing Die Render (signature)
 
-The page spends 11,000px arguing that this person schedules work onto GPUs, then hands the reader the job. A coarse array of SMs you click to dispatch thread blocks into; they claim free warp slots, run for a residency, and retire, with a live readout of blocks dispatched, warps retired, and peak occupancy. Saturate an SM and the next block spills to its neighbour — which is the whole mechanic the piece exists to hand over.
+An MI300X package rendered in ASCII: one compute die ringed by eight HBM stacks on a substrate, rotating to the cursor. Modelled on that board specifically because it is where the 12.1 ms/token figure was measured — the piece and the claim are the same hardware.
 
-**Deliberately few, large SMs.** A physically honest 56-SM array meant one dispatch moved peak occupancy by 3% and the interaction felt inert. Legibility of the mechanic beats fidelity of the part count.
+**A real 3D render, not a glyph collage.** Boxes are rotated, projected, back-face culled, depth-sorted and lambert-shaded into an offscreen buffer at character resolution; that buffer is then sampled per cell and mapped through a density ramp (`@%#*+=-:.`). The shading comes from the geometry, which is why it reads as a solid object rather than a pattern.
 
-The canvas is a pointer enhancement, never the only path: a focusable **Dispatch a block** button does the same thing from a keyboard, the readout is real text in an `aria-live` region, and the canvas itself is `aria-hidden`. A punchline reveals past five blocks.
+**The frame is measured, not assumed.** The renderer computes the projected bounding box every frame and fits to it. Hand-tuned scale constants kept going wrong because the projected extent changes as the object turns; measuring it keeps the render centred and filled at every angle. The stage is capped near the package's own ~1.3:1 aspect, since a 2:1 stage filled the height and left the object at a third of the width.
 
-Placed after `05. Get In Touch`, against the peak-end rule — the previous ending was a centred copyright line, and that was the last thing a visitor carried away. It also carries the page's one Display use, since the hero `h1` that normally holds that step is dormant by choice.
+The model is the package alone. An earlier pass modelled the whole card and the PCB slab swallowed the frame.
+
+Fades in on entry, eases toward the cursor, drifts on its own when nothing is driving it or the pointer is coarse, pauses off-screen and on hidden tabs, and holds one still frame under `prefers-reduced-motion`. The `<figcaption>` describes the object in full for anyone who cannot see it.
+
+This is the sanctioned third use of the mono family, alongside the section ordinals and the agent console — here it is a rendering medium rather than type.
 
 ### Hero Occupancy Grid (signature)
 

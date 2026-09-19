@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupScrollProgress();
 
     // 12. Closing piece + section motion
-    setupScheduler();
+    setupDiemark();
     setupSectionMotion();
 });
 
@@ -580,174 +580,6 @@ function setupAgentModeDashboard() {
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   CLOSING PIECE — playable warp scheduler
-   The canvas is a pointer enhancement. The Dispatch button does the same
-   thing from a keyboard, and the readout is real text in an aria-live
-   region, so nothing here is pointer-only or canvas-only.
-   ══════════════════════════════════════════════════════════════════ */
-function setupScheduler() {
-    const canvas = document.getElementById('scheduler-canvas');
-    const stage = canvas && canvas.parentElement;
-    if (!canvas || !stage) return;
-
-    const ctx = canvas.getContext('2d', { alpha: true });
-    const btn = document.getElementById('scheduler-dispatch');
-    const outBlocks = document.getElementById('sched-blocks');
-    const outWarps = document.getElementById('sched-warps');
-    const outPeak = document.getElementById('sched-peak');
-    const punchline = document.getElementById('scheduler-punchline');
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    // Deliberately few, large SMs. A physically honest 56-SM array meant one
-    // dispatch moved peak occupancy by 3% and the interaction felt inert —
-    // legibility of the mechanic beats fidelity of the part count here.
-    const SLOT = 24, GAP = 6, SM_COLS = 4, SM_ROWS = 4, SM_GAP = 28;
-    const SM_W = SM_COLS * SLOT + (SM_COLS - 1) * GAP;
-    const SM_H = SM_ROWS * SLOT + (SM_ROWS - 1) * GAP;
-
-    let W = 0, H = 0, sms = [], running = false, raf = 0;
-    let blocks = 0, warps = 0, peak = 0;
-
-    function ink() {
-        return document.documentElement.classList.contains('dark') ? '255, 255, 255' : '17, 17, 17';
-    }
-
-    function build() {
-        const r = stage.getBoundingClientRect();
-        W = Math.max(1, Math.floor(r.width));
-        H = Math.max(1, Math.floor(r.height));
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        canvas.width = Math.floor(W * dpr);
-        canvas.height = Math.floor(H * dpr);
-        canvas.style.width = W + 'px';
-        canvas.style.height = H + 'px';
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-        sms = [];
-        const stepX = SM_W + SM_GAP, stepY = SM_H + SM_GAP;
-        const cols = Math.max(1, Math.floor((W + SM_GAP) / stepX));
-        const rows = Math.max(1, Math.floor((H + SM_GAP) / stepY));
-        const offX = (W - (cols * stepX - SM_GAP)) / 2;
-        const offY = (H - (rows * stepY - SM_GAP)) / 2;
-        for (let r2 = 0; r2 < rows; r2++) {
-            for (let c = 0; c < cols; c++) {
-                const slots = [];
-                for (let i = 0; i < SM_COLS * SM_ROWS; i++) slots.push({ load: 0, target: 0, until: 0, counted: false });
-                sms.push({ x: offX + c * stepX, y: offY + r2 * stepY, slots, flash: 0 });
-            }
-        }
-    }
-
-    // Dispatch into the SM nearest the point, spilling to neighbours when it
-    // saturates — which is the whole lesson the piece is trying to hand over.
-    function dispatch(px, py) {
-        if (!sms.length) return;
-        let order = sms.map((sm, i) => {
-            const dx = sm.x + SM_W / 2 - px;
-            const dy = sm.y + SM_H / 2 - py;
-            return { i, d: Math.sqrt(dx * dx + dy * dy) };
-        }).sort((a, b) => a.d - b.d);
-
-        let want = 10 + Math.floor(Math.random() * 10);
-        const now = performance.now();
-        for (const { i } of order) {
-            if (want <= 0) break;
-            const sm = sms[i];
-            let placed = 0;
-            for (const s of sm.slots) {
-                if (want <= 0) break;
-                if (s.target === 0) {
-                    s.target = 0.66 + Math.random() * 0.34;
-                    s.until = now + 1100 + Math.random() * 1900;
-                    s.counted = false;
-                    want--; placed++;
-                }
-            }
-            if (placed) sm.flash = 1;
-        }
-        blocks++;
-        if (outBlocks) outBlocks.textContent = String(blocks);
-        if (blocks >= 5 && punchline && punchline.hidden) punchline.hidden = false;
-        start();
-    }
-
-    function step(now) {
-        let occNow = 0, total = 0;
-        for (const sm of sms) {
-            sm.flash *= 0.9;
-            for (const s of sm.slots) {
-                if (s.target > 0 && now > s.until) {
-                    s.target = 0;
-                    if (!s.counted) { s.counted = true; warps++; }
-                }
-                const rate = s.target > s.load ? 0.17 : 0.04;
-                s.load += (s.target - s.load) * rate;
-                if (s.load < 0.004) s.load = 0;
-                occNow += s.load; total++;
-            }
-        }
-        const pct = total ? Math.round((occNow / total) * 100) : 0;
-        if (pct > peak) { peak = pct; if (outPeak) outPeak.textContent = peak + '%'; }
-        if (outWarps) outWarps.textContent = String(warps);
-        return occNow > 0.01;
-    }
-
-    function draw() {
-        ctx.clearRect(0, 0, W, H);
-        const rgb = ink();
-        for (const sm of sms) {
-            let occ = 0;
-            for (const s of sm.slots) occ += s.load;
-            occ /= sm.slots.length;
-
-            if (occ > 0.02 || sm.flash > 0.02) {
-                ctx.strokeStyle = `rgba(${rgb}, ${0.05 + occ * 0.16 + sm.flash * 0.3})`;
-                ctx.lineWidth = 1;
-                ctx.strokeRect(Math.round(sm.x) - 4.5, Math.round(sm.y) - 4.5, SM_W + 9, SM_H + 9);
-            }
-            for (let i = 0; i < sm.slots.length; i++) {
-                const s = sm.slots[i];
-                const sx = sm.x + (i % SM_COLS) * (SLOT + GAP);
-                const sy = sm.y + Math.floor(i / SM_COLS) * (SLOT + GAP);
-                ctx.fillStyle = s.load < 0.01
-                    ? `rgba(${rgb}, 0.05)`
-                    : `rgba(${rgb}, ${0.08 + s.load * 0.86})`;
-                ctx.fillRect(sx, sy, SLOT, SLOT);
-            }
-        }
-    }
-
-    function frame(now) {
-        const alive = step(now);
-        draw();
-        if (alive && running) raf = requestAnimationFrame(frame);
-        else { running = false; draw(); }
-    }
-
-    function start() {
-        if (running) return;
-        if (reduced.matches) { step(performance.now() + 4000); draw(); return; }
-        running = true;
-        raf = requestAnimationFrame(frame);
-    }
-
-    canvas.addEventListener('pointerdown', (e) => {
-        const r = canvas.getBoundingClientRect();
-        dispatch(e.clientX - r.left, e.clientY - r.top);
-    });
-    canvas.addEventListener('pointermove', (e) => {
-        if (e.buttons !== 1) return;
-        const r = canvas.getBoundingClientRect();
-        dispatch(e.clientX - r.left, e.clientY - r.top);
-    });
-    btn?.addEventListener('click', () => dispatch(W * Math.random(), H * Math.random()));
-
-    window.addEventListener('resize', () => { build(); draw(); }, { passive: true });
-    build();
-    draw();
-}
-
-/* ══════════════════════════════════════════════════════════════════
    SECTION MOTION — three systems, each one-way and fail-visible.
    Resting state is always the finished state; the observer adds a class to
    replay arrival. If JS or the observer never runs, the page is simply
@@ -832,4 +664,224 @@ function countUp(el) {
     }
     node.textContent = lead + fmt(0) + (b !== null ? rangeSep.replace(/\d+(?:\.\d+)?/, '') + fmt(0) : '') + tail;
     requestAnimationFrame(tick);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   CLOSING PIECE — MI300X package, rendered in ASCII
+   A real 3D render, not a glyph collage: boxes are rotated, projected,
+   depth-sorted and shaded by a lambert term into an offscreen buffer, then
+   that buffer is sampled per character cell and mapped through a density
+   ramp. Shading comes from the geometry, which is why it reads as a solid
+   object rather than a pattern.
+
+   Modelled on the MI300X layout because that is the board the 12.1 ms/token
+   figure was measured on: one compute die with eight HBM stacks around it.
+   ══════════════════════════════════════════════════════════════════ */
+function setupDiemark() {
+    const canvas = document.getElementById('diemark-canvas');
+    const stage = canvas && canvas.parentElement;
+    if (!canvas || !stage) return;
+
+    const ctx = canvas.getContext('2d', { alpha: true });
+    const buf = document.createElement('canvas');
+    const bctx = buf.getContext('2d', { alpha: false, willReadFrequently: true });
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const coarse = window.matchMedia('(pointer: coarse)');
+
+    // Dense → sparse. The ramp is the shading; alpha only trims the extremes.
+    const RAMP = '@%#*+=-:. ';
+    // Fine cells matter more than they look: `rows` binds the render scale,
+    // and at 12px rows a 460px stage gave only 38 of them, which capped the
+    // object at a third of the frame.
+    const CELL_W = 6, CELL_H = 10;
+
+    let W = 0, H = 0, cols = 0, rows = 0;
+    let yaw = -0.62, pitch = -0.68, tYaw = -0.62, tPitch = -0.68;
+    let raf = 0, running = false, visible = false, idle = 0;
+
+    // ── Model. Units are arbitrary; the package is ~1 unit deep. ──────────
+    // MI300X: a square-ish substrate, a central compute die, and eight HBM
+    // stacks in two rows of four flanking it.
+    const boxes = [];
+    const box = (x, y, z, w, h, d, tone) => boxes.push({ x, y, z, w, h, d, tone });
+
+    // The package, not the board. An earlier pass modelled the whole card and
+    // the PCB slab swallowed the frame — the substrate, die and HBM ring are
+    // the subject the copy actually describes, so everything else is gone.
+    // +y is down here.
+    box(0, 0.42, 0, 4.3, 0.26, 3.6, 0.30);           // substrate
+    box(0, -0.06, 0, 1.45, 0.70, 2.45, 1.0);         // compute die
+    for (let i = 0; i < 4; i++) {
+        const z = -1.32 + i * 0.88;
+        box(-1.52, 0.02, z, 0.82, 0.55, 0.72, 0.62); // HBM, left rank
+        box(1.52, 0.02, z, 0.82, 0.55, 0.72, 0.62);  // HBM, right rank
+    }
+
+    const FACES = [
+        [[0,1,2,3], [0,-1,0]], [[4,7,6,5], [0,1,0]],
+        [[0,4,5,1], [0,0,-1]], [[3,2,6,7], [0,0,1]],
+        [[0,3,7,4], [-1,0,0]], [[1,5,6,2], [1,0,0]]
+    ];
+
+    function verts(b) {
+        const hw = b.w / 2, hh = b.h / 2, hd = b.d / 2;
+        return [
+            [b.x-hw, b.y-hh, b.z-hd], [b.x+hw, b.y-hh, b.z-hd],
+            [b.x+hw, b.y-hh, b.z+hd], [b.x-hw, b.y-hh, b.z+hd],
+            [b.x-hw, b.y+hh, b.z-hd], [b.x+hw, b.y+hh, b.z-hd],
+            [b.x+hw, b.y+hh, b.z+hd], [b.x-hw, b.y+hh, b.z+hd]
+        ];
+    }
+
+    function rot(v, cy, sy, cp, sp) {
+        const x = v[0] * cy - v[2] * sy;
+        const z = v[0] * sy + v[2] * cy;
+        const y = v[1] * cp - z * sp;
+        return [x, y, z * cp + v[1] * sp];
+    }
+
+    function resize() {
+        const r = stage.getBoundingClientRect();
+        W = Math.max(1, Math.floor(r.width));
+        H = Math.max(1, Math.floor(r.height));
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(W * dpr);
+        canvas.height = Math.floor(H * dpr);
+        canvas.style.width = W + 'px';
+        canvas.style.height = H + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        cols = Math.max(8, Math.floor(W / CELL_W));
+        rows = Math.max(6, Math.floor(H / CELL_H));
+        buf.width = cols;
+        buf.height = rows;
+    }
+
+    function draw() {
+        const cy = Math.cos(yaw), sy = Math.sin(yaw);
+        const cp = Math.cos(pitch), sp = Math.sin(pitch);
+        const ASPECT = (CELL_W / CELL_H) * 1.95;
+
+        // Project once in model units, then fit the result to the frame. Hand
+        // tuned scale constants kept going wrong because the projected extent
+        // changes as the object rotates; measuring it instead keeps the render
+        // centred and filled at every angle.
+        const raw = [];
+        for (const b of boxes) {
+            const vs = verts(b).map(v => rot(v, cy, sy, cp, sp));
+            for (const [idx, n] of FACES) {
+                const nr = rot(n, cy, sy, cp, sp);
+                if (nr[2] > 0.02) continue;                       // back-face cull
+                const lam = Math.max(0, -nr[2]) * 0.55 + Math.max(0, -nr[1]) * 0.45;
+                const pts = idx.map((k) => {
+                    const v = vs[k];
+                    const persp = 1 / (1 + (v[2] + 7) * 0.04);
+                    return [v[0] * persp, v[1] * persp * ASPECT];
+                });
+                raw.push({
+                    pts,
+                    depth: idx.reduce((a, k) => a + vs[k][2], 0) / 4,
+                    shade: Math.min(1, 0.2 + lam * (0.3 + b.tone * 1.15) * 1.45)
+                });
+            }
+        }
+        if (!raw.length) return;
+
+        let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+        for (const f of raw) for (const pt of f.pts) {
+            if (pt[0] < minX) minX = pt[0];
+            if (pt[0] > maxX) maxX = pt[0];
+            if (pt[1] < minY) minY = pt[1];
+            if (pt[1] > maxY) maxY = pt[1];
+        }
+        const fit = Math.min((cols * 0.94) / (maxX - minX), (rows * 0.92) / (maxY - minY));
+        const ox = cols / 2 - ((minX + maxX) / 2) * fit;
+        const oy = rows / 2 - ((minY + maxY) / 2) * fit;
+
+        bctx.fillStyle = '#000';
+        bctx.fillRect(0, 0, cols, rows);
+        raw.sort((a, b2) => b2.depth - a.depth);                  // painter's algorithm
+
+        for (const f of raw) {
+            const g = Math.round(f.shade * 255);
+            bctx.fillStyle = `rgb(${g},${g},${g})`;
+            bctx.beginPath();
+            bctx.moveTo(ox + f.pts[0][0] * fit, oy + f.pts[0][1] * fit);
+            for (let k = 1; k < f.pts.length; k++) bctx.lineTo(ox + f.pts[k][0] * fit, oy + f.pts[k][1] * fit);
+            bctx.closePath();
+            bctx.fill();
+        }
+
+        const data = bctx.getImageData(0, 0, cols, rows).data;
+        const dark = document.documentElement.classList.contains('dark');
+        ctx.clearRect(0, 0, W, H);
+        ctx.font = `${CELL_H - 1}px "Courier New", ui-monospace, monospace`;
+        ctx.textBaseline = 'top';
+
+        const padX = (W - cols * CELL_W) / 2;
+        const padY = (H - rows * CELL_H) / 2;
+
+        for (let r2 = 0; r2 < rows; r2++) {
+            for (let c = 0; c < cols; c++) {
+                const lum = data[(r2 * cols + c) * 4] / 255;
+                if (lum < 0.06) continue;
+                const ch = RAMP[Math.min(RAMP.length - 1, Math.floor((1 - lum) * (RAMP.length - 1)))];
+                if (ch === ' ') continue;
+                ctx.fillStyle = dark
+                    ? `rgba(245, 245, 247, ${0.3 + lum * 0.7})`
+                    : `rgba(17, 17, 17, ${0.28 + lum * 0.72})`;
+                ctx.fillText(ch, padX + c * CELL_W, padY + r2 * CELL_H);
+            }
+        }
+    }
+
+    function frame() {
+        // Ease toward the cursor target; drift slowly when nothing is driving it.
+        if (coarse.matches || idle > 90) tYaw += 0.0045;
+        yaw += (tYaw - yaw) * 0.06;
+        pitch += (tPitch - pitch) * 0.06;
+        idle++;
+        draw();
+        if (running) raf = requestAnimationFrame(frame);
+    }
+
+    function start() {
+        if (running || reduced.matches) return;
+        running = true;
+        raf = requestAnimationFrame(frame);
+    }
+    function stop() { running = false; cancelAnimationFrame(raf); }
+
+    window.addEventListener('pointermove', (e) => {
+        const r = stage.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > window.innerHeight) return;
+        tYaw = -0.62 + ((e.clientX / window.innerWidth) - 0.5) * 2.4;
+        tPitch = -0.68 + ((e.clientY / window.innerHeight) - 0.5) * 0.55;
+        idle = 0;
+    }, { passive: true });
+
+    window.addEventListener('resize', () => { resize(); draw(); }, { passive: true });
+
+    resize();
+    draw();
+
+    if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+            visible = entries[0].isIntersecting;
+            if (visible) { stage.classList.add('is-in'); if (!document.hidden) start(); }
+            else stop();
+        }, { threshold: 0.08 });
+        io.observe(stage);
+    } else {
+        stage.classList.add('is-in');
+        start();
+    }
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stop();
+        else if (visible) start();
+    });
+
+    reduced.addEventListener('change', (e) => {
+        if (e.matches) { stop(); draw(); } else if (visible) start();
+    });
 }

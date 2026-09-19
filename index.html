@@ -218,10 +218,10 @@
                 <!-- Hero Core Bio Text -->
                 <div class="md:col-span-7 space-y-8 text-left">
                     <h1 class="text-4xl md:text-6xl font-bold leading-[1.1] tracking-tight">
-                        ML systems engineer — training and inference, down to the kernel
+                        ML systems engineer, training and inference, down to the kernel
                     </h1>
                     <p class="text-xl md:text-2xl text-gray-600 dark:text-neutral-400 font-light leading-relaxed max-w-xl">
-                        I'm <span class="serif-italic font-normal text-[#111111] dark:text-[#FFFFFF]">Ramshankar</span>. I build the stack that gets a model from experiment to production — distributed training pipelines, high-performance serving, and the <strong class="text-black dark:text-white font-medium">GPU kernels</strong> (CUDA, HIP, Triton) underneath. Recently: persistent megakernels across four LLM architectures, <strong class="text-black dark:text-white font-medium">3–6×</strong> on Blackwell tensor-core GEMMs over the reference kernel, and <strong class="text-black dark:text-white font-medium">12.1 ms/token</strong> decode on a single AMD MI300X.
+                        I'm <span class="serif-italic font-normal text-[#111111] dark:text-[#FFFFFF]">Ramshankar</span>. I build the stack that gets a model from experiment to production : distributed training pipelines, high-performance serving, and the <strong class="text-black dark:text-white font-medium">GPU kernels</strong> (CUDA, HIP, Triton) underneath. Recently: persistent megakernels across four LLM architectures, <strong class="text-black dark:text-white font-medium">3×</strong> on Blackwell CUTLASS kernels over the pytorch reference, and <strong class="text-black dark:text-white font-medium">12.1 ms/token</strong> decode on a single AMD MI300X.
                     </p>
                     <p class="hero-status">
                         <span class="hero-status__dot" aria-hidden="true"></span>
@@ -289,13 +289,13 @@
                 <!-- Bio Copy -->
                 <div class="max-w-3xl space-y-6 text-base md:text-lg text-gray-600 dark:text-neutral-400 font-light leading-relaxed">
                     <p>
-                        I build the <strong class="text-black dark:text-white font-medium">training and inference stack</strong> &#8212; the pipelines, abstractions, and kernels that decide how fast a team can get from an experiment to a model serving real traffic. Master&#8217;s in Information Systems from Northeastern.
+                        I build the <strong class="text-black dark:text-white font-medium">training and inference stack</strong> : the pipelines, abstractions, and kernels that decide how fast a team can get from an experiment to a model serving real traffic. Master&#8217;s in Information Systems from Northeastern.
                     </p>
                     <p>
                         On the <strong class="text-black dark:text-white font-medium">training</strong> side that has meant multi-GPU fine-tuning with FSDP, cluster orchestration on Kubernetes and Ray, and a three-cluster SkyPilot pipeline whose spot workers can be reclaimed mid-run without losing the run. On the <strong class="text-black dark:text-white font-medium">inference</strong> side, serving with vLLM behind FastAPI, retargeting a stack from CUDA to ROCm, and writing the CUDA, HIP, and Triton kernels underneath when the framework leaves performance on the table.
                     </p>
                     <p>
-                        The part I care most about is <strong class="text-black dark:text-white font-medium">measurement</strong>. Most of the speedups below started as a profile that disagreed with someone&#8217;s assumption about where the time was going &#8212; and every number on this page names the baseline it was measured against.
+                        The part I care most about is <strong class="text-black dark:text-white font-medium">measurement</strong>. Most of the speedups below started as a profile that disagreed with someone&#8217;s assumption about where the time was going and every number on this page names the baseline it was measured against.
                     </p>
                     <p>
                         I work in the open, upstream: a merged fix to the Mamba2 cached forward pass in HuggingFace <strong class="text-black dark:text-white font-medium">transformers</strong>

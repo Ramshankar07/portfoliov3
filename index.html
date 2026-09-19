@@ -151,7 +151,7 @@
     <link rel="stylesheet" href="css/icons.css">
 
     <!-- Custom Design Styling -->
-    <link rel="stylesheet" href="styles.css?v=20260918b">
+    <link rel="stylesheet" href="styles.css?v=20260919a">
 </head>
 
 <body class="bg-[#FAF9F6] text-[#111111] dark:bg-[#080808] dark:text-[#F5F5F7] antialiased">
@@ -217,11 +217,15 @@
                 
                 <!-- Hero Core Bio Text -->
                 <div class="md:col-span-7 space-y-8 text-left">
-                    <h1 class="text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight">
-                        Hi, I'm <span class="serif-italic font-normal block md:inline mt-1 text-[#111111] dark:text-[#FFFFFF]">Ramshankar</span>
+                    <h1 class="text-4xl md:text-6xl font-bold leading-[1.1] tracking-tight">
+                        ML systems engineer — training and inference, down to the kernel
                     </h1>
                     <p class="text-xl md:text-2xl text-gray-600 dark:text-neutral-400 font-light leading-relaxed max-w-xl">
-                        I'm an <strong class="text-black dark:text-white font-medium">ML systems engineer</strong> who builds the <strong class="text-black dark:text-white font-medium">training and inference stack</strong> — distributed training pipelines, high-performance serving, and the <strong class="text-black dark:text-white font-medium">GPU kernels</strong> (CUDA, HIP, Triton) underneath. Recently: persistent megakernels across four LLM architectures, <strong class="text-black dark:text-white font-medium">3–6×</strong> on Blackwell tensor-core GEMMs over the reference kernel, and <strong class="text-black dark:text-white font-medium">12.1 ms/token</strong> decode on a single AMD MI300X.
+                        I'm <span class="serif-italic font-normal text-[#111111] dark:text-[#FFFFFF]">Ramshankar</span>. I build the stack that gets a model from experiment to production — distributed training pipelines, high-performance serving, and the <strong class="text-black dark:text-white font-medium">GPU kernels</strong> (CUDA, HIP, Triton) underneath. Recently: persistent megakernels across four LLM architectures, <strong class="text-black dark:text-white font-medium">3–6×</strong> on Blackwell tensor-core GEMMs over the reference kernel, and <strong class="text-black dark:text-white font-medium">12.1 ms/token</strong> decode on a single AMD MI300X.
+                    </p>
+                    <p class="hero-status">
+                        <span class="hero-status__dot" aria-hidden="true"></span>
+                        Open to ML systems roles &middot; Boston or remote
                     </p>
                     <div class="flex gap-4 flex-wrap pt-2">
                         <a href="#projects" class="hero-btn-primary px-8 py-3.5 font-medium rounded-lg text-sm transition-all duration-300">
@@ -897,63 +901,46 @@
                 <span class="serif-italic">Get In Touch</span>
             </h2>
             
-            <div class="max-w-2xl space-y-8">
-                    <div class="space-y-2">
-                        <h3 class="text-2xl font-bold">Let's Connect</h3>
-                        <p class="text-sm text-gray-500 font-light leading-relaxed">I&#8217;m looking for work on training and inference infrastructure — distributed training, high-performance serving, and the tooling that gets ML engineers from experiment to production. Happy to talk through any of the numbers on this page.</p>
-                    </div>
-                    
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-full border flex items-center justify-center text-sm text-black dark:text-white bg-gray-100 dark:bg-neutral-800" aria-hidden="true">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div>
-                                <span class="block text-xs uppercase tracking-wider text-gray-400">Email</span>
-                                <a href="mailto:bhuvaneshwaran.r@northeastern.edu" class="text-sm font-medium hover:underline text-black dark:text-white">bhuvaneshwaran.r@northeastern.edu</a>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-full border flex items-center justify-center text-sm text-black dark:text-white bg-gray-100 dark:bg-neutral-800" aria-hidden="true">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div>
-                                <span class="block text-xs uppercase tracking-wider text-gray-400">Phone</span>
-                                <span class="text-sm font-medium text-black dark:text-white">(857) 693-4328</span>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-full border flex items-center justify-center text-sm text-black dark:text-white bg-gray-100 dark:bg-neutral-800" aria-hidden="true">
-                                <i class="fab fa-linkedin"></i>
-                            </div>
-                            <div>
-                                <span class="block text-xs uppercase tracking-wider text-gray-400">LinkedIn</span>
-                                <a href="https://linkedin.com/in/ramshankarb" target="_blank" class="text-sm font-medium hover:underline text-black dark:text-white" rel="noopener noreferrer">linkedin.com/in/ramshankarb</a>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-full border flex items-center justify-center text-sm text-black dark:text-white bg-gray-100 dark:bg-neutral-800" aria-hidden="true">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div>
-                                <span class="block text-xs uppercase tracking-wider text-gray-400">Location</span>
-                                <span class="text-sm font-medium text-black dark:text-white">Boston, MA</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="p-6 bg-white dark:bg-[#151515] border rounded-xl space-y-4">
-                        <h4 class="font-bold text-base flex items-center gap-2">
-                            <i class="fas fa-calendar-alt text-xs" aria-hidden="true"></i> Schedule Synchronously
-                        </h4>
-                        <p class="text-xs text-gray-500 font-light leading-relaxed">Book a direct meeting to align, share technical feedback, or discuss roles.</p>
-                        <a href="https://cal.com/ramshankar07" target="_blank" rel="noopener noreferrer" class="inline-block text-xs font-semibold uppercase tracking-wider text-black dark:text-white underline underline-offset-4 hover:opacity-70">
-                            Book on Cal.com <i class="fas fa-arrow-right text-[8px] ml-1"></i>
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+
+                <!-- The ask, and the action that answers it -->
+                <div class="space-y-8">
+                    <p class="text-base md:text-lg text-gray-600 dark:text-neutral-400 font-light leading-relaxed">
+                        I&#8217;m looking for work on training and inference infrastructure &#8212; distributed training, high-performance serving, and the tooling that gets ML engineers from experiment to production. Happy to talk through any of the numbers on this page.
+                    </p>
+
+                    <div class="flex gap-4 flex-wrap">
+                        <a href="mailto:bhuvaneshwaran.r@northeastern.edu?subject=ML%20systems%20role%20%E2%80%94%20let%27s%20talk" class="hero-btn-primary px-8 py-3.5 font-medium rounded-lg text-sm transition-all duration-300">
+                            Email me
+                        </a>
+                        <a href="https://linkedin.com/in/ramshankarb" target="_blank" rel="noopener noreferrer" class="hero-btn-outline px-8 py-3.5 border font-medium rounded-lg text-sm transition-all duration-300">
+                            Message on LinkedIn
                         </a>
                     </div>
+
+                    <p class="text-sm text-gray-500 font-light">
+                        Or reply straight to <a href="mailto:bhuvaneshwaran.r@northeastern.edu" class="contact-inline">bhuvaneshwaran.r@northeastern.edu</a>.
+                    </p>
+                </div>
+
+                <!-- The quiet details -->
+                <div class="space-y-6">
+                    <ul class="contrib-list">
+                        <li class="contact-row">
+                            <span class="contact-row__label">Phone</span>
+                            <a href="tel:+18576934328" class="contact-inline">(857) 693-4328</a>
+                        </li>
+                        <li class="contact-row">
+                            <span class="contact-row__label">Location</span>
+                            <span class="text-sm text-black dark:text-white">Boston, MA &#183; open to remote</span>
+                        </li>
+                        <li class="contact-row">
+                            <span class="contact-row__label">Calendar</span>
+                            <a href="https://cal.com/ramshankar07" target="_blank" rel="noopener noreferrer" class="contact-inline">Book a slot on Cal.com</a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
         </section>
 
@@ -1083,7 +1070,7 @@ You are an AI assistant analyzing Ramshankar's portfolio.
     </nav>
 
     <!-- Core Script Assets -->
-    <script src="script.js?v=20260918b" defer></script>
+    <script src="script.js?v=20260919a" defer></script>
     <script src="three-bg.js?v=20260819b" defer></script>
 </body>
 

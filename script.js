@@ -344,10 +344,17 @@ class PortfolioChatbot {
             }
         });
         
-        // Auto focus search widget on initial load
-        setTimeout(() => {
-            this.chatInput?.focus();
-        }, 600);
+        // Auto focus the search widget on load - pointer devices only.
+        // On a phone this scrolled the page to the widget (measured: scrollY 747
+        // at 390x844), putting the headline, the lead and both CTAs off screen
+        // before the visitor had read a word, and opened the keyboard over what
+        // was left. preventScroll keeps even the desktop case from moving the
+        // page if the widget ever falls below the fold.
+        if (window.matchMedia('(min-width: 768px)').matches) {
+            setTimeout(() => {
+                this.chatInput?.focus({ preventScroll: true });
+            }, 600);
+        }
     }
 
     async sendMessage() {
@@ -426,7 +433,9 @@ class PortfolioChatbot {
         const hideModal = () => {
             resultModal.classList.add('hidden');
             document.body.classList.remove('overflow-hidden');
-            this.chatInput?.focus();
+            // Returning focus to the field the dialog came from is correct, but
+            // it must not drag the page there.
+            this.chatInput?.focus({ preventScroll: true });
         };
 
         closeElements.forEach((el, index) => {

@@ -1,0 +1,379 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-19T01:00:50Z",
+  "title": "Design System: Ramshankar Bhuvaneswaran Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "bone": {
+        "role": "neutral",
+        "displayName": "Bone",
+        "canonical": "#FAF9F6",
+        "tonalRamp": [
+          "#141413",
+          "#2B2A27",
+          "#45443F",
+          "#605E57",
+          "#7C7A71",
+          "#9A978D",
+          "#BAB7AB",
+          "#FAF9F6"
+        ]
+      },
+      "obsidian": {
+        "role": "neutral",
+        "displayName": "Obsidian",
+        "canonical": "#080808",
+        "tonalRamp": [
+          "#080808",
+          "#151515",
+          "#222222",
+          "#3A3A3A",
+          "#5C5C5C",
+          "#858585",
+          "#B8B8B8",
+          "#F5F5F7"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#111111",
+        "tonalRamp": [
+          "#000000",
+          "#111111",
+          "#2A2A2A",
+          "#444444",
+          "#666666",
+          "#949494",
+          "#C4C4C4",
+          "#F2F2F2"
+        ]
+      },
+      "chalk": {
+        "role": "neutral",
+        "displayName": "Chalk",
+        "canonical": "#F5F5F7",
+        "tonalRamp": [
+          "#1B1B1E",
+          "#303034",
+          "#4A4A4F",
+          "#67676D",
+          "#87878E",
+          "#A1A1AA",
+          "#CFCFD6",
+          "#F5F5F7"
+        ]
+      },
+      "accent-light": {
+        "role": "primary",
+        "displayName": "Accent Ink (light)",
+        "canonical": "#000000",
+        "tonalRamp": [
+          "#000000",
+          "#1A1A1A",
+          "#333333",
+          "#4D4D4D",
+          "#666666",
+          "#999999",
+          "#CCCCCC",
+          "#FFFFFF"
+        ]
+      },
+      "accent-dark": {
+        "role": "primary",
+        "displayName": "Accent Ink (dark)",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "#000000",
+          "#1A1A1A",
+          "#333333",
+          "#4D4D4D",
+          "#666666",
+          "#999999",
+          "#CCCCCC",
+          "#FFFFFF"
+        ]
+      },
+      "rule-light": {
+        "role": "neutral",
+        "displayName": "Rule (light)",
+        "canonical": "#E2E1DA",
+        "tonalRamp": [
+          "#2E2E2A",
+          "#45453F",
+          "#5D5C55",
+          "#78776E",
+          "#97968B",
+          "#B8B7AC",
+          "#E2E1DA",
+          "#F7F7F4"
+        ]
+      },
+      "rule-dark": {
+        "role": "neutral",
+        "displayName": "Rule (dark)",
+        "canonical": "#222222",
+        "tonalRamp": [
+          "#0A0A0A",
+          "#141414",
+          "#222222",
+          "#333333",
+          "#4A4A4A",
+          "#6B6B6B",
+          "#9E9E9E",
+          "#DADADA"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The hero h1 only. One per page."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles, paired with a monospace 01.-05. number and a bottom hairline."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Card and project headings."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "The hero paragraph. Light weight at large size reads as spoken, not declaimed."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "About copy, max measure ~65ch."
+      },
+      "metric": {
+        "displayName": "Metric",
+        "purpose": "Headline figures in project cards. Always tabular-nums."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Eyebrows, status pills, metric captions. 12px floor with 0.12em tracking."
+      },
+      "serif-accent": {
+        "displayName": "Serif Accent",
+        "purpose": "Times italic. Logo, hero name, and section titles only."
+      }
+    },
+    "shadows": [
+      {
+        "name": "none",
+        "value": "none",
+        "purpose": "The default and the doctrine. Surfaces are flat at rest and on hover; depth is hairline plus tonal layering."
+      },
+      {
+        "name": "field-ambient",
+        "value": "0 4px 20px var(--accent-glow)",
+        "purpose": "The single sanctioned shadow. A 4%-alpha wash under the hero search field, reading as a focus affordance on an interactive surface rather than elevation."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-standard",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "Every state transition in the system."
+      },
+      {
+        "name": "duration-fast",
+        "value": "150ms",
+        "purpose": "Icon button color and border shifts."
+      },
+      {
+        "name": "duration-base",
+        "value": "200ms",
+        "purpose": "Fills, theme swap."
+      },
+      {
+        "name": "duration-slow",
+        "value": "300ms",
+        "purpose": "Card hover, filter fade, nav underline."
+      },
+      {
+        "name": "duration-reduced-cap",
+        "value": "60ms",
+        "purpose": "Ceiling under prefers-reduced-motion. Short enough to read as instant, long enough to be perceived. Looping decoration is set to animation:none instead."
+      },
+      {
+        "name": "rail-progress",
+        "value": "transform 0.1s linear",
+        "purpose": "Scroll-progress rail. scaleY, never height."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile-canvas",
+        "value": "max-width: 767px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "rails",
+        "value": "1280px"
+      },
+      {
+        "name": "touch",
+        "value": "(pointer: coarse), (hover: none)"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The decisive action. Accent fill, inverted text, tightest radius in the system.",
+      "html": "<button class=\"ds-btn-primary\">View Systems I&rsquo;ve Built</button>",
+      "css": ".ds-btn-primary{background:var(--accent,#000);color:var(--bg-primary,#FAF9F6);font-family:Inter,sans-serif;font-size:.875rem;font-weight:500;padding:14px 32px;border:1px solid var(--accent,#000);border-radius:8px;cursor:pointer;transition:opacity 300ms cubic-bezier(.4,0,.2,1)}.ds-btn-primary:hover{opacity:.85}.ds-btn-primary:focus-visible{outline:2px solid var(--accent,#000);outline-offset:2px}"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "The secondary action. 2px border is the one sanctioned exception to the hairline rule.",
+      "html": "<button class=\"ds-btn-outline\">Get In Touch</button>",
+      "css": ".ds-btn-outline{background:transparent;color:var(--text-primary,#111);font-family:Inter,sans-serif;font-size:.875rem;font-weight:500;padding:14px 32px;border:2px solid var(--accent,#000);border-radius:8px;cursor:pointer;transition:background-color 300ms cubic-bezier(.4,0,.2,1)}.ds-btn-outline:hover{background:var(--accent-glow,rgba(0,0,0,.04))}.ds-btn-outline:focus-visible{outline:2px solid var(--accent,#000);outline-offset:2px}"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "chip-filter",
+      "description": "Pill toggle. The painted shape lives on an inset ::before so the 44px hit box exceeds the visible pill.",
+      "html": "<button class=\"ds-chip\" aria-pressed=\"false\">Training Systems</button><button class=\"ds-chip ds-chip--active\" aria-pressed=\"true\">All</button>",
+      "css": ".ds-chip{position:relative;z-index:0;display:inline-flex;align-items:center;height:44px;padding:0 20px;margin:0 4px;background:none;border:0;border-radius:9999px;font-family:Inter,sans-serif;font-size:.875rem;font-weight:500;color:var(--text-secondary,#666);cursor:pointer;transition:color 300ms cubic-bezier(.4,0,.2,1)}.ds-chip::before{content:\"\";position:absolute;inset:2.5px 0;z-index:-1;border:1px solid var(--border-color,#E2E1DA);border-radius:9999px;transition:background-color 300ms cubic-bezier(.4,0,.2,1)}.ds-chip:hover::before{background:var(--accent-glow,rgba(0,0,0,.04))}.ds-chip--active{color:var(--bg-primary,#FAF9F6)}.ds-chip--active::before{background:var(--accent,#000);border-color:var(--accent,#000)}.ds-chip:focus-visible{outline:2px solid var(--accent,#000);outline-offset:-2px}"
+    },
+    {
+      "name": "Content Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Flat surface, hairline rule, 16px corner. The nearer tonal plane in both themes.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card__title\">Qwen600 Inference: CUDA &rarr; ROCm Port</h3><p class=\"ds-card__body\">Retargeted an inference stack to a second vendor.</p></div>",
+      "css": ".ds-card{background:var(--card-bg,#fff);border:1px solid var(--border-color,#E2E1DA);border-radius:16px;padding:40px;box-shadow:none}.ds-card__title{font-family:Inter,sans-serif;font-size:1.5rem;font-weight:700;line-height:1.375;letter-spacing:-.02em;color:var(--text-primary,#111);margin:0 0 16px}.ds-card__body{font-family:Inter,sans-serif;font-size:.875rem;font-weight:300;line-height:1.6;color:var(--text-secondary,#666);margin:0}"
+    },
+    {
+      "name": "Metric Callout",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Signature component. Tabular headline figure with inline unit and a 12px uppercase caption. Every performance claim on the site renders through it.",
+      "html": "<div class=\"ds-metric\"><span class=\"ds-metric__value\">12.1<span class=\"ds-metric__unit\"> ms</span></span><span class=\"ds-metric__label\">Per-token decode &middot; MI300X</span></div>",
+      "css": ".ds-metric{display:flex;flex-direction:column;gap:4px}.ds-metric__value{font-family:Inter,sans-serif;font-size:1.9rem;font-weight:700;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--text-primary,#111)}.ds-metric__unit{font-size:.9rem;font-weight:600;color:var(--text-secondary,#666)}.ds-metric__label{font-family:Inter,sans-serif;font-size:.75rem;font-weight:400;text-transform:uppercase;letter-spacing:.05em;color:var(--text-secondary,#666)}"
+    },
+    {
+      "name": "Status Pill",
+      "kind": "chip",
+      "refersTo": "status-pill",
+      "description": "Hairline pill carrying a terminal state or a date range on contribution rows.",
+      "html": "<span class=\"ds-status\">Merged</span>",
+      "css": ".ds-status{display:inline-block;font-family:Inter,sans-serif;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--text-secondary,#666);border:1px solid var(--border-color,#E2E1DA);border-radius:999px;padding:3px 10px;white-space:nowrap}"
+    },
+    {
+      "name": "Contribution Row",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Signature component. Three-column hairline-ruled row reading as a table without being one. Collapses to stacked below 768px.",
+      "html": "<ul class=\"ds-contrib\"><li class=\"ds-contrib__row\"><div class=\"ds-contrib__repo\"><a href=\"#\">huggingface/transformers <span class=\"ds-contrib__pr\">#46084</span></a></div><p class=\"ds-contrib__what\">Fixed the Mamba2 cached forward pass for multi-token inputs.</p><span class=\"ds-status\">Merged</span></li></ul>",
+      "css": ".ds-contrib{list-style:none;margin:0;padding:0;border-top:1px solid var(--border-color,#E2E1DA)}.ds-contrib__row{display:grid;gap:.35rem 1.5rem;padding:1rem 0;border-bottom:1px solid var(--border-color,#E2E1DA);align-items:baseline}@media (min-width:768px){.ds-contrib__row{grid-template-columns:minmax(0,15rem) minmax(0,1fr) auto}}.ds-contrib__repo{font-family:Inter,sans-serif;font-size:.875rem;font-weight:500;color:var(--text-primary,#111)}.ds-contrib__repo a{color:inherit;text-decoration:underline}.ds-contrib__pr{color:var(--text-secondary,#666);font-weight:400}.ds-contrib__what{font-family:Inter,sans-serif;font-size:.875rem;line-height:1.6;color:var(--text-secondary,#666);margin:0}"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "The hero AI search bar. The only element in the system carrying a shadow, and only as a focus affordance.",
+      "html": "<form class=\"ds-search\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg><input type=\"text\" placeholder=\"Ask a question about Ramshankar...\" aria-label=\"Search\"><button class=\"ds-search__send\" aria-label=\"Submit\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M2 21 23 12 2 3v7l15 2-15 2z\"/></svg></button></form>",
+      "css": ".ds-search{display:flex;align-items:center;gap:12px;background:var(--bg-secondary,#F2F1EA);border:1px solid var(--border-color,#E2E1DA);border-radius:12px;padding:14px;box-shadow:0 4px 20px var(--accent-glow,rgba(0,0,0,.04));color:var(--text-secondary,#666)}.ds-search input{flex:1;background:transparent;border:0;outline:none;font-family:Inter,sans-serif;font-size:.875rem;color:var(--text-primary,#111)}.ds-search__send{position:relative;z-index:0;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;margin:-6px -8px -6px 4px;padding:0;border:0;background:none;color:var(--bg-primary,#FAF9F6);cursor:pointer}.ds-search__send::before{content:\"\";position:absolute;inset:6px 8px;z-index:-1;background:var(--text-primary,#111);border-radius:.5rem}"
+    },
+    {
+      "name": "Section Heading",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Signature wayfinding. A monospace ordinal, a Times italic title, and a full-width hairline beneath.",
+      "html": "<h2 class=\"ds-section\"><span class=\"ds-section__num\">02.</span><span class=\"ds-section__title\">Systems I&rsquo;ve Built</span></h2>",
+      "css": ".ds-section{display:flex;align-items:center;gap:1rem;border-bottom:1px solid var(--border-color,#E2E1DA);padding-bottom:1rem;margin:0}.ds-section__num{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:1.25rem;font-weight:700;color:var(--text-secondary,#666);opacity:.6}.ds-section__title{font-family:\"Times New Roman\",Times,Baskerville,Georgia,serif;font-style:italic;font-weight:400;font-size:2.25rem;line-height:1.11;letter-spacing:-.02em;color:var(--text-primary,#111)}"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "refersTo": "",
+      "description": "Underline animates from zero width on hover and on scroll-spy active. Fixed bar uses backdrop-blur over a transparent ground.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"ds-nav__link ds-nav__link--active\">Systems</a><a href=\"#\" class=\"ds-nav__link\">Experience</a></nav>",
+      "css": ".ds-nav{display:flex;gap:2rem;backdrop-filter:blur(12px)}.ds-nav__link{position:relative;padding:4px 0;font-family:Inter,sans-serif;font-size:.95rem;font-weight:500;color:var(--text-secondary,#666);text-decoration:none;transition:color 300ms cubic-bezier(.4,0,.2,1)}.ds-nav__link::after{content:\"\";position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--accent,#000);transition:width 300ms cubic-bezier(.4,0,.2,1)}.ds-nav__link:hover,.ds-nav__link--active{color:var(--text-primary,#111)}.ds-nav__link:hover::after,.ds-nav__link--active::after{width:100%}.ds-nav__link:focus-visible{outline:2px solid var(--accent,#000);outline-offset:2px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Technical Broadsheet",
+    "overview": "This is a newspaper for one engineer’s measurements. Swiss print discipline applied to engineering evidence: numbered section rules marching 01. through 05., a Times italic cutting against Inter at every heading, hairline rules instead of boxes, and margins wide enough that the page breathes at 1280px. The reader arrives mid-triage with a job description open in another tab. The design’s job is to get out of the way of a number.\n\nThe system is precise, restrained, and quiet, and it is unapologetically dense. Information density is a feature here — the visitor came for substance, and padding the page to feel airy would read as having less to say. What keeps it from becoming a spec sheet is the type: a 300-weight body at 18px with generous leading, and the serif italic that appears exactly where a human name or a section title wants a human voice.\n\nThere is no color. Not “a restrained palette” — none. The accent is pure black in light and pure white in dark, and the only chromatic values anywhere in the system are rgba alphas of those two. This is the single most load-bearing constraint in the file.",
+    "keyCharacteristics": [
+      "Strictly two-tone per theme; the accent is the absence or presence of ink",
+      "Numbered section rules as the primary wayfinding device",
+      "Times italic as the only typographic voice change, used sparingly",
+      "Tabular numerals on every metric, because the numbers are the argument",
+      "Hairline 1px rules doing the work borders and shadows usually do",
+      "Flat surfaces at every state"
+    ],
+    "rules": [
+      {
+        "name": "The No-Color Rule",
+        "body": "There is no chromatic accent and there will not be one. Any hue introduced into this system is a bug, including a “subtle” tinted state, a semantic red for errors, or a brand blue inherited from a config file. State is communicated by ink weight, fill inversion, and rule presence.",
+        "section": "colors"
+      },
+      {
+        "name": "The Off-White Rule",
+        "body": "Neither canvas is a pure value. #FAF9F6 and #080808 are chosen, and #FFFFFF / #000000 are reserved as accent and card-surface only. Substituting a pure value for a canvas flattens the two-layer depth model that replaces shadows.",
+        "section": "colors"
+      },
+      {
+        "name": "The Always-Dark Surface Rule",
+        "body": "#agent-mode-overlay is a permanently dark console in both themes. It rebinds the theme tokens locally rather than fighting the global rules. Any future always-dark or always-light surface follows that pattern — rebind the tokens on the container, never override individual colors downstream.",
+        "section": "colors"
+      },
+      {
+        "name": "The 12px Floor Rule",
+        "body": "No functional text renders below 12px. Metric captions, eyebrows, and status pills all sit exactly at the floor with 0.12em tracking to stay legible at that size. Monospace blocks inside the agent console may go to 11px; nothing else may.",
+        "section": "typography"
+      },
+      {
+        "name": "The Single Italic Rule",
+        "body": ".serif-italic appears in the logo, the hero name, and section titles. That is the complete list. A fourth use dilutes it into decoration.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Rule",
+        "body": "Every number a reader might compare — metrics, latencies, leaderboard ranks — sets in tabular-nums. Columns of figures must align on the decimal.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-Always Rule",
+        "body": "No box-shadow on a resting or hovered surface. Hover state is communicated by border color, background tint via --accent-glow, or a 2px translate — never by adding depth.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Hairline Rule",
+        "body": "1px, var(--border-color), no exceptions for emphasis. A heavier border is not available as an emphasis device; use fill inversion instead.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do route every color through a CSS custom property. The tokens invert wholesale on .dark; a literal hex will not.",
+      "Do keep every functional string at 12px or above, with 0.12em tracking at the floor.",
+      "Do set comparable numbers in tabular-nums.",
+      "Do grep css/tailwind.min.css before using any Tailwind utility — it is a frozen hand-maintained subset. grid-cols-3/4 unprefixed, tabular-nums, border-collapse, align-top, items-baseline, mt-*, pt-12, sticky, min-w-[...], and no-underline are all absent. Hand-write the rule into styles.css instead.",
+      "Do give every interactive control a 44x44 hit box, growing it with padding cancelled by negative margin, or with an inset ::before, so the painted shape never changes.",
+      "Do rebind theme tokens on a container when a surface must ignore the theme.",
+      "Do keep every claim in real text. An LLM screener reading tag-stripped HTML is a first-class audience; nothing load-bearing may live only in an SVG, a pseudo-element, or JS-rendered DOM."
+    ],
+    "donts": [
+      "Don’t introduce a chromatic accent, including for semantic states. tailwind.config.js still defines an unused blue primary ramp (#3b82f6 and siblings) — it is dead config, not permission.",
+      "Don’t add box-shadow to a resting or hovered surface.",
+      "Don’t use a border heavier than 1px for emphasis, except the established 2px outline button.",
+      "Don’t extend .serif-italic beyond the logo, the hero name, and section titles.",
+      "Don’t animate a layout property. The scroll rail uses transform: scaleY() precisely because height thrashed layout on every scroll frame.",
+      "Don’t blanket-kill motion under prefers-reduced-motion. Looping decoration stops; state-change feedback stays perceptible at a ~60ms cap.",
+      "Don’t remove data-category from a #projects-grid child or a nav link for an existing section — both crash live behavior."
+    ]
+  }
+}

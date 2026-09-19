@@ -1314,7 +1314,7 @@ h3, h4 { letter-spacing: -0.018em; }
 #experience li,
 #projects li,
 #projects-grid li,
-#blogs li,
+#blogs li:not(.contrib-row),
 #blogs p,
 .contrib-what,
 .feat-content p,
@@ -1457,4 +1457,140 @@ h2 .font-mono {
 #projects-grid a.inline-flex:hover,
 #blogs a.inline-flex:hover {
     border-bottom-color: var(--accent);
+}
+
+/* ============================================
+   VERTICAL RHYTHM
+   Every top-level interval on the page measured 64px or 128px, and the gap
+   binding an h2 to its own content was identical to the gap separating two
+   unrelated blocks. Section titles were not attached to what they head — only
+   the hairline did that work. A second intra-section step fixes it at one
+   stroke across all five sections.
+   `!important` because Tailwind's `.space-y-16 > :not([hidden]) ~ :not([hidden])`
+   out-specifies any reasonable element selector.
+   ============================================ */
+section[id] > h2:first-child + * {
+    margin-top: 2.25rem !important;
+}
+
+/* The hero sits in a min-h-screen block above `main`'s own padding, leaving an
+   undeclared 257px before `01.`. Declared instead of inherited. */
+#hero {
+    padding-bottom: 4rem;
+}
+
+main > section:first-of-type {
+    margin-top: 2rem;
+}
+
+/* `#blogs` ran five heterogeneous blocks at five identical 64px gaps. Research
+   belongs with the writeups it cites; the newsletter is a separate offer. */
+#blogs > div + div {
+    margin-top: 3rem !important;
+}
+
+#blogs > div:last-child {
+    margin-top: 6rem !important;
+}
+
+/* The conversion target was the smallest region on an 11,000px page. */
+#contact {
+    padding-bottom: 2rem;
+}
+
+/* The availability pill sat 34px below the lead and 40px above the CTAs —
+   near-equidistant, so it read as belonging to neither. Pulled up so it reads
+   as a coda to the claim, and off the 1px band it accidentally shared with the
+   search field across the gutter. */
+#hero .hero-status {
+    margin-top: 1rem !important;
+}
+
+/* ============================================
+   LAYOUT DEFECTS
+   ============================================ */
+
+/* The portrait wrapper overflowed its column by 15px at every width <= 800:
+   the -m-2 ring sits outside the image box and nothing capped the wrapper.
+   Contained rather than page-breaking, but the ring was clipped. */
+#hero .md\:col-span-5 > .relative {
+    max-width: 100%;
+}
+
+#hero picture,
+#hero picture img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* The systems diagram is 680px wide inside a 276px container at 390 and ~630px
+   at 768. It scrolls, but macOS overlay scrollbars give no hint it can, so the
+   figure read as clipped rather than scrollable — "reward = co" cut mid-word at
+   the frame edge. A fade at the trailing edge plus a stated cue, both removed
+   once the figure fits. */
+.sys-diagram {
+    position: relative;
+}
+
+/* Default hidden; the media query below reveals it only where the figure
+   actually overflows. Declared here, ahead of that query — authored after it,
+   an equal-specificity `display:none` silently wins. */
+.sys-diagram-hint {
+    display: none;
+}
+
+@media (max-width: 760px) {
+    .sys-diagram {
+        -webkit-mask-image: linear-gradient(to right, #000 0, #000 88%, transparent 100%);
+                mask-image: linear-gradient(to right, #000 0, #000 88%, transparent 100%);
+    }
+
+    .sys-diagram-hint {
+        display: block;
+    }
+}
+
+.sys-diagram-hint {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+}
+
+/* One `68ch` cap across five different font sizes produced right edges at 601,
+   686, 754 and 1104px inside the same 1152px column. The worst case: the `04.`
+   section rule spans the full width while the contrib-row hairlines beneath it
+   stop 418px short, reading as a broken rule rather than a measure. Rows are
+   structure, not prose — they span. */
+.contrib-what {
+    max-width: 68ch;
+}
+
+/* Inline links in prose and in structured rows were 17-20px tall on touch,
+   against DESIGN.md's own 44x44 Do. Grown with the inset-::before pattern the
+   system already prescribes, so nothing painted moves. */
+@media (pointer: coarse), (hover: none) {
+    .contrib-repo a,
+    .contact-inline,
+    #projects-grid a:not(.inline-flex),
+    #blogs .contrib-repo a {
+        position: relative;
+        display: inline-block;
+    }
+
+    .contrib-repo a::before,
+    .contact-inline::before,
+    #projects-grid a:not(.inline-flex)::before,
+    #blogs .contrib-repo a::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        min-height: 44px;
+        height: 100%;
+    }
 }

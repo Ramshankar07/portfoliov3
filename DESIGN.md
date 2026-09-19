@@ -244,7 +244,25 @@ Above 1280px, fixed hairline rails appear at `left/right: 2.25rem` with a scroll
 
 **Breakpoints:** 768px (grid and featured layout), 1280px (margin rails), `max-width: 767px` (hero canvas opacity), plus `(pointer: coarse), (hover: none)` for touch-target expansion.
 
-**Density:** Card padding 40px, timeline card 32px, section gap 128px, grid gap 32px. Generous inside a container, tight between elements within it.
+**Vertical rhythm.** Two intervals were doing all the work — 64px and 128px — and the gap binding an `h2` to its own content was identical to the gap between two unrelated blocks, so section titles floated free of what they headed. The scale is now:
+
+| Interval | Value |
+|---|---|
+| Between sections | 128px |
+| `h2` → its first block | **36px** (the heading-attach step) |
+| Sibling blocks inside a section | 64px |
+| Related / unrelated blocks inside `04.` | 48px / 96px |
+| Project grid gap | 32px |
+| Between timeline cards | 48px |
+| Card padding | 40px (timeline card 32px) |
+
+Generous inside a container, tight between elements within it.
+
+**The Heading-Attach Rule.** A section title binds to its own first block at 36px, never at the interval used between unrelated blocks. Tailwind's `space-y-*` sets one value for both, so the override is deliberate and carries `!important` to out-specify `.space-y-16 > :not([hidden]) ~ :not([hidden])`.
+
+**The Structure-Spans Rule.** The 68ch measure is for prose. Structured rows — `.contrib-row` and anything else reading as a table — span the full column, so their hairlines align with the section rule above them. One `ch`-based cap across five font sizes produced right edges at 601, 686, 754 and 1104px inside the same 1152px column, and the `04.` rows stopped 418px short of their own section rule, reading as a broken line.
+
+**Known accepted state: the hero has no primary element.** The `h1`'s content is commented out by choice, so the display, headline, and metric steps are all absent from the first screen and the largest object above the fold is the 288px portrait. Judged at blur, the reading order is photo → text slab → buttons. This is recorded rather than fixed because the owner chose it; anyone restoring a headline should use the working `.hero-display` step.
 
 ## Elevation & Depth
 
@@ -315,7 +333,7 @@ A headline figure in tabular numerals (1.9rem, or 2.4rem at `--lg`) with a small
 A three-column hairline-ruled row: subject (15px, primary ink) · description (14px, muted) · status pill, collapsing to stacked rows below 768px. Used for upstream PRs and education. Reads as a table without being one.
 
 ### Systems Diagram (signature)
-Hand-authored inline SVG on a 960-unit viewBox, all strokes and text at `currentColor` so it inverts with the theme for free. 1px hairlines, dashed cluster boundaries, 12px labels. Wrapped in `<figure role="img">` with `<title>`, `<desc>`, and a visible `<figcaption>`; scrolls horizontally inside `.sys-diagram` below its 680px minimum.
+Hand-authored inline SVG on a 960-unit viewBox, all strokes and text at `currentColor` so it inverts with the theme for free. 1px hairlines, dashed cluster boundaries, 12px labels. Wrapped in `<figure role="img">` with `<title>`, `<desc>`, and a visible `<figcaption>`; scrolls horizontally inside `.sys-diagram` below its 680px minimum. Below 760px it carries a trailing-edge fade and a `SCROLL →` cue — macOS overlay scrollbars give no hint the figure scrolls, so without them it read as clipped rather than scrollable.
 
 ## Do's and Don'ts
 

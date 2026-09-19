@@ -209,6 +209,7 @@ A two-tone system that inverts wholesale between themes: one warm off-white fami
 
 ### Hierarchy
 - **Display** (700, `clamp(2.25rem, 4.2vw, 3.75rem)`, 1.05, `-0.03em`): The hero `h1` only. One per page.
+  *Currently dormant — the hero `h1`'s content is commented out by choice, so the role is defined and shipping but has nothing to render. The step is hand-written in `styles.css` as `.hero-display` and works the moment the heading carries text again.*
 - **Headline** (700, 2.25rem, 1.11): Section titles, set in the serif italic, paired with a mono ordinal and a bottom hairline.
 - **Metric** (700, 2.25rem / **3rem** at `--lg`, tabular-nums, `-0.03em`): Headline figures. The inline unit is `0.45em` so it scales with whichever step it sits in.
 - **Title** (700, 1.5rem, 1.3): Project and card headings.

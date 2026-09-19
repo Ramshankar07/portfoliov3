@@ -43,7 +43,6 @@ body {
     color: var(--text-primary) !important;
     font-family: var(--font-sans);
     transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    letter-spacing: -0.01em;
 }
 
 /* ── Typography & Headings ── */
@@ -110,7 +109,7 @@ nav {
 
 nav a {
     color: var(--text-secondary) !important;
-    font-size: 0.95rem;
+    font-size: 0.875rem;
     letter-spacing: -0.01em;
 }
 
@@ -621,7 +620,7 @@ iframe {
 }
 
 .proj-metric__value {
-    font-size: 1.9rem;
+    font-size: 2.25rem;
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.03em;
@@ -630,7 +629,7 @@ iframe {
 }
 
 .proj-metric__value .unit {
-    font-size: 0.9rem;
+    font-size: 0.45em;
     font-weight: 600;
     color: var(--text-secondary) !important;
 }
@@ -661,7 +660,7 @@ iframe {
 }
 
 .proj-metric-stack .proj-metric__value {
-    font-size: 2.4rem;
+    font-size: 3rem;
 }
 
 /* ── Featured project (spans full grid width) ── */
@@ -775,7 +774,7 @@ iframe {
     border-radius: 9999px;
     background: var(--bg-primary);
     color: var(--text-secondary) !important;
-    font-size: 0.85rem;
+    font-size: 0.875rem;
     transition: color 0.25s ease, transform 0.25s ease;
 }
 
@@ -884,7 +883,7 @@ iframe {
 
 .contrib-what code {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     color: var(--text-primary);
 }
 
@@ -1260,7 +1259,7 @@ iframe {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     font-weight: 500;
     letter-spacing: 0.02em;
     color: var(--text-secondary);
@@ -1324,4 +1323,93 @@ iframe {
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: var(--text-secondary);
+}
+
+/* ============================================
+   TYPE RAMP — per-role tracking, measure, and the display step
+   Tracking is set per role, never on `body`: letter-spacing declared in `em`
+   resolves to px where it is declared and then inherits as an absolute value,
+   so one global -0.01em lands as -0.0133em on 12px and -0.0067em on 24px —
+   tightest exactly where Inter wants it loosest.
+   ============================================ */
+
+/* The hero display step. `md:text-6xl` is not in the frozen Tailwind subset,
+   so the h1 rendered at 36px at every width — identical to every section h2,
+   which left the page with no typographic peak. Hand-written here per
+   DESIGN.md's Frozen-Subset Rule. */
+.hero-display {
+    font-size: clamp(2.25rem, 4.2vw, 3.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+}
+
+h1, .hero-display { letter-spacing: -0.03em; }
+h2 { letter-spacing: -0.022em; }
+h3, h4 { letter-spacing: -0.018em; }
+
+/* Reading measure. These lists had no cap at all and inherited the 1104px
+   container: 41 rendered lines ran past 75ch, the worst at 141ch. */
+#about p,
+#experience li,
+#projects li,
+#projects-grid li,
+#blogs li,
+#blogs p,
+.contrib-what,
+.feat-content p,
+figcaption {
+    max-width: 68ch;
+}
+
+/* Comparable numbers set tabular, per DESIGN.md's Tabular Rule — the hero
+   proof points and the experience dates are numbers a reader compares just as
+   much as the metric callouts are. */
+.hero-proof,
+.timeline-card .text-right span,
+#blogs .text-xs {
+    font-variant-numeric: tabular-nums;
+}
+
+/* A monospace with negative tracking is a monospace for no reason. The
+   ordinals were inheriting -0.02em from their h2. */
+h2 .font-mono {
+    letter-spacing: 0;
+    font-weight: 700;
+}
+
+/* Dark-theme compensation. Light-on-dark reads thinner and airier at identical
+   metrics, so it gets marginally more leading, a touch more tracking, and one
+   weight step on emphasis. Smoothing is applied only where it belongs: on dark.
+   Previously zero typographic values differed between the two themes. */
+.dark {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.dark p,
+.dark li {
+    line-height: 1.68;
+    letter-spacing: 0.002em;
+}
+
+.dark strong {
+    font-weight: 600;
+}
+
+/* Font Awesome glyph boxes carry text-[10px]-style classes that are icon
+   sizing, not a type step. Named so the next reader does not mistake them. */
+.icon-inline {
+    font-size: 0.625em;
+}
+
+/* Metadata is scanned, not read. Dates and locations were 14px/400 — identical
+   to the achievement bullets beside them, separated only by colour. Moving them
+   to the label treatment splits the scan layer from the read layer. */
+.timeline-meta {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.5;
 }

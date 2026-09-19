@@ -20,48 +20,73 @@ colors:
   status-live-dark: "#4ADE80"
 typography:
   display:
-    fontFamily: "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif"
-    fontSize: "clamp(3rem, 5vw, 4.5rem)"
+    fontFamily: "Inter, -apple-system, system-ui, Segoe UI, Roboto, sans-serif"
+    fontSize: "clamp(2.25rem, 4.2vw, 3.75rem)"
     fontWeight: 700
-    lineHeight: 1.1
-    letterSpacing: "-0.025em"
+    lineHeight: 1.05
+    letterSpacing: "-0.03em"
   headline:
     fontFamily: "{typography.display.fontFamily}"
     fontSize: "2.25rem"
     fontWeight: 700
     lineHeight: 1.11
-    letterSpacing: "-0.02em"
-  title:
-    fontFamily: "{typography.display.fontFamily}"
-    fontSize: "1.5rem"
-    fontWeight: 700
-    lineHeight: 1.375
-    letterSpacing: "-0.02em"
-  lead:
-    fontFamily: "{typography.display.fontFamily}"
-    fontSize: "1.5rem"
-    fontWeight: 300
-    lineHeight: 1.33
-    letterSpacing: "-0.0067em"
-  body:
-    fontFamily: "{typography.display.fontFamily}"
-    fontSize: "1.125rem"
-    fontWeight: 300
-    lineHeight: 1.556
-    letterSpacing: "-0.0089em"
+    letterSpacing: "-0.022em"
   metric:
     fontFamily: "{typography.display.fontFamily}"
-    fontSize: "1.9rem"
+    fontSize: "2.25rem"
     fontWeight: 700
     lineHeight: 1
     letterSpacing: "-0.03em"
     fontFeature: "tabular-nums"
+  metric-lg:
+    fontFamily: "{typography.display.fontFamily}"
+    fontSize: "3rem"
+    fontWeight: 700
+    lineHeight: 1
+    letterSpacing: "-0.03em"
+    fontFeature: "tabular-nums"
+  title:
+    fontFamily: "{typography.display.fontFamily}"
+    fontSize: "1.5rem"
+    fontWeight: 700
+    lineHeight: 1.3
+    letterSpacing: "-0.018em"
+  lead:
+    fontFamily: "{typography.display.fontFamily}"
+    fontSize: "1.5rem"
+    fontWeight: 400
+    lineHeight: 1.4
+    letterSpacing: "-0.015em"
+  subtitle:
+    fontFamily: "{typography.display.fontFamily}"
+    fontSize: "1.25rem"
+    fontWeight: 700
+    lineHeight: 1.4
+    letterSpacing: "-0.014em"
+  body:
+    fontFamily: "{typography.display.fontFamily}"
+    fontSize: "1.125rem"
+    fontWeight: 400
+    lineHeight: 1.55
+    letterSpacing: "-0.011em"
+  body-dense:
+    fontFamily: "{typography.display.fontFamily}"
+    fontSize: "0.875rem"
+    fontWeight: 400
+    lineHeight: 1.6
+    letterSpacing: "-0.006em"
   label:
     fontFamily: "{typography.display.fontFamily}"
     fontSize: "0.75rem"
     fontWeight: 600
-    lineHeight: 1.5
+    lineHeight: 1.4
     letterSpacing: "0.12em"
+  mono:
+    fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace"
+    fontSize: "1.25rem"
+    fontWeight: 700
+    lineHeight: 1.4
+    letterSpacing: "0"
   serif-accent:
     fontFamily: "Times New Roman, Times, Baskerville, Georgia, serif"
     fontSize: "inherit"
@@ -176,28 +201,37 @@ A two-tone system that inverts wholesale between themes: one warm off-white fami
 
 ## Typography
 
-**Display / Body Font:** Inter (with `-apple-system`, `BlinkMacSystemFont`, `Segoe UI`, `Roboto`, sans-serif)
+**Display / Body Font:** Inter (with `-apple-system`, `system-ui`, `Segoe UI`, `Roboto`, sans-serif). **Four weights are hosted: 400, 500, 600, 700.** 300 is not available and must never be requested — Chromium snaps it to 400, so a `font-light` class documents a lie.
 **Accent Font:** Times New Roman (with Times, Baskerville, Georgia, serif) — italic, 400, `.serif-italic` only
-**Numeric:** Inter with `font-variant-numeric: tabular-nums`
+**Mono Font:** `ui-monospace, SFMono-Regular, Menlo, monospace` — a zero-byte system stack
 
-**Character:** One workhorse sans carrying the entire hierarchy through weight and size alone, interrupted at precise intervals by a Times italic that does nothing but signal "a person wrote this." The pairing is a broadsheet convention: neutral body type, editorial voice in the furniture.
+**Character:** One workhorse sans carrying the hierarchy through weight and size, interrupted at precise intervals by a Times italic that signals "a person wrote this", with a monospace ordinal marking each section like a dateline.
 
 ### Hierarchy
-- **Display** (700, `clamp(3rem, 5vw, 4.5rem)`, 1.1, `-0.025em`): The hero `h1` only. One per page.
-- **Headline** (700, 36px, 40px, `-0.02em`): Section titles, paired with a monospace `01.`–`05.` number and a bottom hairline.
-- **Title** (700, 24px, 33px, `-0.02em`): Card and project headings.
-- **Lead** (300, 24px, 32px): The hero paragraph. Light weight at large size is the signature move — it reads as spoken rather than declaimed.
-- **Body** (300, 18px, 28px): About copy. Max measure ~65ch via `max-w-3xl`.
-- **Metric** (700, 1.9rem / 2.4rem at `--lg`, tabular-nums, `-0.03em`): Headline numbers in project cards.
-- **Label** (600, 12px, uppercase, `0.12em`): Eyebrows, status pills, metric captions, section kickers.
+- **Display** (700, `clamp(2.25rem, 4.2vw, 3.75rem)`, 1.05, `-0.03em`): The hero `h1` only. One per page.
+- **Headline** (700, 2.25rem, 1.11): Section titles, set in the serif italic, paired with a mono ordinal and a bottom hairline.
+- **Metric** (700, 2.25rem / **3rem** at `--lg`, tabular-nums, `-0.03em`): Headline figures. The inline unit is `0.45em` so it scales with whichever step it sits in.
+- **Title** (700, 1.5rem, 1.3): Project and card headings.
+- **Lead** (400, 1.5rem, 1.4): The hero paragraph.
+- **Subtitle** (700, 1.25rem, 1.4): Role and card titles in the timeline.
+- **Body** (400, 1.125rem, 1.55): About copy. Measure capped at 68ch.
+- **Body-dense** (400, 0.875rem, 1.6): **The workhorse.** Experience bullets, project copy, blog copy, buttons, chips, dates — the most-used size in the system by a wide margin.
+- **Label** (600, 0.75rem, uppercase, `0.12em`): Eyebrows, status pills, metric captions.
+- **Mono** (700, 1.25rem, tracking `0`): Section ordinals and the agent console.
 
 ### Named Rules
 
-**The 12px Floor Rule.** No functional text renders below 12px. Metric captions, eyebrows, and status pills all sit exactly at the floor with `0.12em` tracking to stay legible at that size. Monospace blocks inside the agent console may go to 11px; nothing else may.
+**The 12px Floor Rule.** No functional text renders below 12px. Labels sit exactly at the floor with `0.12em` tracking to stay legible there. Arbitrary `text-[9px]`/`[10px]`/`[11px]` classes in the markup are icon-glyph sizing, not type, and must not be read as a type step.
 
-**The Single Italic Rule.** `.serif-italic` appears in the logo, the hero name, and section titles. That is the complete list. A fourth use dilutes it into decoration.
+**The Single Italic Rule.** `.serif-italic` appears in the logo, the hero name, and section titles. That is the complete list.
 
-**The Tabular Rule.** Every number a reader might compare — metrics, latencies, leaderboard ranks — sets in `tabular-nums`. Columns of figures must align on the decimal.
+**The Tabular Rule.** Every number a reader might compare sets in `tabular-nums`. That includes the hero proof points and experience dates, not only the metric callouts.
+
+**The Two-Uses Rule.** The mono family is capped at exactly two jobs: section ordinals and the agent console. It is a dateline and a terminal, not a costume for "technical". Its tracking is never negative — negative tracking on a monospace defeats the only reason to use one.
+
+**The Inherited Tracking Rule.** Never declare `letter-spacing` in `em` on `body`. It resolves to px at the declaring element and inherits as an absolute value, so a single `-0.01em` lands as `-0.0133em` on 12px text and `-0.0067em` on 24px — tightest where it should be loosest. Tracking is set per role, never globally.
+
+**The Frozen-Subset Rule.** `css/tailwind.min.css` is hand-maintained. `md:text-6xl` is **not** in it, and neither are most `md:` type steps — only `md:text-2xl`, `md:text-5xl`, `md:text-7xl`, `md:text-lg` ship. A responsive type step that is not in the subset must be hand-written into `styles.css`, or it silently renders at the base size at every width.
 
 ## Layout
 

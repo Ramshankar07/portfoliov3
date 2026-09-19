@@ -18,6 +18,30 @@
         ],
         "createdAt": "2026-09-19T01:40:48.989Z",
         "reason": "User confirmed the hero availability dot; the agent-overlay dot is a live indicator; .typing-indicator is orphaned CSS that never renders. All three instances accounted for."
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "9px",
+        "createdAt": "2026-09-19T02:28:51.103Z",
+        "reason": "Agent: class name only. These 5 elements are inside #agent-mode-overlay, where styles.css forces .text-[9/10/11px] to 0.75rem; measured computed size is 12px. Verified: zero text renders below 12px."
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "10px",
+        "createdAt": "2026-09-19T02:28:51.129Z",
+        "reason": "Agent: class name only. These 5 elements are inside #agent-mode-overlay, where styles.css forces .text-[9/10/11px] to 0.75rem; measured computed size is 12px. Verified: zero text renders below 12px."
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "11px",
+        "createdAt": "2026-09-19T02:28:51.154Z",
+        "reason": "Agent: class name only. These 5 elements are inside #agent-mode-overlay, where styles.css forces .text-[9/10/11px] to 0.75rem; measured computed size is 12px. Verified: zero text renders below 12px."
+      },
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-09-19T02:28:51.182Z",
+        "reason": "User confirmed Inter is a binding brand commitment recorded in PRODUCT.md and DESIGN.md"
       }
     ]
   }

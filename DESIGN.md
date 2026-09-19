@@ -228,7 +228,7 @@ A two-tone system that inverts wholesale between themes: one warm off-white fami
 
 **The Tabular Rule.** Every number a reader might compare sets in `tabular-nums`. That includes the hero proof points and experience dates, not only the metric callouts.
 
-**The Two-Uses Rule.** The mono family is capped at three jobs: section ordinals, the agent console, and the closing die render — where it is a rendering medium rather than type. It is a dateline and a terminal, not a costume for "technical". Its tracking is never negative — negative tracking on a monospace defeats the only reason to use one.
+**The Two-Uses Rule.** The mono family is capped at exactly two jobs: section ordinals and the agent console. It is a dateline and a terminal, not a costume for “technical”. Its tracking is never negative — negative tracking on a monospace defeats the only reason to use one. It is a dateline and a terminal, not a costume for "technical". Its tracking is never negative — negative tracking on a monospace defeats the only reason to use one.
 
 **The Inherited Tracking Rule.** Never declare `letter-spacing` in `em` on `body`. It resolves to px at the declaring element and inherits as an absolute value, so a single `-0.01em` lands as `-0.0133em` on 12px text and `-0.0067em` on 24px — tightest where it should be loosest. Tracking is set per role, never globally.
 
@@ -331,30 +331,6 @@ A headline figure in tabular numerals (1.9rem, or 2.4rem at `--lg`) with a small
 
 ### Contribution Row (signature)
 A three-column hairline-ruled row: subject (15px, primary ink) · description (14px, muted) · status pill, collapsing to stacked rows below 768px. Used for upstream PRs and education. Reads as a table without being one.
-
-### Closing Card Render (signature)
-
-An RTX 5090 in isometric ASCII, spanning the frame edge to edge, half submerged, three fans turning out of step. No heading, no caption — the page's last beat is the object alone.
-
-**Orthographic, fixed camera.** No perspective divide and no camera state, so the card holds the same footprint every frame. That constancy is what lets it span the full width; a rotating object cannot, because its projected width changes as it turns. The model is pre-rotated 45° about Y, since a long board in plain isometric projects as a diagonal sliver.
-
-**Fit is width-only, and top-aligned.** Height is deliberately unconstrained: the card is meant to run off the bottom and disappear. Every height term that was ever in that expression did the same thing — shrink the card away from the sides to make it fit vertically, which is the opposite of the brief.
-
-**The waterline.** A gradient mask takes the lower half. A hard crop reads as a mistake; a fade reads as the card going under.
-
-**Motion thesis: the card runs an inference.** The loop is the argument the rest of the page makes, played out on the board. Weights sit resident in the memory zones and never go fully dark. A query enters at the PCIe edge and runs to the die. Decode is then one sweep per token, pulling weights from alternating memory zones back into the die — which is why the loop is mostly traffic and barely any compute, and why 79–83% of peak bandwidth is the number that matters. The answer leaves the way it came.
-
-**The fans answer that load.** Work arrives as a wave travelling the length of the board; parts in its path light up. Heat accumulates in whichever zone the wave is over — quickly under load, bleeding off slowly, because a heatsink has mass. Each rotor's RPM then chases its own zone's temperature, and chases it slower still. That lag is the point: the fan spools up *behind* the work and is still winding down once the work has gone.
-
-This replaced three hardcoded rates with a slow wobble. Both produce fans that disagree, but only one of them means anything — here the rotors desynchronise because their zones are loaded at different moments, and the spin-up is readable as a consequence rather than as decoration. A working rotor also brightens with its zone's temperature, so the response is visible as well as measurable. Remove the coupling and the piece loses its argument, not just an effect.
-
-**The rotor is eleven wide backward-swept blades**, spanning hub to rim and overlapping into a near-solid disc, with the hub at roughly a third of the diameter. Three shapes were built and compared before this one was chosen — a ringed variant with a rim joining the blade tips, and a deep-pitch eight-blade turbine. The version before all of them was thin boxes parked at a fixed radius: spokes, not blades, which is precisely why it never read as a fan. Blades are swept about their own centre before being rotated about the hub, so they sit at an angle to the radius rather than pointing straight out.
-
-Blades rotate about their own fan axis per frame and re-project; spinning parts keep both away-faces, since their faces swap sides as they turn.
-
-**The heatsink is 30 discrete fins**, not one slab. That is what a heatsink is, and it is also what gives the inference loop somewhere to happen — each fin lights on its own, so activity can travel the length of the card.
-
-Rendered like the hero lattice: shaded into an offscreen buffer at character resolution, then sampled per cell through a density ramp (`@%#*+=-:.`). Fades in on entry, pauses off-screen and on hidden tabs, holds one settled frame under `prefers-reduced-motion`. The `<figcaption>` is `sr-only` and describes the card in full.
 
 ### Hero Occupancy Grid (signature)
 

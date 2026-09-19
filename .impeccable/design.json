@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-19T18:11:41Z",
+  "generatedAt": "2026-09-19T18:38:47Z",
   "title": "Design System: Ramshankar Bhuvaneswaran Portfolio",
   "extensions": {
     "colorMeta": {
@@ -226,11 +226,6 @@
         "name": "occupancy-waves",
         "value": "3 concurrent launches, fill rate 0.16 / drain rate 0.035",
         "purpose": "Hero GPU occupancy grid. Fill fast, drain slow - the asymmetry is what reads as work rather than a blinking light. Paused off-screen and on hidden tabs; a single settled frame under prefers-reduced-motion."
-      },
-      {
-        "name": "thermal-fan-response",
-        "value": "heat rise 0.035 / decay 0.006, rpm follows temp at 0.022",
-        "purpose": "Closing card. Fan speed is driven by accumulated zone heat rather than a fixed rate, so rotors spool up behind the load wave and coast down after it. The lag is the meaning; identical fixed-rate fans read as drawn rather than running."
       }
     ],
     "breakpoints": [

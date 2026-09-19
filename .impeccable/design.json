@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-19T01:00:50Z",
+  "generatedAt": "2026-09-19T01:39:15Z",
   "title": "Design System: Ramshankar Bhuvaneswaran Portfolio",
   "extensions": {
     "colorMeta": {
@@ -123,6 +123,21 @@
           "#9E9E9E",
           "#DADADA"
         ]
+      },
+      "status-live": {
+        "role": "tertiary",
+        "displayName": "Live Green",
+        "canonical": "#15803D",
+        "tonalRamp": [
+          "#052E16",
+          "#14532D",
+          "#15803D",
+          "#16A34A",
+          "#22C55E",
+          "#4ADE80",
+          "#86EFAC",
+          "#DCFCE7"
+        ]
       }
     },
     "typographyMeta": {
@@ -201,6 +216,11 @@
         "name": "rail-progress",
         "value": "transform 0.1s linear",
         "purpose": "Scroll-progress rail. scaleY, never height."
+      },
+      {
+        "name": "status-blink",
+        "value": "2.4s ease-in-out infinite, bottoming out at 0.3 opacity",
+        "purpose": "The hero availability dot. A slow fade, not a hard on/off - the point is \"this is current\", not \"look here\". Disabled under prefers-reduced-motion and held lit."
       }
     ],
     "breakpoints": [
@@ -308,7 +328,7 @@
     "northStar": "The Technical Broadsheet",
     "overview": "This is a newspaper for one engineer’s measurements. Swiss print discipline applied to engineering evidence: numbered section rules marching 01. through 05., a Times italic cutting against Inter at every heading, hairline rules instead of boxes, and margins wide enough that the page breathes at 1280px. The reader arrives mid-triage with a job description open in another tab. The design’s job is to get out of the way of a number.\n\nThe system is precise, restrained, and quiet, and it is unapologetically dense. Information density is a feature here — the visitor came for substance, and padding the page to feel airy would read as having less to say. What keeps it from becoming a spec sheet is the type: a 300-weight body at 18px with generous leading, and the serif italic that appears exactly where a human name or a section title wants a human voice.\n\nThere is no color. Not “a restrained palette” — none. The accent is pure black in light and pure white in dark, and the only chromatic values anywhere in the system are rgba alphas of those two. This is the single most load-bearing constraint in the file.",
     "keyCharacteristics": [
-      "Strictly two-tone per theme; the accent is the absence or presence of ink",
+      "Two-tone per theme plus a single sanctioned hue on the availability dot",
       "Numbered section rules as the primary wayfinding device",
       "Times italic as the only typographic voice change, used sparingly",
       "Tabular numerals on every metric, because the numbers are the argument",
@@ -318,7 +338,7 @@
     "rules": [
       {
         "name": "The No-Color Rule",
-        "body": "There is no chromatic accent and there will not be one. Any hue introduced into this system is a bug, including a “subtle” tinted state, a semantic red for errors, or a brand blue inherited from a config file. State is communicated by ink weight, fill inversion, and rule presence.",
+        "body": "There is exactly one hue in this system - Live Green on the hero availability dot - and it is spent. Any other hue introduced here is a bug, including a \"subtle\" tinted state, a semantic red for errors, or a brand blue inherited from a config file. Everywhere else, state is communicated by ink weight, fill inversion, and rule presence.",
         "section": "colors"
       },
       {
@@ -367,7 +387,7 @@
       "Do keep every claim in real text. An LLM screener reading tag-stripped HTML is a first-class audience; nothing load-bearing may live only in an SVG, a pseudo-element, or JS-rendered DOM."
     ],
     "donts": [
-      "Don’t introduce a chromatic accent, including for semantic states. tailwind.config.js still defines an unused blue primary ramp (#3b82f6 and siblings) — it is dead config, not permission.",
+      "Don't introduce a second chromatic accent. Live Green on the availability dot is the whole colour budget and it is already spent. tailwind.config.js still defines an unused blue primary ramp (#3b82f6 and siblings) - dead config, not permission.",
       "Don’t add box-shadow to a resting or hovered surface.",
       "Don’t use a border heavier than 1px for emphasis, except the established 2px outline button.",
       "Don’t extend .serif-italic beyond the logo, the hero name, and section titles.",

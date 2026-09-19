@@ -14,7 +14,13 @@
     --border-color: #E2E1DA;    /* Delicate thin borders */
     --accent: #000000;          /* High-contrast pure black solid accent */
     --accent-glow: rgba(0, 0, 0, 0.04);
-    
+
+    /* The system's one sanctioned hue. Availability is the single piece of
+       state on this page that changes in the world rather than on scroll, and
+       it is the one thing a reader scans for. Darker in light theme so it
+       holds against the bone canvas. See DESIGN.md, The No-Color Rule. */
+    --status-live: #15803D;
+
     --font-serif: "Times New Roman", Times, Baskerville, Georgia, serif;
     --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
@@ -28,6 +34,7 @@
     --border-color: #222222;    /* Subtle dark charcoal borders */
     --accent: #FFFFFF;          /* High-contrast pure white solid accent */
     --accent-glow: rgba(255, 255, 255, 0.04);
+    --status-live: #4ADE80;
 }
 
 /* ── Base Styles ── */
@@ -540,8 +547,14 @@ iframe {
        own rules above so they stay disabled wherever that markup lands. */
     .animate-pulse,
     .typing-indicator,
-    .chat-enter {
+    .chat-enter,
+    .hero-status__dot {
         animation: none !important;
+    }
+
+    /* Held lit rather than mid-fade: the dot still has to read as "available". */
+    .hero-status__dot {
+        opacity: 1;
     }
 
     /* The dots idle at scale(0) inside the loop; with the loop gone they have
@@ -1257,11 +1270,19 @@ iframe {
 }
 
 .hero-status__dot {
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     border-radius: 999px;
-    background: var(--accent);
+    background: var(--status-live);
     flex: none;
+    animation: status-blink 2.4s ease-in-out infinite;
+}
+
+/* A slow fade rather than a hard on/off: the point is "this is current", not
+   "look here". Bottoms out at 0.3 so the dot never fully disappears and the
+   row never reads as broken. */
+@keyframes status-blink {
+    50% { opacity: 0.3; }
 }
 
 /* ============================================

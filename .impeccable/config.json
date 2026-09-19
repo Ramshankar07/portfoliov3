@@ -5,5 +5,20 @@
       "maxFindings": 5,
       "maxChars": 8000
     }
+  },
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "pulsing-dot",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-19T01:40:48.989Z",
+        "reason": "User confirmed the hero availability dot; the agent-overlay dot is a live indicator; .typing-indicator is orphaned CSS that never renders. All three instances accounted for."
+      }
+    ]
   }
 }

@@ -16,6 +16,8 @@ colors:
   rule-dark: "#222222"
   accent-light: "#000000"
   accent-dark: "#FFFFFF"
+  status-live-light: "#15803D"
+  status-live-dark: "#4ADE80"
 typography:
   display:
     fontFamily: "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif"
@@ -128,10 +130,10 @@ This is a newspaper for one engineer's measurements. Swiss print discipline appl
 
 The system is precise, restrained, and quiet, and it is unapologetically dense. Information density is a feature here — the visitor came for substance, and padding the page to feel airy would read as having less to say. What keeps it from becoming a spec sheet is the type: a 300-weight body at 18px with generous leading, and the serif italic that appears exactly where a human name or a section title wants a human voice.
 
-There is no color. Not "a restrained palette" — none. The accent is pure black in light and pure white in dark, and the only chromatic values anywhere in the system are `rgba` alphas of those two. This is the single most load-bearing constraint in the file.
+There is almost no color. The accent is pure black in light and pure white in dark, and with one exception every chromatic value in the system is an `rgba` alpha of those two. The exception is a single green on the hero availability dot — one hue, one element, spent deliberately. That restraint is the most load-bearing constraint in the file, and it survives only because the budget is exactly one.
 
 **Key Characteristics:**
-- Strictly two-tone per theme; the accent is the absence or presence of ink
+- Two-tone per theme plus one sanctioned hue; the accent is the absence or presence of ink
 - Numbered section rules as the primary wayfinding device
 - Times italic as the only typographic voice change, used sparingly
 - Tabular numerals on every metric, because the numbers are the argument
@@ -140,10 +142,10 @@ There is no color. Not "a restrained palette" — none. The accent is pure black
 
 ## Colors
 
-A two-tone system that inverts wholesale between themes: one warm off-white family and one near-black family, with a single pure-contrast accent at each end.
+A two-tone system that inverts wholesale between themes: one warm off-white family and one near-black family, with a single pure-contrast accent at each end — plus exactly one hue, held in reserve for availability.
 
 ### Primary
-- **Accent Ink** (`#000000` light / `#FFFFFF` dark): Pure contrast, reserved for the scroll-progress rail, the active filter chip fill, the primary button, focus rings, and the live status dot. It is the only "color" in the system and it is always maximal.
+- **Accent Ink** (`#000000` light / `#FFFFFF` dark): Pure contrast, reserved for the scroll-progress rail, the active filter chip fill, the primary button, and focus rings. Always maximal, never tinted.
 
 ### Neutral — the Bone family (light theme)
 - **Bone** (`#FAF9F6`): The page. A warm alabaster, deliberately off-white — a true `#FFF` would read as a default, not a decision.
@@ -159,9 +161,14 @@ A two-tone system that inverts wholesale between themes: one warm off-white fami
 - **Chalk** (`#F5F5F7`) / **Chalk Muted** (`#A1A1AA`): Primary and secondary text.
 - **Rule Dark** (`#222222`): Hairlines.
 
+### The one sanctioned hue
+- **Live Green** (`#15803D` light / `#4ADE80` dark): The availability dot in the hero, and nothing else. Darker in light theme so it holds against the bone canvas.
+
 ### Named Rules
 
-**The No-Color Rule.** There is no chromatic accent and there will not be one. Any hue introduced into this system is a bug, including a "subtle" tinted state, a semantic red for errors, or a brand blue inherited from a config file. State is communicated by ink weight, fill inversion, and rule presence.
+**The No-Color Rule.** There is exactly one hue in this system — Live Green on the hero availability dot — and it is spent. Any *other* hue introduced here is a bug, including a "subtle" tinted state, a semantic red for errors, or a brand blue inherited from a config file. Everywhere else, state is communicated by ink weight, fill inversion, and rule presence.
+
+**Why the exception holds.** Availability is the only state on this page that changes in the world rather than on scroll, it is the single thing a reader is scanning for, and it is the one claim the monochrome system could not make loudly enough. The hue earns its place by being the only one; a second sanctioned color would dissolve the first.
 
 **The Off-White Rule.** Neither canvas is a pure value. `#FAF9F6` and `#080808` are chosen, and `#FFFFFF` / `#000000` are reserved as accent and card-surface only. Substituting a pure value for a canvas flattens the two-layer depth model that replaces shadows.
 
@@ -283,7 +290,8 @@ Hand-authored inline SVG on a 960-unit viewBox, all strokes and text at `current
 - **Do** keep every claim in real text. An LLM screener reading tag-stripped HTML is a first-class audience; nothing load-bearing may live only in an SVG, a pseudo-element, or JS-rendered DOM.
 
 ### Don't:
-- **Don't** introduce a chromatic accent, including for semantic states. `tailwind.config.js` still defines an unused blue `primary` ramp (`#3b82f6` and siblings) — it is dead config, not permission.
+- **Don't** introduce a *second* chromatic accent. Live Green on the availability dot is the whole colour budget and it is already spent. `tailwind.config.js` still defines an unused blue `primary` ramp (`#3b82f6` and siblings) — it is dead config, not permission.
+- **Don't** let the availability dot carry meaning by colour alone. The label beside it ("Open for new opportunities") states the status in words; the dot only draws the eye.
 - **Don't** add `box-shadow` to a resting or hovered surface.
 - **Don't** use a border heavier than 1px for emphasis, except the established 2px outline button.
 - **Don't** extend `.serif-italic` beyond the logo, the hero name, and section titles.

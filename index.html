@@ -17,7 +17,7 @@
     <link rel="canonical" href="https://ramshankar07.github.io/portfoliov3/">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="img/hero-section-576.jpg">
-    <link rel="agent-link" type="text/markdown" href="https://agnts.sh/ramshankar?raw" title="Plain-text Agent Markdown Link">
+    <link rel="agent-link" type="text/markdown" href="https://ramshankar07.github.io/portfoliov3/llms.txt" title="Plain-text Agent Markdown Link">
     <meta name="agent-docs" content="https://agnts.sh/docs">
 
     <!-- Open Graph -->
@@ -207,9 +207,8 @@
         </ul>
     </nav>
 
-    <!-- Fixed social column (>=1280px). Placed here rather than after the
-         footer: it is visible from the first screen, so a keyboard user
-         should reach it early instead of after 11,000px of page. -->
+    <!-- Fixed social column, 1280px and wider. Placed before the hero so
+         keyboard users reach it early. -->
     <nav class="rail-social" aria-label="Social links">
         <a href="https://github.com/Ramshankar07" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="GitHub"><i class="fab fa-github"></i></a>
         <a href="https://linkedin.com/in/ramshankarb" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -231,7 +230,7 @@
                         <!-- ML systems engineer, training and inference, down to the kernel -->
                     </h1>
                     <p class="text-xl md:text-2xl text-gray-600 dark:text-neutral-400 leading-relaxed max-w-xl">
-                        I'm <span class="serif-italic font-normal text-[#111111] dark:text-[#FFFFFF]">Ramshankar</span>. I build the stack that gets a model from experiment to production: distributed training pipelines, high-performance serving, and the <strong class="text-black dark:text-white font-medium">GPU kernels</strong> (CUDA, HIP, Triton) underneath. Recently: persistent megakernels across four LLM architectures, <strong class="hero-proof text-black dark:text-white font-medium">3×</strong> on Blackwell CUTLASS kernels over the pytorch reference, and <strong class="hero-proof text-black dark:text-white font-medium">12.1 ms/token</strong> decode on a single AMD MI300X.
+                        I'm <span class="serif-italic font-normal text-[#111111] dark:text-[#FFFFFF]">Ramshankar</span>. I build the stack that gets a model from experiment to production: distributed training pipelines, high-performance serving, and the <strong class="text-black dark:text-white font-medium">GPU kernels</strong> (CUDA, HIP, Triton) underneath. Recently: evaluation and RL infrastructure for coding agents at Abundant, persistent megakernels across four LLM architectures, NVFP4 Blackwell kernels (<strong class="hero-proof text-black dark:text-white font-medium">3–6×</strong> over reference), and <strong class="hero-proof text-black dark:text-white font-medium">12.1 ms/token</strong> decode on a single AMD MI300X.
                     </p>
                     <p class="hero-status">
                         <span class="hero-status__dot" aria-hidden="true"></span>
@@ -722,8 +721,9 @@
                                 </div>
                             </div>
                             <ul class="space-y-3 text-sm text-gray-500 leading-relaxed list-disc pl-4">
-                                <li>Engineered <strong class="text-black dark:text-white">persistent megakernels</strong> for four LLM architectures using ThunderKittens primitives, collapsing the forward pass into a single launch and cutting per-request scheduling and launch overhead.</li>
-                                <li>Building <strong class="text-black dark:text-white">Harbor RL environments</strong> and synthesizing novel ML-systems problems on GPUs and TPUs that frontier models fail to solve — expanding the models' capability frontier.</li>
+                                <li>Set up and ran <strong class="text-black dark:text-white">evaluation and RL rollout experiments in Harbor</strong>, benchmarking coding agents (Claude Code, Codex) in containerized RL environments with novel ML-systems tasks on GPUs and TPUs that frontier models fail to solve.</li>
+                                <li>Built <strong class="text-black dark:text-white">job orchestration for GPU verifiers</strong>: scheduling verifier runs on rented cloud GPUs and wiring them into agent harnesses so Claude's outputs are automatically tested on real hardware.</li>
+                                <li>Built <strong class="text-black dark:text-white">persistent megakernels</strong> for four LLM architectures with ThunderKittens, collapsing the forward pass into a single launch.</li>
                             </ul>
                         </div>
                     </div>
@@ -905,6 +905,13 @@
                         <p class="contrib-what">Refactored <code>ilogbf128</code> in LLVM&#8217;s libc to a header-only implementation.</p>
                         <span class="contrib-status">Merged</span>
                     </li>
+                    <li class="contrib-row">
+                        <div class="contrib-repo">
+                            <a href="https://github.com/vllm-project/llm-compressor/pull/2323" target="_blank" rel="noopener noreferrer" class="underline">vllm-project/llm-compressor <span class="contrib-pr">#2323</span></a>
+                        </div>
+                        <p class="contrib-what">Added an AWQ option to account for quantization of the smooth layer during scale search.</p>
+                        <span class="contrib-status">Open</span>
+                    </li>
                 </ul>
             </div>
 
@@ -972,7 +979,7 @@
             <div class="space-y-6">
                 <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-neutral-600">Research</h3>
                 <ul class="space-y-3 text-sm text-gray-500 list-disc pl-4">
-                    <li><span class="text-black dark:text-white font-medium">BitSkip</span> &#8212; authored a paper on the compositional effects of quantization and early exit in large language models: what happens to quality when you stack two inference-cost reductions that are usually studied in isolation.</li>
+                    <li><a href="https://arxiv.org/abs/2510.23766" target="_blank" rel="noopener noreferrer" class="text-black dark:text-white font-medium underline underline-offset-4 hover:opacity-70">BitSkip</a> (<a href="https://arxiv.org/abs/2510.23766" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4 hover:opacity-70">arXiv:2510.23766</a>) &#8212; authored a paper on the compositional effects of quantization and early exit in large language models: what happens to quality when you stack two inference-cost reductions that are usually studied in isolation.</li>
                     <li><span class="text-black dark:text-white font-medium">ModelOpt</span> (Master&#8217;s thesis, Northeastern, 2025) &#8212; a research framework for zero-shot computer-vision model optimization using tree search and federated knowledge sharing.</li>
                 </ul>
             </div>
@@ -1119,7 +1126,7 @@ GET /api/chat {
                     <textarea id="agent-prompt-text" readonly class="w-full h-64 p-4 text-[10px] text-neutral-400 bg-neutral-900/60 border border-neutral-900 rounded-xl focus:outline-none scrollbar-thin"># Ramshankar Bhuvaneswaran - Agent Instructions
 You are an AI assistant analyzing Ramshankar's portfolio.
 - Profile: ML Systems Engineer — training and inference infrastructure. Graduate of Northeastern MSIS (2025).
-- Main Link: https://agnts.sh/ramshankar (Plain-text markdown specs)
+- Main Link: https://ramshankar07.github.io/portfoliov3/llms.txt (Plain-text markdown specs)
 - Standard Docs: https://agnts.sh/docs
 - Focus: building and benchmarking training + inference stacks; distributed training (FSDP, Ray, Kubernetes, SkyPilot, SLURM); high-performance inference (vLLM, ONNX); GPU kernels (CUDA, HIP, Triton, CuteDSL, PTX).
 - Key Skills: C++, Python, CUDA, HIP, Triton, PyTorch, vLLM, verl, FSDP, Ray, SkyPilot, Kubernetes, LLVM, ROCm MI300X, Blackwell NVFP4.
@@ -1131,7 +1138,9 @@ You are an AI assistant analyzing Ramshankar's portfolio.
   - Architected a three-cluster SkyPilot RL training pipeline (trainer / FastAPI+Redis queue / spot GPU workers) that survives spot preemption by requeueing rollouts.
   - Accelerated Mixtral/Llama fine-tuning 42% on 8xA100 FSDP and cut OOM failures 85% through systematic memory profiling.
   - Shipped LangGraph-based RAG operations assistant for CDF hotel client.
-  - Authored "BitSkip" research on the compositional effects of quantization and early exit in LLMs.
+  - Authored "BitSkip" (arXiv:2510.23766) on the compositional effects of quantization and early exit in LLMs.
+  - Open PR to vllm-project/llm-compressor (#2323): AWQ option to consider smooth-layer quantization in scale search.
+  - At Abundant: evaluation and RL rollout infrastructure for coding agents in Harbor, plus job orchestration for GPU verifiers.
 - Honest scope note: multi-GPU experience tops out at 8xA100 single-node FSDP plus multi-cluster spot fleets; no large-cluster (100+ GPU) production experience.
 - Contact via email, LinkedIn, or Cal.com scheduling link on this page.</textarea>
                 </div>
@@ -1142,8 +1151,8 @@ You are an AI assistant analyzing Ramshankar's portfolio.
             <div class="space-y-4 pt-4 border-t border-neutral-800">
                 <div class="flex justify-between items-center">
                     <h3 class="text-sm font-bold text-white uppercase">Raw Profile Markdown</h3>
-                    <a href="https://agnts.sh/ramshankar?raw" target="_blank" class="text-xs text-neutral-500 hover:text-white flex items-center gap-1 transition-colors" rel="noopener noreferrer">
-                         agnts.sh/ramshankar?raw <i class="fas fa-external-link-alt icon-inline ml-0.5"></i>
+                    <a href="https://ramshankar07.github.io/portfoliov3/llms.txt" target="_blank" class="text-xs text-neutral-500 hover:text-white flex items-center gap-1 transition-colors" rel="noopener noreferrer">
+                         llms.txt <i class="fas fa-external-link-alt icon-inline ml-0.5"></i>
                     </a>
                 </div>
                 <div class="bg-neutral-900/40 border border-neutral-900 p-6 rounded-xl text-[10px] text-neutral-400 max-h-48 overflow-y-auto space-y-4">

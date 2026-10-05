@@ -3,7 +3,6 @@
 > ML Systems Engineer — training and inference infrastructure. Portfolio and technical writing.
 
 - Site: https://ramshankar07.github.io/portfoliov3/
-- Agent profile: https://agnts.sh/ramshankar?raw
 - Contact: bhuvaneshwaran.r@northeastern.edu
 - LinkedIn: https://linkedin.com/in/ramshankarb
 - GitHub: https://github.com/Ramshankar07
@@ -14,7 +13,8 @@
 - Training stack: PyTorch, FSDP, verl/GRPO, distributed orchestration on Ray, Kubernetes, SkyPilot, SLURM
 - Inference stack: vLLM, ONNX, CUDA/HIP/Triton kernels, CuteDSL and PTX on Blackwell NVFP4, ROCm on AMD MI300X
 - Benchmarking and profiling: timing-and-correctness harnesses, roofline/bandwidth measurement, regression evaluation
-- Upstream: HuggingFace transformers PR #46084 (merged), LLVM libc PR #175396
+- Upstream: HuggingFace transformers PR #46084 (merged), LLVM libc PR #175396 (merged), vllm-project/llm-compressor PR #2323 (open)
+- Research: BitSkip, https://arxiv.org/abs/2510.23766
 - Alumni of Northeastern University (MSIS) and Anna University (B.Tech CSE)
 
 ## Key pages

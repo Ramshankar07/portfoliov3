@@ -1,6 +1,6 @@
 # Ramshankar Bhuvaneswaran
 
-> ML Systems Engineer — training and inference infrastructure. Portfolio and technical writing.
+> AI Engineer. I ship LLM systems with customers: agent workflows, RAG over real ops data, and the eval harness that keeps them honest in production. Also an ML systems engineer: training and inference infrastructure. Portfolio and technical writing.
 
 - Site: https://ramshankar07.github.io/portfoliov3/
 - Contact: bhuvaneshwaran.r@northeastern.edu

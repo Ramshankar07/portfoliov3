@@ -1685,3 +1685,27 @@ main > section:first-of-type {
     }
 }
 
+
+/* ── Footer GPU: the Hairline figure that closes the page ──
+   The kernel styles the drawing; this seats it and sets its plate to the
+   page ground, so the opaque plates read as paper, not white cards. */
+.footer-gpu {
+    max-width: 22rem;
+    margin: 0 auto 2rem;
+}
+
+.footer-gpu__stage {
+    color-scheme: light;
+    --hairline-plate: #FAF9F6;
+}
+
+.dark .footer-gpu__stage {
+    color-scheme: dark;
+    --hairline-plate: #080808;
+}
+
+/* The 400 × 320 viewBox leaves air under the card; pull the caption up to it. */
+.footer-gpu__caption {
+    margin-top: -2rem;
+    min-height: 1rem;
+}

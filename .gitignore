@@ -15,3 +15,5 @@
 /src/worker_enhanced.js
 /.claude/
 .DS_Store
+/.agents/
+/skills-lock.json

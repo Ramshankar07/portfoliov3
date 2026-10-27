@@ -2027,10 +2027,11 @@ main > section {
 .section-mark .s {
     fill: none;
     stroke: currentColor;
-    /* 0.5px on screen: viewBox units per rendered px is 48 / --mark-size.
+    /* 1px on screen, the system hairline: viewBox units per rendered px is
+       48 / --mark-size-px.
        Not vector-effect: non-scaling-stroke — it moves the dash pattern into
        screen space, and pathLength="1" then draws only part of each stroke. */
-    stroke-width: calc(0.5px * 48 / var(--mark-size-px));
+    stroke-width: calc(1px * 48 / var(--mark-size-px));
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-dasharray: 1;
@@ -2058,15 +2059,38 @@ main > section {
     opacity: 1;
 }
 
-/* 01 · attention: the query row steps down the causal mask. */
+/* 01 · attention: the query row glides down the causal mask, resting on
+   each row while that row's keys — only the ones at or before it — light. */
+.section-mark .m-scan {
+    fill-opacity: 0;
+}
+
 .section-mark.is-live .m-scan {
-    fill-opacity: 0.14;
-    animation: mark-scan 2.4s steps(4) infinite;
+    animation: mark-scan 2.4s infinite;
 }
 
 @keyframes mark-scan {
-    from { transform: translateY(0); }
-    to   { transform: translateY(32px); }
+    0%        { transform: translateY(0);    fill-opacity: 0; animation-timing-function: ease-out; }
+    4%, 19%   { transform: translateY(0);    fill-opacity: 0.12; animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+    25%, 44%  { transform: translateY(8px);  fill-opacity: 0.12; animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+    50%, 69%  { transform: translateY(16px); fill-opacity: 0.12; animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+    75%, 92%  { transform: translateY(24px); fill-opacity: 0.12; animation-timing-function: ease-in; }
+    100%      { transform: translateY(24px); fill-opacity: 0; }
+}
+
+.section-mark .m-key {
+    fill-opacity: 0;
+}
+
+.section-mark.is-live .m-key {
+    animation: mark-key 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    animation-delay: calc(var(--row) * 0.6s);
+}
+
+@keyframes mark-key {
+    0%, 3%  { fill-opacity: 0; }
+    8%, 19% { fill-opacity: 0.6; }
+    28%, 100% { fill-opacity: 0; }
 }
 
 /* 02 · GPU: the four SMs fill fast and drain slow, in turn. */
@@ -2089,7 +2113,7 @@ main > section {
 .section-mark .m-trace {
     fill: none;
     stroke: currentColor;
-    stroke-width: calc(1.5px * 48 / var(--mark-size-px));
+    stroke-width: calc(2px * 48 / var(--mark-size-px));
     stroke-linecap: round;
     stroke-dasharray: 0.08 1.2;
     stroke-dashoffset: 0.08;
@@ -2102,6 +2126,21 @@ main > section {
 @keyframes mark-trace {
     from { stroke-dashoffset: 0.08; }
     to   { stroke-dashoffset: -1; }
+}
+
+.section-mark .m-ckpt {
+    fill-opacity: 0;
+}
+
+.section-mark.is-live .m-ckpt {
+    animation: mark-ckpt 2.4s ease-out infinite;
+}
+
+/* the tracer's head crosses the checkpoint ~55% into its run */
+@keyframes mark-ckpt {
+    0%, 50%   { fill-opacity: 0; }
+    56%       { fill-opacity: 0.45; }
+    80%, 100% { fill-opacity: 0; }
 }
 
 /* 04 · kernel: the 3×3 threads light in a diagonal wave. */

@@ -699,6 +699,10 @@ function setupSectionMarks() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const ramp = (v, from, to) => Math.min(1, Math.max(0, (v - from) / (to - from)));
+    // Scroll is linear; the drawing should not be. Strokes and the slide-in
+    // decelerate into place, and the exit accelerates away.
+    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+    const easeIn = (t) => t * t * t;
     let queued = false;
 
     const paint = () => {
@@ -707,8 +711,8 @@ function setupSectionMarks() {
         marks.forEach((mark) => {
             const r = mark.getBoundingClientRect();
             const p = (vh - r.top) / (vh + r.height);
-            const draw = ramp(p, 0.06, 0.42);
-            const fade = ramp(p, 0.02, 0.2) * (1 - ramp(p, 0.74, 0.94));
+            const draw = easeOut(ramp(p, 0.06, 0.42));
+            const fade = easeOut(ramp(p, 0.02, 0.2)) * (1 - easeIn(ramp(p, 0.74, 0.94)));
             mark.style.setProperty('--draw', draw.toFixed(3));
             mark.style.setProperty('--fade', fade.toFixed(3));
             const live = mark.classList.contains('is-live');

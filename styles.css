@@ -892,6 +892,258 @@ iframe {
     justify-self: start;
 }
 
+/* ============================================
+   ENGINEERING NOTES — SIDEWAYS RAILS
+   Each group is one ruled row of text columns that scrolls horizontally.
+   Columns are divided by hairlines, never boxed, so the section reads as a
+   broadsheet spread rather than a card grid. The column width never divides
+   the 1104px container evenly: a sliver of the next column always shows at
+   the edge, because macOS overlay scrollbars give no other hint that a row
+   scrolls. Each row is one grid and every column a subgrid of it, so meta,
+   title, dek and link sit on shared lines across the whole row however many
+   lines a title wraps to.
+   ============================================ */
+.notes-group-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 2.75rem;
+}
+
+.notes-group-head h3 {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-secondary);
+}
+
+.notes-count {
+    font-variant-numeric: tabular-nums;
+    color: var(--text-primary);
+}
+
+.notes-controls {
+    display: flex;
+    gap: 0.25rem;
+    margin-right: -4px;
+}
+
+.notes-controls[hidden] {
+    display: none;
+}
+
+/* 44x44 hit box; ::before draws the 36px ring, as on the nav toggles. */
+.notes-nav {
+    position: relative;
+    z-index: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-size: 0.75rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.notes-nav::before {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    z-index: -1;
+    border: 1px solid var(--border-color);
+    border-radius: 9999px;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.notes-nav:hover:not([aria-disabled="true"])::before {
+    border-color: var(--accent);
+    background-color: var(--accent-glow);
+}
+
+.notes-nav[aria-disabled="true"] {
+    color: var(--border-color);
+    cursor: default;
+}
+
+.notes-nav:focus-visible {
+    outline-offset: -2px;
+}
+
+/* icons.css ships fa-arrow-right only; the back control mirrors it. */
+.notes-nav-back {
+    transform: scaleX(-1);
+}
+
+/* Pause / resume for the auto-advancing row. The two glyphs swap on
+   data-stopped; the aria-label carries the state for assistive tech. */
+.notes-play[hidden] {
+    display: none;
+}
+
+.notes-play svg {
+    width: 0.75rem;
+    height: 0.75rem;
+}
+
+.notes-play-resume,
+.notes-play[data-stopped] .notes-play-pause {
+    display: none;
+}
+
+.notes-play[data-stopped] .notes-play-resume {
+    display: block;
+}
+
+.notes-body {
+    --note-col: min(21rem, 80vw);
+    --note-pad: 1.5rem;
+}
+
+.notes-track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-columns: calc(var(--note-col) - var(--note-pad));
+    grid-auto-columns: var(--note-col);
+    margin-top: 0.5rem;
+    padding-bottom: 1.25rem;
+    border-top: 1px solid var(--border-color);
+    list-style: none;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
+}
+
+/* The trailing fade is the second scroll cue; it lifts once the row ends. */
+.notes-track.is-scrollable:not(.at-end) {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 3rem), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 3rem), transparent);
+}
+
+.note {
+    position: relative;
+    display: grid;
+    grid-row: span 4;
+    grid-template-rows: subgrid;
+    row-gap: 0.6rem;
+    padding: 1.5rem var(--note-pad) 0.25rem;
+    scroll-snap-align: start;
+}
+
+.note + .note {
+    border-left: 1px solid var(--border-color);
+}
+
+.note:first-child {
+    padding-left: 0;
+}
+
+.note-meta {
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.4;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-secondary);
+}
+
+.note .contrib-status {
+    display: inline-block;
+}
+
+.note-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.014em;
+    color: var(--text-primary);
+    text-wrap: balance;
+}
+
+.note-title a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
+    transition: text-decoration-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* The whole column is the link; the title stays its accessible name. */
+.note-title a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.note-title a:focus-visible {
+    outline: none;
+}
+
+.note-title a:focus-visible::after {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+}
+
+.note:hover .note-title a,
+.note-title a:focus-visible {
+    text-decoration-color: currentColor;
+}
+
+.note-dek {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    text-wrap: pretty;
+}
+
+.note-dek code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.75rem;
+    color: var(--text-primary);
+}
+
+.note-src {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    align-self: end;
+    padding-top: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-primary);
+}
+
+.note-src i {
+    font-size: 0.7em;
+    transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.note:hover .note-src i {
+    transform: translateX(2px);
+}
+
+@media (max-width: 767px) {
+    .notes-body {
+        --note-pad: 1.25rem;
+    }
+}
+
 /* Grid items default to min-width:auto, which lets the min-width on the
    diagram SVG stretch the whole card past the viewport on narrow screens.
    Pinning min-width:0 lets .sys-diagram's own overflow-x actually scroll. */
@@ -1510,8 +1762,18 @@ section[id] > h2:first-child + * {
     padding-bottom: 4rem;
 }
 
+/* The page column: 63rem (960px of content) rather than Tailwind's 72rem
+   max-w-6xl, so wide screens keep a real margin either side — that margin is
+   where the section marks live. Nav, hero, main and footer all use
+   max-w-6xl, so their edges stay aligned. */
+.max-w-6xl {
+    max-width: 63rem !important;
+}
+
 main > section:first-of-type {
-    margin-top: 2rem;
+    /* 3rem rather than 2rem: the first section mark rises 10rem above its
+       rule and needs to clear the hero's last line. */
+    margin-top: 3rem;
 }
 
 /* `#blogs` ran five heterogeneous blocks at five identical 64px gaps. Research
@@ -1520,7 +1782,11 @@ main > section:first-of-type {
     margin-top: 3rem !important;
 }
 
-#blogs > div:last-child {
+.notes-body > .notes-group + .notes-group {
+    margin-top: 4.5rem;
+}
+
+#blogs > div:last-of-type {
     margin-top: 6rem !important;
 }
 
@@ -1685,6 +1951,208 @@ main > section:first-of-type {
     }
 }
 
+
+/* ── Section marks ──
+   One line drawing per numbered section — attention mask, GPU die, loss
+   curve, kernel tile, next token. Each lives in a .mark-rail, the last child
+   of its section, absolutely positioned against the section (not in its
+   flow, so no section rhythm moves).
+
+   Where the screen has a real margin (1424px and up, with the 63rem column)
+   the rails sit outside the column, alternating right / left / right / left /
+   right, and span the full height of their section. The drawing inside is
+   sticky at mid-screen: it rises with its title, holds at the centre while
+   the section scrolls past, and leaves with the section's end — so it never
+   shares space with content. It slides in from its own margin edge as it
+   draws. Narrower screens have no margin to hold it, so the drawing stands
+   on the right end of the title rule instead (above the title on phones).
+
+   Scroll drives --draw (strokes build one after another, --i) and --fade
+   from script.js. Fully drawn and fully in, the mark gets .is-live and its
+   second, looping motion starts. The resting values are the finished
+   drawing, so without JS, or under reduced motion, it is simply there. */
+main > section {
+    position: relative;
+}
+
+.mark-rail {
+    --mark-size: 9.5rem;
+    --mark-size-px: 152;
+    --from: 1;
+    position: absolute;
+    /* beside the title: bottom 9px above the 57px title rule */
+    top: calc(3rem - var(--mark-size));
+    right: 0;
+    width: var(--mark-size);
+    height: var(--mark-size);
+    margin: 0 !important;
+    pointer-events: none;
+}
+
+.section-mark {
+    --draw: 1;
+    --fade: 1;
+    display: block;
+    width: var(--mark-size);
+    height: var(--mark-size);
+    overflow: visible;
+    color: var(--text-primary);
+    opacity: var(--fade);
+    transform: translateX(calc((1 - var(--fade)) * var(--from) * 2rem));
+}
+
+@media (min-width: 1424px) {
+    .mark-rail {
+        top: 0;
+        bottom: 0;
+        height: auto;
+    }
+
+    .mark-rail--right {
+        right: auto;
+        left: calc(100% + 2rem);
+    }
+
+    .mark-rail--left {
+        --from: -1;
+        right: calc(100% + 2rem);
+    }
+
+    .mark-rail .section-mark {
+        position: sticky;
+        top: calc(50vh - var(--mark-size) / 2);
+    }
+}
+
+.section-mark .s {
+    fill: none;
+    stroke: currentColor;
+    /* 0.5px on screen: viewBox units per rendered px is 48 / --mark-size.
+       Not vector-effect: non-scaling-stroke — it moves the dash pattern into
+       screen space, and pathLength="1" then draws only part of each stroke. */
+    stroke-width: calc(0.5px * 48 / var(--mark-size-px));
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: calc(1 - clamp(0, var(--draw) * 1.8 - var(--i, 0) * 0.08, 1));
+}
+
+/* The token still being generated: dashed, so it fades rather than draws. */
+.section-mark .s--dashed {
+    stroke-dasharray: 1.5 1.5;
+    stroke-dashoffset: 0;
+    opacity: clamp(0, (var(--draw) - 0.5) * 3, 1);
+}
+
+/* Second motion, per drawing. Hidden and still until .is-live. Every loop
+   runs on one 2.4s beat (the march at half of it), so the page has a
+   single pulse rather than five clocks. */
+.section-mark .m-live {
+    fill: currentColor;
+    stroke: none;
+    opacity: 0;
+    transition: opacity 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.section-mark.is-live .m-live {
+    opacity: 1;
+}
+
+/* 01 · attention: the query row steps down the causal mask. */
+.section-mark.is-live .m-scan {
+    fill-opacity: 0.14;
+    animation: mark-scan 2.4s steps(4) infinite;
+}
+
+@keyframes mark-scan {
+    from { transform: translateY(0); }
+    to   { transform: translateY(32px); }
+}
+
+/* 02 · GPU: the four SMs fill fast and drain slow, in turn. */
+.section-mark .m-sm {
+    fill-opacity: 0;
+}
+
+.section-mark.is-live .m-sm {
+    animation: mark-occupy 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    animation-delay: calc(var(--k) * 0.6s);
+}
+
+@keyframes mark-occupy {
+    0%       { fill-opacity: 0; }
+    10%, 50% { fill-opacity: 0.2; }
+    100%     { fill-opacity: 0; }
+}
+
+/* 03 · loss curve: a bright step runs down the curve, start to finish. */
+.section-mark .m-trace {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: calc(1.5px * 48 / var(--mark-size-px));
+    stroke-linecap: round;
+    stroke-dasharray: 0.08 1.2;
+    stroke-dashoffset: 0.08;
+}
+
+.section-mark.is-live .m-trace {
+    animation: mark-trace 2.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes mark-trace {
+    from { stroke-dashoffset: 0.08; }
+    to   { stroke-dashoffset: -1; }
+}
+
+/* 04 · kernel: the 3×3 threads light in a diagonal wave. */
+.section-mark .m-thread {
+    fill-opacity: 0;
+}
+
+.section-mark.is-live .m-thread {
+    animation: mark-thread 2.4s ease-out infinite;
+    animation-delay: calc(var(--k) * 0.14s);
+}
+
+@keyframes mark-thread {
+    0%       { fill-opacity: 0; }
+    12%      { fill-opacity: 0.7; }
+    45%, 100% { fill-opacity: 0; }
+}
+
+/* 05 · next token: the token being generated marches; the cursor blinks. */
+.section-mark.is-live .m-march {
+    animation: mark-march 1.2s linear infinite;
+}
+
+.section-mark.is-live .m-blink {
+    animation: mark-blink 1.2s steps(1) infinite;
+}
+
+@keyframes mark-march {
+    to { stroke-dashoffset: -3; }
+}
+
+@keyframes mark-blink {
+    50% { opacity: 0; }
+}
+
+@media (max-width: 1023px) {
+    .mark-rail {
+        --mark-size: 8rem;
+        --mark-size-px: 128;
+    }
+}
+
+/* Titles run the full width on phones, so the mark rises above the title
+   into the section gap instead of sharing its row. */
+@media (max-width: 767px) {
+    .mark-rail {
+        --mark-size: 5rem;
+        --mark-size-px: 80;
+        top: calc(-0.75rem - var(--mark-size));
+    }
+}
 
 /* ── Footer GPU: the Hairline figure that closes the page ──
    The kernel styles the drawing; this seats it and sets its plate to the

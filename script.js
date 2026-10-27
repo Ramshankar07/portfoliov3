@@ -214,6 +214,104 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // 5b. Engineering Notes rails — sideways rows with prev/next controls.
+    // The controls stay hidden unless a row actually overflows, so a short
+    // row (Research on desktop) shows no dead buttons. aria-disabled rather
+    // than disabled, so the end button keeps keyboard focus.
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const notesSection = document.getElementById('blogs');
+
+    const updateRail = track => {
+        const group = track.closest('.notes-group');
+        const controls = group && group.querySelector('.notes-controls');
+        if (!controls) return;
+        const max = track.scrollWidth - track.clientWidth;
+        const atEnd = track.scrollLeft >= max - 1;
+        const [prev, next] = controls.querySelectorAll('.notes-nav[data-dir]');
+        controls.hidden = max <= 1;
+        track.classList.toggle('is-scrollable', max > 1);
+        track.classList.toggle('at-end', atEnd);
+        prev.setAttribute('aria-disabled', String(track.scrollLeft <= 1));
+        next.setAttribute('aria-disabled', String(atEnd));
+    };
+
+    const columnStep = track => {
+        const column = track.querySelector('.note + .note');
+        return column ? column.offsetWidth : track.clientWidth * 0.8;
+    };
+
+    const railResize = new ResizeObserver(entries => entries.forEach(e => updateRail(e.target)));
+
+    if (notesSection) {
+        notesSection.querySelectorAll('.notes-track').forEach(track => {
+            track.addEventListener('scroll', () => updateRail(track), { passive: true });
+            railResize.observe(track);
+            updateRail(track);
+        });
+
+        notesSection.addEventListener('click', e => {
+            const btn = e.target.closest('.notes-nav[data-dir]');
+            if (!btn || btn.getAttribute('aria-disabled') === 'true') return;
+            const track = btn.closest('.notes-group').querySelector('.notes-track');
+            track.scrollBy({
+                left: Number(btn.dataset.dir) * columnStep(track),
+                behavior: reduceMotion.matches ? 'auto' : 'smooth'
+            });
+        });
+    }
+
+    // 5c. Auto-advance for rows marked data-autoplay: one column every 5s,
+    // rewinding to the first column after the last. Pointer, focus and touch
+    // never hold it; it only waits while off-screen or in a background tab,
+    // and restarts its count after a manual scroll so it does not jump
+    // mid-swipe. Reduced motion turns it off; the pause button stops it until
+    // pressed again (WCAG 2.2.2 Pause, Stop, Hide).
+    const AUTOPLAY_MS = 5000;
+
+    document.querySelectorAll('.notes-track[data-autoplay]').forEach(track => {
+        const group = track.closest('.notes-group');
+        const toggle = group.querySelector('.notes-play');
+        if (!toggle || reduceMotion.matches) return;
+
+        let stopped = false;
+        let onScreen = false;
+        let timer = null;
+
+        const advance = () => {
+            const max = track.scrollWidth - track.clientWidth;
+            if (max > 1) {
+                const atEnd = track.scrollLeft >= max - 1;
+                track.scrollTo({
+                    left: atEnd ? 0 : track.scrollLeft + columnStep(track),
+                    behavior: 'smooth'
+                });
+            }
+            schedule();
+        };
+
+        const schedule = () => {
+            clearTimeout(timer);
+            const running = !stopped && onScreen && !document.hidden;
+            timer = running ? setTimeout(advance, AUTOPLAY_MS) : null;
+        };
+
+        toggle.hidden = false;
+        toggle.addEventListener('click', () => {
+            stopped = !stopped;
+            toggle.toggleAttribute('data-stopped', stopped);
+            toggle.setAttribute('aria-pressed', String(stopped));
+            schedule();
+        });
+
+        track.addEventListener('scroll', schedule, { passive: true });
+        document.addEventListener('visibilitychange', schedule);
+
+        new IntersectionObserver(([entry]) => {
+            onScreen = entry.isIntersecting;
+            schedule();
+        }, { threshold: 0.5 }).observe(track);
+    });
+
     // 6. Search Chatbot Form Handling (WebMCP Interceptor)
     const searchForm = document.getElementById('chat-search-form');
     if (searchForm) {
@@ -262,6 +360,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 12. Section motion
     setupSectionMotion();
+    setupSectionMarks();
 });
 
 // ── Margin Scroll-Progress Rail ──
@@ -585,6 +684,49 @@ function setupAgentModeDashboard() {
    already there rather than blank — the failure mode that hid five of seven
    job cards before.
    ══════════════════════════════════════════════════════════════════ */
+/* Section marks: one drawing per section title, scrubbed by scroll rather
+   than played once. Progress is measured the way view() measures `cover` —
+   0 as the mark's top enters at the bottom of the viewport, 1 as its bottom
+   leaves at the top — so everything reverses exactly when scrolling back up.
+   --draw builds the strokes by the time the mark reaches the middle of the
+   screen; --fade lifts it in on entry and lowers it as it nears the nav.
+   Fully drawn and fully in, .is-live starts its second, looping motion
+   (styles.css), with a little hysteresis so it never flickers on the
+   threshold. Reduced motion leaves the resting state: finished, no loops. */
+function setupSectionMarks() {
+    const marks = [...document.querySelectorAll('.section-mark')];
+    if (!marks.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const ramp = (v, from, to) => Math.min(1, Math.max(0, (v - from) / (to - from)));
+    let queued = false;
+
+    const paint = () => {
+        queued = false;
+        const vh = window.innerHeight;
+        marks.forEach((mark) => {
+            const r = mark.getBoundingClientRect();
+            const p = (vh - r.top) / (vh + r.height);
+            const draw = ramp(p, 0.06, 0.42);
+            const fade = ramp(p, 0.02, 0.2) * (1 - ramp(p, 0.74, 0.94));
+            mark.style.setProperty('--draw', draw.toFixed(3));
+            mark.style.setProperty('--fade', fade.toFixed(3));
+            const live = mark.classList.contains('is-live');
+            mark.classList.toggle('is-live', live ? fade > 0.97 && draw > 0.97 : fade > 0.999 && draw > 0.999);
+        });
+    };
+
+    const queue = () => {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(paint);
+    };
+
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+    paint();
+}
+
 function setupSectionMotion() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (!('IntersectionObserver' in window)) return;

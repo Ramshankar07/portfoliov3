@@ -236,7 +236,7 @@ A two-tone system that inverts wholesale between themes: one warm off-white fami
 
 ## Layout
 
-A single centered column, `max-width: 1152px` (`max-w-6xl`), with 24px gutters and 64px of vertical page padding. Sections are separated by a **128px** rhythm (`space-y-32`) — the largest single spacing decision in the system and the main reason the page reads as print rather than app.
+A single centered column, `max-width: 1008px` (`max-w-6xl`, overridden to 63rem in `styles.css`, so 960px of content), with 24px gutters and 64px of vertical page padding. Sections are separated by a **128px** rhythm (`space-y-32`) — the largest single spacing decision in the system and the main reason the page reads as print rather than app.
 
 Cards sit on a two-column grid (`md:grid-cols-2`, 32px gap) that collapses to one below 768px. Featured cards break the grid with `grid-column: 1 / -1` and split internally into a `minmax(0, 240px) 1fr` metric rail plus content. Grid children carry `min-width: 0` so wide children (the systems diagram) scroll inside their own wrapper instead of stretching the card.
 
@@ -341,6 +341,9 @@ Not a picture of a GPU — a running one. A fixed lattice of streaming multiproc
 Monochrome by binding commitment: cells vary in alpha only, never hue. Fill is fast and drain is slow, because that asymmetry is what makes it read as work being done rather than a light blinking. Density falls off vertically so the field sits in the composition rather than tiling to the bleed, and a clearing measured from the portrait's own bounding box seats the photo instead of crowding it.
 
 Masked left-to-right on desktop so the copy column stays quiet and the density lands on the right; masked top-to-bottom on mobile, where the hero stacks and the copy occupies the top of the canvas instead of one side of it. Pauses when the hero scrolls out of view, when the tab is hidden, and renders a single settled frame under `prefers-reduced-motion`. 60fps, no long tasks, and 5.5KB smaller than what it replaced.
+
+### Section Marks (signature)
+One 0.5px line drawing per numbered section: causal attention mask (01), GPU die (02), loss curve (03), kernel `{tile}` (04), next token (05). Each lives in a `.mark-rail`, the last child of its section, positioned against the section so no rhythm moves. From 1424px the rails sit in the margin outside the 960px column, alternating right/left, and the drawing is sticky at mid-screen for the length of its section. It slides in from its own margin edge as its strokes draw in sequence, then loops a second motion on a shared 2.4s beat (row scan, SM occupancy, curve tracer, thread wave, marching token). Below 1424px it stands on the right end of the title rule (above the title on phones). Scroll writes `--draw` and `--fade`; the resting state is the finished drawing, and reduced motion keeps it static. Decorative and `aria-hidden`: nothing load-bearing lives in it.
 
 ### Systems Diagram (signature)
 Hand-authored inline SVG on a 960-unit viewBox, all strokes and text at `currentColor` so it inverts with the theme for free. 1px hairlines, dashed cluster boundaries, 12px labels. Wrapped in `<figure role="img">` with `<title>`, `<desc>`, and a visible `<figcaption>`; scrolls horizontally inside `.sys-diagram` below its 680px minimum. Below 760px it carries a trailing-edge fade and a `SCROLL →` cue — macOS overlay scrollbars give no hint the figure scrolls, so without them it read as clipped rather than scrollable.

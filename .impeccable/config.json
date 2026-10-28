@@ -42,6 +42,24 @@
         "value": "inter",
         "createdAt": "2026-09-19T02:28:51.182Z",
         "reason": "User confirmed Inter is a binding brand commitment recorded in PRODUCT.md and DESIGN.md"
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-28T05:52:07.283Z",
+        "reason": "Agent: the only hit is the .proj-metric__label caption 'Preprocessing throughput scaling' (32ch, index.html Dask card). DESIGN.md's Label role sanctions 12px uppercase metric captions; it is a 4-word caption, not a passage. Re-check if a real uppercase paragraph is added."
+      },
+      {
+        "rule": "nested-cards",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-28T05:52:07.311Z",
+        "reason": "Agent: all 3 hits are inside the #agent-mode-overlay dialog panel: the 'STANDARD: agnts.sh/docs' chip, the search-portfolio tool item, and the raw-llms.txt scroll well. A dialog surface holding a chip, a list item and a code well is not card-in-card; the main page has zero nested div cards. Re-check if nesting appears outside the overlay."
       }
     ]
   }

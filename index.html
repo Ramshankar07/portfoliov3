@@ -157,7 +157,7 @@
     <link rel="stylesheet" href="css/icons.css">
 
     <!-- Custom Design Styling -->
-    <link rel="stylesheet" href="styles.css?v=20261027o">
+    <link rel="stylesheet" href="styles.css?v=20261028a">
 </head>
 
 <body class="bg-[#FAF9F6] text-[#111111] dark:bg-[#080808] dark:text-[#F5F5F7] antialiased">
@@ -233,7 +233,8 @@
                 <!-- Hero Core Bio Text -->
                 <div class="md:col-span-7 space-y-8 text-left">
                     <h1 class="hero-display font-bold">
-                        <!-- ML systems engineer, training and inference, down to the kernel -->
+                        <!-- Visible headline removed by design; kept for screen readers and search. -->
+                        <span class="sr-only leading-relaxed">Ramshankar Bhuvaneswaran, AI engineer: LLM systems, agents and ML infrastructure</span>
                     </h1>
                     <p class="text-xl md:text-2xl text-gray-600 dark:text-neutral-400 leading-relaxed max-w-xl">
                         I'm <span class="serif-italic font-normal text-[#111111] dark:text-[#FFFFFF]">Ramshankar</span>. I ship LLM systems with customers: agent workflows, RAG over real ops data, and the eval harness that keeps them honest in production. I also build the stack that gets a model from experiment to production: distributed training pipelines, high-performance serving, and the <strong class="text-black dark:text-white font-medium">GPU kernels</strong> (CUDA, HIP, Triton) underneath. Recently: evaluation and RL infrastructure for coding agents at Abundant, persistent megakernels across four LLM architectures, NVFP4 Blackwell kernels (<strong class="hero-proof text-black dark:text-white font-medium">3–6×</strong> over reference), and <strong class="hero-proof text-black dark:text-white font-medium">12.1 ms/token</strong> decode on a single AMD MI300X.
@@ -655,7 +656,7 @@
                         </div>
                     </div>
                     <p class="text-sm text-gray-500">
-                        Deep-learning OCR over complex financial documents using ViT + CRNN. Reached 98% text-extraction accuracy and 42% faster processing through ONNX runtime and custom CUDA kernel optimization — the serving path that later held sub-100ms P99 in production.
+                        Deep-learning OCR over complex financial documents using ViT + CRNN. Reached 98% text-extraction accuracy and 42% faster processing through ONNX runtime and custom CUDA kernel optimization. That serving path later held sub-100ms P99 in production.
                     </p>
                 </div>
 
@@ -712,7 +713,7 @@
                     </div>
                     <ul class="space-y-2 text-sm text-gray-500 list-disc pl-4">
                         <li>Built a master financial database for US public companies with raw, transformed, and denormalized fact-table schemas, so the same data serves both audit trails and fast reads.</li>
-                        <li>Engineered automated SEC ETL pipelines in Airflow — scraped filings through S3/Snowflake staging with validation checks at each hop.</li>
+                        <li>Engineered automated SEC ETL pipelines in Airflow, scraping filings through S3/Snowflake staging with validation checks at each hop.</li>
                     </ul>
                     <a href="https://github.com/Ramshankar07/Fintech-Data-Processing-ETL-Platform" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-black dark:text-white hover:opacity-75 transition-opacity" rel="noopener noreferrer">
                         <i class="fab fa-github"></i> Repository <i class="fas fa-arrow-right icon-inline ml-1"></i>
@@ -843,7 +844,7 @@
                                 </div>
                             </div>
                             <ul class="space-y-3 text-sm text-gray-500 leading-relaxed list-disc pl-4">
-                                <li>Profiled and optimized a <strong class="text-black dark:text-white">vLLM</strong> serving path, reworking CPU–GPU synchronization and pinned-memory handling to cut inter-token latency spikes from 70 ms to <strong class="text-black dark:text-white">48 ms</strong> and hold sub-200 ms responses — raising sustained capacity from 12 to <strong class="text-black dark:text-white">32+ concurrent sessions</strong> on the same hardware.</li>
+                                <li>Profiled and optimized a <strong class="text-black dark:text-white">vLLM</strong> serving path, reworking CPU–GPU synchronization and pinned-memory handling to cut inter-token latency spikes from 70 ms to <strong class="text-black dark:text-white">48 ms</strong> and hold sub-200 ms responses. That raised sustained capacity from 12 to <strong class="text-black dark:text-white">32+ concurrent sessions</strong> on the same hardware.</li>
                                 <li>Built a multimodal speech interface for the Northeastern University chatbot, pairing text-to-speech with <strong class="text-black dark:text-white">FastConformer RNNT</strong> speech recognition in an end-to-end streaming pipeline.</li>
                                 <li>Served as a Teaching Assistant, mentoring students on distributed computing workflows including SLURM job scheduling and parallel processing across CPU and GPU environments.</li>
                                 <li>Implemented a knowledge distillation pipeline compressing a Qwen image-to-image model into lightweight GAN architectures, achieving a <strong class="text-black dark:text-white">65% parameter reduction</strong> while maintaining visual quality.</li>
@@ -1079,7 +1080,7 @@
                     </span>
                     <div class="space-y-1">
                         <h3 class="text-lg font-bold">NerdingOut on AI</h3>
-                        <p class="text-sm text-gray-500 leading-relaxed">Field notes on LLM inference, GPU kernels, and ML systems — in the open. New posts straight to your inbox.</p>
+                        <p class="text-sm text-gray-500 leading-relaxed">I write about LLM inference, GPU kernels, and ML systems. New posts go straight to your inbox.</p>
                     </div>
                     <a href="https://ramshankar07.substack.com/subscribe" target="_blank" rel="noopener noreferrer"
                         class="inline-flex items-center gap-2 px-6 py-3 bg-[#111111] dark:bg-[#F5F5F7] text-white dark:text-black font-semibold rounded-lg text-sm transition-all duration-300 hover:opacity-85 hover:translate-x-0.5">

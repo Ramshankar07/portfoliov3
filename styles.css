@@ -1757,8 +1757,13 @@ section[id] > h2:first-child + * {
 }
 
 /* The hero sits in a min-h-screen block above `main`'s own padding, leaving an
-   undeclared 257px before `01.`. Declared instead of inherited. */
+   undeclared 257px before `01.`. Declared instead of inherited.
+   min-h-screen is 100vh, the large viewport, so on iOS Safari the hero ran
+   taller than the visible area and centred its copy under the toolbar. svh
+   (not dvh) keeps the height fixed while the toolbar animates, so the canvas
+   doesn't resize mid-scroll; browsers without svh keep the 100vh fallback. */
 #hero {
+    min-height: 100svh;
     padding-bottom: 4rem;
 }
 
